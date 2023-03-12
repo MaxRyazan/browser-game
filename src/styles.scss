@@ -1,0 +1,196 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.container{
+  width: 100%;
+  min-height: 100vh;
+  background-image: url(assets/images/background_main.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.top_nav{
+  max-width: 1440px;
+  background-color: inherit;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  top: 5px;
+}
+.left_nav{
+  position: relative;
+  width: 40px;
+  height: 70%;
+  top: 100px;
+  left: 5px;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.bottom_nav{
+  position: absolute;
+  max-width: 840px;
+  height: 40px;
+  margin-left: 30%;
+  bottom: 5px;
+}
+
+.top_nav_money{
+  display: flex;
+  gap: 5px;
+}
+
+.top_nav_money_icon{
+  padding: 3px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
+  &:hover{
+    border-left: 1px solid yellow;
+    border-right: 1px solid yellow;
+  }
+  &:active{
+    transform: scale(1.1);
+  }
+}
+
+.top_nav_money_cr, .top_nav_money_ig{
+  padding: 3px 6px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5px;
+  cursor: default;
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+}
+
+.money_cr_sum, .nav_military_rating, .money_cr_units, .money_ig_sum, .nav_certificate_rating, .science_params_search, .construct_params_ship{
+  color: #00E000;
+}
+.money_cr_currency, .title, .nav_certificate_ig, .money_ig_currency, .science_params_search_time, .construct_params_ship_time, .nav_certificate_ig{
+  color: #daa548;
+}
+.title{
+  font-weight: bold;
+}
+.hide{
+  opacity: 0;
+}
+// --------------------------------------------------money end
+.top_nav_science, .top_nav_construct{
+  display: flex;
+  align-items: center;
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  gap: 20px;
+  letter-spacing: 0.8px;
+}
+
+.top_nav_science_params, .top_nav_construct_params{
+  display: flex;
+  gap: 40px;
+}
+//-------------------------------------------------------science end
+//-------------------------------------------------------construct end
+//--------------------------------------------------------------------------------------------TOP NAV END
+
+.left_nav_item{
+  cursor: pointer;
+  &:hover{
+    transform: scale(1.15);
+  }
+  &:active{
+    transform: scale(.95);
+  }
+}
+
+//-----------------------------------------------------------------------------------LEFT NAV END
+.bottom_nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.bottom_nav_item{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.bottom_nav_military, .bottom_nav_certificate, .bottom_nav_bonus_operations{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  & img{
+    height: 25px;
+    cursor: pointer;
+  }
+}
+.bottom_nav_item_icon, .nav_operations_icon{
+  cursor: pointer;
+  &:hover{
+    transform: scale(1.1);
+  }
+  &:active{
+    transform: scale(0.95);
+  }
+}
+
+// -----------------------------------------------------------------TRADE START
+
+.trade_container{
+  position: absolute;
+  top: 135px;
+  left: 200px;
+  width: 70%;
+  border: 1px solid white;
+  padding: 10px;
+  margin: 0 auto;
+  font-size: 12px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.trade_container_wrapper{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.trade_container_item{
+  width: 213%;
+  text-align: center;
+}
+.velid{
+  color: #07a7db;
+}
+.geleon{
+  color: #e8980d;
+}
+.glarg{
+  color: #9fef6a;
+}
+.tormali{
+  color: #425dc1;
+}
+.astoks{
+  color: #ef463e;
+}
+.zekt{
+  color: #fdf986;
+}
+.mrun{
+  color: #9d73f1;
+}
