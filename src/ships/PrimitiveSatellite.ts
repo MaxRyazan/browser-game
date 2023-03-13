@@ -1,4 +1,4 @@
-import {Ship} from "./ship";
+import {Ship} from "../interfaces/Ship";
 
 class PrimitiveSatellite implements Ship {
     id: Number;

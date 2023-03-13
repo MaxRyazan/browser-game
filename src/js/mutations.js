@@ -5,16 +5,12 @@ export class Mutations {
         store.state.showTrade = !store.state.showTrade
     }
 
+
     checkRace(race){
         switch (race){
-            case "Велиды" : return 'velid';
-            case "Гелеоны" : return 'geleon';
-            case "Гларги" : return 'glarg';
-            case "Тормали" : return 'tormali';
-            case "Астоксы" : return 'astoks';
-            case "Зекты" : return 'zekt';
-            case "Мруны" : return 'mrun';
-            default : return 'pt'
+            case "Некроны" : return 'necrons';
+            case "Киборги" : return 'cyborgs';
+            case "Люди" : return 'humans';
         }
     }
     getHours(param){
@@ -27,5 +23,6 @@ export class Mutations {
         const millisInRest = Math.round(millis - hours * 3600000)
         return Math.round(millisInRest / 1000 / 60)
     }
+
 
 }
