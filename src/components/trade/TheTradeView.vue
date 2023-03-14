@@ -12,7 +12,7 @@
         </div>
         <div v-for="lot in filteredLots" :key="lot.id" class="trade_container_wrapper">
             <div class="trade_container_item">{{lot.lotFrom}}</div>
-            <div class="trade_container_item race" :class="mutations.checkRace(lot.race)">{{lot.name}} ур. {{lot.lvl}}</div>
+            <div class="trade_container_item race" :class="mutations.checkRace(lot.race)">{{lot.name}}</div>
             <div class="trade_container_item money_ig_sum">{{lot.minAmount}}</div>
             <div class="trade_container_item money_ig_sum">{{lot.amount}}</div>
             <div class="trade_container_item money_ig_sum">
@@ -29,7 +29,7 @@
     <div class="trade_filters_wrapper">
         <div class="trade_filters_inner">
             <AppTradeNewLot />
-            <AppTradeFilters @tradeSearch="filteredLots" />
+            <AppTradeFilters />
         </div>
     </div>
 </template>

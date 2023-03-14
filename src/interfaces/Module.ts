@@ -1,11 +1,11 @@
 export interface Module{
     id: Number
     name: String
-    lvl: Number
     costInNP: Number
+    amount: Number     //количество модулей одного вида
     requiredTech: []
     picture: String
-    belongsToRace: {}
+    belongsToRace: {id: Number, name: String}
     type: {military: Boolean, civilian: Boolean, neutral: Boolean}
     baseParams: {
         baseMass: Number

@@ -10,7 +10,7 @@ export class Cyborgs implements Race {
     constructor() {
         this.name = "Cyborgs";
         this.params = {science: 1, industry: 1, shipbuilding: 1.2, resource_extraction: 1};
-        this.picture = '';
+        this.picture = './src/assets/images/cyborgs.jpg';
         this.atmosphere = false
     }
 

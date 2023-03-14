@@ -24,5 +24,31 @@ export class Mutations {
         return Math.round(millisInRest / 1000 / 60)
     }
 
+    getHomeWorldStorage(){
+        return store.state.player.playerData.playerPlanets.homeWorld.storage;
+    }
+
+    getOtherPlanetsStorage(){
+        const storage = []
+        const playerOtherPlanets = store.state.player.playerData.playerPlanets.inhabitedPlanets
+        for(let i = 0; i < playerOtherPlanets.length; i++){
+            storage.push(...playerOtherPlanets[i].storage)
+        }
+        return storage;
+    }
+
+    getAllPlayerModules(homeStorage, otherStorage){
+        const count = homeStorage.length
+        for(let i = 0; i < count; i++){
+            for(let j = 0; j < otherStorage.length; j++){
+                if(homeStorage[i].id === otherStorage[j].id){
+                    homeStorage[i].amount++
+                } else {
+                    homeStorage.push(otherStorage[j])
+                }
+            }
+        }
+        return homeStorage
+    }
 
 }
