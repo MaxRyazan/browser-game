@@ -7,7 +7,7 @@
                 <span class="trade_filters_input_label green">Найти:</span>
                 <input v-model="store.state.tradeFilterInput" class="trade_filters_input_field title" type="text" autofocus>
             </div>
-            <AppDropDownTrade/>
+            <AppDropDownTrade @updateValue="updateValue"/>
         </form>
 
     </div>
@@ -16,4 +16,8 @@
 <script setup>
 import store from "../../store.js";
 import AppDropDownTrade from "./AppDropDownTrade.vue";
+
+function updateValue(arg){
+    store.state.tradeFilterRace = arg
+}
 </script>

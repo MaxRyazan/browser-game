@@ -56,6 +56,7 @@ export default createStore({
         sciencesInResearch: reactive({id: 1, name: 'Кинетическая пушка', lvl: 50, timeWhenComplete: 1688653426489, costInNP: 50000}),
 
         projectInOrder: reactive({}),
+        tradeNewLotInput: ref(''),
         tradeFilterInput: ref(''),
         tradeFilterRace: ref(''),
     },
