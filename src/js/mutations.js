@@ -78,10 +78,10 @@ export class Mutations {
             return returnedArray.filter(e => e.subject.belongsToRace.name === raceFilter)
         }
         if(!raceFilter && inputFilter) {
-            return returnedArray.filter(e => e.name.toLowerCase().includes(inputFilter.toLowerCase()))
+            return returnedArray.filter(e => e.subject.name.toLowerCase().includes(inputFilter.toLowerCase()))
         }
         else {
-            return returnedArray.filter(e => e.subject.belongsToRace.name === raceFilter && e.name.toLowerCase().includes(inputFilter.toLowerCase()))
+            return returnedArray.filter(e => e.subject.belongsToRace.name === raceFilter && e.subject.name.toLowerCase().includes(inputFilter.toLowerCase()))
         }
     }
 

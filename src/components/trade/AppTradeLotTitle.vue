@@ -4,7 +4,7 @@
         <div class="trade_container_item title race">Наименование</div>
         <div class="trade_container_item title">Мин. партия</div>
         <div class="trade_container_item title">Количество</div>
-        <div class="trade_container_item title">Цена за штуку</div>
+        <div class="trade_container_item title">Цена мин. партию</div>
         <div class="trade_container_item title">Цена всего лота</div>
         <AppIcon :path="iconsPath.close" @click="mutations.toggleTrade()"/>
     </div>

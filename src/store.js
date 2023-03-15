@@ -55,7 +55,6 @@ export default createStore({
                         storage: [
                             {
                                 id:1,
-                                name:'Химический реактор',
                                 amount: 1,
                                 picture:'./src/assets/images/chemical_reactor.jpg',
                                 requiredTech: [],
@@ -67,6 +66,7 @@ export default createStore({
                                     requiredCRForBuild: 3, requiredIGForBuild: 0
                                 },
                                 subject:{
+                                    name:'Химический реактор',
                                     belongsToRace: {id:1, name: 'Люди'},
                                     bonusesToShip: {energy: 100, cargo: 0, speedInSubspace: 0,
                                         speedInNormalSpace: 0, mining: 0, scanning: 0,
@@ -80,7 +80,6 @@ export default createStore({
                             storage:[
                                 {
                                     id:1,
-                                    name:'Химический реактор',
                                     amount: 13,
                                     picture:'./src/assets/images/chemical_reactor.jpg',
                                     requiredTech: [],
@@ -92,6 +91,7 @@ export default createStore({
                                         requiredCRForBuild: 3, requiredIGForBuild: 0
                                     },
                                     subject: {
+                                        name:'Химический реактор',
                                         belongsToRace: {id:1, name: 'Люди'},
                                         bonusesToShip: {energy: 100, cargo: 0, speedInSubspace: 0,
                                             speedInNormalSpace: 0, mining: 0, scanning: 0,
@@ -100,7 +100,6 @@ export default createStore({
                                 },
                                 {
                                     id: 2,
-                                    name: 'Ядерный реактор',
                                     amount: 1,
                                     picture: './src/assets/images/nuclear_reactor.jpg',
                                     requiredTech: [],
@@ -112,6 +111,7 @@ export default createStore({
                                         requiredCRForBuild: 5, requiredIGForBuild: 0
                                     },
                                     subject:{
+                                        name: 'Ядерный реактор',
                                         belongsToRace: {id: 3, name: 'Некроны'},
                                         bonusesToShip: {
                                             energy: 150, cargo: 0, speedInSubspace: 0,
@@ -121,7 +121,6 @@ export default createStore({
                                 },
                                 {
                                     id: 3,
-                                    name: 'Альтах реактор',
                                     amount: 1,
                                     picture: './src/assets/images/altah_reactor.jpg',
                                     requiredTech: [],
@@ -133,6 +132,7 @@ export default createStore({
                                         requiredCRForBuild: 55, requiredIGForBuild: 0
                                     },
                                     subject: {
+                                        name: 'Альтах реактор',
                                         belongsToRace: {id: 2, name: 'Киборги'},
                                         bonusesToShip: {
                                             energy: 350, cargo: 0, speedInSubspace: 0,

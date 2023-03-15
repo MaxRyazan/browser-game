@@ -1,6 +1,5 @@
 export interface Module{
     id: Number
-    name: String
     costInNP?: Number
     amount?: Number     //количество модулей одного вида
     requiredTech?: []
@@ -8,6 +7,7 @@ export interface Module{
     belongsToRace: {id: Number, name: String}
     type: {military?: Boolean, civilian?: Boolean, neutral?: Boolean}
     subject: {
+        name: String
         baseParams?: {
             baseMass: Number
             baseSignature: Number
