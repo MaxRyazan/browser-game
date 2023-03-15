@@ -3,11 +3,11 @@
         <h2 class="green">Выставить на продажу</h2>
         <div class="trade_new_lot">
             <span class="green">Выбрать</span>
-            <input type="text" v-model="store.state.tradeNewLotInput" class="trade_filters_input_field title">
+            <input type="text" v-model="store.state.newLotFilterInput" class="trade_filters_input_field title">
         </div>
-        <AppDropDownTrade/>
+        <AppDropDownTrade @updateValue="updateValue"/>
         <div class="trade_new_lot_choose_module">
-            <AppModuleView :modules="all"/>
+            <AppModuleView/>
         </div>
     </div>
 </template>
@@ -23,7 +23,10 @@ const playerHomeWorldStorage = mutations.getHomeWorldStorage()
 
 const playerOtherPlanets =  mutations.getOtherPlanetsStorage()
 
-const all = mutations.getAllPlayerModules(playerHomeWorldStorage, playerOtherPlanets)
+store.state.allPlayerModules = mutations.getAllPlayerModules(playerHomeWorldStorage, playerOtherPlanets)
 
+function updateValue(arg){
+    store.state.newLotFilterRace = arg
+}
 
 </script>

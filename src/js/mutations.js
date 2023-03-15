@@ -25,7 +25,11 @@ export class Mutations {
     }
 
     getHomeWorldStorage(){
-        return store.state.player.playerData.playerPlanets.homeWorld.storage;
+        const storage = []
+        for(let i = 0; i< store.state.player.playerData.playerPlanets.homeWorld.storage.length; i++) {
+            storage.push(store.state.player.playerData.playerPlanets.homeWorld.storage[i])
+        }
+        return storage
     }
 
     getOtherPlanetsStorage(){
@@ -38,17 +42,32 @@ export class Mutations {
     }
 
     getAllPlayerModules(homeStorage, otherStorage){
-        const count = homeStorage.length
-        for(let i = 0; i < count; i++){
-            for(let j = 0; j < otherStorage.length; j++){
-                if(homeStorage[i].id === otherStorage[j].id){
-                    homeStorage[i].amount++
-                } else {
-                    homeStorage.push(otherStorage[j])
+        if(homeStorage.length > 0){
+            const count = homeStorage.length
+            for(let i = 0; i < count; i++){
+                for(let j = 0; j < otherStorage.length; j++){
+                    if(homeStorage[i].id === otherStorage[j].id){
+                        homeStorage[i].amount =  homeStorage[i].amount +  otherStorage[j].amount
+                    } else {
+                        homeStorage.push(otherStorage[j])
+                    }
+                }
+            }
+            return homeStorage
+        } else {
+            const count = otherStorage.length
+            for(let i = 0; i < count; i++){
+                for(let j = 0; j < homeStorage.length; j++){
+                    if(otherStorage[j].id === homeStorage[i].id){
+                        otherStorage[j].amount = otherStorage[j].amount + homeStorage[i].amount
+                    } else {
+                        otherStorage.push(homeStorage[i])
+                    }
                 }
             }
         }
-        return homeStorage
+        return otherStorage
     }
+
 
 }
