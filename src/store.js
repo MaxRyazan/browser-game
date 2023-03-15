@@ -57,8 +57,7 @@ export default createStore({
                                 id:1,
                                 amount: 1,
                                 picture:'./src/assets/images/chemical_reactor.jpg',
-                                requiredTech: [],
-                                type: {military: false, civilian: false, neutral: true},
+
                                 baseParams:{
                                     baseMass: 120, baseSignature: 8, requiredEnergy: 0, requiredCargo: 11,
                                     requiredWorkers: 1,
@@ -79,11 +78,9 @@ export default createStore({
                         {
                             storage:[
                                 {
-                                    id:1,
+                                    id: 1,
                                     amount: 13,
                                     picture:'./src/assets/images/chemical_reactor.jpg',
-                                    requiredTech: [],
-                                    type: {military: false, civilian: false, neutral: true},
                                     baseParams:{
                                         baseMass: 120, baseSignature: 8, requiredEnergy: 0, requiredCargo: 11,
                                         requiredWorkers: 1,
@@ -102,8 +99,6 @@ export default createStore({
                                     id: 2,
                                     amount: 1,
                                     picture: './src/assets/images/nuclear_reactor.jpg',
-                                    requiredTech: [],
-                                    type: {military: false, civilian: false, neutral: true},
                                     baseParams: {
                                         baseMass: 190, baseSignature: 11, requiredEnergy: 0, requiredCargo: 16,
                                         requiredWorkers: 1,
@@ -123,8 +118,7 @@ export default createStore({
                                     id: 3,
                                     amount: 1,
                                     picture: './src/assets/images/altah_reactor.jpg',
-                                    requiredTech: [],
-                                    type: {military: false, civilian: false, neutral: true},
+
                                     baseParams: {
                                         baseMass: 80, baseSignature: 10, requiredEnergy: 0, requiredCargo: 26,
                                         requiredWorkers: 5,
@@ -157,7 +151,8 @@ export default createStore({
         newLotFilterRace: ref(''),
         newLotFilterInput: ref(''),
         confirmWindow: ref(false),
-        confirmWindowInput: ref('')
+        confirmWindowInput: ref(''),
+        buyingLot: reactive({lot: {}, amount: Number})
     },
 
 })

@@ -12,7 +12,7 @@
             {{lot.pricePerLot}}
             <span class="money_ig_currency">IG</span>
         </div>
-        <AppIcon :path="iconsPath.buy"  @click="actions.buyItem(lot)"/>
+        <AppIcon :path="iconsPath.buy"  @click="openConfirmWindow(lot)"/>
     </div>
         <AppConfirmWindow  v-if="store.state.confirmWindow === true"/>
 </template>
@@ -24,7 +24,15 @@ import iconsPath from "../../iconsPaths.js";
 import {Actions} from "../../js/actions.js";
 import {Mutations} from "../../js/mutations.js";
 import AppConfirmWindow from "./AppConfirmWindow.vue";
-
-const actions = new Actions()
 const mutations = new Mutations()
+
+function openConfirmWindow(lot){
+    if(store.state.confirmWindow){
+        store.state.confirmWindow = false
+        store.state.confirmWindowInput = ''
+    } else {
+        store.state.confirmWindow = true
+    }
+    store.state.buyingLot.lot = lot
+}
 </script>

@@ -1,8 +1,8 @@
 <template>
-    <form class="confirm_wrapper" @submit.prevent="">
+    <form class="confirm_wrapper" @submit.prevent="actions.buyItem()">
         <div class="confirm_inner">
             <input v-model="store.state.confirmWindowInput" class="confirm_input" type="number" name="amount">
-            <label class="confirm_text" for="amount">штук</label>
+            <label class="confirm_text green" for="amount">Количество</label>
             <button class="confirm_ok_btn">Ок</button>
             <button class="confirm_close_btn" @click="mutations.closeConfirmWindow">X</button>
         </div>
@@ -12,5 +12,7 @@
 <script setup>
 import {Mutations} from "../../js/mutations.js";
 import store from "../../store.js";
+import {Actions} from "../../js/actions.js";
 const mutations = new Mutations()
+const actions = new Actions()
 </script>

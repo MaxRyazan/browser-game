@@ -1,29 +1,29 @@
 
 import {Race} from "../interfaces/Race";
 import {Necrons} from "../races/Necrons";
-import {Chemistry} from "../Technologies/Chemistry";
+import {NuclearPhysics} from "../Technologies/NuclearPhysics";
 
-export class ChemicalReactor {
-                public id: 1
-                public picture: './src/assets/images/chemical_reactor.jpg'
-                public requiredTech: Chemistry
-                public name: 'Химический реактор'
+export class NuclearReactor {
+                public id: 2
+                public picture: './src/assets/images/nuclear_reactor.jpg'
+                public requiredTech: NuclearPhysics
+                public name: 'Ядерный реактор'
                 public baseParams: {
-                        baseMass: 120
-                        baseSignature: 8
+                        baseMass: 190
+                        baseSignature: 11
                         requiredEnergy: 0
-                        requiredCargo: 11
+                        requiredCargo: 16
                         requiredWorkers: 1
                     }
                 public baseCostInMaterials:{
-                        metal: 1
-                        electronic: 2
-                        polymers: 2
-                        requiredCRForBuild: 3
+                        metal: 2
+                        electronic: 4
+                        polymers: 1
+                        requiredCRForBuild: 5
                         requiredIGForBuild: 0
                     }
                 public bonusParamsToShip:{
-                        energy: 100
+                        energy: 150
                         cargo: 0
                         speedInSubspace: 0
                         speedInNormalSpace: 0
@@ -39,5 +39,5 @@ export class ChemicalReactor {
 
 }
 
-const reactor = new ChemicalReactor(new Necrons())
+const reactor = new NuclearReactor(new Necrons())
 console.log(reactor)
