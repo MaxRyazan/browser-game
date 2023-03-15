@@ -70,4 +70,19 @@ export class Mutations {
     }
 
 
+    filteredModules (raceFilter, inputFilter, returnedArray) {
+        if (!raceFilter && !inputFilter) {
+            return returnedArray
+        }
+        if (raceFilter && !inputFilter) {
+            return returnedArray.filter(e => e.belongsToRace.name === raceFilter)
+        }
+        if(!raceFilter && inputFilter) {
+            return returnedArray.filter(e => e.name.toLowerCase().includes(inputFilter.toLowerCase()))
+        }
+        else {
+            return returnedArray.filter(e => e.belongsToRace.name === raceFilter && e.name.toLowerCase().includes(inputFilter.toLowerCase()))
+        }
+    }
+
 }

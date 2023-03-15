@@ -10,9 +10,9 @@
             <div class="trade_container_item title">Цена всего лота</div>
             <AppIcon :path="iconsPath.close" @click="mutations.toggleTrade()"/>
         </div>
-        <div v-for="lot in filteredLots" :key="lot.id" class="trade_container_wrapper">
+        <div v-for="lot in mutations.filteredModules(store.state.tradeFilterRace, store.state.tradeFilterInput, store.state.allLots)" :key="lot.id" class="trade_container_wrapper">
             <div class="trade_container_item">{{lot.lotFrom}}</div>
-            <div class="trade_container_item race" :class="mutations.checkRace(lot.race)">{{lot.name}}</div>
+            <div class="trade_container_item race" :class="mutations.checkRace(lot.belongsToRace.name)">{{lot.name}}</div>
             <div class="trade_container_item money_ig_sum">{{lot.minAmount}}</div>
             <div class="trade_container_item money_ig_sum">{{lot.amount}}</div>
             <div class="trade_container_item money_ig_sum">
@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import {computed} from "vue";
+
 
 defineEmits(['tradeSearch', 'clearFilter'])
 import AppIcon from '../navigation/AppIcon.vue'
@@ -48,20 +48,5 @@ import AppTradeNewLot from "./AppTradeNewLot.vue";
 
 const actions = new Actions()
 const mutations = new Mutations()
-
-const filteredLots = computed(() => {
-    if (!store.state.tradeFilterInput && !store.state.tradeFilterRace) {
-        return store.state.allLots
-    }
-    if (store.state.tradeFilterRace && !store.state.tradeFilterInput) {
-        return store.state.allLots.filter(e => e.race === store.state.tradeFilterRace)
-    }
-    if(!store.state.tradeFilterRace && store.state.tradeFilterInput) {
-        return store.state.allLots.filter(e => e.name.toLowerCase().includes(store.state.tradeFilterInput.toLowerCase()))
-    }
-    else {
-        return store.state.allLots.filter(e => e.race === store.state.tradeFilterRace && e.name.toLowerCase().includes(store.state.tradeFilterInput.toLowerCase()))
-    }
-})
 
 </script>
