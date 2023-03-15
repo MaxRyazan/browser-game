@@ -2,8 +2,8 @@
     <div class="top_nav">
         <div class="top_nav_money">
             <AppIcon :path="iconsPath.money" @click="mutations.toggleTrade"/>
-            <AppPrice :currency_type="`money_cr_currency`" :sum="store.state.playerMoney.CR" :currency="`CR`"/>
-            <AppPrice :currency_type="`money_cr_currency`" :sum="store.state.playerMoney.IG" :currency="`IG`"/>
+            <AppPrice :currency_type="`money_cr_currency`" :sum="store.state.player.playerData.playerMoney.CR" :currency="`CR`"/>
+            <AppPrice :currency_type="`money_cr_currency`" :sum="store.state.player.playerData.playerMoney.IG" :currency="`IG`"/>
         </div>
         <div class="top_nav_science">
             <AppIcon :path="iconsPath.science"/>

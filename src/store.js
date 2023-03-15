@@ -5,19 +5,37 @@ import {Humans} from "./races/Humans.ts";
 export default createStore({
     state: {
         allLots: reactive([
-            { id: 1, lotFrom: 'DenisPrime', name: "Двигательный отсек",  belongsToRace: {id: 1, name:'Люди'}, minAmount: 1, amount: 200, pricePerUnit: 12, pricePerLot: 2400 },
-            { id: 2, lotFrom: 'Столица', name: "Рабочий отсек", belongsToRace: {id: 1,name:'Люди'}, minAmount: 1, amount: 1200, pricePerUnit: 12, pricePerLot: 2400 },
-            { id: 3, lotFrom: 'Галактика', name: "Щитовая платформа",  belongsToRace: {id: 3, name:'Некроны'}, minAmount: 1, amount: 2200, pricePerUnit: 12, pricePerLot: 2400 },
-            { id: 4, lotFrom: 'Ug_uwz', name: "Гипердвигатель",  belongsToRace: {id:3, name:'Некроны'}, minAmount: 1, amount: 2000, pricePerUnit: 200, pricePerLot: 400000 },
-            { id: 5, lotFrom: 'Верфи', name: "Фотонный двигатель",  belongsToRace: {id:2,name:'Киборги'}, minAmount: 1, amount: 2100, pricePerUnit: 150, pricePerLot: 315000 },
-            { id: 6, lotFrom: 'Minax:0', name: "Гравитационный двигатель", belongsToRace: {id:3,name:'Некроны'}, minAmount: 1, amount: 21100, pricePerUnit: 122, pricePerLot: 2574200 },
-            { id: 7, lotFrom: '_SoloPrime_', name: "Лёгкий лазер", belongsToRace: {id:2,name:'Киборги'}, minAmount: 1, amount: 12200, pricePerUnit: 27, pricePerLot: 329400 },
-            { id: 8, lotFrom: 'ElizVeryPrime', name: "Ионная пушка",  belongsToRace: {id:1,name:'Люди'}, minAmount: 1, amount: 3200, pricePerUnit: 125, pricePerLot: 300000 },
+            {
+                id: 1,
+                lotFrom: {id:1, login: 'Десантник'},
+                subject: {id:1, name: 'Химический реактор', belongsToRace: {id: 1, name: 'Люди'}},
+                minAmount: 1,
+                amount: 200,
+                pricePerUnit: 12,
+                pricePerLot: 2400
+            },
+            {
+                id: 2,
+                lotFrom: {id:1, login: 'Десантник'},
+                subject: {id:3, name: 'Альтах реактор', belongsToRace: {id: 2, name: 'Киборги'}},
+                minAmount: 2,
+                amount: 100,
+                pricePerUnit: 120,
+                pricePerLot: 6000
+            },
+            {
+                id: 3,
+                lotFrom: {id:1, login: 'Десантник'},
+                subject: {id:2, name: 'Ядерный реактор', belongsToRace: {id: 3, name: 'Некроны'}},
+                minAmount: 10,
+                amount: 1000,
+                pricePerUnit: 300,
+                pricePerLot: 30000
+            },
+
         ]),
 
         showTrade: ref(false),
-
-        playerMoney: reactive({CR: 100000, IG: 3201}),
 
         player: reactive({
             id: 1, login: 'Десантник', email: 'десант@mail.ru', password: 'pass',
@@ -33,6 +51,7 @@ export default createStore({
                         orbit: 3,
                         atmosphere: true,
                         buildingsPoint: 800,
+                        picture: './src/assets/images/home_planet.jpg',
                         storage: [
                             {
                                 id:1,
@@ -47,10 +66,12 @@ export default createStore({
                                     baseCostInMaterials: { metal: 1, electronic: 2, polymers: 2 },
                                     requiredCRForBuild: 3, requiredIGForBuild: 0
                                 },
-                                belongsToRace: {id:1, name: 'Люди'},
-                                bonusesToShip: {energy: 100, cargo: 0, speedInSubspace: 0,
-                                    speedInNormalSpace: 0, mining: 0, scanning: 0,
-                                    construction: 0, lifeSupporting: 0, autoPilot: 0},
+                                subject:{
+                                    belongsToRace: {id:1, name: 'Люди'},
+                                    bonusesToShip: {energy: 100, cargo: 0, speedInSubspace: 0,
+                                        speedInNormalSpace: 0, mining: 0, scanning: 0,
+                                        construction: 0, lifeSupporting: 0, autoPilot: 0},
+                                },
                             }
                         ],
                     },
@@ -70,10 +91,12 @@ export default createStore({
                                         baseCostInMaterials: { metal: 1, electronic: 2, polymers: 2 },
                                         requiredCRForBuild: 3, requiredIGForBuild: 0
                                     },
-                                    belongsToRace: {id:1, name: 'Люди'},
-                                    bonusesToShip: {energy: 100, cargo: 0, speedInSubspace: 0,
-                                        speedInNormalSpace: 0, mining: 0, scanning: 0,
-                                        construction: 0, lifeSupporting: 0, autoPilot: 0},
+                                    subject: {
+                                        belongsToRace: {id:1, name: 'Люди'},
+                                        bonusesToShip: {energy: 100, cargo: 0, speedInSubspace: 0,
+                                            speedInNormalSpace: 0, mining: 0, scanning: 0,
+                                            construction: 0, lifeSupporting: 0, autoPilot: 0},
+                                    },
                                 },
                                 {
                                     id: 2,
@@ -88,18 +111,19 @@ export default createStore({
                                         baseCostInMaterials: {metal: 2, electronic: 4, polymers: 1},
                                         requiredCRForBuild: 5, requiredIGForBuild: 0
                                     },
-                                    belongsToRace: {id: 3, name: 'Некроны'},
-                                    bonusesToShip: {
-                                        energy: 150, cargo: 0, speedInSubspace: 0,
-                                        speedInNormalSpace: 0, mining: 0, scanning: 0,
-                                        construction: 0, lifeSupporting: 0, autoPilot: 0
+                                    subject:{
+                                        belongsToRace: {id: 3, name: 'Некроны'},
+                                        bonusesToShip: {
+                                            energy: 150, cargo: 0, speedInSubspace: 0,
+                                            speedInNormalSpace: 0, mining: 0, scanning: 0,
+                                            construction: 0, lifeSupporting: 0, autoPilot: 0},
                                     },
                                 },
                                 {
                                     id: 3,
                                     name: 'Альтах реактор',
                                     amount: 1,
-                                    picture: './src/assets/images/nuclear_reactor.jpg',
+                                    picture: './src/assets/images/altah_reactor.jpg',
                                     requiredTech: [],
                                     type: {military: false, civilian: false, neutral: true},
                                     baseParams: {
@@ -108,11 +132,12 @@ export default createStore({
                                         baseCostInMaterials: {metal: 12, electronic: 10, polymers: 12},
                                         requiredCRForBuild: 55, requiredIGForBuild: 0
                                     },
-                                    belongsToRace: {id: 2, name: 'Киборги'},
-                                    bonusesToShip: {
-                                        energy: 350, cargo: 0, speedInSubspace: 0,
-                                        speedInNormalSpace: 0, mining: 0, scanning: 0,
-                                        construction: 0, lifeSupporting: 0, autoPilot: 0
+                                    subject: {
+                                        belongsToRace: {id: 2, name: 'Киборги'},
+                                        bonusesToShip: {
+                                            energy: 350, cargo: 0, speedInSubspace: 0,
+                                            speedInNormalSpace: 0, mining: 0, scanning: 0,
+                                            construction: 0, lifeSupporting: 0, autoPilot: 0},
                                     },
                                 },
                             ]
@@ -131,6 +156,8 @@ export default createStore({
         allPlayerModules: reactive([]),
         newLotFilterRace: ref(''),
         newLotFilterInput: ref(''),
+        confirmWindow: ref(false),
+        confirmWindowInput: ref('')
     },
 
 })

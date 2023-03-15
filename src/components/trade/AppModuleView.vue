@@ -4,7 +4,7 @@
             <div class="module_size">
                 <img :src="module.picture" alt="" class="module_image">
             </div>
-            <div :class="mutations.checkRace(module.belongsToRace.name)">{{module.name}}</div>
+            <div :class="mutations.checkRace(module.subject.belongsToRace.name)">{{module.name}}</div>
             <div class="title">{{module.amount}} шт.</div>
         </div>
     </div>
