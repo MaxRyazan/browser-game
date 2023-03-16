@@ -17,7 +17,7 @@ export class Actions {
         }
 
         store.state.allPlayerModules.push(module)
-        console.log(store.state.allPlayerModules)
+
 
     }
 

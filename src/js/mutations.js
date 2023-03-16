@@ -25,11 +25,7 @@ export class Mutations {
     }
 
     getHomeWorldStorage(){
-        const storage = []
-        for(let i = 0; i< store.state.player.playerData.playerPlanets.homeWorld.storage.length; i++) {
-            storage.push(store.state.player.playerData.playerPlanets.homeWorld.storage[i])
-        }
-        return storage
+        return [...store.state.player.playerData.playerPlanets.homeWorld.storage]
     }
 
     getOtherPlanetsStorage(){
@@ -41,34 +37,26 @@ export class Mutations {
         return storage;
     }
 
-    getAllPlayerModules(homeStorage, otherStorage){
-        if(homeStorage.length > 0){
-            const count = homeStorage.length
-            for(let i = 0; i < count; i++){
-                for(let j = 0; j < otherStorage.length; j++){
-                    if(homeStorage[i].id === otherStorage[j].id){
-                        homeStorage[i].amount =  homeStorage[i].amount +  otherStorage[j].amount
-                    } else {
-                        homeStorage.push(otherStorage[j])
-                    }
-                }
-            }
-            return homeStorage
-        } else {
-            const count = otherStorage.length
-            for(let i = 0; i < count; i++){
-                for(let j = 0; j < homeStorage.length; j++){
-                    if(otherStorage[j].id === homeStorage[i].id){
-                        otherStorage[j].amount = otherStorage[j].amount + homeStorage[i].amount
-                    } else {
-                        otherStorage.push(homeStorage[i])
-                    }
+    getAllPlayerModules() {
+        return this.removeIdenticalElements(this.getHomeWorldStorage(), this.getOtherPlanetsStorage())
+    }
+
+
+    removeIdenticalElements(arrayOne, arrayTwo){
+        for(let i = 0; i < arrayOne.length; i++){
+            for(let j = 0; j < arrayTwo.length; j++){
+                if(arrayTwo[j].id === arrayOne[i].id && arrayTwo[j].belongsToRace.id === arrayOne[i].belongsToRace.id){
+                    arrayTwo.splice(j, 1)
+                    arrayOne[i].amount  = arrayOne[i].amount + arrayTwo[j].amount
                 }
             }
         }
-        return otherStorage
+       return [...arrayOne, ...arrayTwo]
     }
 
+    isIdentical(item1, item2){
+        return item1.id === item2.id && item1.belongsToRace.id === item2.belongsToRace.id
+    }
 
     filteredModules (raceFilter, inputFilter, returnedArray) {
         if (!raceFilter && !inputFilter) {
@@ -89,4 +77,5 @@ export class Mutations {
     closeConfirmWindow(){
         store.state.confirmWindow = false
     }
+
 }

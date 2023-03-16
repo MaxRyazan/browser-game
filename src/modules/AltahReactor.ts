@@ -1,12 +1,15 @@
 import {Race} from "../interfaces/Race";
 import {Necrons} from "../races/Necrons";
 import {AlienTechnology} from "../Technologies/AlienTechnology";
+import {Module} from "../interfaces/Module";
 
-export class AltahReactor {
+export class AltahReactor implements Module{
     public id: Number
     public picture: String
     public requiredTech: {}
+    public belongsToRace: Race
     public name: String
+    public amount: Number
     public baseParams: {
         baseMass: Number
         baseSignature: Number
@@ -35,11 +38,12 @@ export class AltahReactor {
         autoPilot: Boolean
     }
 
-    constructor(public belongsToRace: Race) {
+    constructor(belongsToRace: Race) {
         this.id = 3
         this.picture = './src/assets/images/altah_reactor.jpg'
         this.requiredTech = [new AlienTechnology()]
         this.name = 'Альтах реактор'
+        this.amount = 1
         this.baseParams = {
             baseMass: 80,
             baseSignature: 10,
@@ -70,6 +74,3 @@ export class AltahReactor {
         this.belongsToRace = belongsToRace
     }
 }
-
-const reactor = new AltahReactor(new Necrons())
-console.log(reactor)

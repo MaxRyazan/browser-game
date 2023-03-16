@@ -1,12 +1,12 @@
 <template>
-    <div class="trade_container">
-        <AppTradeLotTitle/>
-        <AppTradeLotView />
-    </div>
+<!--    <div class="trade_container">-->
+<!--        <AppTradeLotTitle/>-->
+<!--        <AppTradeLotView />-->
+<!--    </div>-->
     <div class="trade_filters_wrapper">
         <div class="trade_filters_inner">
             <AppTradeNewLot />
-            <AppTradeFilters />
+<!--            <AppTradeFilters />-->
         </div>
     </div>
 </template>

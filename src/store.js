@@ -46,7 +46,6 @@ export default createStore({
         projectInOrder: reactive({}),
         tradeFilterInput: ref(''),
         tradeFilterRace: ref(''),
-        allPlayerModules: reactive([]),
         newLotFilterRace: ref(''),
         newLotFilterInput: ref(''),
         confirmWindow: ref(false),

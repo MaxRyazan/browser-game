@@ -1,12 +1,15 @@
 import {Race} from "../interfaces/Race";
 import {Chemistry} from "../Technologies/Chemistry";
-import {Humans} from "../races/Humans";
+import {Module} from "../interfaces/Module";
 
-export class ChemicalReactor {
+
+export class ChemicalReactor implements Module{
     public id: Number
     public picture: String
     public requiredTech: {}
+    public belongsToRace: Race
     public name: String
+    public amount: Number
     public baseParams: {
         baseMass: Number
         baseSignature: Number
@@ -35,11 +38,12 @@ export class ChemicalReactor {
         autoPilot: Boolean
     }
 
-    constructor(public belongsToRace: Race) {
+    constructor(belongsToRace: Race) {
         this.id = 1
         this.picture = './src/assets/images/chemical_reactor.jpg'
         this.requiredTech = [new Chemistry()]
         this.name = 'Химический реактор'
+        this.amount = 1
         this.baseParams = {
             baseMass: 120,
             baseSignature: 8,
@@ -70,5 +74,3 @@ export class ChemicalReactor {
         this.belongsToRace = belongsToRace
     }
 }
-const  reactor = new ChemicalReactor(new Humans())
-console.log(reactor)

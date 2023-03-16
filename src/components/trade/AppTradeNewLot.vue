@@ -17,14 +17,6 @@ import {Mutations} from "../../js/mutations.js";
 import AppDropDownTrade from "./AppDropDownTrade.vue";
 import AppModuleView from "./AppModuleView.vue";
 
-const mutations = new Mutations()
-
-const playerHomeWorldStorage = mutations.getHomeWorldStorage()
-
-const playerOtherPlanets =  mutations.getOtherPlanetsStorage()
-
-store.state.allPlayerModules = mutations.getAllPlayerModules(playerHomeWorldStorage, playerOtherPlanets)
-
 function updateValue(arg){
     store.state.newLotFilterRace = arg
 }

@@ -1,5 +1,6 @@
 import {Planet} from "./Planet";
 import {Ship} from "../ARCHIVE/Ship";
+import {Technology} from "../interfaces/Technology";
 
 export class Player {
     constructor(
@@ -11,7 +12,11 @@ export class Player {
             race: {},
             playerMoney: { CR: Number, IG: Number },
             playerScience: Number,
-            playerKnowledge: { learned: {}, inLearnNow: {} },
+            playerKnowledge: { learned: Technology[], inLearnNow: {
+                    tech: Technology,
+                    starting_at: Number
+                    ending_at: Number
+                } },
             playerPlanets: { homeWorld: Planet, inhabitedPlanets: Planet[] },
             playerShips: Ship[],
         }
