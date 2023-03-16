@@ -10,6 +10,7 @@ import {AltahReactor} from "../modules/AltahReactor";
 import {Necrons} from "../races/Necrons";
 import {NuclearReactor} from "../modules/NuclearReactor";
 import {Cyborgs} from "../races/Cyborgs";
+import {Lot} from "../entities/TradeLot";
 
 export class FakeData {
     mathematics = new Mathematics()
@@ -47,4 +48,8 @@ export class FakeData {
             playerShips: [],
         },
     )
+
+    lot1 = new Lot(1,{id: this.player.id, login: this.player.login}, 200, 12, new ChemicalReactor(new Humans()))
+    lot2 = new Lot(2, {id: this.player.id, login: this.player.login}, 180, 120, new AltahReactor(new Necrons()))
+    lot3 = new Lot(10, {id: this.player.id, login: this.player.login}, 1000, 400, new NuclearReactor(new Cyborgs()))
 }

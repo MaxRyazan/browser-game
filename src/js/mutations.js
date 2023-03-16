@@ -59,6 +59,7 @@ export class Mutations {
     }
 
     filteredModules (raceFilter, inputFilter, returnedArray) {
+        console.log(returnedArray)
         if (!raceFilter && !inputFilter) {
             return returnedArray
         }

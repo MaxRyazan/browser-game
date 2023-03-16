@@ -1,5 +1,5 @@
 <template>
-    <div v-for="module in mutations.filteredModules(store.state.newLotFilterRace, store.state.newLotFilterInput, store.state.allPlayerModules)">
+    <div v-for="module in mutations.filteredModules(store.state.newLotFilterRace, store.state.newLotFilterInput, [...store.state.allPlayerModules])">
         <div class="module_container">
             <div class="module_size">
                 <img :src="module.picture" alt="" class="module_image">
