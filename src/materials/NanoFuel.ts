@@ -5,8 +5,14 @@ import {Delitium} from "../Resources/mineral/Delitium";
 import {Quantium} from "../Resources/mineral/Quantium";
 
 export class NanoFuel implements Material {
-    public id: 7
-    public mass: 16
-    public name: 'Нано топлливо'
-    public resourcesForProduction: [Delitium, Quantium, Tellurium, OrganicOre]
+    public id: Number
+    public mass: Number
+    public name: String
+    public resourcesForProduction: {}
+    constructor() {
+        this. id = 7
+        this.mass = 16
+        this.name = 'Нано топлливо'
+        this.resourcesForProduction = [new Delitium(), new Quantium(), new Tellurium(), new OrganicOre()]
+    }
 }

@@ -4,9 +4,16 @@ import {MineralOre} from "../Resources/ore/MineralOre";
 import {Quantium} from "../Resources/mineral/Quantium";
 import {Delitium} from "../Resources/mineral/Delitium";
 
+
 export class Vettur implements Material {
-    public id: 2
-    public mass: 8
-    public name: 'Веттур'
-    public resourcesForProduction: [MetalOre, MineralOre, Quantium, Delitium]
+    public id: Number
+    public mass: Number
+    public name: String
+    public resourcesForProduction: {}
+    constructor() {
+        this. id = 2
+        this.mass = 8
+        this.name = 'Веттур'
+        this.resourcesForProduction = [new MetalOre(), new MineralOre(), new Quantium(), new Delitium()]
+    }
 }

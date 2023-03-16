@@ -1,9 +1,14 @@
 import {createStore} from "vuex";
 import {reactive, ref} from "vue";
-import {Humans} from "./races/Humans.ts";
+import {FakeData} from "./FAKE_DATA/FakeData.ts";
+
+const fakeData = new FakeData();
 
 export default createStore({
     state: {
+        player: fakeData.player,
+        allPlanetarySystems: reactive([fakeData.solarSystem]),
+
         allLots: reactive([
             {
                 id: 1,
@@ -37,112 +42,6 @@ export default createStore({
 
         showTrade: ref(false),
 
-        player: reactive({
-            id: 1, login: 'Десантник', email: 'десант@mail.ru', password: 'pass',
-            playerData: {
-                race: Humans,
-                playerMoney: {CR: 125500, IG: 810},
-                playerScience: {learned: [], inLearnNow: {}},
-                playerPlanets:{
-                    homeWorld: {
-                        id: 1,
-                        name: 'Столица',
-                        planetarySystem: 1,
-                        orbit: 3,
-                        atmosphere: true,
-                        buildingsPoint: 800,
-                        picture: './src/assets/images/home_planet.jpg',
-                        storage: [
-                            {
-                                id:1,
-                                amount: 1,
-                                picture:'./src/assets/images/chemical_reactor.jpg',
-
-                                baseParams:{
-                                    baseMass: 120, baseSignature: 8, requiredEnergy: 0, requiredCargo: 11,
-                                    requiredWorkers: 1,
-                                    baseCostInMaterials: { metal: 1, electronic: 2, polymers: 2 },
-                                    requiredCRForBuild: 3, requiredIGForBuild: 0
-                                },
-                                subject:{
-                                    name:'Химический реактор',
-                                    belongsToRace: {id:1, name: 'Люди'},
-                                    bonusesToShip: {energy: 100, cargo: 0, speedInSubspace: 0,
-                                        speedInNormalSpace: 0, mining: 0, scanning: 0,
-                                        construction: 0, lifeSupporting: 0, autoPilot: 0},
-                                },
-                            }
-                        ],
-                    },
-                    inhabitedPlanets: [
-                        {
-                            storage:[
-                                {
-                                    id: 1,
-                                    amount: 13,
-                                    picture:'./src/assets/images/chemical_reactor.jpg',
-                                    baseParams:{
-                                        baseMass: 120, baseSignature: 8, requiredEnergy: 0, requiredCargo: 11,
-                                        requiredWorkers: 1,
-                                        baseCostInMaterials: { metal: 1, electronic: 2, polymers: 2 },
-                                        requiredCRForBuild: 3, requiredIGForBuild: 0
-                                    },
-                                    subject: {
-                                        name:'Химический реактор',
-                                        belongsToRace: {id:1, name: 'Люди'},
-                                        bonusesToShip: {energy: 100, cargo: 0, speedInSubspace: 0,
-                                            speedInNormalSpace: 0, mining: 0, scanning: 0,
-                                            construction: 0, lifeSupporting: 0, autoPilot: 0},
-                                    },
-                                },
-                                {
-                                    id: 2,
-                                    amount: 1,
-                                    picture: './src/assets/images/nuclear_reactor.jpg',
-                                    baseParams: {
-                                        baseMass: 190, baseSignature: 11, requiredEnergy: 0, requiredCargo: 16,
-                                        requiredWorkers: 1,
-                                        baseCostInMaterials: {metal: 2, electronic: 4, polymers: 1},
-                                        requiredCRForBuild: 5, requiredIGForBuild: 0
-                                    },
-                                    subject:{
-                                        name: 'Ядерный реактор',
-                                        belongsToRace: {id: 3, name: 'Некроны'},
-                                        bonusesToShip: {
-                                            energy: 150, cargo: 0, speedInSubspace: 0,
-                                            speedInNormalSpace: 0, mining: 0, scanning: 0,
-                                            construction: 0, lifeSupporting: 0, autoPilot: 0},
-                                    },
-                                },
-                                {
-                                    id: 3,
-                                    amount: 1,
-                                    picture: './src/assets/images/altah_reactor.jpg',
-
-                                    baseParams: {
-                                        baseMass: 80, baseSignature: 10, requiredEnergy: 0, requiredCargo: 26,
-                                        requiredWorkers: 5,
-                                        baseCostInMaterials: {metal: 12, electronic: 10, polymers: 12},
-                                        requiredCRForBuild: 55, requiredIGForBuild: 0
-                                    },
-                                    subject: {
-                                        name: 'Альтах реактор',
-                                        belongsToRace: {id: 2, name: 'Киборги'},
-                                        bonusesToShip: {
-                                            energy: 350, cargo: 0, speedInSubspace: 0,
-                                            speedInNormalSpace: 0, mining: 0, scanning: 0,
-                                            construction: 0, lifeSupporting: 0, autoPilot: 0},
-                                    },
-                                },
-                            ]
-                        }
-                    ]
-                },
-                playerShips: []
-            }
-        }),
-
-        sciencesInResearch: reactive({id: 1, name: 'Кинетическая пушка', lvl: 50, timeWhenComplete: 1688653426489, costInNP: 50000}),
 
         projectInOrder: reactive({}),
         tradeFilterInput: ref(''),

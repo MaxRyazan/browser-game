@@ -3,8 +3,14 @@ import {Tellurium} from "../Resources/mineral/Tellurium";
 import {MetalOre} from "../Resources/ore/MetalOre";
 
 export class Steel implements Material {
-    public id: 4
-    public mass: 4
-    public name: 'Сталь'
-    public resourcesForProduction: [MetalOre, MetalOre, MetalOre, Tellurium]
+    public id: Number
+    public mass: Number
+    public name: String
+    public resourcesForProduction: {}
+    constructor() {
+        this. id = 4
+        this.mass = 4
+        this.name = 'Сталь'
+        this.resourcesForProduction = [new MetalOre(), new MetalOre(), new MetalOre(), new Tellurium()]
+    }
 }

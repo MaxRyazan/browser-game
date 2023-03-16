@@ -2,8 +2,14 @@ import {Technology} from "../interfaces/Technology";
 import {HigherMathematics} from "./HigherMathematics";
 
 export class ArtificialIntelligence implements Technology {
-    public cost: 1800
-    public id: 13
-    public name: 'Искусственный интеллект'
-    public requiredTechs: [HigherMathematics]
+    public cost: Number
+    public id: Number
+    public name: String
+    public requiredTechs: {}
+    constructor() {
+        this.cost = 1800
+        this.id = 13
+        this.name = 'Искусственный интеллект'
+        this.requiredTechs = [new HigherMathematics()]
+    }
 }

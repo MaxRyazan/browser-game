@@ -3,8 +3,14 @@ import {Mathematics} from "./Mathematics";
 import {Biology} from "./Biology";
 
 export class Physics implements Technology {
-    public cost: 400
-    public id: 5
-    public name: 'Физика'
-    public requiredTechs: [Mathematics, Biology]
+    public cost: Number
+    public id: Number
+    public name: String
+    public requiredTechs: {}
+    constructor() {
+        this.cost = 400
+        this.id = 5
+        this.name = 'Физика'
+        this.requiredTechs = [new Mathematics(), new Biology()]
+    }
 }

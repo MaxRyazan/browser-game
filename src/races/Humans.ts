@@ -1,15 +1,27 @@
 import {Race} from "../interfaces/Race";
 
 export class Humans implements Race {
-    public id: 1
-    public name: 'Люди'
+    public id: Number
+    public name: String
     public params: {
-        science: 1.2,
-        industry: 1,
-        shipbuilding: 1,
-        resource_extraction: 1
+        science: Number,
+        industry: Number,
+        shipbuilding: Number,
+        resource_extraction: Number
     }
-    public picture: './src/assets/images/humans.jpg'
-    public atmosphere: true
+    public picture: String
+    public atmosphere: Boolean
 
+    constructor() {
+        this.id = 1
+        this.name = 'Люди'
+        this.params = {
+            science: 1.2,
+            industry: 1,
+            shipbuilding: 1,
+            resource_extraction: 1
+        }
+        this.picture = './src/assets/images/humans.jpg'
+        this.atmosphere = true
+    }
 }

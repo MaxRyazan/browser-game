@@ -3,9 +3,16 @@ import {Delitium} from "../Resources/mineral/Delitium";
 import {MineralOre} from "../Resources/ore/MineralOre";
 import {MetalOre} from "../Resources/ore/MetalOre";
 
+
 export class NuclearFuel implements Material {
-    public id: 6
-    public mass: 4
-    public name: 'Ядерное топливо'
-    public resourcesForProduction: [Delitium, MineralOre, MetalOre]
+    public id: Number
+    public mass: Number
+    public name: String
+    public resourcesForProduction: {}
+    constructor() {
+        this. id = 6
+        this.mass = 4
+        this.name = 'Ядерное топлливо'
+        this.resourcesForProduction = [new Delitium(), new MineralOre(), new MetalOre()]
+    }
 }

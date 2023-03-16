@@ -1,12 +1,18 @@
 import {Technology} from "../interfaces/Technology";
 import {Biology} from "./Biology";
-import {Chemistry} from "./Chemistry";
 import {Medicine} from "./Medicine";
+import {Mathematics} from "./Mathematics";
 
 export class Physiology implements Technology {
-    public cost: 900
-    public id: 9
-    public name: 'Физиология'
-    public requiredTechs: [Chemistry, Biology, Medicine]
+    public cost: Number
+    public id: Number
+    public name: String
+    public requiredTechs: {}
+    constructor() {
+        this.cost = 900
+        this.id = 9
+        this.name = 'Физиология'
+        this.requiredTechs = [new Mathematics(),new Biology(),new Medicine()]
+    }
 
 }

@@ -1,12 +1,12 @@
 export interface Race{
-    id: number,
+    id: Number,
     name: String,
     atmosphere: Boolean,
     picture: String,
     params: {
-        science: number,
-        industry: number,
-        shipbuilding: number,
-        resource_extraction: number
+        science: Number,
+        industry: Number,
+        shipbuilding: Number,
+        resource_extraction: Number
     },
 }

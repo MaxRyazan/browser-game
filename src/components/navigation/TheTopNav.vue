@@ -8,10 +8,10 @@
         <div class="top_nav_science">
             <AppIcon :path="iconsPath.science"/>
             <div class="top_nav_science_params">
-                <strong class="science_params_search">{{ store.state.sciencesInResearch.name }}</strong>
+                <strong class="science_params_search">{{ store.state.player.playerData.playerKnowledge.inLearnNow }}</strong>
                 <span class="science_params_search_time">
-                    {{ mutations.getHours(store.state.sciencesInResearch.timeWhenComplete) }} ч.
-                    {{ mutations.getMinutes(store.state.sciencesInResearch.timeWhenComplete) }} м.
+<!--                    {{ mutations.getHours(store.state.sciencesInResearch.timeWhenComplete) }} ч.-->
+<!--                    {{ mutations.getMinutes(store.state.sciencesInResearch.timeWhenComplete) }} м.-->
                 </span>
             </div>
         </div>

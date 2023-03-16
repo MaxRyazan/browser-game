@@ -3,9 +3,15 @@ import {AlienTechnology} from "./AlienTechnology";
 import {MilitaryShipbuilding} from "./MilitaryShipbuilding";
 
 export class AlienSystemsIntegration implements Technology {
-    public cost: 15000
-    public id: 19
-    public name: 'Интеграция инопланетных систем'
-    public requiredTechs: [AlienTechnology, MilitaryShipbuilding]
+    public cost: Number
+    public id: Number
+    public name: String
+    public requiredTechs: {}
+    constructor() {
+        this.cost = 15000
+        this.id = 19
+        this.name = 'Интеграция инопланетных систем'
+        this.requiredTechs = [new AlienTechnology(), new MilitaryShipbuilding()]
+    }
 
 }
