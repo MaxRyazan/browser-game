@@ -6,7 +6,8 @@ export class Player{
     playerData: {
         race: {},
         playerMoney: {CR: Number, IG: Number},
-        playerScience: {learned: [], inLearnNow: {}},
+        playerScience: Number,
+        playerKnowledge: {learned: [], inLearnNow: {}},
         playerPlanets: {homeWorld: {}, inhabitedPlanets: []},
         playerShips: [],
     }

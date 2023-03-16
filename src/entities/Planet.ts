@@ -1,10 +1,10 @@
 export class Planet{
-    id: Number
-    name: String
-    planetarySystem: Number
-    orbit: Number
-    atmosphere: Boolean
-    building_points: Number
-    storage: []
-    picture: String
+    public id: Number
+    public name: String
+    public planetarySystem: Number
+    public orbit: Number
+    public atmosphere: Boolean
+    public building_points: Number
+    public storage: []
+    public picture: String
 }
