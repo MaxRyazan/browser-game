@@ -16,8 +16,8 @@ export class FakeData {
     biology = new Biology()
     higherMathematics = new HigherMathematics()
     public planet_MERCURY = new Planet(1, 'Меркурий', 1, 1, false, 190, {}, '');
-    public planet_VENUS = new Planet(2, 'Венера', 1, 2, false, 280, [new AltahReactor(new Necrons()), new ChemicalReactor(new Necrons())], '');
-    public planet_EARTH = new Planet(3, 'Земля', 1, 3, true, 310, [new NuclearReactor(new Necrons()), new ChemicalReactor(new Necrons()), new AltahReactor(new Necrons()), new AltahReactor(new Cyborgs())], '');
+    public planet_VENUS = new Planet(2, 'Венера', 1, 2, false, 280, [new AltahReactor(new Necrons()), new ChemicalReactor(new Necrons(), 2)], '');
+    public planet_EARTH = new Planet(3, 'Земля', 1, 3, true, 310, [new NuclearReactor(new Necrons(), 2), new ChemicalReactor(new Necrons(), 2), new AltahReactor(new Necrons(), 2), new AltahReactor(new Cyborgs(), 2)], '');
     public solarSystem = new PlanetarySystem(
         1,
         'Солнечная система',

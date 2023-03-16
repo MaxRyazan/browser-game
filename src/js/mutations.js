@@ -46,15 +46,15 @@ export class Mutations {
         for(let i = 0; i < arrayOne.length; i++){
             for(let j = 0; j < arrayTwo.length; j++){
                 if(arrayTwo[j].id === arrayOne[i].id && arrayTwo[j].belongsToRace.id === arrayOne[i].belongsToRace.id){
+                    arrayOne[i].amount = arrayOne[i].amount + arrayTwo[j].amount
                     arrayTwo.splice(j, 1)
-                    arrayOne[i].amount  = arrayOne[i].amount + arrayTwo[j].amount
                 }
             }
         }
-       return [...arrayOne, ...arrayTwo]
+       store.state.allPlayerModules =  [...arrayOne, ...arrayTwo]
     }
 
-    isIdentical(item1, item2){
+    isModuleIdentical(item1, item2){
         return item1.id === item2.id && item1.belongsToRace.id === item2.belongsToRace.id
     }
 
@@ -63,13 +63,13 @@ export class Mutations {
             return returnedArray
         }
         if (raceFilter && !inputFilter) {
-            return returnedArray.filter(e => e.subject.belongsToRace.name === raceFilter)
+            return returnedArray.filter(e => e.belongsToRace.name === raceFilter)
         }
         if(!raceFilter && inputFilter) {
-            return returnedArray.filter(e => e.subject.name.toLowerCase().includes(inputFilter.toLowerCase()))
+            return returnedArray.filter(e => e.name.toLowerCase().includes(inputFilter.toLowerCase()))
         }
         else {
-            return returnedArray.filter(e => e.subject.belongsToRace.name === raceFilter && e.subject.name.toLowerCase().includes(inputFilter.toLowerCase()))
+            return returnedArray.filter(e => e.belongsToRace.name === raceFilter && e.name.toLowerCase().includes(inputFilter.toLowerCase()))
         }
     }
 

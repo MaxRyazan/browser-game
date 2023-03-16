@@ -9,7 +9,7 @@ export class ChemicalReactor implements Module{
     public requiredTech: {}
     public belongsToRace: Race
     public name: String
-    public amount: Number
+    public amount?: Number
     public baseParams: {
         baseMass: Number
         baseSignature: Number
@@ -38,7 +38,7 @@ export class ChemicalReactor implements Module{
         autoPilot: Boolean
     }
 
-    constructor(belongsToRace: Race) {
+    constructor(belongsToRace: Race, amount?: Number) {
         this.id = 1
         this.picture = './src/assets/images/chemical_reactor.jpg'
         this.requiredTech = [new Chemistry()]
@@ -72,5 +72,6 @@ export class ChemicalReactor implements Module{
             autoPilot: false
         }
         this.belongsToRace = belongsToRace
+        this.amount = amount
     }
 }
