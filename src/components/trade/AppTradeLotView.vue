@@ -1,5 +1,5 @@
 <template>
-    <div v-for="lot in mutations.filteredModules(store.state.tradeFilterRace, store.state.tradeFilterInput, store.state.allLots)" :key="lot.id" class="trade_container_wrapper">
+    <div v-for="lot in mutations.tradeLotsFilter(store.state.tradeFilterRace, store.state.tradeFilterInput, store.state.allLots)" :key="lot.id" class="trade_container_wrapper">
         <div class="trade_container_item">{{lot.lotFrom.login}}</div>
         <div class="trade_container_item race" :class="mutations.checkRace(lot.subject.belongsToRace.name)">{{lot.subject.name}}</div>
         <div class="trade_container_item money_ig_sum">{{lot.minAmount}}</div>

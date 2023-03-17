@@ -74,6 +74,23 @@ export class Mutations {
         }
     }
 
+    tradeLotsFilter(raceFilter, inputFilter, returnedArray) {
+        console.log(returnedArray)
+        if (!raceFilter && !inputFilter) {
+            return returnedArray
+        }
+        if (raceFilter && !inputFilter) {
+            return returnedArray.filter(e => e.subject.belongsToRace.name === raceFilter)
+        }
+        if(!raceFilter && inputFilter) {
+            return returnedArray.filter(e => e.subject.name.toLowerCase().includes(inputFilter.toLowerCase()))
+        }
+        else {
+            return returnedArray.filter(e => e.subject.belongsToRace.name === raceFilter && e.subject.name.toLowerCase().includes(inputFilter.toLowerCase()))
+        }
+    }
+
+
 
     closeConfirmWindow(){
         store.state.confirmWindow = false
