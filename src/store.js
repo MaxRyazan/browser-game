@@ -22,7 +22,7 @@ export default createStore({
         newLotMinUnit:ref(''),
         moduleToSold: reactive({}),
 
-        allPlayerModules: reactive({}),
+        allPlayerModules: reactive([]),
         projectInOrder: reactive({}),
         tradeFilterInput: ref(''),
         tradeFilterRace: ref(''),
@@ -30,7 +30,7 @@ export default createStore({
         newLotFilterInput: ref(''),
         confirmWindow: ref(false),
         confirmWindowInput: ref(''),
-        buyingLot: reactive({lot: {}, amount: Number})
+        buyingLot: reactive({})
     },
 
 })

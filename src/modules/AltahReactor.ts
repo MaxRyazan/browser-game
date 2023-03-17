@@ -9,7 +9,7 @@ export class AltahReactor implements Module{
     public requiredTech: {}
     public belongsToRace: Race
     public name: String
-    public amount?: Number
+    public amount: Number
     public baseParams: {
         baseMass: Number
         baseSignature: Number
@@ -38,7 +38,7 @@ export class AltahReactor implements Module{
         autoPilot: Boolean
     }
 
-    constructor(belongsToRace: Race, amount?: Number) {
+    constructor(belongsToRace: Race, amount: Number = 1) {
         this.id = 3
         this.picture = './src/assets/images/altah_reactor.jpg'
         this.requiredTech = [new AlienTechnology()]
@@ -70,7 +70,7 @@ export class AltahReactor implements Module{
             lifeSupporting: false,
             autoPilot: false
         }
-        this.belongsToRace = belongsToRace
-        this.amount = amount || 1
+        this.belongsToRace = belongsToRace;
+        this.amount = amount;
     }
 }

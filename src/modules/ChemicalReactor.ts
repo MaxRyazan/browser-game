@@ -38,12 +38,11 @@ export class ChemicalReactor implements Module{
         autoPilot: Boolean
     }
 
-    constructor(belongsToRace: Race, amount?: Number) {
+    constructor(belongsToRace: Race, amount: Number = 1) {
         this.id = 1
         this.picture = './src/assets/images/chemical_reactor.jpg'
         this.requiredTech = [new Chemistry()]
         this.name = 'Химический реактор'
-        this.amount = 1
         this.baseParams = {
             baseMass: 120,
             baseSignature: 8,

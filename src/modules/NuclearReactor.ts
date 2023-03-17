@@ -37,12 +37,11 @@ export class NuclearReactor implements Module{
         autoPilot: Boolean
     }
 
-    constructor(belongsToRace: Race, amount?: Number) {
+    constructor(belongsToRace: Race, amount: Number = 1) {
         this.id = 2
         this.picture = './src/assets/images/nuclear_reactor.jpg'
         this.requiredTech = [new NuclearPhysics()]
         this.name = 'Ядерный реактор'
-        this.amount = 1
         this.baseParams = {
             baseMass: 190,
             baseSignature: 11,

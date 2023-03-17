@@ -33,6 +33,6 @@ function openConfirmWindow(lot){
     } else {
         store.state.confirmWindow = true
     }
-    store.state.buyingLot.lot = lot
+    store.state.buyingLot = lot
 }
 </script>
