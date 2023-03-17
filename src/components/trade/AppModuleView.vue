@@ -1,6 +1,7 @@
 <template>
     <div v-for="module in mutations.filteredModules(store.state.newLotFilterRace, store.state.newLotFilterInput, [...store.state.allPlayerModules])">
         <div class="module_container">
+            <input type="radio" name="choose_module" value="module" @click="chooseModule(module)">
             <div class="module_size">
                 <img :src="module.picture" alt="" class="module_image">
             </div>
@@ -13,5 +14,11 @@
 import {Mutations} from "../../js/mutations.js";
 const mutations = new Mutations()
 import store from "../../store.js";
+import {Actions} from "../../js/actions.js";
 mutations.getAllPlayerModules()
+const actions = new Actions()
+
+function chooseModule(module){
+    store.state.moduleToSold = module
+}
 </script>

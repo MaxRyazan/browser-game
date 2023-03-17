@@ -1,4 +1,7 @@
 import store from "../store.js";
+import {Lot} from "../entities/Lot.ts";
+
+
 
 export class Actions {
 
@@ -19,6 +22,16 @@ export class Actions {
         store.state.allPlayerModules.push(module)
 
 
+    }
+
+    createNewLot(){
+        const moduleToSold = store.state.moduleToSold
+        const minUnit = store.state.newLotMinUnit
+        const count = store.state.newLotCount
+        const price = store.state.newLotPrice
+
+        const newLot = new Lot(Number(minUnit), store.state.player, Number(count), Number(price), moduleToSold)
+        console.log(newLot)
     }
 
 }

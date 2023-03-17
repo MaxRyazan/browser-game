@@ -4,10 +4,9 @@
 
         <form class="trade_filters_item_search">
             <div class="trade_filters_input">
-                <span class="trade_filters_input_label green">Найти:</span>
                 <input v-model="store.state.tradeFilterInput" class="trade_filters_input_field title" type="text" autofocus>
             </div>
-            <AppDropDownTrade @updateValue="updateValue"/>
+            <AppDropDownTrade @updateValue="updateValue" :direction_row="true" />
         </form>
 
     </div>

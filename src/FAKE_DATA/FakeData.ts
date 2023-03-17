@@ -10,7 +10,7 @@ import {AltahReactor} from "../modules/AltahReactor";
 import {Necrons} from "../races/Necrons";
 import {NuclearReactor} from "../modules/NuclearReactor";
 import {Cyborgs} from "../races/Cyborgs";
-import {Lot} from "../entities/TradeLot";
+import {Lot} from "../entities/Lot";
 
 export class FakeData {
     mathematics = new Mathematics()

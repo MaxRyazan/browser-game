@@ -38,7 +38,7 @@ export class Mutations {
     }
 
     getAllPlayerModules() {
-        return this.removeIdenticalElements(this.getHomeWorldStorage(), this.getOtherPlanetsStorage())
+        this.removeIdenticalElements(this.getHomeWorldStorage(), this.getOtherPlanetsStorage())
     }
 
 
@@ -59,7 +59,6 @@ export class Mutations {
     }
 
     filteredModules (raceFilter, inputFilter, returnedArray) {
-        console.log(returnedArray)
         if (!raceFilter && !inputFilter) {
             return returnedArray
         }
@@ -75,7 +74,6 @@ export class Mutations {
     }
 
     tradeLotsFilter(raceFilter, inputFilter, returnedArray) {
-        console.log(returnedArray)
         if (!raceFilter && !inputFilter) {
             return returnedArray
         }

@@ -17,6 +17,10 @@ export default createStore({
 
         showTrade: ref(false),
 
+        newLotCount:ref(''),
+        newLotPrice:ref(''),
+        newLotMinUnit:ref(''),
+        moduleToSold: reactive({}),
 
         allPlayerModules: reactive({}),
         projectInOrder: reactive({}),
