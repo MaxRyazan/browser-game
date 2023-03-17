@@ -24,6 +24,14 @@ export class Mutations {
         return Math.round(millisInRest / 1000 / 60)
     }
 
+    checkThatModulesAmountMoreThanZero(array){
+        for(let i = 0; i< array.length; i++){
+            if(array[i].amount === 0){
+                array.splice(i, 1)
+            }
+        }
+    }
+
     getHomeWorldStorage(){
         return [...store.state.player.playerData.playerPlanets.homeWorld.storage]
     }

@@ -422,7 +422,7 @@
 .new_lot_input {
   border: 1px solid white;
   background-color: inherit;
-  width: 76px;
+  width: 86px;
   border-radius: 10px;
   padding: 0 5px;
   color: white;
@@ -439,7 +439,7 @@
   border-radius: 10px;
   border: 0;
   outline: none;
-  width: 90px;
+  width: 70px;
 }
 .new_lot_button:hover {
   background-color: rgb(0, 0, 0);

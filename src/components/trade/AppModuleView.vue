@@ -14,9 +14,7 @@
 import {Mutations} from "../../js/mutations.js";
 const mutations = new Mutations()
 import store from "../../store.js";
-import {Actions} from "../../js/actions.js";
 mutations.getAllPlayerModules()
-const actions = new Actions()
 
 function chooseModule(module){
     store.state.moduleToSold = module

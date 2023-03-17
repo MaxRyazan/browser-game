@@ -5,7 +5,7 @@
             <div class="trade_filters_input_wrapper">
                 <div class="new_lot_inputs">
                     <div class="direction_column">
-                        <input type="text" v-model="store.state.newLotMinUnit" placeholder="мин.партия" class="new_lot_input">
+                        <input type="number" v-model="store.state.newLotMinUnit" placeholder="мин.партия" class="new_lot_input">
                         <input type="number" v-model="store.state.newLotCount" placeholder="всего" class="new_lot_input">
                     </div>
                     <input type="number" v-model="store.state.newLotPrice" placeholder="цена" class="new_lot_input">
