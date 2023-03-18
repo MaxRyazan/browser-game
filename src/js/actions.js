@@ -6,13 +6,19 @@ const mutations = new Mutations()
 export class Actions {
 
     async buyItem(){
-        if(store.state.buyingLot.amount >= store.state.confirmWindowInput) {
+        const sum =  store.state.confirmWindowInput / store.state.buyingLot.minAmount * store.state.buyingLot.pricePerUnit;
+        const module = store.state.buyingLot.subject
+        if(mutations.validateDataForBuyModule(sum, store.state.buyingLot.minAmount)) {
             store.state.buyingLot.amount -= store.state.confirmWindowInput
-            const module = store.state.buyingLot.subject
-            module.amount = store.state.confirmWindowInput
-            store.state.allPlayerModules.push(module)
+            mutations.addModuleToPlayerAllModules(module)
+            mutations.changePlayerIGBalance(-sum)
+            store.state.confirmWindowInput = ''
+            store.state.confirmWindow = false
         }
     }
+
+
+
 
     createNewLot(){
         const moduleToSold = store.state.moduleToSold

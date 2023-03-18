@@ -36,6 +36,38 @@ export class Mutations {
         return [...store.state.player.playerData.playerPlanets.homeWorld.storage]
     }
 
+    changePlayerIGBalance(param){
+        store.state.player.playerData.playerMoney.IG += param
+    }
+
+    addModuleToPlayerAllModules(module){
+        const countOfBuyingModules = module.amount
+        module.amount = store.state.confirmWindowInput
+        const index =  store.state.allPlayerModules.indexOf(module, 0)
+        if(index === -1){
+            store.state.allPlayerModules.push(module)
+        } else {
+            store.state.allPlayerModules[index].amount += countOfBuyingModules
+        }
+    }
+
+    validateDataForBuyModule(sum, minAmount){
+        return this.isSumOfBuyValid(sum) && this.isAmountOfBuyValid() && this.checkMinAmountOfBuy(minAmount)
+    }
+
+    isSumOfBuyValid(sum){
+        return store.state.player.playerData.playerMoney.IG >= sum
+    }
+
+    isAmountOfBuyValid(){
+
+        return store.state.buyingLot.amount >= store.state.confirmWindowInput
+    }
+
+    checkMinAmountOfBuy(minAmount){
+        return store.state.confirmWindowInput % minAmount === 0
+    }
+
     getOtherPlanetsStorage(){
         const storage = []
         const playerOtherPlanets = store.state.player.playerData.playerPlanets.inhabitedPlanets
