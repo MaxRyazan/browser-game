@@ -9,18 +9,17 @@ export class Actions {
         const sum =  store.state.confirmWindowInput / store.state.buyingLot.minAmount * store.state.buyingLot.pricePerUnit;
         const module = store.state.buyingLot.subject
         if(mutations.validateDataForBuyModule(sum, store.state.buyingLot.minAmount)) {
-            store.state.buyingLot.amount -= store.state.confirmWindowInput
+            mutations.subtractionBuyingLotAmount()
             mutations.addModuleToPlayerAllModules(module)
             mutations.changePlayerIGBalance(-sum)
-            store.state.confirmWindowInput = ''
-            store.state.confirmWindow = false
+            mutations.clearAndCloseConfirmWindow()
+
         }
+        // TODO fetch
     }
 
 
-
-
-    createNewLot(){
+    async createNewLot(){
         const moduleToSold = store.state.moduleToSold
         const minUnit = store.state.newLotMinUnit
         const count = store.state.newLotCount
@@ -32,8 +31,7 @@ export class Actions {
             store.state.allLots.push(newLot)
         }
         mutations.checkThatModulesAmountMoreThanZero(store.state.allPlayerModules)
-
-
+        // TODO fetch
     }
 
 }

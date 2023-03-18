@@ -51,6 +51,21 @@ export class Mutations {
         }
     }
 
+    subtractionBuyingLotAmount(){
+        store.state.buyingLot.amount -= store.state.confirmWindowInput
+        if(store.state.buyingLot.amount === 0) {
+            let index = store.state.allLots.indexOf(store.state.buyingLot)
+            store.state.allLots.splice(index, 1)
+            // TODO update  allLotsInDB
+        }
+    }
+
+
+    clearAndCloseConfirmWindow(){
+        store.state.confirmWindowInput = ''
+        store.state.confirmWindow = false
+    }
+
     validateDataForBuyModule(sum, minAmount){
         return this.isSumOfBuyValid(sum) && this.isAmountOfBuyValid() && this.checkMinAmountOfBuy(minAmount)
     }
@@ -60,7 +75,6 @@ export class Mutations {
     }
 
     isAmountOfBuyValid(){
-
         return store.state.buyingLot.amount >= store.state.confirmWindowInput
     }
 
