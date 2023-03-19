@@ -1,44 +1,3 @@
-*{
-  margin: 0;
-  padding: 0;
-}
-.container{
-  max-width: 1920px;
-  min-height: 100vh;
-  background-image: url(assets/images/background_main.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.top_nav{
-  max-width: 1440px;
-  background-color: inherit;
-  height: 40px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 auto;
-  top: 5px;
-}
-.left_nav{
-  position: relative;
-  width: 40px;
-  height: 70%;
-  top: 100px;
-  left: 5px;
-  display: inline-flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 10px;
-}
-.bottom_nav{
-  position: absolute;
-  max-width: 840px;
-  height: 40px;
-  margin-left: 30%;
-  bottom: 5px;
-}
 
 .top_nav_money{
   display: flex;
@@ -68,7 +27,7 @@
   align-items: center;
   gap: 5px;
   cursor: default;
-  font-family: Tahoma, sans-serif;
+  font-family: FUTURE, sans-serif;
   font-size: 12px;
   letter-spacing: 0.8px;
 }
@@ -89,7 +48,7 @@
 .top_nav_science, .top_nav_construct{
   display: flex;
   align-items: center;
-  font-family: Tahoma, sans-serif;
+  font-family: FUTURE, sans-serif;
   font-size: 12px;
   gap: 20px;
   letter-spacing: 0.8px;
@@ -159,16 +118,14 @@
 }
 
 .trade_container{
-  position: absolute;
-  height: 470px;
+  width: 97.7%;
+  min-width: 700px;
+  position: relative;
+  height: 370px;
   border-radius: 12px 12px 0 0;
-  top: 135px;
-  left: 200px;
-  width: 70%;
   border: 1px solid white;
   border-bottom: 0;
   padding: 10px;
-  margin: 0 auto;
   font-size: 12px;
   color: white;
   display: flex;
@@ -185,18 +142,15 @@
     left: 0;
     opacity: 0.25;
   }
+
 }
 
 
 .trade_filters_wrapper{
-  position: absolute;
+  position: relative;
   border: 1px solid white;
-  border-radius: 0 0 12px 12px;
-  top: 626px;
-  left: 200px;
-  width: 70%;
+  width: 100%;
   color: white;
-  padding: 10px;
 }
 .trade_container_wrapper{
   z-index: 100;
@@ -228,30 +182,43 @@
   right: 135px;
 }
 .trade_filters_inner{
-  gap: 100px;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  gap: 0;
 }
 .trade_filters_item{
-  width: 50%;
   text-align: center;
   position: relative;
+  padding: 0 0 30px 0;
+  border-right: 2px solid rgba(255, 255, 255, .3);
+  @media (max-width: 1439.79px) {
+    border-right: none;
+    border-bottom: 2px solid rgba(255, 255, 255, .3);
+  }
 }
+
 .trade_filters_item_search{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 10px;
   gap: 20px;
   margin-top: 20px;
   position: relative;
+  & h2{
+    white-space: nowrap;
+  }
 }
 .trade_filters_input{
   display: flex;
-  align-items: start;
+  justify-content: center;
 }
 .trade_filters_input_field{
   height: 26px;
-  width: calc(100px + (300 - 100) * ((100vw - 320px) / (1920 - 320)));;
+  width: calc(100px + (300 - 100) * ((100vw - 320px) / (1920 - 320)));
   font-size: 16px;
+  min-width: 200px;
   outline: none;
   background-color: inherit;
   border: 2px solid white;
@@ -264,8 +231,8 @@
   margin-right: 20px;
 }
 .trade_filters_dropdown{
+  width: 100%;
   text-align: start;
-  gap: 5px;
 }
 .border_red{
   border: 1px solid red;
@@ -276,9 +243,16 @@
   gap: 20px;
   flex-direction: column;
 }
-.double_width{
-  width: 200%;
-}
+//.double_width{
+//  width: 200%;
+//  & h2{
+//    margin-top: 20px;
+//  }
+//  @media (max-width: 1439.79px) {
+//    width: 100%;
+//  }
+//}
+
 .direction_column{
   display: flex;
   flex-direction: column;
@@ -308,10 +282,16 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  font-size: calc(10px + (16 - 10) * ((100vw - 320px) / (1920 - 320)));;
 }
 .module_size{
   width: 45px;
   height: 45px;
+  @media (max-width: 1023.79px) {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+  }
 }
 .module_image{
   width: 100%;
@@ -325,6 +305,9 @@
   height: 120px;
   overflow: hidden;
   overflow-y: scroll;
+  @media (max-width: 1023.79px) {
+    width: 250px;
+  }
 }
 
 .confirm_wrapper{
@@ -345,7 +328,7 @@
     bottom: 0;
     top: 0;
     right: 0;
-    background-image: url('assets/images/trade_background.jpg');
+    background-image: url('src/assets/images/trade_background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
   }

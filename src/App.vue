@@ -1,10 +1,9 @@
 <template>
-    <div class="container">
-        <RouterView />
-    </div>
+    <RouterView />
 </template>
 
 <script setup>
-import './styles.css'
-
+// import './css/tradeStyles.css'
+// import './css/globaStyles.css'
+// import './css/planetStyles.css'
 </script>

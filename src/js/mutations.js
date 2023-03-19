@@ -5,7 +5,6 @@ export class Mutations {
         store.state.showTrade = !store.state.showTrade
     }
 
-
     checkRace(race){
         switch (race){
             case "Некроны" : return 'necrons';

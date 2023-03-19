@@ -1,12 +1,14 @@
 <template>
-    <div class="trade_container">
-        <AppTradeLotTitle/>
-        <AppTradeLotView />
-    </div>
-    <div class="trade_filters_wrapper">
-        <div class="trade_filters_inner">
-            <AppTradeNewLot />
-            <AppTradeFilters />
+    <div class="trade_base_wrapper">
+        <div class="trade_container">
+            <AppTradeLotTitle/>
+            <AppTradeLotView />
+        </div>
+        <div class="trade_filters_wrapper">
+            <div class="trade_filters_inner">
+                <AppTradeNewLot />
+                <AppTradeFilters />
+            </div>
         </div>
     </div>
 </template>

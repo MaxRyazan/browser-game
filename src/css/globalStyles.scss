@@ -1,0 +1,74 @@
+@font-face {
+  font-family:"FUTURE";
+  src:url("fonts/FUTURE.woff") format("woff");
+  font-weight:normal;
+  font-style:normal;
+}
+*{
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+h1, h2 {
+  font-size: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)));
+}
+strong, span{
+  white-space: nowrap;
+}
+span{
+  font-family: FUTURE, sans-serif;
+  margin-left: 3px;
+}
+
+.main_wrapper{
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0 auto;
+  min-height: 100vh;
+  width: 100%;
+  background-image: url('../assets/images/background_main.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+.top_nav{
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.left_nav{
+  position: absolute;
+  left: 10px;
+  top: 100px;
+}
+
+.bottom_nav{
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.trade_base_wrapper{
+  position: relative;
+  width: 730px;
+  margin: 50px auto 80px 70px;
+  overflow: hidden;
+  border: 2px solid white;
+  border-radius: 12px;
+}
+
+.planet_main_wrapper{
+  position: relative;
+  padding: 20px;
+  left: 70px;
+  top: 50px;
+  border: 2px solid white;
+  width: 730px;
+}

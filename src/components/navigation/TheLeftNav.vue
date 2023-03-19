@@ -36,7 +36,7 @@
         <div class="left_nav_item">
             <img src="src/assets/images/battle_logs_icon.png" alt="" class="left_nav_item_img">
         </div>
-        <div class="left_nav_item">
+        <div class="left_nav_item planet" @click="planetMutations.togglePlanetMenuVision()">
             <img src="src/assets/images/planet_icon.png" alt="" class="left_nav_item_img">
         </div>
         <div class="left_nav_item">
@@ -55,6 +55,8 @@
 </template>
 
 <script setup>
+import {PlanetMutations} from "../../js/planets/planetMutations.js";
+
+const planetMutations = new PlanetMutations()
 
 </script>
-e>
