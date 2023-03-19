@@ -10,9 +10,9 @@
 </template>
 
 <script setup>
-import {Mutations} from "../../js/mutations.js";
-import store from "../../store.js";
-import {Actions} from "../../js/actions.js";
+import {Mutations} from "../../js/trade/mutations.js";
+import store from "../../store_modules/tradeStore.js";
+import {Actions} from "../../js/trade/actions.js";
 const mutations = new Mutations()
 const actions = new Actions()
 </script>

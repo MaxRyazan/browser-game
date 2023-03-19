@@ -29,8 +29,8 @@
 import AppIcon from "./AppIcon.vue";
 import AppPrice from "./AppPrice.vue";
 import iconsPath from '/src/iconsPaths.js'
-import store from "../../store.js";
-import {Mutations} from "../../js/mutations.js";
+import store from "../../store_modules/tradeStore.js";
+import {Mutations} from "../../js/trade/mutations.js";
 const mutations = new Mutations()
 
 

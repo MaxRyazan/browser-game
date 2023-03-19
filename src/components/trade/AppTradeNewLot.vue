@@ -21,11 +21,10 @@
     </div>
 </template>
 <script setup>
-import store from "../../store.js";
-import {Mutations} from "../../js/mutations.js";
+import store from "../../store_modules/tradeStore.js";
 import AppDropDownTrade from "./AppDropDownTrade.vue";
 import AppModuleView from "./AppModuleView.vue";
-import {Actions} from "../../js/actions.js";
+import {Actions} from "../../js/trade/actions.js";
 const actions = new Actions()
 function updateValue(arg) {
     store.state.newLotFilterRace = arg

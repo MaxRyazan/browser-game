@@ -1,4 +1,4 @@
-import store from "../store.js";
+import store from "../../store_modules/tradeStore.js";
 
 export class Mutations {
     toggleTrade(){

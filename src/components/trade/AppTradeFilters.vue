@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import store from "../../store.js";
+import store from "../../store_modules/tradeStore.js";
 import AppDropDownTrade from "./AppDropDownTrade.vue";
 
 function updateValue(arg){

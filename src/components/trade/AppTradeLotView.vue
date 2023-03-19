@@ -19,10 +19,9 @@
 
 <script setup>
 import AppIcon from '../navigation/AppIcon.vue'
-import store from "../../store.js";
+import store from "../../store_modules/tradeStore.js";
 import iconsPath from "../../iconsPaths.js";
-import {Actions} from "../../js/actions.js";
-import {Mutations} from "../../js/mutations.js";
+import {Mutations} from "../../js/trade/mutations.js";
 import AppConfirmWindow from "./AppConfirmWindow.vue";
 const mutations = new Mutations()
 

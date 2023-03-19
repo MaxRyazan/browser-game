@@ -1,5 +1,5 @@
-import store from "../store.js";
-import {Lot} from "../entities/Lot.ts";
+import store from "../../store_modules/tradeStore.js";
+import {Lot} from "../../entities/Lot.ts";
 import {Mutations} from "./mutations.js";
 const mutations = new Mutations()
 

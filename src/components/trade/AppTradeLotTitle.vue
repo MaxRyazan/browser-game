@@ -12,7 +12,7 @@
 <script setup>
 import AppIcon from '../navigation/AppIcon.vue'
 import iconsPath from "../../iconsPaths.js";
-import {Mutations} from "../../js/mutations.js";
+import {Mutations} from "../../js/trade/mutations.js";
 
 const mutations = new Mutations()
 </script>

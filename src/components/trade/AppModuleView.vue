@@ -11,9 +11,9 @@
     </div>
 </template>
 <script setup>
-import {Mutations} from "../../js/mutations.js";
+import {Mutations} from "../../js/trade/mutations.js";
 const mutations = new Mutations()
-import store from "../../store.js";
+import store from "../../store_modules/tradeStore.js";
 mutations.getAllPlayerModules()
 
 function chooseModule(module){

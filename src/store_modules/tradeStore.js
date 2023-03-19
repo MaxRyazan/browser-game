@@ -1,8 +1,6 @@
 import {createStore} from "vuex";
 import {reactive, ref} from "vue";
-import {FakeData} from "./FAKE_DATA/FakeData.ts";
-import planetStore from "./store_modules/planetStore.js";
-
+import {FakeData} from "../FAKE_DATA/FakeData.ts";
 
 const fakeData = new FakeData();
 
@@ -18,7 +16,6 @@ export default createStore({
         ]),
 
         showTrade: ref(false),
-
         newLotCount:ref(''),
         newLotPrice:ref(''),
         newLotMinUnit:ref(''),
@@ -33,8 +30,4 @@ export default createStore({
         confirmWindowInput: ref(''),
         buyingLot: reactive({}),
     },
-
-    modules: {
-       planetStore: planetStore
-    }
 })
