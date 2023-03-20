@@ -1,3 +1,49 @@
+.planet_item {
+  position: relative;
+  background-color: white;
+  padding: 0;
+  width: 100%;
+  border: 2px solid white;
+  border-radius: 0 12px 12px 0;
+}
+.planet_item.planet_list {
+  width: 25%;
+  min-width: 200px;
+  border-radius: 12px 0 0 12px;
+}
 
+.planet_icon {
+  width: 100%;
+  background-image: url("../assets/images/planet_fon.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+}
+.planet_icon img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  animation: 150s linear planet_spin infinite;
+}
+
+.planet_data_name {
+  font-family: FUTURE, sans-serif;
+}
+
+@keyframes planet_spin {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 /*# sourceMappingURL=planetStyles.css.map */

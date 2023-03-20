@@ -5,7 +5,7 @@ import tradeStore from "./store_modules/tradeStore.js";
 export default createStore({
     state: {},
     modules: {
-        tradeStore: tradeStore,
-        planetStore: planetStore,
+        tradeStore,
+        planetStore
     }
 })
