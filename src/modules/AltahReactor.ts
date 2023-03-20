@@ -44,7 +44,7 @@ export class AltahReactor implements Module{
         this.requiredTech = [new AlienTechnology()]
         this.name = 'Альтах реактор'
         this.baseParams = {
-            baseMass: 80,
+            baseMass: 10,
             baseSignature: 10,
             requiredEnergy: 0,
             requiredCargo: 26,

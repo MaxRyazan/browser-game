@@ -43,7 +43,7 @@ export class NuclearReactor implements Module{
         this.requiredTech = [new NuclearPhysics()]
         this.name = 'Ядерный реактор'
         this.baseParams = {
-            baseMass: 190,
+            baseMass: 13,
             baseSignature: 11,
             requiredEnergy: 0,
             requiredCargo: 16,

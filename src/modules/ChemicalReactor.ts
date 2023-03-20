@@ -44,7 +44,7 @@ export class ChemicalReactor implements Module{
         this.requiredTech = [new Chemistry()]
         this.name = 'Химический реактор'
         this.baseParams = {
-            baseMass: 120,
+            baseMass: 16,
             baseSignature: 8,
             requiredEnergy: 0,
             requiredCargo: 11,

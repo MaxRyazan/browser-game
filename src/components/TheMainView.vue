@@ -5,6 +5,7 @@
         <TheBottomNav />
         <TheTradeView v-if="tradeStore.state.showTrade"/>
         <ThePlanets v-if="planetStore.state.visibilityPlanetMenu"/>
+        <ThePlanetarySystem v-if="planetStore.state.visibilityPlanetarySystem" />
     </div>
 </template>
 
@@ -16,4 +17,6 @@ import TheTradeView from "./trade/TheTradeView.vue";
 import tradeStore from "../store_modules/tradeStore.js";
 import planetStore from "../store_modules/planetStore.js";
 import ThePlanets from '../components/planets/ThePlanets.vue'
+import ThePlanetarySystem from '../components/planets/ThePlanetarySystem.vue'
+
 </script>

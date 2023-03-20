@@ -222,7 +222,7 @@
 
 .trade_filters_input_field {
   height: 26px;
-  width: calc(100px + 200 * (100vw - 320px) / 1600);
+  width: calc(100px + 100 * (100vw - 320px) / 1600);
   font-size: 16px;
   min-width: 200px;
   outline: none;

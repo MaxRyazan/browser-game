@@ -13,12 +13,14 @@ import {Cyborgs} from "../races/Cyborgs";
 import {Lot} from "../entities/Lot";
 
 export class FakeData {
+
     mathematics = new Mathematics()
     biology = new Biology()
     higherMathematics = new HigherMathematics()
-    public planet_MERCURY = new Planet(1, 'Меркурий', 1, 1, false, 190, {}, '');
-    public planet_VENUS = new Planet(2, 'Венера', 1, 2, false, 280, [new AltahReactor(new Necrons()), new ChemicalReactor(new Necrons(), 2)], '');
-    public planet_EARTH = new Planet(3, 'Земля', 1, 3, true, 310, [new NuclearReactor(new Necrons(), 2), new ChemicalReactor(new Necrons(), 2), new AltahReactor(new Necrons(), 2), new AltahReactor(new Cyborgs(), 2)], '');
+
+    public planet_MERCURY = new Planet(1, 'Меркурий', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 1, false, 190, {maxCapacity: 2000, modules: []}, '');
+    public planet_VENUS = new Planet(2, 'Венера', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 2, false, 280, {maxCapacity: 2000, modules: [new AltahReactor(new Necrons()), new ChemicalReactor(new Necrons(), 2)]}, '');
+    public planet_EARTH = new Planet(3, 'Земля', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 3, true, 310, {maxCapacity: 2000, modules: [new NuclearReactor(new Necrons(), 2), new ChemicalReactor(new Necrons(), 2), new AltahReactor(new Necrons(), 2), new AltahReactor(new Cyborgs(), 2)]}, '');
     public solarSystem = new PlanetarySystem(
         1,
         'Солнечная система',
@@ -26,6 +28,7 @@ export class FakeData {
         3,
         [this.planet_MERCURY, this.planet_VENUS, this.planet_EARTH]
     );
+
 
     public player = new Player(
         1, 'gecaHTHuk', 'email@email.ru', 'password',

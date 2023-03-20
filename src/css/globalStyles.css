@@ -76,10 +76,28 @@ span {
   width: calc(100% - 200px);
   min-width: 730px;
   height: calc(100vh - 200px);
-  min-height: 600px;
   display: flex;
   padding: 0;
   margin-bottom: 100px;
+}
+@media (max-width: 1210px) {
+  .planet_main_wrapper {
+    height: calc(100vh + 132px);
+  }
+}
+.planet_main_wrapper::after {
+  border-radius: 12px;
+  content: "";
+  background-image: url("../assets/images/planet_window_bgN.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  opacity: 0.5;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
 /*# sourceMappingURL=globalStyles.css.map */

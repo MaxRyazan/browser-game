@@ -1,12 +1,17 @@
+import {PlanetarySystem} from "./PlanetarySystem";
+
 export class Planet {
     constructor(
         public id: Number,
         public name: String,
-        public planetarySystem: Number,
+        public planetarySystem: PlanetarySystem,
         public orbit: Number,
         public atmosphere: Boolean,
         public building_points: Number,
-        public storage: {},
+        public storage: {
+            maxCapacity: Number,
+            modules: {}
+        },
         public picture: String
     ) {
         this.id = id

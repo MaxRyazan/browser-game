@@ -3,7 +3,14 @@ import {createStore} from "vuex";
 
 export default createStore({
     state: {
-        visibilityPlanetMenu: false
+        visibilityPlanetMenu: false,
+        visibilityPlanetarySystem: false,
+        visibilityInfrastructure: false,
+        visibilityEnergy: false,
+        visibilityResources: false,
+        visibilityMaterials: false,
+        visibilityScience: false,
+        visibilityComponents: false,
     },
     mutations: planetMutations
 })

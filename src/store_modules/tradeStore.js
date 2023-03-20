@@ -7,7 +7,7 @@ const fakeData = new FakeData();
 export default createStore({
     state: {
         player: fakeData.player,
-        allPlanetarySystems: reactive([fakeData.solarSystem]),
+        // allPlanetarySystems: reactive([fakeData.solarSystem]),
 
         allLots: reactive([
             fakeData.lot1,
