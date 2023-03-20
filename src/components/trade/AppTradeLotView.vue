@@ -26,12 +26,13 @@ import AppConfirmWindow from "./AppConfirmWindow.vue";
 const mutations = new Mutations()
 
 function openConfirmWindow(lot){
-    if(store.state.confirmWindow){
+    if(store.state.confirmWindow === true){
         store.state.confirmWindow = false
         store.state.confirmWindowInput = ''
     } else {
         store.state.confirmWindow = true
     }
     store.state.buyingLot = lot
+    console.log(store.state.confirmWindow)
 }
 </script>

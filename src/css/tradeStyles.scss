@@ -118,12 +118,10 @@
 }
 
 .trade_container{
-  width: 97.7%;
+  width: 97.2%;
   min-width: 700px;
   position: relative;
   height: 370px;
-  border-radius: 12px 12px 0 0;
-  border: 1px solid white;
   border-bottom: 0;
   padding: 10px;
   font-size: 12px;
@@ -149,6 +147,7 @@
 .trade_filters_wrapper{
   position: relative;
   border: 1px solid white;
+  border-radius: 0 0 12px 12px;
   width: 100%;
   color: white;
 }
@@ -311,6 +310,7 @@
 }
 
 .confirm_wrapper{
+  color: white;
   z-index: 1100;
   width: 120px;
   height: 100px;

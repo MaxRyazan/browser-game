@@ -4,7 +4,7 @@
             <input v-model="store.state.confirmWindowInput" class="confirm_input" type="number" name="amount">
             <label class="confirm_text green" for="amount">Количество</label>
             <button class="confirm_ok_btn">Ок</button>
-            <button class="confirm_close_btn" @click="mutations.closeConfirmWindow">X</button>
+            <button type="submit" class="confirm_close_btn" @click="mutations.closeConfirmWindow">X</button>
         </div>
     </form>
 </template>
