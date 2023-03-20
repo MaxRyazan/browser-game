@@ -31,10 +31,6 @@ export class Mutations {
         }
     }
 
-    getHomeWorldStorage(){
-        return [...store.state.player.playerData.playerPlanets.homeWorld.storage]
-    }
-
     changePlayerIGBalance(param){
         store.state.player.playerData.playerMoney.IG += param
     }
@@ -81,21 +77,15 @@ export class Mutations {
         return store.state.confirmWindowInput % minAmount === 0
     }
 
-    getOtherPlanetsStorage(){
-        const storage = []
+
+    removeIdenticalElements(arrayTwo){
+        const arrayOne = [...store.state.player.playerData.playerPlanets.homeWorld.storage.modules]
+        arrayTwo = [];
         const playerOtherPlanets = store.state.player.playerData.playerPlanets.inhabitedPlanets
         for(let i = 0; i < playerOtherPlanets.length; i++){
-            storage.push(...playerOtherPlanets[i].storage)
+            arrayTwo.push(...playerOtherPlanets[i].storage.modules)
         }
-        return storage;
-    }
 
-    getAllPlayerModules() {
-        this.removeIdenticalElements(this.getHomeWorldStorage(), this.getOtherPlanetsStorage())
-    }
-
-
-    removeIdenticalElements(arrayOne, arrayTwo){
         for(let i = 0; i < arrayOne.length; i++){
             for(let j = 0; j < arrayTwo.length; j++){
                 if(arrayTwo[j].id === arrayOne[i].id && arrayTwo[j].belongsToRace.id === arrayOne[i].belongsToRace.id){
@@ -105,10 +95,6 @@ export class Mutations {
             }
         }
        store.state.allPlayerModules =  [...arrayOne, ...arrayTwo]
-    }
-
-    isModuleIdentical(item1, item2){
-        return item1.id === item2.id && item1.belongsToRace.id === item2.belongsToRace.id
     }
 
     filteredModules (raceFilter, inputFilter, returnedArray) {
@@ -140,7 +126,6 @@ export class Mutations {
             return returnedArray.filter(e => e.subject.belongsToRace.name === raceFilter && e.subject.name.toLowerCase().includes(inputFilter.toLowerCase()))
         }
     }
-
 
 
     closeConfirmWindow(){

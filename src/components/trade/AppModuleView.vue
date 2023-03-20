@@ -14,7 +14,6 @@
 import {Mutations} from "../../js/trade/mutations.js";
 const mutations = new Mutations()
 import store from "../../store_modules/tradeStore.js";
-mutations.getAllPlayerModules()
 
 function chooseModule(module){
     store.state.moduleToSold = module

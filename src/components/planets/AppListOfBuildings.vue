@@ -59,9 +59,5 @@
 import AppMiniButton from "../mini/AppMiniButton.vue";
 import AppBuildingCard from "./AppBuildingCard.vue";
 import planetStore from "../../store_modules/planetStore.js";
-import {watch} from "vue";
-
-
-watch()
 
 </script>

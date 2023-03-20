@@ -7,7 +7,6 @@ const fakeData = new FakeData();
 export default createStore({
     state: {
         player: fakeData.player,
-        // allPlanetarySystems: reactive([fakeData.solarSystem]),
 
         allLots: reactive([
             fakeData.lot1,
@@ -20,13 +19,13 @@ export default createStore({
         newLotPrice:ref(''),
         newLotMinUnit:ref(''),
         moduleToSold: reactive({}),
-        allPlayerModules: reactive([]),
+        allPlayerModules: reactive({}),
         projectInOrder: reactive({}),
         tradeFilterInput: ref(''),
         tradeFilterRace: ref(''),
         newLotFilterRace: ref(''),
         newLotFilterInput: ref(''),
-        confirmWindow: ref(false),
+        confirmWindow: false,
         confirmWindowInput: ref(''),
         buyingLot: reactive({}),
     },

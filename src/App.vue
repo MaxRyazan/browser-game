@@ -3,7 +3,11 @@
 </template>
 
 <script setup>
-// import './css/tradeStyles.css'
-// import './css/globaStyles.css'
-// import './css/planetStyles.css'
+import {onMounted} from "vue";
+import {Mutations} from './js/trade/mutations.js'
+const mutations = new Mutations()
+
+onMounted(() => {
+    mutations.removeIdenticalElements()
+})
 </script>
