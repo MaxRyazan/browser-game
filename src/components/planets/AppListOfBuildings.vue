@@ -10,7 +10,7 @@
         </div>
         <div class="buildings_wrapper">
             <div class="buildings_infrastructure" v-if="planetStore.state.visibilityInfrastructure">
-                <AppBuildingCard  name="Колония" picture="planet_window_bg" />
+                <AppBuildingCard  name="Колония" picture="colony_icon" />
                 <AppBuildingCard  name="Колониальный сенат" picture="planet_window_bg" />
                 <AppBuildingCard  name="Склад" picture="planet_window_bg" />
                 <AppBuildingCard  name="Административный центр" picture="planet_window_bg" />

@@ -15,7 +15,7 @@
                 <div class="modules_line module_full_mass">{{module.baseParams.baseMass * module.amount}}</div>
                 <div class="modules_line_buttons">
                     <AppMiniButton name="З" :mini="true" />
-                    <AppMiniButton name="У" :mini="true" @click="removeModule(module)" />
+                    <AppMiniButton name="У" :mini="true" @click="planetStore.commit('removeModule',module)" />
                 </div>
             </div>
         </div>
@@ -24,16 +24,7 @@
 
 <script setup>
 import tradeStore from "../../store_modules/tradeStore.js";
+import planetStore from "../../store_modules/planetStore.js";
 import AppMiniButton from "../mini/AppMiniButton.vue";
 
-function removeModule(module){
-    let index = -1
-    const storage = tradeStore.state.currentPlanet.storage.modules
-    for(let i = 0; i < storage.length; i++) {
-        if(storage[i].id === module.id && storage[i].belongsToRace.id === module.belongsToRace.id){
-            index = i
-        }
-    }
-    storage.splice(index, 1)
-}
 </script>

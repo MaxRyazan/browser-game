@@ -1,4 +1,5 @@
 import planetStore from "../../store_modules/planetStore.js";
+import tradeStore from "../../store_modules/tradeStore.js";
 
 export default {
 
@@ -13,6 +14,18 @@ export default {
 
     togglePlanetarySystemVision(planetState){
         planetState.visibilityPlanetarySystem = ! planetState.visibilityPlanetarySystem
+    },
+
+
+    removeModule(module){
+        let index = -1
+        const storage = tradeStore.state.currentPlanet.storage.modules
+        for(let i = 0; i < storage.length; i++) {
+            if(storage[i].id === module.id && storage[i].belongsToRace.id === module.belongsToRace.id){
+                index = i
+            }
+        }
+        storage.splice(index, 1)
     },
 
     toggleInfrastructureBuildingsVision(planetState){

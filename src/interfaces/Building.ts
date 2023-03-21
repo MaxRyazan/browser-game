@@ -1,12 +1,6 @@
-import {ConstructionMaterials} from "../materials/ConstructionMaterials";
-import {Electronics} from "../materials/Electronics";
-import {NuclearFuel} from "../materials/NuclearFuel";
-import {ChemicalFuel} from "../materials/ChemicalFuel";
-import {NanoFuel} from "../materials/NanoFuel";
-import {Polymers} from "../materials/Polymers";
-import {Quadria} from "../materials/Quadria";
-import {Steel} from "../materials/Steel";
-import {Vettur} from "../materials/Vettur";
+import {Material} from "./Material";
+import {Resource} from "./Resource";
+import {Detail} from "./Detail";
 
 export interface Building{
     id: Number
@@ -14,16 +8,13 @@ export interface Building{
     onGround: Boolean
     constInCR: Number
     constInIG?: Number
+    basePower: Number
     requiredMaterials: {
-        type: [ConstructionMaterials?, Electronics?, NuclearFuel?],
+        type: Material[] | Resource[],
         amount: Number
     }
     canProduce:{
-        resourcesPerHour?:{
-            type: [ChemicalFuel?, ConstructionMaterials?, Electronics?, NanoFuel?, NuclearFuel?, Polymers?, Quadria?, Steel?, Vettur?]
-            amount: Number
-        },
-        sciencePerHour?: Number
-        CRPerHour?: Number
+        type: Resource[] | Material[] | Detail[]
+        amount: Number
     }
 }
