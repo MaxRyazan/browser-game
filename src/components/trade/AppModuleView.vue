@@ -1,5 +1,5 @@
 <template>
-    <div v-for="module in mutations.filteredModules(store.state.newLotFilterRace, store.state.newLotFilterInput, [...store.state.allPlayerModules])">
+    <div v-for="module in mutations.filteredModules(tradeStore.state.newLotFilterRace, tradeStore.state.newLotFilterInput, tradeStore.state.currentPlanet.storage.modules)">
         <div class="module_container">
             <input type="radio" name="choose_module" value="module" @click="chooseModule(module)">
             <div class="module_size">
@@ -13,9 +13,11 @@
 <script setup>
 import {Mutations} from "../../js/trade/mutations.js";
 const mutations = new Mutations()
-import store from "../../store_modules/tradeStore.js";
+import tradeStore from "../../store_modules/tradeStore.js";
 
 function chooseModule(module){
-    store.state.moduleToSold = module
+    tradeStore.state.moduleToSold = module
+
 }
+
 </script>

@@ -10,10 +10,9 @@ export class Actions {
         const module = store.state.buyingLot.subject
         if(mutations.validateDataForBuyModule(sum, store.state.buyingLot.minAmount)) {
             mutations.subtractionBuyingLotAmount()
-            mutations.addModuleToPlayerAllModules(module)
+            mutations.addModuleToCurrentPlanetStore(module)
             mutations.changePlayerIGBalance(-sum)
             mutations.clearAndCloseConfirmWindow()
-
         }
         // TODO fetch
     }

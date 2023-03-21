@@ -10,6 +10,7 @@ export class AltahReactor implements Module{
     public belongsToRace: Race
     public name: String
     public amount: Number
+    public costInBuildPoints: Number
     public baseParams: {
         baseMass: Number
         baseSignature: Number
@@ -43,6 +44,7 @@ export class AltahReactor implements Module{
         this.picture = './src/assets/images/altah_reactor.jpg'
         this.requiredTech = [new AlienTechnology()]
         this.name = 'Альтах реактор'
+        this.costInBuildPoints = 200
         this.baseParams = {
             baseMass: 10,
             baseSignature: 10,

@@ -10,6 +10,7 @@ export class ChemicalReactor implements Module{
     public belongsToRace: Race
     public name: String
     public amount?: Number
+    public costInBuildPoints: Number
     public baseParams: {
         baseMass: Number
         baseSignature: Number
@@ -43,6 +44,7 @@ export class ChemicalReactor implements Module{
         this.picture = './src/assets/images/chemical_reactor.jpg'
         this.requiredTech = [new Chemistry()]
         this.name = 'Химический реактор'
+        this.costInBuildPoints = 50
         this.baseParams = {
             baseMass: 16,
             baseSignature: 8,

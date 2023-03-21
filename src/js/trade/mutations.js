@@ -1,8 +1,8 @@
-import store from "../../store_modules/tradeStore.js";
+import tradeStore from "../../store_modules/tradeStore.js";
 
 export class Mutations {
     toggleTrade(){
-        store.state.showTrade = !store.state.showTrade
+        tradeStore.state.showTrade = !tradeStore.state.showTrade
     }
 
     checkRace(race){
@@ -32,33 +32,35 @@ export class Mutations {
     }
 
     changePlayerIGBalance(param){
-        store.state.player.playerData.playerMoney.IG += param
+        tradeStore.state.player.playerData.playerMoney.IG += param
     }
 
-    addModuleToPlayerAllModules(module){
-        const countOfBuyingModules = module.amount
-        module.amount = store.state.confirmWindowInput
-        const index =  store.state.allPlayerModules.indexOf(module, 0)
+    addModuleToCurrentPlanetStore(module){
+        const currentPlanetStore = tradeStore.state.currentPlanet.storage.modules
+        const baseModuleCount = module.amount
+        module.amount = tradeStore.state.confirmWindowInput
+        const index = currentPlanetStore.indexOf(module, 0)
         if(index === -1){
-            store.state.allPlayerModules.push(module)
+            currentPlanetStore.push(module)
         } else {
-            store.state.allPlayerModules[index].amount += countOfBuyingModules
+            currentPlanetStore[index].amount += baseModuleCount
         }
     }
 
+
     subtractionBuyingLotAmount(){
-        store.state.buyingLot.amount -= store.state.confirmWindowInput
-        if(store.state.buyingLot.amount === 0) {
-            let index = store.state.allLots.indexOf(store.state.buyingLot)
-            store.state.allLots.splice(index, 1)
+        tradeStore.state.buyingLot.amount -= tradeStore.state.confirmWindowInput
+        if(tradeStore.state.buyingLot.amount === 0) {
+            let index = tradeStore.state.allLots.indexOf(tradeStore.state.buyingLot)
+            tradeStore.state.allLots.splice(index, 1)
             // TODO update  allLotsInDB
         }
     }
 
 
     clearAndCloseConfirmWindow(){
-        store.state.confirmWindowInput = ''
-        store.state.confirmWindow = false
+        tradeStore.state.confirmWindowInput = ''
+        tradeStore.state.confirmWindow = false
     }
 
     validateDataForBuyModule(sum, minAmount){
@@ -66,22 +68,22 @@ export class Mutations {
     }
 
     isSumOfBuyValid(sum){
-        return store.state.player.playerData.playerMoney.IG >= sum
+        return tradeStore.state.player.playerData.playerMoney.IG >= sum
     }
 
     isAmountOfBuyValid(){
-        return store.state.buyingLot.amount >= store.state.confirmWindowInput
+        return tradeStore.state.buyingLot.amount >= tradeStore.state.confirmWindowInput
     }
 
     checkMinAmountOfBuy(minAmount){
-        return store.state.confirmWindowInput % minAmount === 0
+        return tradeStore.state.confirmWindowInput % minAmount === 0
     }
 
 
     removeIdenticalElements(arrayTwo){
-        const arrayOne = [...store.state.player.playerData.playerPlanets.homeWorld.storage.modules]
+        const arrayOne = [...tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.modules]
         arrayTwo = [];
-        const playerOtherPlanets = store.state.player.playerData.playerPlanets.inhabitedPlanets
+        const playerOtherPlanets = tradeStore.state.player.playerData.playerPlanets.inhabitedPlanets
         for(let i = 0; i < playerOtherPlanets.length; i++){
             arrayTwo.push(...playerOtherPlanets[i].storage.modules)
         }
@@ -94,7 +96,7 @@ export class Mutations {
                 }
             }
         }
-       store.state.allPlayerModules =  [...arrayOne, ...arrayTwo]
+       tradeStore.state.allPlayerModules =  [...arrayOne, ...arrayTwo]
     }
 
     filteredModules (raceFilter, inputFilter, returnedArray) {
@@ -129,7 +131,7 @@ export class Mutations {
 
 
     closeConfirmWindow(){
-        store.state.confirmWindow = false
+        tradeStore.state.confirmWindow = false
     }
 
 }

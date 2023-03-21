@@ -16,7 +16,7 @@ import TheBottomNav from '../components/navigation/TheBottomNav.vue'
 import TheTradeView from "./trade/TheTradeView.vue";
 import tradeStore from "../store_modules/tradeStore.js";
 import planetStore from "../store_modules/planetStore.js";
-import ThePlanets from '../components/planets/ThePlanets.vue'
+import ThePlanets from './planets/CurrentPlanet.vue'
 import ThePlanetarySystem from '../components/planets/ThePlanetarySystem.vue'
 
 </script>

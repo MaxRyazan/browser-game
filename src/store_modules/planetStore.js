@@ -5,7 +5,7 @@ export default createStore({
     state: {
         visibilityPlanetMenu: false,
         visibilityPlanetarySystem: false,
-        visibilityInfrastructure: false,
+        visibilityInfrastructure: true,
         visibilityEnergy: false,
         visibilityResources: false,
         visibilityMaterials: false,

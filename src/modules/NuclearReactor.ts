@@ -9,6 +9,7 @@ export class NuclearReactor implements Module{
     public belongsToRace: Race
     public name: String
     public amount?: Number
+    public costInBuildPoints: Number
     public baseParams: {
         baseMass: Number
         baseSignature: Number
@@ -42,6 +43,7 @@ export class NuclearReactor implements Module{
         this.picture = './src/assets/images/nuclear_reactor.jpg'
         this.requiredTech = [new NuclearPhysics()]
         this.name = 'Ядерный реактор'
+        this.costInBuildPoints = 130
         this.baseParams = {
             baseMass: 13,
             baseSignature: 11,

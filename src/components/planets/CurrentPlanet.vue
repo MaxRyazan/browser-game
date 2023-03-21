@@ -5,15 +5,15 @@
                 <img src="../../assets/images/home_planetN.jpg" alt="">
             </div>
             <div class="planet_data_name">
-                <div class="planet_data_name">Планета: {{playerPlanets.homeWorld.name}}</div>
-                <div class="planet_data_name link" @click="planetStore.commit('togglePlanetarySystemVision')">{{playerPlanets.homeWorld.planetarySystem.name}}</div>
-                <div class="planet_data_name">Орбита: {{playerPlanets.homeWorld.orbit}}</div>
+                <div class="planet_data_name">Планета: {{playerPlanets.name}}</div>
+                <div class="planet_data_name link" @click="planetStore.commit('togglePlanetarySystemVision')">{{playerPlanets.planetarySystem.name}}</div>
+                <div class="planet_data_name">Орбита: {{playerPlanets.orbit}}</div>
                 <div class="planet_data_name">Атмосфера: {{atmosphere}}</div>
-                <div class="planet_data_name">Точек застройки: {{playerPlanets.homeWorld.building_points}}</div>
+                <div class="planet_data_name">Точек застройки: {{playerPlanets.building_points}}</div>
                 <div class="planet_data_name">
                     Склад:
                     {{massOfModules}} /
-                    {{playerPlanets.homeWorld.storage.maxCapacity}}
+                    {{playerPlanets.storage.maxCapacity}}
                 </div>
             </div>
         </div>
@@ -38,9 +38,10 @@ import AppListOfBuildings from "./AppListOfBuildings.vue";
 import AppOrderList from "./AppOrderList.vue";
 import {computed} from "vue";
 
+//TODO реализовать добавление купленных модулей на склад, для подсчета массы на складе
 const massOfModules = computed(() => {
     let mass = 0
-    const store = tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.modules
+    const store = tradeStore.state.currentPlanet.storage.modules
     for(let i = 0; i < store.length; i ++){
         const count = store[i].amount
         mass += store[i].baseParams.baseMass * count
@@ -49,10 +50,10 @@ const massOfModules = computed(() => {
 })
 
 const atmosphere = computed(() => {
-   return tradeStore.state.player.playerData.playerPlanets.homeWorld.atmosphere ? 'Есть': 'Нет'
+   return tradeStore.state.currentPlanet.atmosphere ? 'Есть': 'Нет'
 })
 
 const playerPlanets = computed(() => {
-    return tradeStore.state.player.playerData.playerPlanets
+    return tradeStore.state.currentPlanet
 })
 </script>
