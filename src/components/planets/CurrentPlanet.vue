@@ -19,13 +19,14 @@
         </div>
         <div class="planet_item">
             <div class="planet_navigation">
-                <AppMiniButton :name="`Склад`" />
+                <AppMiniButton :name="`Склад`" @click="planetStore.commit('toggleStorageVision')" />
                 <AppMiniButton :name="`Строительство`" />
                 <AppMiniButton :name="`Управление`" />
-                <AppMiniButton :name="`Орбитальный док`" />
+                <AppMiniButton :name="`Орбитальный док`" :circleRightBorder="true" />
             </div>
             <AppOrderList />
             <AppListOfBuildings />
+            <AppPlanetStorageView v-if="planetStore.state.visibilityStorage" />
         </div>
     </div>
 </template>
@@ -35,8 +36,10 @@ import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
 import AppMiniButton from "../mini/AppMiniButton.vue";
 import AppListOfBuildings from "./AppListOfBuildings.vue";
+import AppPlanetStorageView from "./AppPlanetStorageView.vue";
 import AppOrderList from "./AppOrderList.vue";
 import {computed} from "vue";
+
 
 //TODO реализовать добавление купленных модулей на склад, для подсчета массы на складе
 const massOfModules = computed(() => {

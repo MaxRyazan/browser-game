@@ -11,6 +11,7 @@ export default createStore({
         visibilityMaterials: false,
         visibilityScience: false,
         visibilityComponents: false,
+        visibilityStorage: false
     },
     mutations: planetMutations
 })

@@ -1,8 +1,14 @@
+import planetStore from "../../store_modules/planetStore.js";
 
 export default {
 
     togglePlanetMenuVision(planetState){
         planetState.visibilityPlanetMenu = !planetState.visibilityPlanetMenu
+    },
+
+
+    toggleStorageVision(){
+        planetStore.state.visibilityStorage = !planetStore.state.visibilityStorage
     },
 
     togglePlanetarySystemVision(planetState){

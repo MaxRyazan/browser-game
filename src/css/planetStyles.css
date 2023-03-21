@@ -88,17 +88,18 @@
   gap: 1px;
 }
 
+.circle_right_border {
+  border-radius: 0 12px 0 0;
+}
+
 .planet_navigation_btn {
   position: relative;
   background-color: inherit;
-  width: 25%;
+  width: 100%;
   border: 1px solid black;
   outline: none;
   color: #00E000;
   font-family: FUTURE, sans-serif;
-}
-.planet_navigation_btn:last-child {
-  border-radius: 0 12px 0 0;
 }
 .planet_navigation_btn:after {
   z-index: -2;
@@ -175,6 +176,86 @@
 }
 .building_card_btn:active {
   color: #00E000;
+}
+
+.mini {
+  width: 40px;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+.modules_line_buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.planet_storage_wrapper {
+  position: absolute;
+  left: -2px;
+  top: 40px;
+  border-radius: 12px;
+  padding: 100px;
+  width: calc(100% - 200px);
+}
+
+.planet_storage_navigation {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: -2px;
+  height: 40px;
+  display: flex;
+  gap: 2px;
+}
+
+.planet_storage_modules {
+  position: absolute;
+  left: 0;
+  top: 40px;
+  width: 100%;
+  height: calc(100% - 8px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.planet_storage_modules::after {
+  background-color: rgba(15, 65, 140, 0.5);
+  opacity: 0.5;
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.planet_storage_modules_line {
+  width: calc(100% - 42px);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modules_line {
+  width: 80%;
+  text-align: center;
+  color: #daa548;
+  font-weight: bold;
+  font-family: FUTURE, sans-serif;
+  cursor: default;
+}
+.modules_line.module_id {
+  width: 15%;
+}
+.modules_line.module_amount {
+  width: 15%;
+}
+.modules_line.module_base_mass {
+  width: 15%;
+}
+.modules_line.module_full_mass {
+  width: 35%;
 }
 
 @keyframes planet_spin {
