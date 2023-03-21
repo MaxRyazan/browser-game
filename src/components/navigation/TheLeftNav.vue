@@ -36,7 +36,7 @@
         <div class="left_nav_item">
             <img src="src/assets/images/battle_logs_icon.png" alt="" class="left_nav_item_img">
         </div>
-        <div class="left_nav_item planet" @click="planetStore.commit('togglePlanetMenuVision')">
+        <div class="left_nav_item planet" @click="planetStore.commit('toggleVision', 'planet')">
             <img src="src/assets/images/planet_icon.png" alt="" class="left_nav_item_img">
         </div>
         <div class="left_nav_item">

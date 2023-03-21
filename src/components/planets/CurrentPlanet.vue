@@ -6,7 +6,7 @@
             </div>
             <div class="planet_data_name">
                 <div class="planet_data_name">Планета: {{playerPlanets.name}}</div>
-                <div class="planet_data_name link" @click="planetStore.commit('togglePlanetarySystemVision')">{{playerPlanets.planetarySystem.name}}</div>
+                <div class="planet_data_name link" @click="planetStore.commit('toggleVision', 'planetarySystem')">{{playerPlanets.planetarySystem.name}}</div>
                 <div class="planet_data_name">Орбита: {{playerPlanets.orbit}}</div>
                 <div class="planet_data_name">Атмосфера: {{atmosphere}}</div>
                 <div class="planet_data_name">Точек застройки: {{playerPlanets.building_points}}</div>
@@ -18,12 +18,7 @@
             </div>
         </div>
         <div class="planet_item">
-            <div class="planet_navigation">
-                <AppMiniButton :name="`Склад`" @click="planetStore.commit('toggleStorageVision')" />
-                <AppMiniButton :name="`Строительство`" />
-                <AppMiniButton :name="`Управление`" />
-                <AppMiniButton :name="`Орбитальный док`" :circleRightBorder="true" />
-            </div>
+            <AppPlanetNavigationButtons />
             <AppOrderList />
             <AppListOfBuildings />
             <AppPlanetStorageView v-if="planetStore.state.visibilityStorage" />
@@ -34,11 +29,11 @@
 <script setup>
 import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
-import AppMiniButton from "../mini/AppMiniButton.vue";
 import AppListOfBuildings from "./AppListOfBuildings.vue";
 import AppPlanetStorageView from "./AppPlanetStorageView.vue";
 import AppOrderList from "./AppOrderList.vue";
 import {computed} from "vue";
+import AppPlanetNavigationButtons from "./AppPlanetNavigationButtons.vue";
 
 
 //TODO реализовать добавление купленных модулей на склад, для подсчета массы на складе

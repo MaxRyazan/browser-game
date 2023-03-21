@@ -1,9 +1,9 @@
 <template>
     <div class="planet_storage_wrapper">
         <div class="planet_storage_navigation">
-            <AppMiniButton  name="Ресурсы"/>
-            <AppMiniButton  name="Материалы"/>
-            <AppMiniButton  name="Модули"/>
+            <AppMiniButton :storage="true" name="Ресурсы"/>
+            <AppMiniButton :storage="true"  name="Материалы"/>
+            <AppMiniButton :storage="true"  name="Модули"/>
         </div>
         <div class="planet_storage_modules">
             <div class="planet_storage_modules_line" v-for="(module, index) in tradeStore.state.currentPlanet.storage.modules" :key="index">
@@ -26,5 +26,12 @@
 import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
 import AppMiniButton from "../mini/AppMiniButton.vue";
-
+import {onMounted} from "vue";
+onMounted(() => {
+    const buttons = document.querySelectorAll('.storage')
+    buttons.forEach(b => b.addEventListener('click', () => {
+        buttons.forEach(item => item.style.color = '#00E000')
+        b.style.color = '#daa548'
+    }))
+})
 </script>

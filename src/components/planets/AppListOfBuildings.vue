@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="planet_navigation">
-            <AppMiniButton :name="`Инфраструктура`" @click="planetStore.commit('toggleInfrastructureBuildingsVision')"/>
-            <AppMiniButton :name="`Энергетика`" @click="planetStore.commit('toggleEnergyBuildingsVision')" />
-            <AppMiniButton :name="`Ресурсы`"  @click="planetStore.commit('toggleResourcesBuildingsVision')"/>
-            <AppMiniButton :name="`Материалы`"  @click="planetStore.commit('toggleMaterialsBuildingsVision')"/>
-            <AppMiniButton :name="`Наука`"  @click="planetStore.commit('toggleScienceBuildingsVision')"/>
-            <AppMiniButton :name="`Компоненты КК`"  @click="planetStore.commit('toggleComponentsBuildingsVision')"/>
+            <AppMiniButton :active="true" :buildings="true" :name="`Инфраструктура`" @click="planetStore.commit('toggleVision', 'infrastructure')"/>
+            <AppMiniButton :buildings="true" :name="`Энергетика`" @click="planetStore.commit('toggleVision', 'energy')" />
+            <AppMiniButton :buildings="true" :name="`Ресурсы`"  @click="planetStore.commit('toggleVision', 'resources')"/>
+            <AppMiniButton :buildings="true" :name="`Материалы`"  @click="planetStore.commit('toggleVision', 'materials')"/>
+            <AppMiniButton :buildings="true" :name="`Наука`"  @click="planetStore.commit('toggleVision', 'science')"/>
+            <AppMiniButton :buildings="true" :name="`Компоненты КК`"  @click="planetStore.commit('toggleVision', 'components')"/>
         </div>
         <div class="buildings_wrapper">
             <div class="buildings_infrastructure" v-if="planetStore.state.visibilityInfrastructure">
@@ -59,5 +59,14 @@
 import AppMiniButton from "../mini/AppMiniButton.vue";
 import AppBuildingCard from "./AppBuildingCard.vue";
 import planetStore from "../../store_modules/planetStore.js";
+import {computed, onMounted} from "vue";
 
+onMounted(() => {
+    const buttons = document.querySelectorAll('.buildings')
+    buttons.forEach(b => b.addEventListener('click', () => {
+        buttons.forEach(item => item.style.color = '#00E000')
+        b.style.color = '#daa548'
+    }))
+    document.querySelector('.active').style.color = '#daa548'
+})
 </script>

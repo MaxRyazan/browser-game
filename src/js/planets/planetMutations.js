@@ -1,23 +1,59 @@
-import planetStore from "../../store_modules/planetStore.js";
 import tradeStore from "../../store_modules/tradeStore.js";
+import planetStore from "../../store_modules/planetStore.js";
 
 export default {
 
-    togglePlanetMenuVision(planetState){
-        planetState.visibilityPlanetMenu = !planetState.visibilityPlanetMenu
+    toggleVision(planetState, param){
+        switch (param){
+            case 'planet' : planetState.visibilityPlanetMenu = !planetState.visibilityPlanetMenu;
+                break;
+            case 'storage' : planetState.visibilityStorage = !planetState.visibilityStorage;
+                break;
+            case 'planetarySystem' : planetState.visibilityPlanetarySystem = !planetState.visibilityPlanetarySystem
+                break;
+            case 'infrastructure' : {
+                planetStore.commit('hideAllMenu')
+                planetState.visibilityInfrastructure = !planetState.visibilityInfrastructure
+            }
+                break;
+            case 'energy' : {
+                planetStore.commit('hideAllMenu')
+                planetState.visibilityEnergy = !planetState.visibilityEnergy
+            }
+                break;
+            case 'resources' : {
+                planetStore.commit('hideAllMenu')
+                planetState.visibilityResources = !planetState.visibilityResources
+            }
+                break;
+            case 'materials' : {
+                planetStore.commit('hideAllMenu')
+                planetState.visibilityMaterials = !planetState.visibilityMaterials
+            }
+                break;
+            case 'science' : {
+                planetStore.commit('hideAllMenu')
+                planetState.visibilityScience = !planetState.visibilityScience
+            }
+                break;
+            case 'components' : {
+                planetStore.commit('hideAllMenu')
+                planetState.visibilityComponents = !planetState.visibilityComponents
+            }
+                break;
+        }
     },
 
-
-    toggleStorageVision(){
-        planetStore.state.visibilityStorage = !planetStore.state.visibilityStorage
+    hideAllMenu(planetState){
+        planetState.visibilityInfrastructure = false
+        planetState.visibilityEnergy = false
+        planetState.visibilityResources = false
+        planetState.visibilityMaterials = false
+        planetState.visibilityScience = false
+        planetState.visibilityComponents = false
     },
 
-    togglePlanetarySystemVision(planetState){
-        planetState.visibilityPlanetarySystem = ! planetState.visibilityPlanetarySystem
-    },
-
-
-    removeModule(module){
+    removeModule(_, module){
         let index = -1
         const storage = tradeStore.state.currentPlanet.storage.modules
         for(let i = 0; i < storage.length; i++) {
@@ -28,64 +64,5 @@ export default {
         storage.splice(index, 1)
     },
 
-    toggleInfrastructureBuildingsVision(planetState){
-        planetState.visibilityInfrastructure = !planetState.visibilityInfrastructure
-            // planetState.visibilityInfrastructure = false
-            planetState.visibilityEnergy = false
-            planetState.visibilityResources = false
-            planetState.visibilityMaterials = false
-            planetState.visibilityScience = false
-            planetState.visibilityComponents = false
-    },
-
-    toggleEnergyBuildingsVision(planetState){
-        planetState.visibilityEnergy = !planetState.visibilityEnergy
-        planetState.visibilityInfrastructure = false
-        // planetState.visibilityEnergy = false
-        planetState.visibilityResources = false
-        planetState.visibilityMaterials = false
-        planetState.visibilityScience = false
-        planetState.visibilityComponents = false
-    },
-
-    toggleResourcesBuildingsVision(planetState){
-        planetState.visibilityResources = !planetState.visibilityResources
-        planetState.visibilityInfrastructure = false
-        planetState.visibilityEnergy = false
-        // planetState.visibilityResources = false
-        planetState.visibilityMaterials = false
-        planetState.visibilityScience = false
-        planetState.visibilityComponents = false
-    },
-
-    toggleMaterialsBuildingsVision(planetState){
-        planetState.visibilityMaterials = !planetState.visibilityMaterials
-        planetState.visibilityInfrastructure = false
-        planetState.visibilityEnergy = false
-        planetState.visibilityResources = false
-        // planetState.visibilityMaterials = false
-        planetState.visibilityScience = false
-        planetState.visibilityComponents = false
-    },
-
-    toggleScienceBuildingsVision(planetState){
-        planetState.visibilityScience = !planetState.visibilityScience
-        planetState.visibilityInfrastructure = false
-        planetState.visibilityEnergy = false
-        planetState.visibilityResources = false
-        planetState.visibilityMaterials = false
-        // planetState.visibilityScience = false
-        planetState.visibilityComponents = false
-    },
-
-    toggleComponentsBuildingsVision(planetState){
-        planetState.visibilityComponents = !planetState.visibilityComponents
-        planetState.visibilityInfrastructure = false
-        planetState.visibilityEnergy = false
-        planetState.visibilityResources = false
-        planetState.visibilityMaterials = false
-        planetState.visibilityScience = false
-        // planetState.visibilityComponents = false
-    },
 
 }
