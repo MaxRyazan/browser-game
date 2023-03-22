@@ -2,7 +2,7 @@ import {Material} from "./Material";
 import {Resource} from "./Resource";
 import {Detail} from "./Detail";
 
-export interface Building{
+export interface BuildingInterface {
     id: Number
     name: String
     onGround: Boolean

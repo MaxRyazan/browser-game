@@ -1,5 +1,6 @@
 import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
+import {Colony} from '../../buildings/Colony'
 
 export default {
 
@@ -70,6 +71,32 @@ export default {
         } else {
             planetStore.state.isColonyCreated = false
         }
+    },
+
+    createBuilding(planetState, payload){
+        switch (payload){
+            case 'colony' : {
+                tradeStore.state.currentPlanet.buildings.push(new Colony())
+                planetStore.state.isColonyCreated = true
+            }
+            break;
+        }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

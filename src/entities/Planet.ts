@@ -1,5 +1,5 @@
 import {PlanetarySystem} from "./PlanetarySystem";
-import {Building} from "../interfaces/Building";
+import {Building} from "./Building";
 
 export class Planet {
     constructor(

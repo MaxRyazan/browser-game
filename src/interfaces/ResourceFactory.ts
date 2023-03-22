@@ -1,5 +1,5 @@
-import {Building} from "./Building";
+import {BuildingInterface} from "./BuildingInterface";
 
-export interface ResourceFactory extends Building{
+export interface ResourceFactory extends BuildingInterface{
 
 }

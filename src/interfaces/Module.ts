@@ -7,7 +7,7 @@ export interface Module{
      belongsToRace?: Race
      name?: String
      amount?: Number
-    costInBuildPoints: Number
+    costInBuildPoints?: Number
      baseParams?: {
         baseMass: Number
         baseSignature: Number
