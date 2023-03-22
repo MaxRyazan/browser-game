@@ -64,5 +64,12 @@ export default {
         storage.splice(index, 1)
     },
 
+    checkThatColonyExists(_){
+        if(tradeStore.state.currentPlanet.buildings.find(building => building.id === 1)) {
+            planetStore.state.isColonyCreated = true
+        } else {
+            planetStore.state.isColonyCreated = false
+        }
+    }
 
 }

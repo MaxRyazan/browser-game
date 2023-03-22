@@ -32,8 +32,13 @@ import planetStore from "../../store_modules/planetStore.js";
 import AppListOfBuildings from "./AppListOfBuildings.vue";
 import AppPlanetStorageView from "./AppPlanetStorageView.vue";
 import AppOrderList from "./AppOrderList.vue";
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 import AppPlanetNavigationButtons from "./AppPlanetNavigationButtons.vue";
+
+onMounted(() => {
+    planetStore.commit('checkThatColonyExists')
+})
+
 
 
 //TODO реализовать добавление купленных модулей на склад, для подсчета массы на складе

@@ -1,0 +1,17 @@
+<template>
+    <div class="buildings_infrastructure" v-if="planetStore.state.visibilityInfrastructure">
+        <AppBuildingCard name="Колония" picture="colony_icon"/>
+        <AppBuildingCard name="Колониальный сенат" picture="colonial_senat" v-if="planetStore.state.isColonyCreated"/>
+        <AppBuildingCard name="Склад" picture="store" v-if="planetStore.state.isColonyCreated"/>
+        <AppBuildingCard name="Административный центр" picture="admin_center" v-if="planetStore.state.isColonyCreated"/>
+        <AppBuildingCard name="Строительный центр" picture="building_center" v-if="planetStore.state.isColonyCreated"/>
+        <AppBuildingCard name="Медицинский центр" picture="med_center" v-if="planetStore.state.isColonyCreated"/>
+        <AppBuildingCard name="Города" picture="planet_window_bg" v-if="planetStore.state.isColonyCreated"/>
+        <AppBuildingCard name="Банк" picture="planet_window_bg" v-if="planetStore.state.isColonyCreated"/>
+        <AppBuildingCard name="Космопорт" picture="planet_window_bg" v-if="planetStore.state.isColonyCreated"/>
+    </div>
+</template>
+<script setup>
+import planetStore from "../../store_modules/planetStore.js";
+import AppBuildingCard from "./AppBuildingCard.vue";
+</script>

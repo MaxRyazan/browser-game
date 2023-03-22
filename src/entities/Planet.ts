@@ -1,4 +1,5 @@
 import {PlanetarySystem} from "./PlanetarySystem";
+import {Building} from "../interfaces/Building";
 
 export class Planet {
     constructor(
@@ -8,11 +9,12 @@ export class Planet {
         public orbit: Number,
         public atmosphere: Boolean,
         public building_points: Number,
+        public picture: String,
         public storage: {
             maxCapacity: Number,
             modules: {}
         },
-        public picture: String
+        public buildings: Building[]
     ) {
         this.id = id
         this.name = name
@@ -20,7 +22,8 @@ export class Planet {
         this.orbit = orbit
         this.atmosphere = atmosphere
         this.building_points = building_points
-        this.storage = storage
         this.picture = picture
+        this.storage = storage
+        this.buildings = buildings
     }
 }
