@@ -9,6 +9,7 @@ export class Colony extends Building{
     name: String;
     costInCR: Number;
     costInIG: Number;
+    costInTime: Number;
     onGround: Boolean;
     buildComponentsSpeed: Number;
     buildOtherBuildingsSpeed: Number;
@@ -22,6 +23,7 @@ export class Colony extends Building{
         this.costInIG = 0
         this.costInIG = 50000
         this.onGround = true
+        this.costInTime = 6000
         this.buildComponentsSpeed = 0
         this.buildOtherBuildingsSpeed = 25
         this.requiredMaterials = [new Electronics(10), new Steel(10), new Polymers(10)]

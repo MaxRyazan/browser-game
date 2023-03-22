@@ -1,5 +1,6 @@
 import planetMutations from "../js/planets/planetMutations.js";
 import {createStore} from "vuex";
+import planetActions from "../js/planets/planetActions.js";
 
 export default createStore({
     state: {
@@ -13,7 +14,10 @@ export default createStore({
         visibilityComponents: false,
         visibilityStorage: false,
 
-        isColonyCreated: false
+        isColonyCreated: false,
+        buildingsInProgressNow: [],
+        currentPlanetBuildingSpeed: 1
     },
-    mutations: planetMutations
+    mutations: planetMutations,
+    actions: planetActions
 })

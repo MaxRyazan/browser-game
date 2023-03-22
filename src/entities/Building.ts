@@ -11,6 +11,7 @@ export class Building implements BuildingInterface{
         type: Resource[] | Material[] | Detail[]; amount: Number };
     costInCR: Number;
     costInIG: Number;
+    costInTime: Number;
     id: Number;
     name: String;
     onGround: Boolean;

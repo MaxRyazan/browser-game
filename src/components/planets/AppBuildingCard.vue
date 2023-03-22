@@ -10,7 +10,7 @@
             {{building === undefined ? '' : building.amount}}
         </div>
         <div class="building_controls">
-            <button class="building_card_btn" @click="planetStore.commit('createBuilding', 'colony')">Построить</button>
+            <button class="building_card_btn" @click="planetStore.commit('createBuilding', name)">Построить</button>
             <button class="building_card_btn">Сломать</button>
         </div>
     </div>

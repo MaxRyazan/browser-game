@@ -73,15 +73,23 @@ export default {
         }
     },
 
+
     createBuilding(planetState, payload){
         switch (payload){
-            case 'colony' : {
-                tradeStore.state.currentPlanet.buildings.push(new Colony())
-                planetStore.state.isColonyCreated = true
+            case 'Колония' : {
+                let buildingSpeed = 1
+                for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
+                    buildingSpeed = buildingSpeed+ tradeStore.state.currentPlanet.buildings[i].buildOtherBuildingsSpeed
+                }
+                const colony = new Colony()
+                colony.costInTime = colony.costInTime - (colony.costInTime  * (buildingSpeed - 1 ))
+                planetStore.state.buildingsInProgressNow.push({ building: colony, timeWhereDone: ((colony.costInTime + Date.now())) })
             }
             break;
+
         }
     }
+
 
 
 

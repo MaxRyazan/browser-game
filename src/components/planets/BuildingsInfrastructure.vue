@@ -1,6 +1,6 @@
 <template>
     <div class="buildings_infrastructure" v-if="planetStore.state.visibilityInfrastructure">
-        <AppBuildingCard name="Колония" picture="colony_icon" :building="returnBuildings"/>
+        <AppBuildingCard name="Колония" picture="colony_icon" :name="`Колония`" :building="checkBuilding('Колония')"/>
         <AppBuildingCard name="Колониальный сенат" picture="colonial_senat" v-if="planetStore.state.isColonyCreated"/>
         <AppBuildingCard name="Склад" picture="store" v-if="planetStore.state.isColonyCreated"/>
         <AppBuildingCard name="Административный центр" picture="admin_center" v-if="planetStore.state.isColonyCreated"/>
@@ -14,11 +14,10 @@
 <script setup>
 import planetStore from "../../store_modules/planetStore.js";
 import AppBuildingCard from "./AppBuildingCard.vue";
-import {computed} from "vue";
 import tradeStore from "../../store_modules/tradeStore.js";
 
+function checkBuilding(param){
+    return tradeStore.state.currentPlanet.buildings.filter(b=> b.name === param)[0]
+}
 
-const returnBuildings = computed(() => {
-    return tradeStore.state.currentPlanet.buildings.filter(b => b.id === 1)[0]
-})
 </script>
