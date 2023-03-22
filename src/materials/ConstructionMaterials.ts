@@ -7,10 +7,13 @@ export class ConstructionMaterials implements Material {
     public mass: Number
     public name: String
     public resourcesForProduction: {}
-    constructor() {
+    amount: Number;
+    constructor(amount: Number = 1) {
         this. id = 9
         this.mass = 4
         this.name = 'Строительные материалы'
         this.resourcesForProduction = [new MineralOre(), new MineralOre(), new MetalOre(), new MetalOre()]
+        this.amount = amount
     }
+
 }

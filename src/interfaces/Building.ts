@@ -6,14 +6,13 @@ export interface Building{
     id: Number
     name: String
     onGround: Boolean
-    constInCR: Number
-    constInIG?: Number
-    basePower: Number
-    requiredMaterials: {
-        type: Material[] | Resource[],
-        amount: Number
-    }
-    canProduce:{
+    costInCR: Number
+    costInIG?: Number
+    amount: Number
+    buildComponentsSpeed?: Number
+    buildOtherBuildingsSpeed?: Number
+    requiredMaterials: Material[]
+    canProduce?:{
         type: Resource[] | Material[] | Detail[]
         amount: Number
     }

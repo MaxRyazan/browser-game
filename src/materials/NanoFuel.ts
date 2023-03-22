@@ -9,10 +9,13 @@ export class NanoFuel implements Material {
     public mass: Number
     public name: String
     public resourcesForProduction: {}
-    constructor() {
+    amount: Number;
+    constructor(amount: Number = 1) {
         this. id = 7
         this.mass = 16
         this.name = 'Нано топлливо'
         this.resourcesForProduction = [new Delitium(), new Quantium(), new Tellurium(), new OrganicOre()]
+        this.amount = amount
     }
+
 }
