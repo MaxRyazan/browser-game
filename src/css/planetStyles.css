@@ -120,12 +120,21 @@
 }
 
 .building_in_progress_wrapper {
+  position: relative;
   display: flex;
   color: white;
   justify-content: space-around;
   padding: 10px 10px 0;
   align-items: center;
+}
+.building_in_progress_wrapper ::after {
+  width: 100%;
   border-bottom: 1px solid white;
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  opacity: 0.05;
 }
 
 .building_in_progress_wrapper-name span {
