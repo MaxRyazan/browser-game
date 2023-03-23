@@ -16,7 +16,7 @@ export class Colony extends Building{
     requiredMaterials: Material[];
     amount: Number;
 
-    constructor(amount: Number = 1, costInTime: Number = 6000) {
+    constructor(amount: Number = 1, costInTime: Number = 32211116000) {
         super();
         this.id = 1
         this.name = 'Колония'

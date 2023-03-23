@@ -1,8 +1,13 @@
 <template>
     <div class="order_list_wrapper">
-        <div class="test" v-for="(building, index) in planetStore.state.buildingsInProgressNow" :key="index">
-            <div>{{building.building.name}}</div>
-            <div>Построится в: {{ timer(building) }}</div>
+        <div class="building_in_progress_wrapper" v-for="(building, index) in planetStore.state.buildingsInProgressNow" :key="index">
+            <div class="building_in_progress_wrapper-name">
+                <span>{{building.building.name}}</span>
+            </div>
+            <div class="building_in_progress_wrapper-timer">
+                <strong>Построится : </strong>
+                <span>{{ timer(building) }}</span>
+            </div>
         </div>
     </div>
 </template>
@@ -30,7 +35,43 @@ function timer(param) {
         }
     planetStore.commit('checkThatColonyExists')
     }, dd)
-    return param.timeWhereDone
+
+    const time = new Date(param.timeWhereDone)
+    let month =  time.getMonth() + 1
+    const day = time.getDate()
+    const hour = time.getHours()
+    const min = time.getMinutes()
+
+    switch (month) {
+        case 1 :  month = 'января'
+            break;
+        case 2 :  month = 'февраля'
+            break;
+        case 3 :  month = 'марта'
+            break;
+        case 4 :  month = 'апреля'
+            break;
+        case 5 :  month = 'мая'
+            break;
+        case 6 :  month = 'июня'
+            break;
+        case 7 :  month = 'июля'
+            break;
+        case 8 :  month = 'августа'
+            break;
+        case 9 :  month = 'сентября'
+            break;
+        case 10 :  month = 'октября'
+            break;
+        case 11 :  month = 'ноября'
+            break;
+        case 12 :  month = 'декабря'
+            break;
+    }
+    const minutes = min  < 10 ? '0' + min : min
+
+    return day + ' ' + month + ' в ' + hour + ":" + minutes
+
 }
 
 

@@ -119,10 +119,28 @@
   min-height: 30%;
 }
 
-.test {
+.building_in_progress_wrapper {
   display: flex;
   color: white;
   justify-content: space-around;
+  padding: 10px 10px 0;
+  align-items: center;
+  border-bottom: 1px solid white;
+}
+
+.building_in_progress_wrapper-name span {
+  color: #00E000;
+  font-size: 20px;
+  font-family: FUTURE, sans-serif;
+}
+
+.building_in_progress_wrapper-timer span {
+  color: #daa548;
+  font-size: 16px;
+}
+.building_in_progress_wrapper-timer strong {
+  font-size: 16px;
+  color: #00E000;
 }
 
 .buildings_wrapper {
