@@ -14,7 +14,8 @@ export class Planet {
             maxCapacity: Number,
             modules: {}
         },
-        public buildings: Building[]
+        public buildings: Building[],
+        public peoples: Number
     ) {
         this.id = id
         this.name = name
@@ -25,5 +26,6 @@ export class Planet {
         this.picture = picture
         this.storage = storage
         this.buildings = buildings
+        this.peoples = peoples
     }
 }

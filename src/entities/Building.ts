@@ -16,5 +16,7 @@ export class Building implements BuildingInterface{
     name: String;
     onGround: Boolean;
     requiredMaterials: Material[];
+    addPeopleToPlanet: Number;
+    peopleNeedToFunctionality: Number
 
 }

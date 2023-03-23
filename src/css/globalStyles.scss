@@ -69,6 +69,7 @@ span{
   top: 50px;
   border-radius: 12px;
   width: calc(100% - 200px);
+  max-width: 1600px;
   min-width: 730px;
   height: calc(100vh - 200px);
   display: flex;

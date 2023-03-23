@@ -11,6 +11,8 @@
         <div class="planet_data_name">Атмосфера: {{atmosphere}}</div>
         <div class="planet_data_name">Точек застройки: {{currentPlanet.building_points}}</div>
         <div class="planet_data_name"> Склад: {{massOfModules}} / {{currentPlanet.storage.maxCapacity}}</div>
+        <div class="planet_data_name peoples"> Население всего: {{currentPlanet.peoples}}</div>
+        <div class="planet_data_name"> Минимальное: {{peoplesNeedToFunctionality}}</div>
     </div>
 </template>
 <script setup>
@@ -20,6 +22,14 @@ import planetStore from "../../store_modules/planetStore.js";
 
 const atmosphere = computed(() => {
     return tradeStore.state.currentPlanet.atmosphere ? 'Есть': 'Нет'
+})
+
+const peoplesNeedToFunctionality = computed(() => {
+    let peoples = 0
+    for(let i =0; i < tradeStore.state.currentPlanet.buildings.length; i++){
+        peoples = peoples + tradeStore.state.currentPlanet.buildings[i].peopleNeedToFunctionality
+    }
+    return peoples
 })
 
 const currentPlanet = computed(() => {

@@ -15,6 +15,8 @@ export class Colony extends Building{
     buildOtherBuildingsSpeed: Number;
     requiredMaterials: Material[];
     amount: Number;
+    addPeopleToPlanet: Number;
+    peopleNeedToFunctionality: Number;
 
     constructor(amount: Number = 1, costInTime: Number = 6000) {
         super();
@@ -28,5 +30,7 @@ export class Colony extends Building{
         this.buildOtherBuildingsSpeed = 0.25
         this.requiredMaterials = [new Electronics(10), new Steel(10), new Polymers(10)]
         this.amount = amount
+        this.addPeopleToPlanet = 30
+        this.peopleNeedToFunctionality = 7
     }
 }

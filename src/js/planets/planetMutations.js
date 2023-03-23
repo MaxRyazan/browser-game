@@ -73,6 +73,14 @@ export default {
         }
     },
 
+    calculateAllPeoples(){
+        let peoples = 0;
+        for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
+            peoples += tradeStore.state.currentPlanet.buildings[i].addPeopleToPlanet
+        }
+        tradeStore.state.currentPlanet.peoples = peoples
+    },
+
 
     createBuilding(planetState, payload) {
         const dateNow = Date.now()
