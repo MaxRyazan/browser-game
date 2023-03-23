@@ -28,7 +28,10 @@ defineProps({
         type: String,
         required: true
     },
-    building: Building
+    building: {
+        type: Building,
+        required: false
+    },
 })
 
 </script>

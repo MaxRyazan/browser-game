@@ -17,7 +17,7 @@ function timer() {
     const dateNow = Date.now()
     for(let i = 0; i < planetStore.state.buildingsInProgressNow.length; i++){
         planetStore.state.buildingsInProgressNow[i].timeWhereDone = planetStore.state.buildingsInProgressNow[i].timeWhereDone - 1000
-        if(planetStore.state.buildingsInProgressNow[i].timeWhereDone - dateNow <= 0){
+        if(planetStore.state.buildingsInProgressNow[i].timeWhereDone - dateNow <= 0) {
             clearInterval(interval)
             tradeStore.state.currentPlanet.buildings.push(planetStore.state.buildingsInProgressNow[i].building)
             planetStore.state.buildingsInProgressNow.splice(i, 1)

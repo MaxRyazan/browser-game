@@ -16,16 +16,16 @@ export class Colony extends Building{
     requiredMaterials: Material[];
     amount: Number;
 
-    constructor(amount: Number = 1) {
+    constructor(amount: Number = 1, costInTime: Number = 6000) {
         super();
         this.id = 1
         this.name = 'Колония'
         this.costInIG = 0
         this.costInIG = 50000
         this.onGround = true
-        this.costInTime = 6000
+        this.costInTime = costInTime
         this.buildComponentsSpeed = 0
-        this.buildOtherBuildingsSpeed = 25
+        this.buildOtherBuildingsSpeed = 0.25
         this.requiredMaterials = [new Electronics(10), new Steel(10), new Polymers(10)]
         this.amount = amount
     }
