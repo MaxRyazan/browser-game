@@ -85,8 +85,6 @@ function timer(param) {
 
     const minutes = min  < 10 ? '0' + min : min
 
-
-
     return day + ' ' + month + ' в ' + hour + ":" + minutes
 
 }
