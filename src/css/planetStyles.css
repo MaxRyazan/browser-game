@@ -44,11 +44,11 @@
   cursor: pointer;
   color: #00E000;
 }
-.planet_data_name.peoples {
+.planet_data_name.border_top {
   position: relative;
   margin-top: 10px;
 }
-.planet_data_name.peoples::after {
+.planet_data_name.border_top::after {
   position: absolute;
   content: "";
   border-top: 1px solid white;

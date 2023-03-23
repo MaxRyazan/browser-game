@@ -18,5 +18,6 @@ export class Building implements BuildingInterface{
     requiredMaterials: Material[];
     addPeopleToPlanet: Number;
     peopleNeedToFunctionality: Number
-
+    addEnergyToPlanet: Number
+    energyNeedToFunctionality: Number
 }

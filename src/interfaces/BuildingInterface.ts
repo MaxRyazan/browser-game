@@ -16,4 +16,8 @@ export interface BuildingInterface {
         type: Resource[] | Material[] | Detail[]
         amount: Number
     }
+    addPeopleToPlanet: Number;
+    peopleNeedToFunctionality: Number
+    addEnergyToPlanet: Number
+    energyNeedToFunctionality: Number
 }
