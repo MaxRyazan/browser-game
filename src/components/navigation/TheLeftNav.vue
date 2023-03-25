@@ -4,7 +4,7 @@
             <img src="src/assets/images/settings_icon.png" alt="" class="left_nav_item_img">
         </div>
         <div class="left_nav_item">
-            <img src="src/assets/images/help_icon.png" alt="" class="left_nav_item_img">
+            <img src="src/assets/images/help_icon.png" alt="" class="left_nav_item_img" @click="planetStore.commit('toggleVision', 'helpMenu')">
         </div>
         <div class="left_nav_item">
             <img src="src/assets/images/federation_icon.png" alt="" class="left_nav_item_img">

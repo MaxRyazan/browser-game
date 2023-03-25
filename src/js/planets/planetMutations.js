@@ -1,11 +1,15 @@
 import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
 import {Colony} from '../../buildings/Colony'
+import helpStore from "../../store_modules/helpStore.js";
+
 
 export default {
 
     toggleVision(planetState, param){
         switch (param){
+            case  'helpMenu' : helpStore.state.helpMenu = !helpStore.state.helpMenu;
+            break;
             case 'planet' : planetState.visibilityPlanetMenu = !planetState.visibilityPlanetMenu;
                 break;
             case 'storage' : planetState.visibilityStorage = !planetState.visibilityStorage;
@@ -95,6 +99,14 @@ export default {
                         }
                         const colony = new Colony()
                         colony.costInTime = colony.costInTime - (colony.costInTime * (buildingSpeed - 1))
+
+
+                        // TODO материалы
+                        for(let i = 0; i < colony.requiredMaterials.length; i ++){
+                            console.log(colony.requiredMaterials[i].name + ' ' + colony.requiredMaterials[i].amount)
+                        }
+
+
 
                         planetStore.state.buildingsInProgressNow.push({
                             building: colony,
