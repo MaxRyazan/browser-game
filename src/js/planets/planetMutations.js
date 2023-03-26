@@ -2,6 +2,7 @@ import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
 import {Colony} from '../../buildings/Colony'
 import helpStore from "../../store_modules/helpStore.js";
+import {Store} from "../../buildings/Store.ts";
 
 
 export default {
@@ -112,24 +113,32 @@ export default {
                         }
                         const colony = new Colony()
                         colony.costInTime = colony.costInTime - (colony.costInTime * (buildingSpeed - 1))
-
-
-                        // TODO материалы
-
                         planetStore.commit('isMaterialsEnough', {materials: colony.requiredMaterials, building: colony})
-
-
                     }
                 }
             }
             break;
-
+            case 'Склад' : {
+                let buildingSpeed = 1
+                for (let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++) {
+                    buildingSpeed = buildingSpeed + tradeStore.state.currentPlanet.buildings[i].buildOtherBuildingsSpeed
+                }
+                const store = new Store()
+                store.costInTime = store.costInTime - (store.costInTime * (buildingSpeed - 1))
+                planetStore.commit('isMaterialsEnough', {materials: store.requiredMaterials, building: store})
+                planetStore.commit('calculateStorageAmountOfCurrentPlanet')
+            }
+            break;
         }
     },
 
 
-
-
+    calculateStorageAmountOfCurrentPlanet(_){
+        const stores = tradeStore.state.currentPlanet.buildings.filter(b => b.id === 3)[0]
+        if(stores){
+            tradeStore.state.currentPlanet.storage.maxCapacity = tradeStore.state.currentPlanet.storage.maxCapacity + stores.addStoreToPlanet * stores.amount
+        }
+    },
 
     isMaterialsEnough(_, payload){
         let count = 0
@@ -154,7 +163,6 @@ export default {
         } else {
             console.log('not enough materials')
         }
-        return count
     },
 
     subtractMaterialFromCurrentPlanetStore(_, material){

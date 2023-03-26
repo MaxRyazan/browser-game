@@ -42,7 +42,8 @@ function timer(param) {
                 planetStore.state.buildingsInProgressNow.splice(i, 1)
             }
         }
-    planetStore.commit('checkThatColonyExists')
+        planetStore.commit('checkThatColonyExists')
+        planetStore.commit('calculateStorageAmountOfCurrentPlanet')
     }, dd)
 
     const time = new Date(param.timeWhereDone)

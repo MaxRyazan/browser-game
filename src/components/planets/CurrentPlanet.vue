@@ -24,6 +24,7 @@ import AppCurrentInBuild from "./AppCurrentInBuild.vue";
 onMounted(() => {
     planetStore.commit('checkThatColonyExists')
     planetStore.commit('calculateAllPeoples')
+    planetStore.commit('calculateStorageAmountOfCurrentPlanet')
 })
 
 </script>
