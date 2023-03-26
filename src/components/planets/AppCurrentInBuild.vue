@@ -38,12 +38,11 @@ function timer(param) {
                 } else {
                     tradeStore.state.currentPlanet.buildings.push(planetStore.state.buildingsInProgressNow[i].building)
                 }
-                tradeStore.state.currentPlanet.peoples = tradeStore.state.currentPlanet.peoples + planetStore.state.buildingsInProgressNow[i].building.addPeopleToPlanet;
+                // tradeStore.state.currentPlanet.peoples = tradeStore.state.currentPlanet.peoples + planetStore.state.buildingsInProgressNow[i].building.addPeopleToPlanet;
                 planetStore.state.buildingsInProgressNow.splice(i, 1)
             }
         }
         planetStore.commit('checkThatColonyExists')
-        planetStore.commit('calculateStorageAmountOfCurrentPlanet')
     }, dd)
 
     const time = new Date(param.timeWhereDone)

@@ -6,7 +6,6 @@ import {Store} from "../../buildings/Store.ts";
 
 
 export default {
-
     toggleVision(planetState, param){
         switch (param){
             case  'helpMenu' : helpStore.state.helpMenu = !helpStore.state.helpMenu;
@@ -92,7 +91,7 @@ export default {
         }
     },
 
-    calculateAllPeoples(){
+    calculateAllPeoples(_){
         let peoples = 0;
         for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
             peoples += tradeStore.state.currentPlanet.buildings[i].addPeopleToPlanet
@@ -126,7 +125,6 @@ export default {
                 const store = new Store()
                 store.costInTime = store.costInTime - (store.costInTime * (buildingSpeed - 1))
                 planetStore.commit('isMaterialsEnough', {materials: store.requiredMaterials, building: store})
-                planetStore.commit('calculateStorageAmountOfCurrentPlanet')
             }
             break;
         }

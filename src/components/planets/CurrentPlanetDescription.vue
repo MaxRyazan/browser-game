@@ -10,7 +10,7 @@
         <div class="planet_data_name">Орбита: {{currentPlanet.orbit}}</div>
         <div class="planet_data_name">Атмосфера: {{atmosphere}}</div>
         <div class="planet_data_name">Точек застройки: {{currentPlanet.building_points}}</div>
-        <div class="planet_data_name"> Склад: {{massOfModules}} / {{currentPlanet.storage.maxCapacity}}</div>
+        <div class="planet_data_name"> Склад: {{massOfModules}} / {{storeAll}}</div>
         <div class="planet_data_name border_top"> Население всего: {{ peopleAll }}</div>
         <div class="planet_data_name"> Минимальное: {{peoplesNeedToFunctionality}}</div>
         <div class="planet_data_name border_top"> Энергия всего: {{ energyAll }}</div>
@@ -50,18 +50,28 @@ const energyNeedToFunctionality = computed(() => {
     return energy
 })
 
-
 const energyAll = computed(() => {
     let energy = 0
-    for(let i =0; i < tradeStore.state.currentPlanet.buildings.length; i++){
+    for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
         energy = energy + tradeStore.state.currentPlanet.buildings[i].addEnergyToPlanet
     }
     return energy
 })
 
+const storeAll = computed(() => {
+    let store = 2000
+    for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
+        console.log( tradeStore.state.currentPlanet.buildings[i].addStoreToPlanet)
+        store = tradeStore.state.currentPlanet.storage.maxCapacity + tradeStore.state.currentPlanet.buildings[i].addStoreToPlanet * tradeStore.state.currentPlanet.buildings[i].amount
+    }
+    return store
+})
+
+
 const currentPlanet = computed(() => {
     return tradeStore.state.currentPlanet
 })
+
 
 //TODO реализовать добавление купленных модулей на склад, для подсчета массы на складе
 const massOfModules = computed(() => {
