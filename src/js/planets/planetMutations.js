@@ -101,7 +101,6 @@ export default {
 
 
     createBuilding(planetState, payload) {
-        const dateNow = Date.now()
         switch (payload) {
             case 'Колония' : {
                 const exist = planetStore.state.buildingsInProgressNow.filter(b => b.building.id === 1)
@@ -116,22 +115,54 @@ export default {
 
 
                         // TODO материалы
-                        for(let i = 0; i < colony.requiredMaterials.length; i ++){
-                            console.log(colony.requiredMaterials[i].name + ' ' + colony.requiredMaterials[i].amount)
-                        }
+
+                        planetStore.commit('isMaterialsEnough', {materials: colony.requiredMaterials, building: colony})
 
 
-
-                        planetStore.state.buildingsInProgressNow.push({
-                            building: colony,
-                            timeWhereDone: ((colony.costInTime + dateNow))
-                        })
                     }
-
                 }
             }
             break;
 
+        }
+    },
+
+
+
+
+
+    isMaterialsEnough(_, payload){
+        let count = 0
+
+        for(let i = 0; i < payload.materials.length; i++){
+            const countOfMaterial = payload.materials[i].amount
+            const requiredMaterial = tradeStore.state.currentPlanet.storage.materials.filter(m => m.id === payload.materials[i].id && m.amount >= payload.materials[i].amount)[0]
+            if(requiredMaterial && requiredMaterial.amount >= countOfMaterial) {
+                count++
+            }
+        }
+
+        if(count === payload.materials.length){
+            for(let i = 0; i < payload.materials.length; i++){
+                planetStore.commit('subtractMaterialFromCurrentPlanetStore', payload.materials[i])
+            }
+
+            planetStore.state.buildingsInProgressNow.push({
+                building: payload.building,
+                timeWhereDone: ((payload.building.costInTime +  Date.now()))
+            })
+        } else {
+            console.log('not enough materials')
+        }
+        return count
+    },
+
+    subtractMaterialFromCurrentPlanetStore(_, material){
+        const storeMaterials = tradeStore.state.currentPlanet.storage.materials
+        for(let i = 0; i < storeMaterials.length; i++){
+            if(storeMaterials[i].id === material.id){
+                storeMaterials[i].amount = storeMaterials[i].amount - material.amount
+            }
         }
     }
 
