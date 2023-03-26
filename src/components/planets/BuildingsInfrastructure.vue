@@ -4,7 +4,7 @@
         <AppBuildingCard name="Колониальный сенат" picture="colonial_senat" v-if="planetStore.state.isColonyCreated"/>
         <AppBuildingCard name="Склад" picture="store" v-if="planetStore.state.isColonyCreated" :building="checkBuilding('Склад')"/>
         <AppBuildingCard name="Административный центр" picture="admin_center" v-if="planetStore.state.isColonyCreated"/>
-        <AppBuildingCard name="Строительный центр" picture="building_center" v-if="planetStore.state.isColonyCreated"/>
+        <AppBuildingCard name="Строительный центр" picture="building_center" v-if="planetStore.state.isColonyCreated" :building="checkBuilding('СтройЦентр')"/>
         <AppBuildingCard name="Медицинский центр" picture="med_center" v-if="planetStore.state.isColonyCreated"/>
         <AppBuildingCard name="Города" picture="planet_window_bg" v-if="planetStore.state.isColonyCreated"/>
         <AppBuildingCard name="Банк" picture="planet_window_bg" v-if="planetStore.state.isColonyCreated"/>

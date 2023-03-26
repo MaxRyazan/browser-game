@@ -7,6 +7,7 @@
             <li>Орбитальные постройки</li>
             <li>Космобаза</li>
             <li>Модули КК</li>
+            <li>Кораблестроение</li>
         </ul>
         <div class="main_help_nav_content">
             <div class="help_close_btn">
