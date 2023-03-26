@@ -13,6 +13,7 @@ export default createStore({
         visibilityScience: false,
         visibilityComponents: false,
         visibilityStorage: false,
+        visibilityBuildingsInProgress: true,
 
         isColonyCreated: false,
         buildingsInProgressNow: [],

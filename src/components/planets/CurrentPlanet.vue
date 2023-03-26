@@ -5,9 +5,9 @@
         </div>
         <div class="planet_item">
             <AppPlanetNavigationButtons />
-            <AppCurrentInBuild />
-            <AppBuildingsMenu />
+            <AppCurrentInBuild v-if="planetStore.state.visibilityBuildingsInProgress" />
             <AppPlanetStorageView v-if="planetStore.state.visibilityStorage" />
+            <AppBuildingsMenu />
         </div>
     </div>
 </template>

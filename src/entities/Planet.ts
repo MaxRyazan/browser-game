@@ -12,7 +12,9 @@ export class Planet {
         public picture: String,
         public storage: {
             maxCapacity: Number,
-            modules: {}
+            modules: {},
+            materials: {},
+            resources: {}
         },
         public buildings: Building[],
         public peoples: Number

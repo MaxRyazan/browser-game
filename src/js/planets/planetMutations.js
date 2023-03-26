@@ -12,7 +12,10 @@ export default {
             break;
             case 'planet' : planetState.visibilityPlanetMenu = !planetState.visibilityPlanetMenu;
                 break;
-            case 'storage' : planetState.visibilityStorage = !planetState.visibilityStorage;
+            case 'storage' : {
+                planetState.visibilityStorage = !planetState.visibilityStorage
+                planetStore.state.visibilityBuildingsInProgress = !planetStore.state.visibilityBuildingsInProgress
+            }
                 break;
             case 'planetarySystem' : planetState.visibilityPlanetarySystem = !planetState.visibilityPlanetarySystem
                 break;
@@ -63,6 +66,17 @@ export default {
         const storage = tradeStore.state.currentPlanet.storage.modules
         for(let i = 0; i < storage.length; i++) {
             if(storage[i].id === module.id && storage[i].belongsToRace.id === module.belongsToRace.id){
+                index = i
+            }
+        }
+        storage.splice(index, 1)
+    },
+
+    removeMaterial(_, material){
+        let index = -1
+        const storage = tradeStore.state.currentPlanet.storage.materials
+        for(let i = 0; i < storage.length; i++) {
+            if(storage[i].id === material.id){
                 index = i
             }
         }

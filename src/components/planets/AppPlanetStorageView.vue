@@ -1,11 +1,12 @@
 <template>
     <div class="planet_storage_wrapper">
         <div class="planet_storage_navigation">
-            <AppMiniButton :storage="true" name="Ресурсы"/>
-            <AppMiniButton :storage="true"  name="Материалы"/>
-            <AppMiniButton :storage="true"  name="Модули"/>
+            <AppMiniButton :storage="true" name="Ресурсы" @click="toggleShowResources" />
+            <AppMiniButton :storage="true"  name="Материалы" @click="toggleShowMaterials" />
+            <AppMiniButton :storage="true"  name="Модули" @click="toggleShowModules" />
         </div>
-        <div class="planet_storage_modules">
+
+        <div class="planet_storage_modules" v-if="showModules">
             <div class="planet_storage_modules_line" v-for="(module, index) in tradeStore.state.currentPlanet.storage.modules" :key="index">
                 <div class="modules_line module_id">{{module.id}}</div>
                 <div class="modules_line">{{module.name}}</div>
@@ -19,6 +20,34 @@
                 </div>
             </div>
         </div>
+
+        <div class="planet_storage_modules" v-if="showMaterials">
+            <div class="planet_storage_materials_line" v-for="(material, index) in tradeStore.state.currentPlanet.storage.materials" :key="index">
+                <div class="modules_materials">{{material.name}}</div>
+                <div class="modules_materials">{{material.amount}}</div>
+                <div class="modules_materials">{{material.mass}}</div>
+                <div class="modules_materials">{{material.mass * material.amount}}</div>
+                <div class="modules_line_buttons">
+                    <AppMiniButton name="З" :mini="true" />
+                    <AppMiniButton name="У" :mini="true" @click="planetStore.commit('removeMaterial',material)" />
+                </div>
+            </div>
+        </div>
+
+        <div class="planet_storage_modules" v-if="showResources">
+            <div class="planet_storage_materials_line" v-for="(resource, index) in tradeStore.state.currentPlanet.storage.resources" :key="index">
+                <div class="modules_line">{{resource.name}}</div>
+                <div class="modules_line">{{resource.amount}}</div>
+                <div class="modules_line">{{resource.baseMass}}</div>
+                <div class="modules_line">{{resource.baseMass * resource.amount}}</div>
+                <div class="modules_line_buttons">
+                    <AppMiniButton name="З" :mini="true" />
+                    <AppMiniButton name="У" :mini="true" @click="planetStore.commit('removeModule',module)" />
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </template>
 
@@ -26,7 +55,36 @@
 import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
 import AppMiniButton from "../mini/AppMiniButton.vue";
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
+
+const showModules = ref(false)
+const showMaterials = ref(false)
+const showResources = ref(false)
+
+function hideAll(){
+    showModules.value = false
+    showMaterials.value = false
+    showResources.value = false
+    planetStore.state.visibilityBuildingsInProgress = false
+}
+
+function toggleShowModules(){
+    hideAll()
+    showModules.value = !showModules.value
+}
+function toggleShowMaterials(){
+    hideAll()
+    showMaterials.value = !showMaterials.value
+}
+
+function toggleShowResources(){
+    hideAll()
+    showResources.value = !showResources.value
+}
+
+
+
+
 onMounted(() => {
     const buttons = document.querySelectorAll('.storage')
     buttons.forEach(b => b.addEventListener('click', () => {

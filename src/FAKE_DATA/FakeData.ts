@@ -11,6 +11,10 @@ import {Necrons} from "../races/Necrons";
 import {NuclearReactor} from "../modules/NuclearReactor";
 import {Cyborgs} from "../races/Cyborgs";
 import {Lot} from "../entities/Lot";
+import {Electronics} from "../materials/Electronics";
+import {Polymers} from "../materials/Polymers";
+import {Steel} from "../materials/Steel";
+import {Delitium} from "../Resources/mineral/Delitium";
 
 export class FakeData {
 
@@ -18,9 +22,9 @@ export class FakeData {
     biology = new Biology()
     higherMathematics = new HigherMathematics()
 
-    public planet_MERCURY = new Planet(1, 'Меркурий', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 1, false, 190, '', {maxCapacity: 2000, modules: []}, [], 0);
-    public planet_VENUS = new Planet(2, 'Венера', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 2, false, 280, '', {maxCapacity: 2000, modules: []}, [], 0);
-    public planet_EARTH = new Planet(3, 'Земля', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 3, true, 310, '', {maxCapacity: 2000, modules: []},  [], 0);
+    public planet_MERCURY = new Planet(1, 'Меркурий', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 1, false, 190, '', {maxCapacity: 2000, modules: [], materials: [], resources: []}, [], 0);
+    public planet_VENUS = new Planet(2, 'Венера', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 2, false, 280, '', {maxCapacity: 2000, modules: [], materials: [], resources: []}, [], 0);
+    public planet_EARTH = new Planet(3, 'Земля', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 3, true, 310, '', {maxCapacity: 2000, modules: [], materials: [new Electronics(15), new Polymers(15), new Steel(15)], resources: [new Delitium(81)]},  [], 0);
     public solarSystem = new PlanetarySystem(
         1,
         'Солнечная система',
