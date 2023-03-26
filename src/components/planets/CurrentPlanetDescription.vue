@@ -29,7 +29,7 @@ const atmosphere = computed(() => {
 const peoplesNeedToFunctionality = computed(() => {
     let peoples = 0
     for(let i =0; i < tradeStore.state.currentPlanet.buildings.length; i++){
-        peoples = peoples + tradeStore.state.currentPlanet.buildings[i].peopleNeedToFunctionality
+        peoples = peoples + tradeStore.state.currentPlanet.buildings[i].peopleNeedToFunctionality * tradeStore.state.currentPlanet.buildings[i].amount
     }
     return peoples
 })
@@ -37,7 +37,7 @@ const peoplesNeedToFunctionality = computed(() => {
 const peopleAll = computed(() => {
     let peoples = 0
     for(let i =0; i < tradeStore.state.currentPlanet.buildings.length; i++){
-        peoples = peoples + tradeStore.state.currentPlanet.buildings[i].addPeopleToPlanet
+        peoples = peoples + tradeStore.state.currentPlanet.buildings[i].addPeopleToPlanet * tradeStore.state.currentPlanet.buildings[i].amount
     }
     return peoples
 })
@@ -45,7 +45,7 @@ const peopleAll = computed(() => {
 const energyNeedToFunctionality = computed(() => {
     let energy = 0
     for(let i =0; i < tradeStore.state.currentPlanet.buildings.length; i++){
-        energy = energy + tradeStore.state.currentPlanet.buildings[i].energyNeedToFunctionality
+        energy = energy + tradeStore.state.currentPlanet.buildings[i].energyNeedToFunctionality * tradeStore.state.currentPlanet.buildings[i].amount
     }
     return energy
 })
@@ -53,7 +53,7 @@ const energyNeedToFunctionality = computed(() => {
 const energyAll = computed(() => {
     let energy = 0
     for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
-        energy = energy + tradeStore.state.currentPlanet.buildings[i].addEnergyToPlanet
+        energy = energy + tradeStore.state.currentPlanet.buildings[i].addEnergyToPlanet * tradeStore.state.currentPlanet.buildings[i].amount
     }
     return energy
 })
