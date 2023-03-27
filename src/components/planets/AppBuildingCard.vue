@@ -14,11 +14,15 @@
             <button class="building_card_btn">Сломать</button>
         </div>
     </div>
+    <AppError v-if="error"/>
 </template>
 
 <script setup>
 import planetStore from "../../store_modules/planetStore.js";
 import {Building} from "../../entities/Building.ts";
+import AppError from '../mini/AppError.vue'
+import {computed, watch} from "vue";
+
 defineProps({
     picture: {
         type: String,
@@ -34,4 +38,17 @@ defineProps({
     },
 })
 
+
+const error = computed(() => {
+    return  planetStore.state.error.flag
+})
+
+watch(error, (value) => {
+    if(value){
+        setTimeout(() => {
+            planetStore.state.error.flag = false
+            planetStore.state.error.value = ''
+        }, 1500)
+    }
+})
 </script>

@@ -100,7 +100,6 @@ export default {
             buildingsCount += tradeStore.state.currentPlanet.buildings[i].amount
         }
         if(tradeStore.state.currentPlanet.building_points > planetStore.state.buildingsInProgressNow.length + buildingsCount) {
-            console.log(payload)
             switch (payload) {
                 case 'Колония' : {
                     const exist = planetStore.state.buildingsInProgressNow.filter(b => b.building.id === 1)
@@ -116,7 +115,13 @@ export default {
                                 materials: colony.requiredMaterials,
                                 building: colony
                             })
+                        } else {
+                            planetStore.state.error.flag = true
+                            planetStore.state.error.value = 'Колония уже построена!'
                         }
+                    } else {
+                        planetStore.state.error.flag = true
+                        planetStore.state.error.value = 'Колония уже строится!'
                     }
                 }
                 break;
@@ -141,7 +146,11 @@ export default {
                 }
                 break;
             }
+        } else {
+            planetStore.state.error.flag = true
+            planetStore.state.error.value = 'На планете кончилось место для застройки!'
         }
+
     },
 
     isMaterialsEnough(_, payload){
@@ -163,7 +172,8 @@ export default {
                 timeWhereDone: ((payload.building.costInTime +  Date.now()))
             })
         } else {
-            console.log('not enough materials')
+           planetStore.state.error.flag = true
+           planetStore.state.error.value = 'Нехватает материалов!'
         }
     },
 
@@ -175,6 +185,4 @@ export default {
             }
         }
     }
-
-
 }

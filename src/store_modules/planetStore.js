@@ -2,8 +2,14 @@ import planetMutations from "../js/planets/planetMutations.js";
 import {createStore} from "vuex";
 import planetActions from "../js/planets/planetActions.js";
 
+
+
 export default createStore({
     state: {
+        error: {
+            flag: false,
+            value: ''
+        },
         visibilityPlanetMenu: false,
         visibilityPlanetarySystem: false,
         visibilityInfrastructure: true,
@@ -21,5 +27,6 @@ export default createStore({
         currentPlanetPeoples: 0
     },
     mutations: planetMutations,
-    actions: planetActions
+    actions: planetActions,
+
 })
