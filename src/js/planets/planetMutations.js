@@ -4,6 +4,8 @@ import {Colony} from '../../buildings/Colony'
 import helpStore from "../../store_modules/helpStore.js";
 import {Store} from "../../buildings/Store.ts";
 import {BuildingCenter} from "../../buildings/BuildingCenter.ts";
+import {ColonialSenate} from "../../buildings/ColonialSenate.ts";
+import {AdministrativeCenter} from "../../buildings/AdministrativeCenter.ts";
 
 
 export default {
@@ -145,6 +147,66 @@ export default {
                     planetStore.commit('isMaterialsEnough', {materials: buildingCenter.requiredMaterials, building: buildingCenter})
                 }
                 break;
+                case 'Колониальный сенат' : {
+                    let buildingSpeed = 1
+                    for (let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++) {
+                        buildingSpeed = buildingSpeed + tradeStore.state.currentPlanet.buildings[i].buildOtherBuildingsSpeed
+                    }
+                    const colonialSenate = new ColonialSenate()
+                    colonialSenate.costInTime = colonialSenate.costInTime - (colonialSenate.costInTime * (buildingSpeed - 1))
+                    planetStore.commit('isMaterialsEnough', {materials: colonialSenate.requiredMaterials, building: colonialSenate})
+                }
+                    break;
+                case 'Административный центр' : {
+                    let buildingSpeed = 1
+                    for (let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++) {
+                        buildingSpeed = buildingSpeed + tradeStore.state.currentPlanet.buildings[i].buildOtherBuildingsSpeed
+                    }
+                    const administrativeCenter = new AdministrativeCenter()
+                    administrativeCenter.costInTime = administrativeCenter.costInTime - (administrativeCenter.costInTime * (buildingSpeed - 1))
+                    planetStore.commit('isMaterialsEnough', {materials: administrativeCenter.requiredMaterials, building: administrativeCenter})
+                }
+                    break;
+                case 'Медицинский центр' : {
+                    let buildingSpeed = 1
+                    for (let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++) {
+                        buildingSpeed = buildingSpeed + tradeStore.state.currentPlanet.buildings[i].buildOtherBuildingsSpeed
+                    }
+                    const medicalCenter = new MedicalCenter()
+                    medicalCenter.costInTime = medicalCenter.costInTime - (medicalCenter.costInTime * (buildingSpeed - 1))
+                    planetStore.commit('isMaterialsEnough', {materials: medicalCenter.requiredMaterials, building: medicalCenter})
+                }
+                    break;
+                case 'Небоскрёб' : {
+                    let buildingSpeed = 1
+                    for (let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++) {
+                        buildingSpeed = buildingSpeed + tradeStore.state.currentPlanet.buildings[i].buildOtherBuildingsSpeed
+                    }
+                    const skyscraper = new Skyscraper()
+                    skyscraper.costInTime = skyscraper.costInTime - (skyscraper.costInTime * (buildingSpeed - 1))
+                    planetStore.commit('isMaterialsEnough', {materials: skyscraper.requiredMaterials, building: skyscraper})
+                }
+                    break;
+                case 'Банк' : {
+                    let buildingSpeed = 1
+                    for (let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++) {
+                        buildingSpeed = buildingSpeed + tradeStore.state.currentPlanet.buildings[i].buildOtherBuildingsSpeed
+                    }
+                    const bank = new Bank()
+                    bank.costInTime = bank.costInTime - (bank.costInTime * (buildingSpeed - 1))
+                    planetStore.commit('isMaterialsEnough', {materials: bank.requiredMaterials, building: bank})
+                }
+                    break;
+                case 'Космопорт' : {
+                    let buildingSpeed = 1
+                    for (let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++) {
+                        buildingSpeed = buildingSpeed + tradeStore.state.currentPlanet.buildings[i].buildOtherBuildingsSpeed
+                    }
+                    const spacePort = new SpacePort()
+                    spacePort.costInTime = spacePort.costInTime - (spacePort.costInTime * (buildingSpeed - 1))
+                    planetStore.commit('isMaterialsEnough', {materials: spacePort.requiredMaterials, building: spacePort})
+                }
+                    break;
             }
         } else {
             planetStore.state.error.flag = true
