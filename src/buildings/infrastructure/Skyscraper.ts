@@ -1,7 +1,7 @@
-import {Building} from "../entities/Building";
-import {ConstructionMaterials} from "../materials/ConstructionMaterials";
-import {Electronics} from "../materials/Electronics";
-import {Steel} from "../materials/Steel";
+import {Building} from "../../entities/Building";
+import {ConstructionMaterials} from "../../materials/ConstructionMaterials";
+import {Electronics} from "../../materials/Electronics";
+import {Steel} from "../../materials/Steel";
 
 
 export class Skyscraper extends Building{
@@ -22,5 +22,6 @@ export class Skyscraper extends Building{
         this.addEnergyToPlanet = 0
         this.energyNeedToFunctionality = 5
         this.addStoreToPlanet = 0
+        this.fuelNeedToFunctionalityPerMinute = 0
     }
 }

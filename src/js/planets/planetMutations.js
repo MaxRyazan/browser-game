@@ -1,19 +1,19 @@
 import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
-import {Colony} from '../../buildings/Colony'
+import {Colony} from '../../buildings/infrastructure/Colony.ts'
 import helpStore from "../../store_modules/helpStore.js";
-import {Store} from "../../buildings/Store.ts";
-import {BuildingCenter} from "../../buildings/BuildingCenter.ts";
-import {ColonialSenate} from "../../buildings/ColonialSenate.ts";
-import {AdministrativeCenter} from "../../buildings/AdministrativeCenter.ts";
-import {Skyscraper} from "../../buildings/Skyscraper.ts";
-import {MedicalCenter} from "../../buildings/MedicalCenter.ts";
-import {Bank} from "../../buildings/Bank.ts";
-import {SpacePort} from "../../buildings/SpacePort.ts";
-import {SolarPlant} from "../../buildings/SolarPlant.ts";
-import {ChemicalPlant} from "../../buildings/ChemicalPlant.ts";
-import {NuclearPlant} from "../../buildings/NuclearPlant.ts";
-import {AltahSplitter} from "../../buildings/AltahSplitter.ts";
+import {Store} from "../../buildings/infrastructure/Store.ts";
+import {BuildingCenter} from "../../buildings/infrastructure/BuildingCenter.ts";
+import {ColonialSenate} from "../../buildings/infrastructure/ColonialSenate.ts";
+import {AdministrativeCenter} from "../../buildings/infrastructure/AdministrativeCenter.ts";
+import {Skyscraper} from "../../buildings/infrastructure/Skyscraper.ts";
+import {MedicalCenter} from "../../buildings/infrastructure/MedicalCenter.ts";
+import {Bank} from "../../buildings/infrastructure/Bank.ts";
+import {SpacePort} from "../../buildings/infrastructure/SpacePort.ts";
+import {SolarPlant} from "../../buildings/energy/SolarPlant.ts";
+import {ChemicalPlant} from "../../buildings/energy/ChemicalPlant.ts";
+import {NuclearPlant} from "../../buildings/energy/NuclearPlant.ts";
+import {AltahSplitter} from "../../buildings/energy/AltahSplitter.ts";
 
 
 export default {

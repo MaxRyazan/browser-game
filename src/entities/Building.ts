@@ -21,4 +21,5 @@ export class Building implements BuildingInterface{
     addEnergyToPlanet: Number
     energyNeedToFunctionality: Number
     addStoreToPlanet: Number;
+    fuelNeedToFunctionalityPerMinute: { fuelType: Material | Resource; required: Number } | 0;
 }

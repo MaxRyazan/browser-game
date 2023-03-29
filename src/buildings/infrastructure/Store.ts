@@ -1,9 +1,9 @@
-import {Building} from "../entities/Building";
-import {Electronics} from "../materials/Electronics";
-import {Steel} from "../materials/Steel";
-import {Polymers} from "../materials/Polymers";
+import {Building} from "../../entities/Building";
+import {Electronics} from "../../materials/Electronics";
+import {Steel} from "../../materials/Steel";
+import {Polymers} from "../../materials/Polymers";
 
-import {ConstructionMaterials} from "../materials/ConstructionMaterials";
+import {ConstructionMaterials} from "../../materials/ConstructionMaterials";
 
 export class Store extends Building{
     constructor(amount: Number = 1, costInTime: Number = 12000) {
@@ -23,5 +23,6 @@ export class Store extends Building{
         this.addEnergyToPlanet = 0
         this.energyNeedToFunctionality = 2
         this.addStoreToPlanet = 100
+        this.fuelNeedToFunctionalityPerMinute = 0
     }
 }

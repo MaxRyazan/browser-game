@@ -1,8 +1,8 @@
-import {ConstructionMaterials} from "../materials/ConstructionMaterials";
-import {Electronics} from "../materials/Electronics";
-import {Steel} from "../materials/Steel";
-import {Polymers} from "../materials/Polymers";
-import {Building} from "../entities/Building";
+import {ConstructionMaterials} from "../../materials/ConstructionMaterials";
+import {Electronics} from "../../materials/Electronics";
+import {Steel} from "../../materials/Steel";
+import {Polymers} from "../../materials/Polymers";
+import {Building} from "../../entities/Building";
 
 export class BuildingCenter extends Building{
     addStoreToPlanet: Number
@@ -23,5 +23,6 @@ export class BuildingCenter extends Building{
         this.addEnergyToPlanet = 0
         this.energyNeedToFunctionality = 6
         this.addStoreToPlanet = 0
+        this.fuelNeedToFunctionalityPerMinute = 0
     }
 }

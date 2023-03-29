@@ -1,8 +1,8 @@
-import {ConstructionMaterials} from "../materials/ConstructionMaterials";
-import {Electronics} from "../materials/Electronics";
-import {Steel} from "../materials/Steel";
-import {Building} from "../entities/Building";
-import {Quadria} from "../materials/Quadria";
+import {ConstructionMaterials} from "../../materials/ConstructionMaterials";
+import {Electronics} from "../../materials/Electronics";
+import {Steel} from "../../materials/Steel";
+import {Building} from "../../entities/Building";
+import {Quadria} from "../../materials/Quadria";
 
 export class ColonialSenate extends Building{
     constructor(amount: Number = 1, costInTime: Number = 20000) {
@@ -22,5 +22,6 @@ export class ColonialSenate extends Building{
         this.addEnergyToPlanet = 0
         this.energyNeedToFunctionality = 8
         this.addStoreToPlanet = 0
+        this.fuelNeedToFunctionalityPerMinute = 0
     }
 }

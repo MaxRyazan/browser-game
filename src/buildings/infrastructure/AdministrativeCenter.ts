@@ -1,9 +1,9 @@
-import {Building} from "../entities/Building";
-import {ConstructionMaterials} from "../materials/ConstructionMaterials";
-import {Electronics} from "../materials/Electronics";
-import {Steel} from "../materials/Steel";
-import {Quadria} from "../materials/Quadria";
-import {Vettur} from "../materials/Vettur";
+import {Building} from "../../entities/Building";
+import {ConstructionMaterials} from "../../materials/ConstructionMaterials";
+import {Electronics} from "../../materials/Electronics";
+import {Steel} from "../../materials/Steel";
+import {Quadria} from "../../materials/Quadria";
+import {Vettur} from "../../materials/Vettur";
 
 export class AdministrativeCenter extends Building{
     constructor(amount: Number = 1, costInTime: Number = 40000) {
@@ -23,5 +23,6 @@ export class AdministrativeCenter extends Building{
         this.addEnergyToPlanet = 4
         this.energyNeedToFunctionality = 12
         this.addStoreToPlanet = 200
+        this.fuelNeedToFunctionalityPerMinute = 0
     }
 }

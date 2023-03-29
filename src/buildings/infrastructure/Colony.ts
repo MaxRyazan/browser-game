@@ -1,8 +1,8 @@
-import {Material} from "../interfaces/Material";
-import {Electronics} from "../materials/Electronics";
-import {Steel} from "../materials/Steel";
-import {Polymers} from "../materials/Polymers";
-import {Building} from "../entities/Building";
+import {Material} from "../../interfaces/Material";
+import {Electronics} from "../../materials/Electronics";
+import {Steel} from "../../materials/Steel";
+import {Polymers} from "../../materials/Polymers";
+import {Building} from "../../entities/Building";
 
 export class Colony extends Building{
     // id: Number;
@@ -38,5 +38,6 @@ export class Colony extends Building{
         this.addEnergyToPlanet = 10
         this.energyNeedToFunctionality = 4
         this.addStoreToPlanet = 0
+        this.fuelNeedToFunctionalityPerMinute = 0
     }
 }

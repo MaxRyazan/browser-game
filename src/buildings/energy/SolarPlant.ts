@@ -1,6 +1,6 @@
-import {Building} from "../entities/Building";
-import {Electronics} from "../materials/Electronics";
-import {Steel} from "../materials/Steel";
+import {Building} from "../../entities/Building";
+import {Electronics} from "../../materials/Electronics";
+import {Steel} from "../../materials/Steel";
 
 export class SolarPlant extends Building{
     constructor(amount: Number = 1, costInTime: Number = 20000) {

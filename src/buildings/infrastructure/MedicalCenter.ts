@@ -1,9 +1,9 @@
-import {Building} from "../entities/Building";
-import {ConstructionMaterials} from "../materials/ConstructionMaterials";
-import {Electronics} from "../materials/Electronics";
-import {Polymers} from "../materials/Polymers";
-import {Quadria} from "../materials/Quadria";
-import {Vettur} from "../materials/Vettur";
+import {Building} from "../../entities/Building";
+import {ConstructionMaterials} from "../../materials/ConstructionMaterials";
+import {Electronics} from "../../materials/Electronics";
+import {Polymers} from "../../materials/Polymers";
+import {Quadria} from "../../materials/Quadria";
+import {Vettur} from "../../materials/Vettur";
 
 export class MedicalCenter extends Building{
     addHealthToPlanet: Number
@@ -25,5 +25,6 @@ export class MedicalCenter extends Building{
         this.energyNeedToFunctionality = 10
         this.addStoreToPlanet = 0
         this.addHealthToPlanet = 0.5
+        this.fuelNeedToFunctionalityPerMinute = 0
     }
 }
