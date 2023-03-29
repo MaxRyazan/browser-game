@@ -20,9 +20,13 @@ import AppPlanetStorageView from "./AppPlanetStorageView.vue";
 import AppPlanetNavigationButtons from "./AppPlanetNavigationButtons.vue";
 import CurrentPlanetDescription from "./CurrentPlanetDescription.vue";
 import AppCurrentInBuild from "./AppCurrentInBuild.vue";
+import tradeStore from "../../store_modules/tradeStore.js";
 
 onMounted(() => {
     planetStore.commit('checkThatColonyExists')
+    for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i ++){
+        planetStore.commit('checkThatFuelLoadTimePassed', tradeStore.state.currentPlanet.buildings[i])
+    }
 })
 
 </script>

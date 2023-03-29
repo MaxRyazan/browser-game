@@ -8,7 +8,7 @@ import {ChemicalFuel} from "../../materials/ChemicalFuel";
 export class ChemicalPlant extends Building{
     fuelLoadTime: Number
     isFuelLoaded: Boolean
-    constructor(amount: Number = 1, costInTime: Number = 1000) {
+    constructor(amount: Number = 1, costInTime: Number = 1000, fuelLoadTime?: Number) {
         super();
         this.id = 11
         this.name = 'Химическая электростанция'
@@ -27,6 +27,7 @@ export class ChemicalPlant extends Building{
         this.addStoreToPlanet = 0
         this.buildingType = 2
         this.isFuelLoaded = false
+        this.fuelLoadTime = fuelLoadTime
         this.fuelNeedToFunctionalityPerDay = {fuelType: new ChemicalFuel(), required: 38.8}
     }
 }
