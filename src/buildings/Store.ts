@@ -6,7 +6,6 @@ import {Polymers} from "../materials/Polymers";
 import {ConstructionMaterials} from "../materials/ConstructionMaterials";
 
 export class Store extends Building{
-    addStoreToPlanet: Number
     constructor(amount: Number = 1, costInTime: Number = 12000) {
         super();
         this.id = 3

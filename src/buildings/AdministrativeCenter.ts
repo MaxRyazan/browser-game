@@ -6,7 +6,6 @@ import {Quadria} from "../materials/Quadria";
 import {Vettur} from "../materials/Vettur";
 
 export class AdministrativeCenter extends Building{
-    addStoreToPlanet: Number
     constructor(amount: Number = 1, costInTime: Number = 40000) {
         super();
         this.id = 4

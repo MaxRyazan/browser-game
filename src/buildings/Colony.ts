@@ -5,21 +5,21 @@ import {Polymers} from "../materials/Polymers";
 import {Building} from "../entities/Building";
 
 export class Colony extends Building{
-    id: Number;
-    name: String;
-    costInCR: Number;
-    costInIG: Number;
-    costInTime: Number;
-    onGround: Boolean;
-    buildComponentsSpeed: Number;
-    buildOtherBuildingsSpeed: Number;
-    requiredMaterials: Material[];
-    amount: Number;
-    addPeopleToPlanet: Number;
-    peopleNeedToFunctionality: Number;
-    addEnergyToPlanet: Number
-    energyNeedToFunctionality: Number
-    addStoreToPlanet: Number
+    // id: Number;
+    // name: String;
+    // costInCR: Number;
+    // costInIG: Number;
+    // costInTime: Number;
+    // onGround: Boolean;
+    // buildComponentsSpeed: Number;
+    // buildOtherBuildingsSpeed: Number;
+    // requiredMaterials: Material[];
+    // amount: Number;
+    // addPeopleToPlanet: Number;
+    // peopleNeedToFunctionality: Number;
+    // addEnergyToPlanet: Number
+    // energyNeedToFunctionality: Number
+    // addStoreToPlanet: Number
 
     constructor(amount: Number = 1, costInTime: Number = 6000) {
         super();

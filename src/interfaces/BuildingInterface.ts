@@ -20,4 +20,5 @@ export interface BuildingInterface {
     peopleNeedToFunctionality: Number
     addEnergyToPlanet: Number
     energyNeedToFunctionality: Number
+    addStoreToPlanet: Number
 }

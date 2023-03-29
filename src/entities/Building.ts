@@ -20,4 +20,5 @@ export class Building implements BuildingInterface{
     peopleNeedToFunctionality: Number
     addEnergyToPlanet: Number
     energyNeedToFunctionality: Number
+    addStoreToPlanet: Number;
 }

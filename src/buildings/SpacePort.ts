@@ -1,26 +1,26 @@
+import {Building} from "../entities/Building";
 import {ConstructionMaterials} from "../materials/ConstructionMaterials";
 import {Electronics} from "../materials/Electronics";
 import {Steel} from "../materials/Steel";
-import {Building} from "../entities/Building";
 import {Quadria} from "../materials/Quadria";
 
-export class ColonialSenate extends Building{
-    constructor(amount: Number = 1, costInTime: Number = 20000) {
+export class SpacePort extends Building{
+    constructor(amount: Number = 1, costInTime: Number = 80000) {
         super();
-        this.id = 2
-        this.name = 'Колониальный сенат'
-        this.costInCR = 110
-        this.costInIG = 100
+        this.id = 9
+        this.name = 'Космопорт'
+        this.costInCR = 120
+        this.costInIG = 0
         this.onGround = true
         this.costInTime = costInTime
         this.buildComponentsSpeed = 0
         this.buildOtherBuildingsSpeed = 0
-        this.requiredMaterials = [new ConstructionMaterials(14), new Electronics(17), new Steel(2), new Quadria(1)]
+        this.requiredMaterials = [new ConstructionMaterials(20), new Electronics(20), new Steel(12), new Quadria(15)]
         this.amount = amount
         this.addPeopleToPlanet = 0
-        this.peopleNeedToFunctionality = 8
+        this.peopleNeedToFunctionality = 10
         this.addEnergyToPlanet = 0
-        this.energyNeedToFunctionality = 8
+        this.energyNeedToFunctionality = 10
         this.addStoreToPlanet = 0
     }
 }
