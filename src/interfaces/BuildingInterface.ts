@@ -21,5 +21,7 @@ export interface BuildingInterface {
     addEnergyToPlanet: Number
     energyNeedToFunctionality: Number
     addStoreToPlanet: Number
-    fuelNeedToFunctionalityPerMinute: {fuelType: Material | Resource, required: Number} | 0
+    fuelNeedToFunctionalityPerDay: {fuelType: Material | Resource, required: Number} | 0
+    fuelLoadTime? : Number
+    buildingType: Number
 }

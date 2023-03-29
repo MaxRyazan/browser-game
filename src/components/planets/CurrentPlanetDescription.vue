@@ -37,7 +37,7 @@ const busyBuildingPoints = computed(() => {
 
 const peoplesNeedToFunctionality = computed(() => {
     let peoples = 0
-    for(let i =0; i < tradeStore.state.currentPlanet.buildings.length; i++){
+    for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
         peoples = peoples + tradeStore.state.currentPlanet.buildings[i].peopleNeedToFunctionality * tradeStore.state.currentPlanet.buildings[i].amount
     }
     return peoples
@@ -45,7 +45,7 @@ const peoplesNeedToFunctionality = computed(() => {
 
 const peopleAll = computed(() => {
     let peoples = 0
-    for(let i =0; i < tradeStore.state.currentPlanet.buildings.length; i++){
+    for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
         peoples = peoples + tradeStore.state.currentPlanet.buildings[i].addPeopleToPlanet * tradeStore.state.currentPlanet.buildings[i].amount
     }
     return peoples
@@ -53,16 +53,22 @@ const peopleAll = computed(() => {
 
 const energyNeedToFunctionality = computed(() => {
     let energy = 0
-    for(let i =0; i < tradeStore.state.currentPlanet.buildings.length; i++){
+    for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
         energy = energy + tradeStore.state.currentPlanet.buildings[i].energyNeedToFunctionality * tradeStore.state.currentPlanet.buildings[i].amount
     }
     return energy
 })
 
 const energyAll = computed(() => {
+    const buildings = tradeStore.state.currentPlanet.buildings
     let energy = 0
-    for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
-        energy = energy + tradeStore.state.currentPlanet.buildings[i].addEnergyToPlanet * tradeStore.state.currentPlanet.buildings[i].amount
+    if(planetStore.state.isColonyCreated){
+        energy+=10
+    }
+    for(let i = 0; i < buildings.length; i++){
+        if(buildings[i].buildingType === 2 && buildings[i].isFuelLoaded){
+            energy = energy + buildings[i].addEnergyToPlanet * buildings[i].amount
+        }
     }
     return energy
 })

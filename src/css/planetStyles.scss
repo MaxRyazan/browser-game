@@ -327,9 +327,33 @@
   font-size: 18px;
 }
 
-
-
-
+.building_settings{
+  position: absolute;
+  right: 5px;
+  bottom: 65px;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}
+.building_settings_modal{
+  position: absolute;
+  left: 3px;
+  bottom: 65px;
+  width: calc(100% - 6px);
+  height: calc(100% - 105px);
+  background-color: black;
+  opacity: .9;
+}
+.close{
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  padding: 3px 6px;
+}
+.settings_modal_label{
+  color: white;
+  margin-left: 10px;
+}
 
 
 

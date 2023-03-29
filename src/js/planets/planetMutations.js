@@ -94,6 +94,50 @@ export default {
         storage.splice(index, 1)
     },
 
+    subtractResource(_, {resource, amount, from}){
+        for(let i = 0; i < from.length; i++){
+            if(from[i].id === resource.id){
+                from[i].amount = from[i].amount - amount
+            }
+        }
+    },
+
+
+    manageBuilding(_){
+        const materialsOnStore = tradeStore.state.currentPlanet.storage.materials
+        const buildingToLoad =  planetStore.state.loadFuelToThisBuilding
+        for(let i = 0; i < materialsOnStore.length; i++){
+            if(materialsOnStore[i].id === buildingToLoad.fuelNeedToFunctionalityPerDay.fuelType.id){
+                if(materialsOnStore[i].amount >= buildingToLoad.fuelNeedToFunctionalityPerDay.required){
+                    if(!buildingToLoad.isFuelLoaded){
+                        planetStore.commit('subtractResource',
+                            {
+                            resource: buildingToLoad.fuelNeedToFunctionalityPerDay.fuelType,
+                            amount: buildingToLoad.fuelNeedToFunctionalityPerDay.required,
+                            from: materialsOnStore
+                            })
+                            planetStore.commit('loadFuelToStation', buildingToLoad.id)
+                    } else {
+                        planetStore.commit('sendError', 'Топливо уже загружено!')
+                    }
+                } else {
+                    planetStore.commit('sendError', 'На складе нехватает топлива!')
+                }
+            }
+        }
+    },
+
+    loadFuelToStation(_, id){
+        const buildings = tradeStore.state.currentPlanet.buildings
+        for(let i = 0; i < buildings.length; i++){
+            if(buildings[i].id === id){
+                buildings[i].isFuelLoaded = true
+                buildings[i].addEnergyToPlanet = buildings[i].checkFuel()
+            }
+        }
+    },
+
+
     checkThatColonyExists(_){
         if(tradeStore.state.currentPlanet.buildings.find(building => building.id === 1)) {
             planetStore.state.isColonyCreated = true

@@ -23,6 +23,6 @@ export class BuildingCenter extends Building{
         this.addEnergyToPlanet = 0
         this.energyNeedToFunctionality = 6
         this.addStoreToPlanet = 0
-        this.fuelNeedToFunctionalityPerMinute = 0
+        this.buildingType = 1
     }
 }

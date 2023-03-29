@@ -21,7 +21,7 @@ export class Colony extends Building{
     // energyNeedToFunctionality: Number
     // addStoreToPlanet: Number
 
-    constructor(amount: Number = 1, costInTime: Number = 6000) {
+    constructor(amount: Number = 1, costInTime: Number = 1000) {
         super();
         this.id = 1
         this.name = 'Колония'
@@ -38,6 +38,6 @@ export class Colony extends Building{
         this.addEnergyToPlanet = 10
         this.energyNeedToFunctionality = 4
         this.addStoreToPlanet = 0
-        this.fuelNeedToFunctionalityPerMinute = 0
+        this.buildingType = 1
     }
 }

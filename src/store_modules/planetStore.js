@@ -20,6 +20,9 @@ export default createStore({
         visibilityComponents: false,
         visibilityStorage: false,
         visibilityBuildingsInProgress: true,
+        buildingsSettingsModal: false,
+
+        loadFuelToThisBuilding: {},
 
         isColonyCreated: false,
         buildingsInProgressNow: [],

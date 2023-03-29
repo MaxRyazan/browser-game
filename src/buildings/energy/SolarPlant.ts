@@ -3,6 +3,7 @@ import {Electronics} from "../../materials/Electronics";
 import {Steel} from "../../materials/Steel";
 
 export class SolarPlant extends Building{
+    fuelLoadTime: Number
     constructor(amount: Number = 1, costInTime: Number = 20000) {
         super();
         this.id = 10
@@ -20,5 +21,6 @@ export class SolarPlant extends Building{
         this.addEnergyToPlanet = 15
         this.energyNeedToFunctionality = 0
         this.addStoreToPlanet = 0
+        this.buildingType = 2
     }
 }

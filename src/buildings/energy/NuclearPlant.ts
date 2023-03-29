@@ -5,6 +5,7 @@ import {Steel} from "../../materials/Steel";
 import {Vettur} from "../../materials/Vettur";
 
 export class NuclearPlant extends Building{
+    fuelLoadTime: Number
     constructor(amount: Number = 1, costInTime: Number = 90000) {
         super();
         this.id = 12
@@ -22,5 +23,6 @@ export class NuclearPlant extends Building{
         this.addEnergyToPlanet = 110
         this.energyNeedToFunctionality = 1
         this.addStoreToPlanet = 0
+        this.buildingType = 2
     }
 }

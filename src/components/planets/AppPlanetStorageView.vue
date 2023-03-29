@@ -24,9 +24,9 @@
         <div class="planet_storage_modules" v-if="showMaterials">
             <div class="planet_storage_materials_line" v-for="(material, index) in tradeStore.state.currentPlanet.storage.materials" :key="index">
                 <div class="modules_materials">{{material.name}}</div>
-                <div class="modules_materials">{{material.amount}}</div>
+                <div class="modules_materials">{{(material.amount).toFixed(2)}}</div>
                 <div class="modules_materials">{{material.mass}}</div>
-                <div class="modules_materials">{{material.mass * material.amount}}</div>
+                <div class="modules_materials">{{(material.mass * material.amount).toFixed(2)}}</div>
                 <div class="modules_line_buttons">
                     <AppMiniButton name="З" :mini="true" />
                     <AppMiniButton name="У" :mini="true" @click="planetStore.commit('removeMaterial',material)" />
@@ -37,9 +37,9 @@
         <div class="planet_storage_modules" v-if="showResources">
             <div class="planet_storage_materials_line" v-for="(resource, index) in tradeStore.state.currentPlanet.storage.resources" :key="index">
                 <div class="modules_line">{{resource.name}}</div>
-                <div class="modules_line">{{resource.amount}}</div>
+                <div class="modules_line">{{(resource.amount).toFixed(2)}}</div>
                 <div class="modules_line">{{resource.baseMass}}</div>
-                <div class="modules_line">{{resource.baseMass * resource.amount}}</div>
+                <div class="modules_line">{{(resource.baseMass * resource.amount).toFixed(2)}}</div>
                 <div class="modules_line_buttons">
                     <AppMiniButton name="З" :mini="true" />
                     <AppMiniButton name="У" :mini="true" @click="planetStore.commit('removeModule',module)" />

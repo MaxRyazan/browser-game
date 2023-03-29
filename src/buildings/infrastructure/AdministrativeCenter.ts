@@ -23,6 +23,6 @@ export class AdministrativeCenter extends Building{
         this.addEnergyToPlanet = 4
         this.energyNeedToFunctionality = 12
         this.addStoreToPlanet = 200
-        this.fuelNeedToFunctionalityPerMinute = 0
+        this.buildingType = 1
     }
 }

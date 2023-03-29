@@ -23,6 +23,6 @@ export class Store extends Building{
         this.addEnergyToPlanet = 0
         this.energyNeedToFunctionality = 2
         this.addStoreToPlanet = 100
-        this.fuelNeedToFunctionalityPerMinute = 0
+        this.buildingType = 1
     }
 }

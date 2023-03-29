@@ -2,9 +2,13 @@ import {Building} from "../../entities/Building";
 import {Electronics} from "../../materials/Electronics";
 import {Steel} from "../../materials/Steel";
 import {ConstructionMaterials} from "../../materials/ConstructionMaterials";
+import {Altah} from "../../Resources/mineral/Altah";
+import {ChemicalFuel} from "../../materials/ChemicalFuel";
 
 export class ChemicalPlant extends Building{
-    constructor(amount: Number = 1, costInTime: Number = 20000) {
+    fuelLoadTime: Number
+    isFuelLoaded: Boolean
+    constructor(amount: Number = 1, costInTime: Number = 1000) {
         super();
         this.id = 11
         this.name = 'Химическая электростанция'
@@ -21,6 +25,8 @@ export class ChemicalPlant extends Building{
         this.addEnergyToPlanet = 25
         this.energyNeedToFunctionality = 1
         this.addStoreToPlanet = 0
-
+        this.buildingType = 2
+        this.isFuelLoaded = false
+        this.fuelNeedToFunctionalityPerDay = {fuelType: new ChemicalFuel(), required: 38.8}
     }
 }

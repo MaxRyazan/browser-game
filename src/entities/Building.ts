@@ -21,5 +21,14 @@ export class Building implements BuildingInterface{
     addEnergyToPlanet: Number
     energyNeedToFunctionality: Number
     addStoreToPlanet: Number;
-    fuelNeedToFunctionalityPerMinute: { fuelType: Material | Resource; required: Number } | 0;
+    fuelNeedToFunctionalityPerDay: { fuelType: Material | Resource; required: Number } | 0;
+    buildingType: Number
+    isFuelLoaded?: Boolean
+
+    checkFuel(){
+        if(this.isFuelLoaded){
+            return this.addEnergyToPlanet
+        }
+        return 0
+    }
 }
