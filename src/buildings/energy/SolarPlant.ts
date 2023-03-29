@@ -22,5 +22,6 @@ export class SolarPlant extends Building{
         this.energyNeedToFunctionality = 0
         this.addStoreToPlanet = 0
         this.buildingType = 2
+        this.isFuelLoaded = true
     }
 }

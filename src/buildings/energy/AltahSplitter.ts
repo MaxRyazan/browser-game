@@ -8,6 +8,7 @@ import {Altah} from "../../Resources/mineral/Altah";
 
 export class AltahSplitter extends Building{
     fuelLoadTime: Number
+    isFuelLoaded: Boolean
     constructor(amount: Number = 1, costInTime: Number = 190000, fuelLoadTime: Number = Date.now()) {
         super();
         this.id = 13
@@ -25,9 +26,10 @@ export class AltahSplitter extends Building{
         this.addEnergyToPlanet = 200
         this.energyNeedToFunctionality = 1
         this.addStoreToPlanet = 0
-        this.fuelNeedToFunctionalityPerDay = {fuelType: new Altah(), required: 28.8}
-        this.fuelLoadTime = fuelLoadTime
         this.buildingType = 2
+        this.isFuelLoaded = false
+        this.fuelLoadTime = fuelLoadTime
+        this.fuelNeedToFunctionalityPerDay = {fuelType: new Altah(), required: 28.8}
     }
 
 }

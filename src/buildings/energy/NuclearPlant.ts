@@ -3,10 +3,13 @@ import {ConstructionMaterials} from "../../materials/ConstructionMaterials";
 import {Electronics} from "../../materials/Electronics";
 import {Steel} from "../../materials/Steel";
 import {Vettur} from "../../materials/Vettur";
+import {Altah} from "../../Resources/mineral/Altah";
+import {NuclearFuel} from "../../materials/NuclearFuel";
 
 export class NuclearPlant extends Building{
     fuelLoadTime: Number
-    constructor(amount: Number = 1, costInTime: Number = 90000) {
+    isFuelLoaded: Boolean
+    constructor(amount: Number = 1, costInTime: Number = 90000, fuelLoadTime?: Number) {
         super();
         this.id = 12
         this.name = 'Ядерная электростанция'
@@ -24,5 +27,8 @@ export class NuclearPlant extends Building{
         this.energyNeedToFunctionality = 1
         this.addStoreToPlanet = 0
         this.buildingType = 2
+        this.isFuelLoaded = false
+        this.fuelLoadTime = fuelLoadTime
+        this.fuelNeedToFunctionalityPerDay = {fuelType: new NuclearFuel(), required: 20}
     }
 }
