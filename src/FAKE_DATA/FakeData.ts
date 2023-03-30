@@ -27,9 +27,9 @@ export class FakeData {
     biology = new Biology()
     higherMathematics = new HigherMathematics()
 
-    public planet_MERCURY = new Planet(1, 'Меркурий', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 1, false, 190, '', {maxCapacity: 2000, modules: [], materials: [], resources: []}, [], 0);
-    public planet_VENUS = new Planet(2, 'Венера', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 2, false, 280, '', {maxCapacity: 2000, modules: [], materials: [], resources: []}, [], 0);
-    public planet_EARTH = new Planet(3, 'Земля', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 3, true, 310, '', {maxCapacity: 2000, modules: [], materials: [new ConstructionMaterials(300), new Electronics(125), new Polymers(121), new Steel(125), new Quadria(100), new Vettur(100), new ChemicalFuel(100)], resources: [new Altah(3), new Delitium(81)]},  [], 0);
+    public planet_MERCURY = new Planet(1, 'Меркурий', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 1, false, 190, '', false, {maxCapacity: 2000, modules: [], materials: [], resources: []}, [], 0);
+    public planet_VENUS = new Planet(2, 'Венера', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 2, false, 280, '', false, {maxCapacity: 2000, modules: [], materials: [], resources: []}, [], 0);
+    public planet_EARTH = new Planet(3, 'Земля', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 3, true, 310, '', false, {maxCapacity: 2000, modules: [], materials: [new ConstructionMaterials(300), new Electronics(125), new Polymers(121), new Steel(125), new Quadria(100), new Vettur(100), new ChemicalFuel(100)], resources: [new Altah(3), new Delitium(81)]},  [], 0);
     public solarSystem = new PlanetarySystem(
         1,
         'Солнечная система',

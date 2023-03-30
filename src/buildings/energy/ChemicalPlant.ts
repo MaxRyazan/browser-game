@@ -28,6 +28,6 @@ export class ChemicalPlant extends Building{
         this.buildingType = 2
         this.isFuelLoaded = false
         this.fuelLoadTime = fuelLoadTime
-        this.fuelNeedToFunctionalityPerDay = {fuelType: new ChemicalFuel(), required: 38.8}
+        this.fuelNeedToFunctionalityPerDay = {fuelType: new ChemicalFuel(), required: 48.8}
     }
 }

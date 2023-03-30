@@ -151,6 +151,22 @@ export default {
     },
 
 
+    checkThatEnergyOnPlanetIsEnough(){
+        //TODO запилить проверку на потребность энергии строящихся зданий
+        let requiredEnergy = 0;
+        let maxEnergy = 0;
+        const buildings = tradeStore.state.currentPlanet.buildings
+        for(let i = 0; i < buildings.length; i++){
+            requiredEnergy += buildings[i].energyNeedToFunctionality * buildings[i].amount
+            maxEnergy += buildings[i].addEnergyToPlanet * buildings[i].amount
+        }
+        if(requiredEnergy > maxEnergy){
+            tradeStore.state.currentPlanet.isEnergyEnough = false
+        } else {
+            tradeStore.state.currentPlanet.isEnergyEnough = true
+        }
+    },
+
     checkThatColonyExists(_){
         if(tradeStore.state.currentPlanet.buildings.find(building => building.id === 1)) {
             planetStore.state.isColonyCreated = true
@@ -174,6 +190,11 @@ export default {
     },
 
     createBuilding(planetState, payload) {
+        //TODO запилить проверку, что после постройки здания энергии будет хватать
+        planetStore.commit('checkThatEnergyOnPlanetIsEnough')
+        if(!tradeStore.state.currentPlanet.isEnergyEnough){
+            return  planetStore.commit('sendError', 'Дефицит энергии на планете!!')
+        }
         let buildingsCount = 0
         for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i ++){
             buildingsCount += tradeStore.state.currentPlanet.buildings[i].amount

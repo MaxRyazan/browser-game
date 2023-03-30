@@ -7,20 +7,26 @@
         <div class="building_amount">
             {{building === undefined ? '' : building.amount}}
         </div>
-        <div class="building_settings" v-if="building!==undefined && building.buildingType===2">
-            <button v-if="building.id !== 10" @click="openModalWindow">XX</button>
-        </div>
+<!--        <div class="building_settings" v-if="building!==undefined && building.buildingType===2">-->
+<!--            <button v-if="building.id !== 10" @click="openModalWindow">XX</button>-->
+<!--        </div>-->
         <div class="building_controls">
             <button class="building_card_btn" @click="planetStore.commit('createBuilding', name)">Построить</button>
             <button class="building_card_btn">Сломать</button>
         </div>
-        <transition name="fade">
-            <AppBuildingSettings
-                    :building="building"
-                    v-if="building!==undefined && building.buildingType===2 && isOpen"
-                    @closeWindow="isOpen=false"
-            />
-        </transition>
+<!--        <transition name="fade">-->
+<!--            <AppBuildingSettings-->
+<!--                    :building="building"-->
+<!--                    v-if="building!==undefined && building.buildingType===2 && isOpen"-->
+<!--                    @closeWindow="isOpen=false"-->
+<!--            />-->
+<!--        </transition>-->
+        <div class="molnia"
+             @click="planetStore.commit('manageBuilding', building)"
+             v-if="building!==undefined && building.buildingType===2 && !building.isFuelLoaded"
+        >
+            <img src="../../assets/images/molnia.png" alt="pic" title="Топливо не загружено в реактор!">
+        </div>
     </div>
     <transition name="fade">
         <AppError v-if="error"/>
@@ -45,7 +51,7 @@ import {Building} from "../../entities/Building.ts";
 import AppError from '../mini/AppError.vue'
 import AppBuildingSettings from '../planets/AppBuildingSettings.vue'
 import {computed, ref, watch} from "vue";
-const isOpen = ref(false)
+
 defineProps({
     picture: {
         type: String,
@@ -60,10 +66,6 @@ defineProps({
         required: false
     },
 })
-
-function openModalWindow(){
-    isOpen.value = true
-}
 
 
 function timer(param){

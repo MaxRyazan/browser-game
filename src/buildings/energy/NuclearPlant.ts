@@ -29,6 +29,6 @@ export class NuclearPlant extends Building{
         this.buildingType = 2
         this.isFuelLoaded = false
         this.fuelLoadTime = fuelLoadTime
-        this.fuelNeedToFunctionalityPerDay = {fuelType: new NuclearFuel(), required: 20}
+        this.fuelNeedToFunctionalityPerDay = {fuelType: new NuclearFuel(), required: 35}
     }
 }

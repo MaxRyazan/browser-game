@@ -10,6 +10,7 @@ export class Planet {
         public atmosphere: Boolean,
         public building_points: Number,
         public picture: String,
+        public isEnergyEnough: Boolean,
         public storage: {
             maxCapacity: Number,
             modules: {},
@@ -29,5 +30,6 @@ export class Planet {
         this.storage = storage
         this.buildings = buildings
         this.peoples = peoples
+        this.isEnergyEnough = isEnergyEnough
     }
 }

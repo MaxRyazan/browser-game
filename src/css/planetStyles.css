@@ -365,6 +365,18 @@
   margin-left: 10px;
 }
 
+.molnia {
+  position: absolute;
+  width: 20px;
+  height: 40px;
+  bottom: 65px;
+  left: 10px;
+}
+.molnia img {
+  width: 100%;
+  cursor: pointer;
+}
+
 @keyframes planet_spin {
   0% {
     transform: rotate(0);
