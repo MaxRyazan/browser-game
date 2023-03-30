@@ -179,6 +179,7 @@
   height: 100%;
   gap: 5.1px;
   justify-content: space-between;
+  position: relative;
 }
 
 .building_card {

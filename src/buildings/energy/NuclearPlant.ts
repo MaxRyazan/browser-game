@@ -9,7 +9,7 @@ import {NuclearFuel} from "../../materials/NuclearFuel";
 export class NuclearPlant extends Building{
     fuelLoadTime: Number
     isFuelLoaded: Boolean
-    constructor(amount: Number = 1, costInTime: Number = 90000, fuelLoadTime?: Number) {
+    constructor(amount: Number = 1, costInTime: Number = 1000, fuelLoadTime?: Number) {
         super();
         this.id = 12
         this.name = 'Ядерная электростанция'

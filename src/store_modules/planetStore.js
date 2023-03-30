@@ -22,8 +22,6 @@ export default createStore({
         visibilityBuildingsInProgress: true,
         buildingsSettingsModal: false,
 
-        loadFuelToThisBuilding: {},
-
         isColonyCreated: false,
         buildingsInProgressNow: [],
         currentPlanetBuildingSpeed: 1,

@@ -103,12 +103,14 @@ export default {
     },
 
 
-    manageBuilding(_){
+    manageBuilding(_, building){
+        let isFuelEnough = false
         const materialsOnStore = tradeStore.state.currentPlanet.storage.materials
-        const buildingToLoad =  planetStore.state.loadFuelToThisBuilding
+        const buildingToLoad =  building
         planetStore.commit('checkThatFuelLoadTimePassed', buildingToLoad)
         for(let i = 0; i < materialsOnStore.length; i++){
             if(materialsOnStore[i].id === buildingToLoad.fuelNeedToFunctionalityPerDay.fuelType.id){
+                isFuelEnough = true
                 if(materialsOnStore[i].amount >= buildingToLoad.fuelNeedToFunctionalityPerDay.required){
                     if(!buildingToLoad.isFuelLoaded){
                         planetStore.commit('subtractResource',
@@ -121,10 +123,11 @@ export default {
                     } else {
                         planetStore.commit('sendError', 'Топливо уже загружено!')
                     }
-                } else {
-                    planetStore.commit('sendError', 'На складе нехватает топлива!')
                 }
             }
+        }
+        if(isFuelEnough === false){
+            planetStore.commit('sendError', 'На складе нехватает топлива!')
         }
     },
 
@@ -141,7 +144,6 @@ export default {
 
     // проверяем сутки с момента загрузки
     checkThatFuelLoadTimePassed(_, building){
-        console.log(building)
          if(Date.now() > building.fuelLoadTime + 86400000){
              building.isFuelLoaded = false
              building.checkFuel()

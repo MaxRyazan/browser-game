@@ -1,7 +1,7 @@
 <template>
-    <div class="error_wrapper">
-        <span>{{ error }}</span>
-    </div>
+        <div class="error_wrapper">
+            <span>{{ error }}</span>
+        </div>
 </template>
 
 <script setup>

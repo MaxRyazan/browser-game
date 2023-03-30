@@ -9,16 +9,33 @@
             <AppMiniButton :buildings="true" :name="`Компоненты КК`"  @click="planetStore.commit('toggleVision', 'components')"/>
         </div>
         <div class="buildings_wrapper">
-            <BuildingsInfrastructure/>
-            <BuildingsEnergy v-if="planetStore.state.isColonyCreated"/>
-            <BuildingsResources v-if="planetStore.state.isColonyCreated"/>
-            <BuildingsMaterials v-if="planetStore.state.isColonyCreated"/>
-            <BuildingScience v-if="planetStore.state.isColonyCreated"/>
-            <BuildingsComponents v-if="planetStore.state.isColonyCreated"/>
+            <transition-group name="swap">
+                <BuildingsInfrastructure  v-if="planetStore.state.isColonyCreated ||  !planetStore.state.isColonyCreated"/>
+                <BuildingsEnergy v-if="planetStore.state.isColonyCreated"/>
+                <BuildingsResources v-if="planetStore.state.isColonyCreated"/>
+                <BuildingsMaterials v-if="planetStore.state.isColonyCreated"/>
+                <BuildingScience v-if="planetStore.state.isColonyCreated"/>
+                <BuildingsComponents v-if="planetStore.state.isColonyCreated"/>
+            </transition-group>
         </div>
     </div>
 </template>
+<style lang="scss">
+.swap-enter-from,
+.swap-leave-to{
+  opacity: 0;
+  transform: scale(0.1);
+}
+.swap-enter-active{
+  transition: .6s ease;
+  position: absolute;
+}
+.swap-leave-active{
+  transition: .6s ease;
+  position: absolute;
+}
 
+</style>
 <script setup>
 import AppMiniButton from "../mini/AppMiniButton.vue";
 import planetStore from "../../store_modules/planetStore.js";

@@ -8,24 +8,44 @@
             {{building === undefined ? '' : building.amount}}
         </div>
         <div class="building_settings" v-if="building!==undefined && building.buildingType===2">
-            <button @click="openModalSettings(building)">XX</button>
+            <button v-if="building.id !== 10" @click="openModalWindow">XX</button>
         </div>
         <div class="building_controls">
             <button class="building_card_btn" @click="planetStore.commit('createBuilding', name)">Построить</button>
             <button class="building_card_btn">Сломать</button>
         </div>
-        <AppBuildingSettings v-if="building!==undefined && building.buildingType===2 && planetStore.state.buildingsSettingsModal"/>
+        <transition name="fade">
+            <AppBuildingSettings
+                    :building="building"
+                    v-if="building!==undefined && building.buildingType===2 && isOpen"
+                    @closeWindow="isOpen=false"
+            />
+        </transition>
     </div>
-    <AppError v-if="error"/>
+    <transition name="fade">
+        <AppError v-if="error"/>
+    </transition>
 </template>
+
+<style lang="scss">
+.fade-enter-from,
+.fade-leave-to{
+  opacity: 0;
+  transform: scale(0.1);
+}
+.fade-enter-active,
+.fade-leave-active{
+  transition: 1s ease;
+}
+</style>
 
 <script setup>
 import planetStore from "../../store_modules/planetStore.js";
 import {Building} from "../../entities/Building.ts";
 import AppError from '../mini/AppError.vue'
 import AppBuildingSettings from '../planets/AppBuildingSettings.vue'
-import {computed, watch} from "vue";
-
+import {computed, ref, watch} from "vue";
+const isOpen = ref(false)
 defineProps({
     picture: {
         type: String,
@@ -41,9 +61,8 @@ defineProps({
     },
 })
 
-function openModalSettings(building){
-    planetStore.state.loadFuelToThisBuilding = building
-    planetStore.state.buildingsSettingsModal = true
+function openModalWindow(){
+    isOpen.value = true
 }
 
 

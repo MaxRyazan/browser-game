@@ -4,8 +4,12 @@
         <TheLeftNav />
         <TheBottomNav />
         <TheHelp v-if="helpStore.state.helpMenu"/>
-        <TheTradeView v-if="tradeStore.state.showTrade"/>
-        <ThePlanets v-if="planetStore.state.visibilityPlanetMenu"/>
+        <transition name="fade">
+            <TheTradeView v-if="tradeStore.state.showTrade"/>
+        </transition>
+        <transition name="fade">
+            <CurrentPlanet v-if="planetStore.state.visibilityPlanetMenu"/>
+        </transition>
         <ThePlanetarySystem v-if="planetStore.state.visibilityPlanetarySystem" />
     </div>
 </template>
@@ -18,8 +22,19 @@ import TheTradeView from "./trade/TheTradeView.vue";
 import tradeStore from "../store_modules/tradeStore.js";
 import planetStore from "../store_modules/planetStore.js";
 import helpStore from "../store_modules/helpStore.js";
-import ThePlanets from './planets/CurrentPlanet.vue'
+import CurrentPlanet from './planets/CurrentPlanet.vue'
 import ThePlanetarySystem from '../components/planets/ThePlanetarySystem.vue'
 import TheHelp from "./help/TheHelp.vue";
 
 </script>
+<style lang="scss">
+.fade-enter-from,
+.fade-leave-to{
+  opacity: 0;
+  transform: scale(0.1);
+}
+.fade-enter-active,
+.fade-leave-active{
+  transition: .4s ease;
+}
+</style>
