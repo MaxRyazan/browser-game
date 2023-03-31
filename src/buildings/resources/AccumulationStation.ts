@@ -3,6 +3,7 @@ import {ConstructionMaterials} from "../../materials/ConstructionMaterials";
 import {Electronics} from "../../materials/Electronics";
 import {Steel} from "../../materials/Steel";
 import {CrudeOre} from "../../Resources/CrudeOre";
+import {Quadria} from "../../materials/Quadria";
 
 
 export class AccumulationStation extends Building{
@@ -17,7 +18,7 @@ export class AccumulationStation extends Building{
         this.costInTime = costInTime
         this.buildComponentsSpeed = 0
         this.buildOtherBuildingsSpeed = 0
-        this.requiredMaterials = [new ConstructionMaterials(20), new Electronics(5), new Steel(14)]
+        this.requiredMaterials = [new ConstructionMaterials(20), new Electronics(5), new Steel(14), new Quadria(5)]
         this.amount = amount
         this.addPeopleToPlanet = 0
         this.peopleNeedToFunctionality = 12

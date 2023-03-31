@@ -24,6 +24,8 @@ import tradeStore from "../../store_modules/tradeStore.js";
 
 onMounted(() => {
     planetStore.commit('checkThatColonyExists')
+    planetStore.commit('calculateMaxCapacityOfStorage')
+    planetStore.commit('calculateWeightOfAllOnStorage')
     planetStore.commit('checkAccumulationStationsOfCurrentPlanet')
     for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i ++){
         planetStore.commit('checkThatFuelLoadTimePassed', tradeStore.state.currentPlanet.buildings[i])

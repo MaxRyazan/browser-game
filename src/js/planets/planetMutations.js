@@ -19,6 +19,8 @@ import {WaveStation} from "../../buildings/resources/WaveStation.ts";
 import {OreCleaner} from "../../buildings/resources/OreCleaner.ts";
 import {MineralSynthesizer} from "../../buildings/resources/MineralSynthesizer.ts";
 import {CrudeOre} from "../../Resources/CrudeOre.ts";
+import planetGetters from "./helpers.js";
+import helpers from "./helpers.js";
 
 
 export default {
@@ -115,6 +117,22 @@ export default {
         }
     },
 
+    calculateWeightOfAllOnStorage(_){
+        const modules = helpers.calculateWeightOfThis(tradeStore.state.currentPlanet.storage.modules)
+        const resources = helpers.calculateWeightOfThis(tradeStore.state.currentPlanet.storage.resources)
+        const materials = helpers.calculateWeightOfThis(tradeStore.state.currentPlanet.storage.materials)
+        tradeStore.state.currentPlanet.allStorageUnitsMass = modules + resources + materials
+    },
+
+    calculateMaxCapacityOfStorage(){
+        const buildings = tradeStore.state.currentPlanet.buildings
+        let capacity = 2000
+        for(let i = 0; i < buildings.length; i++){
+            capacity += buildings[i].addStoreToPlanet * buildings[i].amount
+        }
+        tradeStore.state.currentPlanet.storage.maxCapacity = capacity
+        console.log(capacity)
+    },
 
 
     checkAccumulationStationsOfCurrentPlanet(){
@@ -333,7 +351,6 @@ export default {
         } else {
             planetStore.commit('sendError', 'На планете кончилось место для застройки!')
         }
-
     },
 
     isMaterialsEnough(_, payload){

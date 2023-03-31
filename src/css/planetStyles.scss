@@ -125,6 +125,9 @@
   &:active{
     border-bottom: 1px solid white;
   }
+  &:hover{
+    color: white;
+  }
 }
 
 .order_list_wrapper{
@@ -357,9 +360,6 @@
   margin-left: 10px;
 }
 
-
-
-
 .molnia{
   position: absolute;
   width: 20px;
@@ -374,9 +374,38 @@
 }
 
 
-.big_icon{
-  width: 20px;
+.info_wrapper{
+  z-index: 99999999999;
+  background-color: black;
+  max-width: 300px;
+  border: 1px solid green;
+  padding: 5px;
+  position: absolute;
+  right: 50%;
+  top: 0;
+  border-radius: 12px;
+  transform: translate(-50%, 0);
+  & h4{
+    white-space: normal;
+    text-align: center;
+    color: greenyellow;
+  }
 }
+
+.help_container{
+  position: absolute;
+  right: 0;
+  bottom: 60px;
+}
+
+
+
+
+.red{
+  color: red;
+}
+
+
 
 @keyframes blink {
   0%{opacity: 0}

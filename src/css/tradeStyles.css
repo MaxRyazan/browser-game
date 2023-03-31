@@ -9,6 +9,9 @@
   border: 1px solid rgba(0, 0, 0, 0);
   cursor: pointer;
 }
+.top_nav_money_icon img {
+  width: 20px;
+}
 .top_nav_money_icon:hover {
   border-left: 1px solid yellow;
   border-right: 1px solid yellow;

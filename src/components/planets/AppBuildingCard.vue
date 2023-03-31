@@ -15,12 +15,17 @@
              @click="planetStore.commit('manageBuilding', building)"
              v-if="building!==undefined && building.buildingType===2 && !building.isFuelLoaded"
         >
-<!--            <img src="../../assets/images/molnia.png" alt="pic" title="Топливо не загружено в реактор!">-->
-           <AppIcon :path="iconsPaths.molnia" :class-name="`big_icon`" :title="`Топливо не загружено в реактор!`"/>
+           <AppIcon :path="iconsPaths.molnia" :title="`Топливо не загружено в реактор!`"/>
+        </div>
+        <div class="help_container">
+           <AppIcon :path="iconsPaths.help" @click="toggleHelp"/>
         </div>
     </div>
     <transition name="fade">
         <AppError v-if="error"/>
+    </transition>
+    <transition name="help">
+        <AppInfo v-if="help" :text="`${buildingInfo}`" @closeHelp="toggleHelp"/>
     </transition>
 </template>
 
@@ -35,6 +40,16 @@
   transition: 1s ease;
 }
 
+.help-enter-from,
+.help-leave-to{
+  opacity: 0;
+  transform: scale(0.1);
+}
+.help-enter-active,
+.help-leave-active{
+  transition: 1s ease;
+}
+
 
 </style>
 
@@ -42,9 +57,10 @@
 import planetStore from "../../store_modules/planetStore.js";
 import {Building} from "../../entities/Building.ts";
 import AppError from '../mini/AppError.vue'
-import {computed, watch} from "vue";
+import {computed, ref, watch} from "vue";
 import AppIcon from "../navigation/AppIcon.vue";
 import iconsPaths from "../../iconsPaths.js";
+import AppInfo from "../mini/AppInfo.vue";
 defineProps({
     picture: {
         type: String,
@@ -58,15 +74,16 @@ defineProps({
         type: Building,
         required: false
     },
+    buildingInfo: {
+        type: String,
+        required: false
+    }
 })
+let help = ref(false)
 
-
-// function timer(param){
-//     const timeOfEnd = param + 86400000
-//     const dateOfEnd = new Date(timeOfEnd)
-//     return dateOfEnd.getDate() + '/' + (dateOfEnd.getMonth() + 1) + ' - ' + dateOfEnd.getHours() + ':' + dateOfEnd.getMinutes()
-// }
-
+const toggleHelp = () => {
+    help.value = !help.value
+}
 
 const error = computed(() => {
     return  planetStore.state.error.flag
