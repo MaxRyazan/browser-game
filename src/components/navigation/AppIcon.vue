@@ -1,5 +1,5 @@
 <template>
-    <div class="top_nav_money_icon" :class="className">
+    <div class="top_nav_money_icon" :class="className" :title="hoverTitle">
         <img :src="path" alt="icon">
     </div>
 </template>
@@ -11,6 +11,10 @@ defineProps({
         required: true
     },
     className: {
+        type: String,
+        required: false
+    },
+    hoverTitle: {
         type: String,
         required: false
     }

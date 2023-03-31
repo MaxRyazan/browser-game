@@ -378,6 +378,10 @@
   animation: blink 1s linear infinite;
 }
 
+.big_icon {
+  width: 20px;
+}
+
 @keyframes blink {
   0% {
     opacity: 0;

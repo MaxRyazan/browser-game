@@ -15,7 +15,8 @@
              @click="planetStore.commit('manageBuilding', building)"
              v-if="building!==undefined && building.buildingType===2 && !building.isFuelLoaded"
         >
-            <img src="../../assets/images/molnia.png" alt="pic" title="Топливо не загружено в реактор!">
+<!--            <img src="../../assets/images/molnia.png" alt="pic" title="Топливо не загружено в реактор!">-->
+           <AppIcon :path="iconsPaths.molnia" :class-name="`big_icon`" :title="`Топливо не загружено в реактор!`"/>
         </div>
     </div>
     <transition name="fade">
@@ -42,7 +43,8 @@ import planetStore from "../../store_modules/planetStore.js";
 import {Building} from "../../entities/Building.ts";
 import AppError from '../mini/AppError.vue'
 import {computed, watch} from "vue";
-
+import AppIcon from "../navigation/AppIcon.vue";
+import iconsPaths from "../../iconsPaths.js";
 defineProps({
     picture: {
         type: String,

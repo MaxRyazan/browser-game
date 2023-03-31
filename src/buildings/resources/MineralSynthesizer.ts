@@ -8,6 +8,7 @@ import {Tellurium} from "../../Resources/mineral/Tellurium";
 import {CrudeMineralOre} from "../../Resources/CrudeMineralOre";
 
 export class MineralSynthesizer extends Building{
+    isResourceLoaded: Boolean
     constructor(amount: Number = 1, costInTime: Number = 40000) {
         super();
         this.id = 17
@@ -28,5 +29,6 @@ export class MineralSynthesizer extends Building{
         this.buildingType = 3
         this.canProduce= {type: [Delitium, Quantium, Tellurium], amount: 5}
         this.resourcesNeedToFunctionality= {type: [new CrudeMineralOre()], amount: 5}
+        this.isResourceLoaded = false
     }
 }

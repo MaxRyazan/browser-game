@@ -1,6 +1,6 @@
 <template>
     <div class="buildings_infrastructure" v-if="planetStore.state.visibilityResources">
-        <AppBuildingCard name="Буровая платформа" picture="planet_window_bg" :name="`Буровая платформа`" :building="checkBuilding('Буровая платформа')"/>
+        <AppBuildingCard name="Накопительная станция" picture="planet_window_bg" :name="`Накопительная станция`" :building="checkBuilding('Накопительная станция')"/>
         <AppBuildingCard name="Волновая станция" picture="planet_window_bg" :name="`Волновая станция`" :building="checkBuilding('Волновая станция')"/>
         <AppBuildingCard name="Очиститель руды" picture="planet_window_bg" :name="`Очиститель руды`" :building="checkBuilding('Очиститель руды')"/>
         <AppBuildingCard name="Синтезатор минералов" picture="planet_window_bg" :name="`Синтезатор минералов`" :building="checkBuilding('Синтезатор минералов')"/>

@@ -14,10 +14,11 @@ import {SolarPlant} from "../../buildings/energy/SolarPlant.ts";
 import {ChemicalPlant} from "../../buildings/energy/ChemicalPlant.ts";
 import {NuclearPlant} from "../../buildings/energy/NuclearPlant.ts";
 import {AltahSplitter} from "../../buildings/energy/AltahSplitter.ts";
-import {DrillingPlatform} from "../../buildings/resources/DrillingPlatform.ts";
+import {AccumulationStation} from "../../buildings/resources/AccumulationStation.ts";
 import {WaveStation} from "../../buildings/resources/WaveStation.ts";
 import {OreCleaner} from "../../buildings/resources/OreCleaner.ts";
 import {MineralSynthesizer} from "../../buildings/resources/MineralSynthesizer.ts";
+import {CrudeOre} from "../../Resources/CrudeOre.ts";
 
 
 export default {
@@ -102,6 +103,34 @@ export default {
         for(let i = 0; i < from.length; i++){
             if(from[i].id === resource.id){
                 from[i].amount = from[i].amount - amount
+            }
+        }
+    },
+
+    applyResource(_, {resource, amount, to}){
+        for(let i = 0; i < to.length; i++){
+            if(to[i].id === resource.id){
+                to[i].amount = to[i].amount + amount
+            }
+        }
+    },
+
+
+
+    checkAccumulationStationsOfCurrentPlanet(){
+        const accumulationStations = tradeStore.state.currentPlanet.buildings.filter(b => b.id === 14)[0]
+        const isResourceExist =  tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === 8)[0]
+        if(accumulationStations){
+            const sub = (Date.now() - accumulationStations.timeOfLastProduce) / 1000    //  количество прошедших секунд  TODO сделать  количество прошедших минут
+            if(sub > 2){ // раз в 2 секунды TODO сделать раз в минуту
+                const count = Math.floor(sub / 2)  // подсчет сколько раз прошло по 2 секунды (чтобы посчитать amount) TODO  / 1
+                const crudeOre = new CrudeOre(5 * count)
+                if(isResourceExist){
+                    planetStore.commit('applyResource',{resource: crudeOre, amount: crudeOre.amount, to: tradeStore.state.currentPlanet.storage.resources})
+                } else {
+                    tradeStore.state.currentPlanet.storage.resources.push(crudeOre)
+                }
+                accumulationStations.timeOfLastProduce = Date.now()
             }
         }
     },
@@ -280,9 +309,9 @@ export default {
                     planetStore.commit('build', altahSplitter)
                 }
                     break;
-                case 'Буровая платформа' : {
-                    const drillingPlatform = new DrillingPlatform()
-                    planetStore.commit('build', drillingPlatform)
+                case 'Накопительная станция' : {
+                    const accumulationStation = new AccumulationStation()
+                    planetStore.commit('build', accumulationStation)
                 }
                     break;
                 case 'Волновая станция' : {

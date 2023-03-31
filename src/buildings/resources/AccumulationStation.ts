@@ -5,11 +5,12 @@ import {Steel} from "../../materials/Steel";
 import {CrudeOre} from "../../Resources/CrudeOre";
 
 
-export class DrillingPlatform extends Building{
-    constructor(amount: Number = 1, costInTime: Number = 40000) {
+export class AccumulationStation extends Building{
+    timeOfLastProduce: Number
+    constructor(amount: Number = 1, costInTime: Number = 1000) {
         super();
         this.id = 14
-        this.name = 'Буровая платформа'
+        this.name = 'Накопительная станция'
         this.costInCR = 110
         this.costInIG = 0
         this.onGround = true
@@ -25,5 +26,6 @@ export class DrillingPlatform extends Building{
         this.addStoreToPlanet = 0
         this.buildingType = 3
         this.canProduce= {type: [CrudeOre], amount: 5}
+        this.timeOfLastProduce = Date.now()
     }
 }
