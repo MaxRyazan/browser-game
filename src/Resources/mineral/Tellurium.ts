@@ -1,6 +1,6 @@
-import {Resource} from "../../interfaces/Resource";
+import {ResourceInterface} from "../../interfaces/ResourceInterface";
 
-export class Tellurium implements Resource {
+export class Tellurium implements ResourceInterface {
     public baseMass: Number
     public id: Number
     public name: String

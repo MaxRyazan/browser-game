@@ -14,6 +14,10 @@ import {SolarPlant} from "../../buildings/energy/SolarPlant.ts";
 import {ChemicalPlant} from "../../buildings/energy/ChemicalPlant.ts";
 import {NuclearPlant} from "../../buildings/energy/NuclearPlant.ts";
 import {AltahSplitter} from "../../buildings/energy/AltahSplitter.ts";
+import {DrillingPlatform} from "../../buildings/resources/DrillingPlatform.ts";
+import {WaveStation} from "../../buildings/resources/WaveStation.ts";
+import {OreCleaner} from "../../buildings/resources/OreCleaner.ts";
+import {MineralSynthesizer} from "../../buildings/resources/MineralSynthesizer.ts";
 
 
 export default {
@@ -132,6 +136,7 @@ export default {
     },
 
     loadFuelToStation(_, id){
+        //TODO добавить зависимость загрузки топлива от количества станций(и при постройке дополнительной)
         const buildings = tradeStore.state.currentPlanet.buildings
         for(let i = 0; i < buildings.length; i++){
             if(buildings[i].id === id){
@@ -273,6 +278,26 @@ export default {
                 case 'Расщепитель Альтах' : {
                     const altahSplitter = new AltahSplitter()
                     planetStore.commit('build', altahSplitter)
+                }
+                    break;
+                case 'Буровая платформа' : {
+                    const drillingPlatform = new DrillingPlatform()
+                    planetStore.commit('build', drillingPlatform)
+                }
+                    break;
+                case 'Волновая станция' : {
+                    const waveStation = new WaveStation()
+                    planetStore.commit('build', waveStation)
+                }
+                    break;
+                case 'Очиститель руды' : {
+                    const oreCleaner = new OreCleaner()
+                    planetStore.commit('build', oreCleaner)
+                }
+                    break;
+                case 'Синтезатор минералов' : {
+                    const mineralSynthesizer = new MineralSynthesizer()
+                    planetStore.commit('build', mineralSynthesizer)
                 }
                     break;
             }

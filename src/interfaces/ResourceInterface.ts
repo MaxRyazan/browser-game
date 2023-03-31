@@ -1,4 +1,4 @@
-export interface Resource {
+export interface ResourceInterface {
     id: Number
     name: String
     baseMass: Number

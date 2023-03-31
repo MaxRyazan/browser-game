@@ -1,6 +1,6 @@
-import {Resource} from "../../interfaces/Resource";
+import {ResourceInterface} from "../../interfaces/ResourceInterface";
 
-export class Quantium implements Resource {
+export class Quantium implements ResourceInterface {
     public baseMass: Number
     public id: Number
     public name: String

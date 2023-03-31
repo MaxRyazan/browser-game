@@ -1,6 +1,6 @@
-import {Resource} from "../../interfaces/Resource";
+import {ResourceInterface} from "../../interfaces/ResourceInterface";
 
-export class Delitium implements Resource {
+export class Delitium implements ResourceInterface {
     public baseMass: Number
     public id: Number
     public name: String

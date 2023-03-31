@@ -6,7 +6,7 @@
         <AppBuildingCard name="Административный центр" picture="admin_center" v-if="planetStore.state.isColonyCreated" :building="checkBuilding('Административный центр')"/>
         <AppBuildingCard name="Строительный центр" picture="building_center" v-if="planetStore.state.isColonyCreated" :building="checkBuilding('СтройЦентр')"/>
         <AppBuildingCard name="Медицинский центр" picture="med_center" v-if="planetStore.state.isColonyCreated" :building="checkBuilding('Медицинский центр')"/>
-        <AppBuildingCard name="Небоскрёб" picture="planet_window_bg" v-if="planetStore.state.isColonyCreated" :building="checkBuilding('Небоскрёб')"/>
+        <AppBuildingCard name="Небоскрёб" picture="skyscraper" v-if="planetStore.state.isColonyCreated" :building="checkBuilding('Небоскрёб')"/>
         <AppBuildingCard name="Банк" picture="planet_window_bg" v-if="planetStore.state.isColonyCreated" :building="checkBuilding('Банк')"/>
         <AppBuildingCard name="Космопорт" picture="planet_window_bg" v-if="planetStore.state.isColonyCreated" :building="checkBuilding('Космопорт')"/>
     </div>

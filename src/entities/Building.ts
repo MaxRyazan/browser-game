@@ -1,7 +1,8 @@
 import {BuildingInterface} from "../interfaces/BuildingInterface";
-import {Resource} from "../interfaces/Resource";
+import {ResourceInterface} from "../interfaces/ResourceInterface";
 import {Material} from "../interfaces/Material";
 import {Detail} from "../interfaces/Detail";
+import {Resource} from "./Resource";
 
 export class Building implements BuildingInterface{
     amount: Number;
@@ -9,6 +10,8 @@ export class Building implements BuildingInterface{
     buildOtherBuildingsSpeed: Number;
     canProduce: {
         type: Resource[] | Material[] | Detail[]; amount: Number };
+    resourcesNeedToFunctionality: {
+        type: Resource[]; amount: Number};
     costInCR: Number;
     costInIG: Number;
     costInTime: Number;
@@ -21,7 +24,7 @@ export class Building implements BuildingInterface{
     addEnergyToPlanet: Number
     energyNeedToFunctionality: Number
     addStoreToPlanet: Number;
-    fuelNeedToFunctionalityPerDay: { fuelType: Material | Resource; required: Number } | 0;
+    fuelNeedToFunctionalityPerDay: { fuelType: Material | ResourceInterface; required: Number } | 0;
     buildingType: Number
     isFuelLoaded?: Boolean
 

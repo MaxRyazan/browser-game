@@ -1,6 +1,7 @@
 import {Material} from "./Material";
-import {Resource} from "./Resource";
+import {ResourceInterface} from "./ResourceInterface";
 import {Detail} from "./Detail";
+import {Resource} from "../entities/Resource";
 
 export interface BuildingInterface {
     id: Number
@@ -13,15 +14,19 @@ export interface BuildingInterface {
     buildOtherBuildingsSpeed?: Number
     requiredMaterials: Material[]
     canProduce?:{
-        type: Resource[] | Material[] | Detail[]
+        type: ResourceInterface[] | Material[] | Detail[]
         amount: Number
     }
+    resourcesNeedToFunctionality?: {
+        type: Resource[];
+        amount: Number
+    };
     addPeopleToPlanet: Number;
     peopleNeedToFunctionality: Number
     addEnergyToPlanet: Number
     energyNeedToFunctionality: Number
     addStoreToPlanet: Number
-    fuelNeedToFunctionalityPerDay: {fuelType: Material | Resource, required: Number} | 0
+    fuelNeedToFunctionalityPerDay: {fuelType: Material | ResourceInterface, required: Number} | 0
     fuelLoadTime? : Number
     buildingType: Number
 }

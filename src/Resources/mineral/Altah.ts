@@ -1,6 +1,6 @@
-import {Resource} from "../../interfaces/Resource";
+import {ResourceInterface} from "../../interfaces/ResourceInterface";
 
-export class Altah implements Resource {
+export class Altah implements ResourceInterface {
     public baseMass: Number
     public id: Number
     public name: String
