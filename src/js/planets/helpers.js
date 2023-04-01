@@ -1,4 +1,5 @@
 import tradeStore from "../../store_modules/tradeStore.js";
+import planetStore from "../../store_modules/planetStore.js";
 
 export default {
 
@@ -21,4 +22,12 @@ export default {
         console.log(tradeStore.state.currentPlanet.allStorageUnitsMass <  tradeStore.state.currentPlanet.storage.maxCapacity)
         return tradeStore.state.currentPlanet.allStorageUnitsMass <  tradeStore.state.currentPlanet.storage.maxCapacity
     },
+
+    checkEnergyAndAddBuildingToInProgressNow(building){
+        planetStore.commit('checkThatEnergyOnPlanetIsEnough', building)
+        if(!tradeStore.state.currentPlanet.isEnergyEnough){
+            return  planetStore.commit('sendError', 'Дефицит энергии на планете!!')
+        }
+        planetStore.commit('build', building)
+    }
 }

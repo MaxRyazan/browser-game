@@ -101,6 +101,17 @@ export default {
         storage.splice(index, 1)
     },
 
+    removeResource(_, resource){
+        let index = -1
+        const storage = tradeStore.state.currentPlanet.storage.resources
+        for(let i = 0; i < storage.length; i++) {
+            if(storage[i].id === resource.id){
+                index = i
+            }
+        }
+        storage.splice(index, 1)
+    },
+
     subtractResource(_, {resource, amount, from}){
         for(let i = 0; i < from.length; i++){
             if(from[i].id === resource.id){
@@ -131,7 +142,6 @@ export default {
             capacity += buildings[i].addStoreToPlanet * buildings[i].amount
         }
         tradeStore.state.currentPlanet.storage.maxCapacity = capacity
-        console.log(capacity)
     },
 
 
@@ -162,12 +172,12 @@ export default {
         for(let i = 0; i < materialsOnStore.length; i++){
             if(materialsOnStore[i].id === buildingToLoad.fuelNeedToFunctionalityPerDay.fuelType.id){
                 isFuelEnough = true
-                if(materialsOnStore[i].amount >= buildingToLoad.fuelNeedToFunctionalityPerDay.required){
+                if(materialsOnStore[i].amount >= buildingToLoad.fuelNeedToFunctionalityPerDay.required * buildingToLoad.amount){
                     if(!buildingToLoad.isFuelLoaded){
                         planetStore.commit('subtractResource',
                             {
                             resource: buildingToLoad.fuelNeedToFunctionalityPerDay.fuelType,
-                            amount: buildingToLoad.fuelNeedToFunctionalityPerDay.required,
+                            amount: buildingToLoad.fuelNeedToFunctionalityPerDay.required * buildingToLoad.amount,
                             from: materialsOnStore
                             })
                             planetStore.commit('loadFuelToStation', buildingToLoad.id)
@@ -182,8 +192,10 @@ export default {
         }
     },
 
+
+
     loadFuelToStation(_, id){
-        //TODO добавить зависимость загрузки топлива от количества станций(и при постройке дополнительной)
+        //TODO добавить зависимость загрузки топлива при постройке дополнительной станции
         const buildings = tradeStore.state.currentPlanet.buildings
         for(let i = 0; i < buildings.length; i++){
             if(buildings[i].id === id){
@@ -203,16 +215,21 @@ export default {
     },
 
 
-    checkThatEnergyOnPlanetIsEnough(){
-        //TODO запилить проверку на потребность энергии строящихся зданий
+    checkThatEnergyOnPlanetIsEnough(_, building){
         let requiredEnergy = 0;
+        let requiredEnergyOfBuildingsInProgress = 0
         let maxEnergy = 0;
         const buildings = tradeStore.state.currentPlanet.buildings
+        for(let i = 0; i < planetStore.state.buildingsInProgressNow.length; i++){
+            requiredEnergyOfBuildingsInProgress+=planetStore.state.buildingsInProgressNow[i].building.energyNeedToFunctionality
+        }
         for(let i = 0; i < buildings.length; i++){
             requiredEnergy += buildings[i].energyNeedToFunctionality * buildings[i].amount
-            maxEnergy += buildings[i].addEnergyToPlanet * buildings[i].amount
+            if(buildings[i].isFuelLoaded){
+                maxEnergy += buildings[i].addEnergyToPlanet * buildings[i].amount
+            }
         }
-        if(requiredEnergy > maxEnergy){
+        if(requiredEnergy + requiredEnergyOfBuildingsInProgress + building.energyNeedToFunctionality > maxEnergy){
             tradeStore.state.currentPlanet.isEnergyEnough = false
         } else {
             tradeStore.state.currentPlanet.isEnergyEnough = true
@@ -242,11 +259,6 @@ export default {
     },
 
     createBuilding(planetState, payload) {
-        //TODO запилить проверку, что после постройки здания энергии будет хватать
-        planetStore.commit('checkThatEnergyOnPlanetIsEnough')
-        if(!tradeStore.state.currentPlanet.isEnergyEnough){
-            return  planetStore.commit('sendError', 'Дефицит энергии на планете!!')
-        }
         let buildingsCount = 0
         for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i ++){
             buildingsCount += tradeStore.state.currentPlanet.buildings[i].amount
@@ -269,42 +281,42 @@ export default {
                 break;
                 case 'Склад' : {
                     const store = new Store()
-                    planetStore.commit('build', store)
+                    helpers.checkEnergyAndAddBuildingToInProgressNow(store)
                 }
                 break;
                 case 'Строительный центр' : {
                     const buildingCenter = new BuildingCenter()
-                    planetStore.commit('build', buildingCenter)
+                    helpers.checkEnergyAndAddBuildingToInProgressNow(buildingCenter)
                 }
                 break;
                 case 'Колониальный сенат' : {
                     const colonialSenate = new ColonialSenate()
-                    planetStore.commit('build', colonialSenate)
+                    helpers.checkEnergyAndAddBuildingToInProgressNow(colonialSenate)
                 }
                     break;
                 case 'Административный центр' : {
                     const administrativeCenter = new AdministrativeCenter()
-                    planetStore.commit('build', administrativeCenter)
+                    helpers.checkEnergyAndAddBuildingToInProgressNow(administrativeCenter)
                 }
                     break;
                 case 'Медицинский центр' : {
                     const medicalCenter = new MedicalCenter()
-                    planetStore.commit('build', medicalCenter)
+                    helpers.checkEnergyAndAddBuildingToInProgressNow(medicalCenter)
                 }
                     break;
                 case 'Небоскрёб' : {
                     const skyscraper = new Skyscraper()
-                    planetStore.commit('build', skyscraper)
+                     helpers.checkEnergyAndAddBuildingToInProgressNow(skyscraper)
                 }
                     break;
                 case 'Банк' : {
                     const bank = new Bank()
-                    planetStore.commit('build', bank)
+                     helpers.checkEnergyAndAddBuildingToInProgressNow(bank)
                 }
                     break;
                 case 'Космопорт' : {
                     const spacePort = new SpacePort()
-                    planetStore.commit('build', spacePort)
+                    helpers.checkEnergyAndAddBuildingToInProgressNow(spacePort)
                 }
                     break;
                 case 'Солнечная станция' : {
@@ -314,42 +326,57 @@ export default {
                     break;
                 case 'Химическая электростанция' : {
                     const chemicalPlant = new ChemicalPlant()
-                    planetStore.commit('build', chemicalPlant)
+                    planetStore.commit('checkThatFuelIsEnoughAfterBuildNewStation', chemicalPlant)
+                    helpers.checkEnergyAndAddBuildingToInProgressNow(chemicalPlant)
                 }
                     break;
                 case 'Ядерная электростанция' : {
                     const nuclearPlant = new NuclearPlant()
-                    planetStore.commit('build', nuclearPlant)
+                    planetStore.commit('checkThatFuelIsEnoughAfterBuildNewStation', nuclearPlant)
+                    helpers.checkEnergyAndAddBuildingToInProgressNow(nuclearPlant)
                 }
                     break;
                 case 'Расщепитель Альтах' : {
                     const altahSplitter = new AltahSplitter()
-                    planetStore.commit('build', altahSplitter)
+                    planetStore.commit('checkThatFuelIsEnoughAfterBuildNewStation', altahSplitter)
+                    helpers.checkEnergyAndAddBuildingToInProgressNow(altahSplitter)
                 }
                     break;
                 case 'Накопительная станция' : {
                     const accumulationStation = new AccumulationStation()
-                    planetStore.commit('build', accumulationStation)
+                    helpers.checkEnergyAndAddBuildingToInProgressNow(accumulationStation)
                 }
                     break;
                 case 'Волновая станция' : {
                     const waveStation = new WaveStation()
-                    planetStore.commit('build', waveStation)
+                    helpers.checkEnergyAndAddBuildingToInProgressNow(waveStation)
                 }
                     break;
                 case 'Очиститель руды' : {
                     const oreCleaner = new OreCleaner()
-                    planetStore.commit('build', oreCleaner)
+                    helpers.checkEnergyAndAddBuildingToInProgressNow(oreCleaner)
                 }
                     break;
                 case 'Синтезатор минералов' : {
                     const mineralSynthesizer = new MineralSynthesizer()
-                    planetStore.commit('build', mineralSynthesizer)
+                    helpers.checkEnergyAndAddBuildingToInProgressNow(mineralSynthesizer)
                 }
                     break;
             }
         } else {
             planetStore.commit('sendError', 'На планете кончилось место для застройки!')
+        }
+    },
+
+
+    checkThatFuelIsEnoughAfterBuildNewStation(_, building){
+        const stations = tradeStore.state.currentPlanet.buildings.filter(b => b.id === building.id)[0]
+        if(stations){
+            if(stations.isFuelLoaded){
+                let material = building.fuelNeedToFunctionalityPerDay.fuelType
+                material.amount = building.fuelNeedToFunctionalityPerDay.required
+                building.requiredMaterials.push(material)
+            }
         }
     },
 

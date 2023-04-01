@@ -10,11 +10,11 @@
         <div class="planet_data_name">Орбита: {{currentPlanet.orbit}}</div>
         <div class="planet_data_name">Атмосфера: {{atmosphere}}</div>
         <div class="planet_data_name">Точек застройки: {{busyBuildingPoints}} / {{currentPlanet.building_points}}</div>
-        <div class="planet_data_name" :class="`${allWeight > storeAll ? 'red': ''}`"> Склад: {{allWeight}} / {{storeAll}}</div>
+        <div class="planet_data_name" :class="`${allWeight >= storeAll ? 'red': ''}`"> Склад: {{allWeight}} / {{storeAll}}</div>
         <div class="planet_data_name border_top"> Население всего: {{ peopleAll }}</div>
-        <div class="planet_data_name" :class="`${peoplesNeedToFunctionality > peopleAll ? 'red': ''}`"> Минимальное: {{peoplesNeedToFunctionality}}</div>
+        <div class="planet_data_name" :class="`${peoplesNeedToFunctionality >= peopleAll ? 'red': ''}`"> Минимальное: {{peoplesNeedToFunctionality}}</div>
         <div class="planet_data_name border_top"> Энергия всего: {{ energyAll }}</div>
-        <div class="planet_data_name" :class="`${peoplesNeedToFunctionality > energyAll ? 'red': ''}`"> Минимальная: {{ energyNeedToFunctionality }}</div>
+        <div class="planet_data_name" :class="`${energyNeedToFunctionality >= energyAll ? 'red': ''}`"> Минимальная: {{ energyNeedToFunctionality }}</div>
     </div>
 </template>
 <script setup>

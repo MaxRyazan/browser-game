@@ -1,25 +1,9 @@
-import {Material} from "../../interfaces/Material";
 import {Electronics} from "../../materials/Electronics";
 import {Steel} from "../../materials/Steel";
 import {Polymers} from "../../materials/Polymers";
 import {Building} from "../../entities/Building";
 
 export class Colony extends Building{
-    // id: Number;
-    // name: String;
-    // costInCR: Number;
-    // costInIG: Number;
-    // costInTime: Number;
-    // onGround: Boolean;
-    // buildComponentsSpeed: Number;
-    // buildOtherBuildingsSpeed: Number;
-    // requiredMaterials: Material[];
-    // amount: Number;
-    // addPeopleToPlanet: Number;
-    // peopleNeedToFunctionality: Number;
-    // addEnergyToPlanet: Number
-    // energyNeedToFunctionality: Number
-    // addStoreToPlanet: Number
 
     constructor(amount: Number = 1, costInTime: Number = 1000) {
         super();
@@ -39,5 +23,6 @@ export class Colony extends Building{
         this.energyNeedToFunctionality = 4
         this.addStoreToPlanet = 0
         this.buildingType = 1
+        this.isFuelLoaded = true
     }
 }
