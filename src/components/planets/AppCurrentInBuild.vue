@@ -5,9 +5,6 @@
                 <span>{{item.building.name}}</span>
             </div>
             <div class="building_in_progress_wrapper-timer">
-                <span>{{item.building.amount}}</span>
-            </div>
-            <div class="building_in_progress_wrapper-timer">
                 <strong>Построится : </strong>
                 <span>{{ timer(item) }}</span>
             </div>
@@ -84,7 +81,6 @@ function timer(param) {
     }
 
     const minutes = min  < 10 ? '0' + min : min
-
     return day + ' ' + month + ' в ' + hour + ":" + minutes
 
 }

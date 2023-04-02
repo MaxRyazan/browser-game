@@ -26,7 +26,6 @@ onMounted(() => {
     const buildings =  tradeStore.state.currentPlanet.buildings
     for(let i = 0; i <  buildings.length; i++){
         buildings[i].buildingEffectiveCoefficient = tradeStore.state.currentPlanet.buildingsEffectiveCoefficient
-        console.log(buildings[i].buildingEffectiveCoefficient)
     }
 })
 const buildings = tradeStore.state.currentPlanet.buildings
@@ -57,7 +56,7 @@ const peopleAll = computed(() => {
     for(let i = 0; i < buildings.length; i++){
         peoples = peoples + buildings[i].addPeopleToPlanet * buildings[i].amount *  tradeStore.state.currentPlanet.buildingsEffectiveCoefficient
     }
-    return peoples
+    return peoples.toFixed(0)
 })
 
 const energyNeedToFunctionality = computed(() => {
@@ -78,7 +77,7 @@ const energyAll = computed(() => {
             energy = energy + buildings[i].addEnergyToPlanet * buildings[i].amount *  tradeStore.state.currentPlanet.buildingsEffectiveCoefficient
         }
     }
-    return energy
+    return  energy.toFixed(2)
 })
 
 const storeAll = computed(() => {
@@ -95,6 +94,6 @@ const currentPlanet = computed(() => {
 })
 
 const allWeight = computed(() => {
-    return tradeStore.state.currentPlanet.allStorageUnitsMass
+    return tradeStore.state.currentPlanet.allStorageUnitsMass.toFixed(1)
 })
 </script>

@@ -155,17 +155,17 @@
 .building_in_progress_wrapper-name{
   & span{
     color:  #00E000;
-    font-size: 20px;
+    font-size: calc(12px + (16 - 12) * ((100vw - 800px) / (1920 - 800)));
     font-family: FUTURE, sans-serif;
   }
 }
 .building_in_progress_wrapper-timer{
   & span{
     color: #daa548;
-    font-size: 16px;
+    font-size: calc(12px + (16 - 12) * ((100vw - 800px) / (1920 - 800)));
   }
   & strong{
-    font-size: 16px;
+    font-size: calc(12px + (16 - 12) * ((100vw - 800px) / (1920 - 800)));
     color:  #00E000;
   }
 }
@@ -362,7 +362,6 @@
 
 .molnia{
   position: absolute;
-  width: 20px;
   height: 40px;
   bottom: 65px;
   left: 10px;

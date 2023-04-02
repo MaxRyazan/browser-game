@@ -42,7 +42,7 @@
                 <div class="modules_line">{{(resource.baseMass * resource.amount).toFixed(2)}}</div>
                 <div class="modules_line_buttons">
                     <AppMiniButton name="З" :mini="true" />
-                    <AppMiniButton name="У" :mini="true" @click="planetStore.commit('removeModule',module)" />
+                    <AppMiniButton name="У" :mini="true" @click="planetStore.commit('removeResource', resource)" />
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
 import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
 import AppMiniButton from "../mini/AppMiniButton.vue";
-import {onMounted, ref} from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
 
 const showModules = ref(false)
 const showMaterials = ref(false)
@@ -80,10 +80,13 @@ function toggleShowMaterials(){
 function toggleShowResources(){
     hideAll()
     showResources.value = !showResources.value
+    planetStore.commit('checkAccumulationStationsOfCurrentPlanet')
 }
 
-
-
+const interval = setInterval(() => {
+    planetStore.commit('checkAccumulationStationsOfCurrentPlanet')
+    planetStore.commit('recycleCrudeOreToOre')
+}, 60000)
 
 onMounted(() => {
     const buttons = document.querySelectorAll('.storage')
@@ -91,5 +94,8 @@ onMounted(() => {
         buttons.forEach(item => item.style.color = '#00E000')
         b.style.color = '#daa548'
     }))
+})
+onUnmounted(() => {
+    clearInterval(interval)
 })
 </script>

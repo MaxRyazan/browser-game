@@ -19,8 +19,10 @@ import {WaveStation} from "../../buildings/resources/WaveStation.ts";
 import {OreCleaner} from "../../buildings/resources/OreCleaner.ts";
 import {MineralSynthesizer} from "../../buildings/resources/MineralSynthesizer.ts";
 import {CrudeOre} from "../../Resources/CrudeOre.ts";
-import planetGetters from "./helpers.js";
 import helpers from "./helpers.js";
+import {MetalOre} from "../../Resources/ore/MetalOre.ts";
+import {MineralOre} from "../../Resources/ore/MineralOre.ts";
+import {OrganicOre} from "../../Resources/ore/OrganicOre.ts";
 
 
 export default {
@@ -33,6 +35,7 @@ export default {
             case 'storage' : {
                 planetState.visibilityStorage = !planetState.visibilityStorage
                 planetStore.state.visibilityBuildingsInProgress = !planetStore.state.visibilityBuildingsInProgress
+                planetStore.commit('checkAccumulationStationsOfCurrentPlanet')
             }
                 break;
             case 'planetarySystem' : planetState.visibilityPlanetarySystem = !planetState.visibilityPlanetarySystem
@@ -146,6 +149,7 @@ export default {
 
 
     checkAccumulationStationsOfCurrentPlanet(){
+        //TODO запилить проверку на вместимость склада
         const accumulationStations = tradeStore.state.currentPlanet.buildings.filter(b => b.id === 14)[0]
         const isResourceExist =  tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === 8)[0]
         if(accumulationStations){
@@ -159,6 +163,50 @@ export default {
                     tradeStore.state.currentPlanet.storage.resources.push(crudeOre)
                 }
                 accumulationStations.timeOfLastProduce = Date.now()
+            }
+        }
+    },
+
+    recycleCrudeOreToOre(){
+        // TODO запилить уменьшение CRUDE_ORE при производстве руды
+        // TODO запилить проверку на наличие CRUDE_ORE при производстве руды
+        // TODO запилить проверку на вместимость склада при производстве руды. Выключить производство при переполненном складе
+        // TODO подумать как реализовать офлайн переработку
+      const oreCleaners = tradeStore.state.currentPlanet.buildings.filter(b => b.id === 16)[0]
+        if(!oreCleaners){
+           return planetStore.commit('sendError', 'Руда не очищается! Постройте очиститель руды!')
+        }
+        else {
+            const sub = (Date.now() - oreCleaners.timeOfLastProduce) / 1000    //  количество прошедших секунд  TODO сделать  количество прошедших минут
+            console.log(sub)
+            if(sub > 2){ // раз в 2 секунды TODO сделать раз в минуту
+                const count = Math.floor(sub / 2)  // подсчет сколько раз прошло по 2 секунды (чтобы посчитать amount) TODO  / 1
+                const metalOre = new MetalOre((5/3).toFixed(2) * count)
+                const mineralOre = new MineralOre((5/3).toFixed(2) * count)
+                const organicOre = new OrganicOre((5/3).toFixed(2) * count)
+
+                const isMetalOreExistOnStorage =  tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === 1)[0]
+                const isMineralOreExistOnStorage =  tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === 3)[0]
+                const isOrganicOreExistOnStorage =  tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === 2)[0]
+
+                if(isMetalOreExistOnStorage){
+                    planetStore.commit('applyResource',{resource: metalOre, amount: metalOre.amount, to: tradeStore.state.currentPlanet.storage.resources})
+                } else {
+                    tradeStore.state.currentPlanet.storage.resources.push(metalOre)
+                }
+
+                if(isMineralOreExistOnStorage){
+                    planetStore.commit('applyResource',{resource: mineralOre, amount: mineralOre.amount, to: tradeStore.state.currentPlanet.storage.resources})
+                } else {
+                    tradeStore.state.currentPlanet.storage.resources.push(mineralOre)
+                }
+
+                if(isOrganicOreExistOnStorage){
+                    planetStore.commit('applyResource',{resource: organicOre, amount: organicOre.amount, to: tradeStore.state.currentPlanet.storage.resources})
+                } else {
+                    tradeStore.state.currentPlanet.storage.resources.push(organicOre)
+                }
+                oreCleaners.timeOfLastProduce = Date.now()
             }
         }
     },
@@ -260,10 +308,14 @@ export default {
     },
 
     createBuilding(planetState, payload) {
-        //TODO запилить проверку на население
         let buildingsCount = 0
+        let maxInProgressNow = 1
         for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i ++){
             buildingsCount += tradeStore.state.currentPlanet.buildings[i].amount
+            if(tradeStore.state.currentPlanet.buildings[i].id === 5){
+                // если на планете есть стройкомбинаты, то очередь строительства ++
+                maxInProgressNow += tradeStore.state.currentPlanet.buildings[i].amount
+            }
         }
         if(tradeStore.state.currentPlanet.building_points > planetStore.state.buildingsInProgressNow.length + buildingsCount) {
             switch (payload) {
@@ -283,85 +335,149 @@ export default {
                 break;
                 case 'Склад' : {
                     const store = new Store()
-                    helpers.checkEnergyAndAddBuildingToInProgressNow(store)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(store)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                 break;
                 case 'Строительный центр' : {
                     const buildingCenter = new BuildingCenter()
-                    helpers.checkEnergyAndAddBuildingToInProgressNow(buildingCenter)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(buildingCenter)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                 break;
                 case 'Колониальный сенат' : {
                     const colonialSenate = new ColonialSenate()
-                    helpers.checkEnergyAndAddBuildingToInProgressNow(colonialSenate)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(colonialSenate)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
                 case 'Административный центр' : {
                     const administrativeCenter = new AdministrativeCenter()
-                    helpers.checkEnergyAndAddBuildingToInProgressNow(administrativeCenter)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(administrativeCenter)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
                 case 'Медицинский центр' : {
                     const medicalCenter = new MedicalCenter()
-                    helpers.checkEnergyAndAddBuildingToInProgressNow(medicalCenter)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(medicalCenter)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
                 case 'Небоскрёб' : {
                     const skyscraper = new Skyscraper()
-                     helpers.checkEnergyAndAddBuildingToInProgressNow(skyscraper)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(skyscraper)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
                 case 'Банк' : {
                     const bank = new Bank()
-                     helpers.checkEnergyAndAddBuildingToInProgressNow(bank)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(bank)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
                 case 'Космопорт' : {
                     const spacePort = new SpacePort()
-                    helpers.checkEnergyAndAddBuildingToInProgressNow(spacePort)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(spacePort)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
                 case 'Солнечная станция' : {
                     const solarPlant = new SolarPlant()
-                    planetStore.commit('build', solarPlant)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        planetStore.commit('build', solarPlant)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
                 case 'Химическая электростанция' : {
                     const chemicalPlant = new ChemicalPlant()
                     planetStore.commit('checkThatFuelIsEnoughAfterBuildNewStation', chemicalPlant)
-                    helpers.checkEnergyAndAddBuildingToInProgressNow(chemicalPlant)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(chemicalPlant)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
                 case 'Ядерная электростанция' : {
                     const nuclearPlant = new NuclearPlant()
                     planetStore.commit('checkThatFuelIsEnoughAfterBuildNewStation', nuclearPlant)
-                    helpers.checkEnergyAndAddBuildingToInProgressNow(nuclearPlant)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(nuclearPlant)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
                 case 'Расщепитель Альтах' : {
                     const altahSplitter = new AltahSplitter()
                     planetStore.commit('checkThatFuelIsEnoughAfterBuildNewStation', altahSplitter)
-                    helpers.checkEnergyAndAddBuildingToInProgressNow(altahSplitter)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(altahSplitter)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
                 case 'Накопительная станция' : {
                     const accumulationStation = new AccumulationStation()
-                    helpers.checkEnergyAndAddBuildingToInProgressNow(accumulationStation)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(accumulationStation)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
                 case 'Волновая станция' : {
                     const waveStation = new WaveStation()
-                    helpers.checkEnergyAndAddBuildingToInProgressNow(waveStation)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(waveStation)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
                 case 'Очиститель руды' : {
                     const oreCleaner = new OreCleaner()
-                    helpers.checkEnergyAndAddBuildingToInProgressNow(oreCleaner)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(oreCleaner)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
                 case 'Синтезатор минералов' : {
                     const mineralSynthesizer = new MineralSynthesizer()
-                    helpers.checkEnergyAndAddBuildingToInProgressNow(mineralSynthesizer)
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(mineralSynthesizer)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
                 }
                     break;
             }
@@ -430,7 +546,6 @@ export default {
             } else {
                 tradeStore.state.currentPlanet.buildingsEffectiveCoefficient = 1
             }
-
         }
     },
 

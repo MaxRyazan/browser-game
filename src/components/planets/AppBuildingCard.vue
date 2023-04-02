@@ -15,10 +15,10 @@
              @click="planetStore.commit('manageBuilding', building)"
              v-if="building!==undefined && building.buildingType===2 && !building.isFuelLoaded"
         >
-           <AppIcon :path="iconsPaths.molnia" :title="`Топливо не загружено в реактор!`"/>
+           <AppIcon :path="iconsPaths.molnia" :title="`Топливо не загружено в реактор! Нажмите, чтобы загрузить!`"/>
         </div>
         <div class="help_container">
-           <AppIcon :path="iconsPaths.help" @click="toggleHelp"/>
+           <AppIcon :path="iconsPaths.help" :small="true" :colored="true" @click="toggleHelp"/>
         </div>
     </div>
     <transition name="fade">

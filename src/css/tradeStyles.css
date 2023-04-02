@@ -3,6 +3,13 @@
   gap: 5px;
 }
 
+.colored {
+  border-radius: 50%;
+  border: 1px solid #00E000;
+  padding: 2px 4px;
+  background-color: white;
+}
+
 .top_nav_money_icon {
   padding: 3px 6px;
   border-radius: 6px;
@@ -11,6 +18,9 @@
 }
 .top_nav_money_icon img {
   width: 20px;
+}
+.top_nav_money_icon img.small {
+  width: 10px;
 }
 .top_nav_money_icon:hover {
   border-left: 1px solid yellow;
