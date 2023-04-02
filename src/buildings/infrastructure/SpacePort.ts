@@ -23,5 +23,6 @@ export class SpacePort extends Building{
         this.energyNeedToFunctionality = 10
         this.addStoreToPlanet = 0
         this.buildingType = 1
+        this.buildingEffectiveCoefficient = 1
     }
 }

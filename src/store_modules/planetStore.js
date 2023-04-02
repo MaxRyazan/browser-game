@@ -25,8 +25,6 @@ export default createStore({
 
         isColonyCreated: false,
         buildingsInProgressNow: [],
-        currentPlanetBuildingSpeed: 1,
-        currentPlanetPeoples: 0
     },
     mutations: planetMutations,
     actions: planetActions,

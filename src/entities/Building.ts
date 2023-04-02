@@ -21,12 +21,13 @@ export class Building implements BuildingInterface{
     requiredMaterials: Material[];
     addPeopleToPlanet: Number;
     peopleNeedToFunctionality: Number
-    addEnergyToPlanet: Number
+    addEnergyToPlanet: number
     energyNeedToFunctionality: Number
     addStoreToPlanet: Number;
     fuelNeedToFunctionalityPerDay: { fuelType: Material | ResourceInterface; required: Number } | 0;
     buildingType: Number
     isFuelLoaded?: Boolean
+    buildingEffectiveCoefficient: number;
 
     checkFuel(){
         if(this.isFuelLoaded){
@@ -34,4 +35,5 @@ export class Building implements BuildingInterface{
         }
         return 0
     }
+
 }

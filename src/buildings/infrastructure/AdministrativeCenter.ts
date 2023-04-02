@@ -22,7 +22,8 @@ export class AdministrativeCenter extends Building{
         this.peopleNeedToFunctionality = 3
         this.addEnergyToPlanet = 4
         this.energyNeedToFunctionality = 12
-        this.addStoreToPlanet = 200
+        this.buildingEffectiveCoefficient = 1
+        this.addStoreToPlanet = 200 * this.buildingEffectiveCoefficient
         this.buildingType = 1
     }
 }

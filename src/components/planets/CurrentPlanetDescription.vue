@@ -18,9 +18,18 @@
     </div>
 </template>
 <script setup>
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
+onMounted(() => {
+    planetStore.commit('checkThatPeopleEnough')
+    const buildings =  tradeStore.state.currentPlanet.buildings
+    for(let i = 0; i <  buildings.length; i++){
+        buildings[i].buildingEffectiveCoefficient = tradeStore.state.currentPlanet.buildingsEffectiveCoefficient
+        console.log(buildings[i].buildingEffectiveCoefficient)
+    }
+})
+const buildings = tradeStore.state.currentPlanet.buildings
 
 const atmosphere = computed(() => {
     return tradeStore.state.currentPlanet.atmosphere ? 'Есть': 'Нет'
@@ -29,45 +38,44 @@ const atmosphere = computed(() => {
 const busyBuildingPoints = computed(() => {
     let buildingsCount = 0;
     let buildingInProgress = planetStore.state.buildingsInProgressNow.length;
-    for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i ++){
-        buildingsCount += tradeStore.state.currentPlanet.buildings[i].amount
+    for(let i = 0; i < buildings.length; i ++){
+        buildingsCount += buildings[i].amount
     }
     return buildingsCount + buildingInProgress
 })
 
 const peoplesNeedToFunctionality = computed(() => {
     let peoples = 0
-    for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
-        peoples = peoples + tradeStore.state.currentPlanet.buildings[i].peopleNeedToFunctionality * tradeStore.state.currentPlanet.buildings[i].amount
+    for(let i = 0; i < buildings.length; i++){
+        peoples = peoples + buildings[i].peopleNeedToFunctionality * buildings[i].amount
     }
     return peoples
 })
 
 const peopleAll = computed(() => {
     let peoples = 0
-    for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
-        peoples = peoples + tradeStore.state.currentPlanet.buildings[i].addPeopleToPlanet * tradeStore.state.currentPlanet.buildings[i].amount
+    for(let i = 0; i < buildings.length; i++){
+        peoples = peoples + buildings[i].addPeopleToPlanet * buildings[i].amount *  tradeStore.state.currentPlanet.buildingsEffectiveCoefficient
     }
     return peoples
 })
 
 const energyNeedToFunctionality = computed(() => {
     let energy = 0
-    for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
-        energy = energy + tradeStore.state.currentPlanet.buildings[i].energyNeedToFunctionality * tradeStore.state.currentPlanet.buildings[i].amount
+    for(let i = 0; i < buildings.length; i++){
+        energy = energy + buildings[i].energyNeedToFunctionality * buildings[i].amount
     }
     return energy
 })
 
 const energyAll = computed(() => {
-    const buildings = tradeStore.state.currentPlanet.buildings
     let energy = 0
     if(planetStore.state.isColonyCreated){
         energy+=10
     }
     for(let i = 0; i < buildings.length; i++){
         if(buildings[i].buildingType === 2 && buildings[i].isFuelLoaded){
-            energy = energy + buildings[i].addEnergyToPlanet * buildings[i].amount
+            energy = energy + buildings[i].addEnergyToPlanet * buildings[i].amount *  tradeStore.state.currentPlanet.buildingsEffectiveCoefficient
         }
     }
     return energy
@@ -75,8 +83,8 @@ const energyAll = computed(() => {
 
 const storeAll = computed(() => {
     let store = 2000
-    for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i++){
-        store += tradeStore.state.currentPlanet.buildings[i].addStoreToPlanet * tradeStore.state.currentPlanet.buildings[i].amount
+    for(let i = 0; i < buildings.length; i++){
+        store += buildings[i].addStoreToPlanet * buildings[i].amount *  tradeStore.state.currentPlanet.buildingsEffectiveCoefficient
     }
     return store
 })

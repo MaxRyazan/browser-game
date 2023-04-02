@@ -12,6 +12,7 @@ export class Planet {
         public picture: String,
         public isEnergyEnough: Boolean,
         public allStorageUnitsMass: Number,
+        public buildingsEffectiveCoefficient: Number,
         public storage: {
             maxCapacity: Number,
             modules: {},
@@ -33,5 +34,6 @@ export class Planet {
         this.peoples = peoples
         this.isEnergyEnough = isEnergyEnough
         this.allStorageUnitsMass = allStorageUnitsMass
+        this.buildingsEffectiveCoefficient = buildingsEffectiveCoefficient
     }
 }

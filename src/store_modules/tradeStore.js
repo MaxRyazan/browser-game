@@ -10,6 +10,8 @@ export default createStore({
         player: fakeData.player,
 
         currentPlanet: fakeData.player.playerData.playerPlanets.homeWorld,
+        buildingsEffectiveCoefficient: 1,
+
 
         allLots: reactive([
             fakeData.lot1,

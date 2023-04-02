@@ -129,9 +129,9 @@ export default {
     },
 
     calculateWeightOfAllOnStorage(_){
-        const modules = helpers.calculateWeightOfThis(tradeStore.state.currentPlanet.storage.modules)
-        const resources = helpers.calculateWeightOfThis(tradeStore.state.currentPlanet.storage.resources)
-        const materials = helpers.calculateWeightOfThis(tradeStore.state.currentPlanet.storage.materials)
+        const modules = helpers.calculateWeightOfThisArray(tradeStore.state.currentPlanet.storage.modules)
+        const resources = helpers.calculateWeightOfThisArray(tradeStore.state.currentPlanet.storage.resources)
+        const materials = helpers.calculateWeightOfThisArray(tradeStore.state.currentPlanet.storage.materials)
         tradeStore.state.currentPlanet.allStorageUnitsMass = modules + resources + materials
     },
 
@@ -195,7 +195,6 @@ export default {
 
 
     loadFuelToStation(_, id){
-        //TODO добавить зависимость загрузки топлива при постройке дополнительной станции
         const buildings = tradeStore.state.currentPlanet.buildings
         for(let i = 0; i < buildings.length; i++){
             if(buildings[i].id === id){
@@ -250,7 +249,9 @@ export default {
             buildingSpeed = buildingSpeed + tradeStore.state.currentPlanet.buildings[i].buildOtherBuildingsSpeed
         }
         building.costInTime = building.costInTime - (building.costInTime * (buildingSpeed - 1))
-        planetStore.commit('isMaterialsEnough', {materials: building.requiredMaterials, building: building})
+        if(helpers.subtractCRAndIGForBuild(building)){
+            planetStore.commit('isMaterialsEnough', {materials: building.requiredMaterials, building: building})
+        }
     },
 
     sendError(_, message){
@@ -259,6 +260,7 @@ export default {
     },
 
     createBuilding(planetState, payload) {
+        //TODO запилить проверку на население
         let buildingsCount = 0
         for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i ++){
             buildingsCount += tradeStore.state.currentPlanet.buildings[i].amount
@@ -410,5 +412,26 @@ export default {
                 storeMaterials[i].amount = storeMaterials[i].amount - material.amount
             }
         }
-    }
+    },
+
+    checkThatPeopleEnough(_){
+        let percent;
+        let allPlanetPeople = 0
+        let neededPeople = 0
+        const buildings =  tradeStore.state.currentPlanet.buildings
+        for(let i = 0; i < buildings.length; i ++){
+            allPlanetPeople += buildings[i].addPeopleToPlanet * buildings[i].amount
+            neededPeople += buildings[i].peopleNeedToFunctionality * buildings[i].amount
+        }
+        if(allPlanetPeople !== 0){
+            percent = neededPeople * 100 / allPlanetPeople
+            if(percent > 100){
+                tradeStore.state.currentPlanet.buildingsEffectiveCoefficient = (100 - (percent - 100)) / 100
+            } else {
+                tradeStore.state.currentPlanet.buildingsEffectiveCoefficient = 1
+            }
+
+        }
+    },
+
 }

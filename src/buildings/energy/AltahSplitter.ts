@@ -23,7 +23,8 @@ export class AltahSplitter extends Building{
         this.amount = amount
         this.addPeopleToPlanet = 0
         this.peopleNeedToFunctionality = 0
-        this.addEnergyToPlanet = 200
+        this.buildingEffectiveCoefficient = 1
+        this.addEnergyToPlanet = 200 * this.buildingEffectiveCoefficient
         this.energyNeedToFunctionality = 1
         this.addStoreToPlanet = 0
         this.buildingType = 2

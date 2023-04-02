@@ -3,7 +3,7 @@ import planetStore from "../../store_modules/planetStore.js";
 
 export default {
 
-    calculateWeightOfThis(param){
+    calculateWeightOfThisArray(param){
         let weight = 0;
         if(param.length){
             for(let i = 0; i < param.length; i ++){
@@ -29,5 +29,20 @@ export default {
             return  planetStore.commit('sendError', 'Дефицит энергии на планете!!')
         }
         planetStore.commit('build', building)
+    },
+
+    subtractCRAndIGForBuild(building){
+        const neededCR = building.costInCR
+        const neededIG = building.costInIG
+        const currentCR = tradeStore.state.player.playerData.playerMoney.CR
+        const currentIG = tradeStore.state.player.playerData.playerMoney.IG
+        if(neededCR > currentCR || neededIG > currentIG){
+            planetStore.commit('sendError', 'Нехватает денег для постройки здания!')
+            return false
+        } else {
+            tradeStore.state.player.playerData.playerMoney.CR -= neededCR
+            tradeStore.state.player.playerData.playerMoney.IG -= neededIG
+        }
+        return true
     }
 }

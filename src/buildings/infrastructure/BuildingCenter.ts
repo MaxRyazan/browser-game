@@ -15,7 +15,8 @@ export class BuildingCenter extends Building{
         this.onGround = true
         this.costInTime = costInTime
         this.buildComponentsSpeed = 0
-        this.buildOtherBuildingsSpeed = 0.5
+        this.buildingEffectiveCoefficient = 1
+        this.buildOtherBuildingsSpeed = 0.5 * this.buildingEffectiveCoefficient
         this.requiredMaterials = [new ConstructionMaterials(7), new Electronics(7), new Steel(9), new Polymers(2)]
         this.amount = amount
         this.addPeopleToPlanet = 0

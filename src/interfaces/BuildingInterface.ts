@@ -29,4 +29,5 @@ export interface BuildingInterface {
     fuelNeedToFunctionalityPerDay: {fuelType: Material | ResourceInterface, required: Number} | 0
     fuelLoadTime? : Number
     buildingType: Number
+    buildingEffectiveCoefficient: Number
 }

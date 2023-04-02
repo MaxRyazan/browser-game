@@ -2,7 +2,6 @@ import {Building} from "../../entities/Building";
 import {Electronics} from "../../materials/Electronics";
 import {Steel} from "../../materials/Steel";
 import {ConstructionMaterials} from "../../materials/ConstructionMaterials";
-import {Altah} from "../../Resources/mineral/Altah";
 import {ChemicalFuel} from "../../materials/ChemicalFuel";
 
 export class ChemicalPlant extends Building{
@@ -22,7 +21,8 @@ export class ChemicalPlant extends Building{
         this.amount = amount
         this.addPeopleToPlanet = 0
         this.peopleNeedToFunctionality = 2
-        this.addEnergyToPlanet = 25
+        this.buildingEffectiveCoefficient = 1
+        this.addEnergyToPlanet = 25 * this.buildingEffectiveCoefficient
         this.energyNeedToFunctionality = 1
         this.addStoreToPlanet = 0
         this.buildingType = 2

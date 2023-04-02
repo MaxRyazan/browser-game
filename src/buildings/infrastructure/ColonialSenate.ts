@@ -23,5 +23,6 @@ export class ColonialSenate extends Building{
         this.energyNeedToFunctionality = 8
         this.addStoreToPlanet = 0
         this.buildingType = 1
+        this.buildingEffectiveCoefficient = 1
     }
 }

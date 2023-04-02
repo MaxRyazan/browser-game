@@ -22,7 +22,8 @@ export class Bank extends Building{
         this.peopleNeedToFunctionality = 5
         this.addEnergyToPlanet = 0
         this.energyNeedToFunctionality = 12
-        this.addCRToPlanet = 50
+        this.buildingEffectiveCoefficient = 1
+        this.addCRToPlanet = 50 * this.buildingEffectiveCoefficient
         this.addStoreToPlanet = 0
         this.buildingType = 1
     }

@@ -24,7 +24,8 @@ export class MedicalCenter extends Building{
         this.addEnergyToPlanet = 0
         this.energyNeedToFunctionality = 10
         this.addStoreToPlanet = 0
-        this.addHealthToPlanet = 0.5
+        this.buildingEffectiveCoefficient = 1
+        this.addHealthToPlanet = 0.5 * this.buildingEffectiveCoefficient
         this.buildingType = 1
     }
 }

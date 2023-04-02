@@ -18,7 +18,8 @@ export class SolarPlant extends Building{
         this.amount = amount
         this.addPeopleToPlanet = 0
         this.peopleNeedToFunctionality = 0
-        this.addEnergyToPlanet = 15
+        this.buildingEffectiveCoefficient = 1
+        this.addEnergyToPlanet = 15 * this.buildingEffectiveCoefficient
         this.energyNeedToFunctionality = 0
         this.addStoreToPlanet = 0
         this.buildingType = 2

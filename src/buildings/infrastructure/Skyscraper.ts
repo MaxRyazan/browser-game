@@ -17,7 +17,8 @@ export class Skyscraper extends Building{
         this.buildOtherBuildingsSpeed = 0
         this.requiredMaterials = [new ConstructionMaterials(100), new Electronics(10), new Steel(10)]
         this.amount = amount
-        this.addPeopleToPlanet = 50
+        this.buildingEffectiveCoefficient = 1
+        this.addPeopleToPlanet = 50 * this.buildingEffectiveCoefficient
         this.peopleNeedToFunctionality = 1
         this.addEnergyToPlanet = 0
         this.energyNeedToFunctionality = 5
