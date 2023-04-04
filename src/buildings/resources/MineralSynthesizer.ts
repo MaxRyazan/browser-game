@@ -9,7 +9,8 @@ import {CrudeMineralOre} from "../../Resources/CrudeMineralOre";
 
 export class MineralSynthesizer extends Building{
     isResourceLoaded: Boolean
-    constructor(amount: Number = 1, costInTime: Number = 40000) {
+    timeOfLastProduce: Number
+    constructor(amount: Number = 1, costInTime: Number = 1000) {
         super();
         this.id = 17
         this.name = 'Синтезатор минералов'
@@ -30,5 +31,6 @@ export class MineralSynthesizer extends Building{
         this.canProduce= {type: [Delitium, Quantium, Tellurium], amount: 5}
         this.resourcesNeedToFunctionality= {type: [new CrudeMineralOre()], amount: 5}
         this.isResourceLoaded = false
+        this.timeOfLastProduce = Date.now()
     }
 }

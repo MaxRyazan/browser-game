@@ -1,6 +1,6 @@
 <template>
         <div class="error_wrapper">
-            <span>{{ error }}</span>
+            <h3>{{ error }}</h3>
         </div>
 </template>
 

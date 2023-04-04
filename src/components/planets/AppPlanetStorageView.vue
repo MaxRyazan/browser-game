@@ -81,12 +81,16 @@ function toggleShowResources(){
     hideAll()
     showResources.value = !showResources.value
     planetStore.commit('checkAccumulationStationsOfCurrentPlanet')
+    planetStore.commit('checkWaveStationsOfCurrentPlanet')
 }
 
 const interval = setInterval(() => {
     planetStore.commit('checkAccumulationStationsOfCurrentPlanet')
+    planetStore.commit('checkWaveStationsOfCurrentPlanet')
     planetStore.commit('recycleCrudeOreToOre')
-}, 60000)
+    planetStore.commit('recycleCrudeMineralOreToMinerals')
+    console.log('1111')
+}, 6000)
 
 onMounted(() => {
     const buttons = document.querySelectorAll('.storage')

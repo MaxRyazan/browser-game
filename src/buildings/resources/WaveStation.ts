@@ -5,7 +5,8 @@ import {Steel} from "../../materials/Steel";
 import {CrudeMineralOre} from "../../Resources/CrudeMineralOre";
 
 export class WaveStation extends Building{
-    constructor(amount: Number = 1, costInTime: Number = 40000) {
+    timeOfLastProduce: Number
+    constructor(amount: Number = 1, costInTime: Number = 1000) {
         super();
         this.id = 15
         this.name = 'Волновая платформа'
@@ -24,5 +25,6 @@ export class WaveStation extends Building{
         this.addStoreToPlanet = 0
         this.buildingType = 3
         this.canProduce= {type: [CrudeMineralOre], amount: 5}
+        this.timeOfLastProduce = Date.now()
     }
 }

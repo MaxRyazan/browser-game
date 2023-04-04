@@ -9,7 +9,7 @@ import {CrudeOre} from "../../Resources/CrudeOre";
 
 export class OreCleaner extends Building{
     timeOfLastProduce: Number
-    constructor(amount: Number = 1, costInTime: Number = 40000) {
+    constructor(amount: Number = 1, costInTime: Number = 1000) {
         super();
         this.id = 16
         this.name = 'Очиститель руды'

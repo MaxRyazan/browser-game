@@ -1,5 +1,6 @@
 import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
+import variables from "../../variables.js";
 
 export default {
 
@@ -18,8 +19,6 @@ export default {
     },
 
     isStorageNotFull(){
-        //TODO добавить эту проверку к варке ресурсов, модулей и торговле
-        console.log(tradeStore.state.currentPlanet.allStorageUnitsMass <  tradeStore.state.currentPlanet.storage.maxCapacity)
         return tradeStore.state.currentPlanet.allStorageUnitsMass <  tradeStore.state.currentPlanet.storage.maxCapacity
     },
 
@@ -43,6 +42,17 @@ export default {
             tradeStore.state.player.playerData.playerMoney.CR -= neededCR
             tradeStore.state.player.playerData.playerMoney.IG -= neededIG
         }
+        return true
+    },
+
+    checkCrudeOreAndSubtract(stationsId, crudeOreId) {
+        const storage = tradeStore.state.currentPlanet.storage.resources
+        const oreCleaners = tradeStore.state.currentPlanet.buildings.filter(b => b.id === stationsId)[0]
+        const crudeOre = storage.filter( r => r.id === crudeOreId)[0]
+        if(!crudeOre){
+            return false
+        }
+        crudeOre.amount = crudeOre.amount - 5 * oreCleaners.amount
         return true
     }
 }
