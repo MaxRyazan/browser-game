@@ -207,7 +207,6 @@ export default {
             const sub = (Date.now() - oreCleaners.timeOfLastProduce) / 1000    //  количество прошедших секунд  TODO сделать  количество прошедших минут
 
             if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(variables.oreCleanersId, variables.crudeOreId)){ // раз в 2 секунды TODO сделать раз в минуту
-            // if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(oreCleaners, )){ // раз в 2 секунды TODO сделать раз в минуту
                 const count = Math.floor(sub / variables.timeOfResourceProduce)  // подсчет сколько раз прошло по 2 секунды (чтобы посчитать amount) TODO  / 1
                 const metalOre = new MetalOre((5/3 * oreCleaners.amount).toFixed(2) * count)
                 const mineralOre = new MineralOre((5/3 * oreCleaners.amount).toFixed(2) * count)

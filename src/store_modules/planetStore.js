@@ -1,7 +1,6 @@
 import planetMutations from "../js/planets/planetMutations.js";
 import {createStore} from "vuex";
 import planetActions from "../js/planets/planetActions.js";
-import planetGetters from "../js/planets/helpers.js";
 
 
 

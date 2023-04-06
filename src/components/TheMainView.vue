@@ -25,7 +25,13 @@ import helpStore from "../store_modules/helpStore.js";
 import CurrentPlanet from './planets/CurrentPlanet.vue'
 import ThePlanetarySystem from '../components/planets/ThePlanetarySystem.vue'
 import TheHelp from "./help/TheHelp.vue";
+import {onMounted} from "vue";
 
+import {Mutations} from '../js/trade/mutations.js'
+const mutations = new Mutations()
+onMounted(() => {
+    mutations.removeIdenticalElements()
+})
 </script>
 <style lang="scss">
 .fade-enter-from,

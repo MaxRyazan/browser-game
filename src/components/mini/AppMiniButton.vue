@@ -1,9 +1,17 @@
 <template>
-    <button class="planet_navigation_btn" :class="{circle_right_border: circleRightBorder, active:active, storage: storage, buildings: buildings, nav: nav, mini: mini}">{{name}}</button>
+    <button class="planet_navigation_btn"
+            :class="{circle_right_border: circleRightBorder, active:active, storage: storage, buildings: buildings, nav: nav, mini: mini, medium: medium}"
+            :type="type"
+    >
+        {{name}}
+    </button>
 </template>
 
 <script setup>
 defineProps({
+    type: {
+      type: String
+    },
     name: {
         type: String,
         required: true
@@ -13,6 +21,10 @@ defineProps({
         required: false
     },
     mini: {
+        type: Boolean,
+        required: false
+    },
+    medium: {
         type: Boolean,
         required: false
     },

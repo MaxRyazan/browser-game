@@ -1,4 +1,4 @@
-import {Race} from "../interfaces/Race";
+import {RaceInterface} from "../interfaces/RaceInterface";
 import {Necrons} from "../races/Necrons";
 import {AlienTechnology} from "../Technologies/AlienTechnology";
 import {Module} from "../interfaces/Module";
@@ -7,7 +7,7 @@ export class AltahReactor implements Module{
     public id: Number
     public picture: String
     public requiredTech: {}
-    public belongsToRace: Race
+    public belongsToRace: RaceInterface
     public name: String
     public amount: Number
     public costInBuildPoints: Number
@@ -39,7 +39,7 @@ export class AltahReactor implements Module{
         autoPilot: Boolean
     }
 
-    constructor(belongsToRace: Race, amount: Number = 1) {
+    constructor(belongsToRace: RaceInterface, amount: Number = 1) {
         this.id = 3
         this.picture = './src/assets/images/altah_reactor.jpg'
         this.requiredTech = [new AlienTechnology()]

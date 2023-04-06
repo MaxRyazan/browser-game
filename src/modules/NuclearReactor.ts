@@ -1,4 +1,4 @@
-import {Race} from "../interfaces/Race";
+import {RaceInterface} from "../interfaces/RaceInterface";
 import {NuclearPhysics} from "../Technologies/NuclearPhysics";
 import {Module} from "../interfaces/Module";
 
@@ -6,7 +6,7 @@ export class NuclearReactor implements Module{
     public id: Number
     public picture: String
     public requiredTech: {}
-    public belongsToRace: Race
+    public belongsToRace: RaceInterface
     public name: String
     public amount?: Number
     public costInBuildPoints: Number
@@ -38,7 +38,7 @@ export class NuclearReactor implements Module{
         autoPilot: Boolean
     }
 
-    constructor(belongsToRace: Race, amount: Number = 1) {
+    constructor(belongsToRace: RaceInterface, amount: Number = 1) {
         this.id = 2
         this.picture = './src/assets/images/nuclear_reactor.jpg'
         this.requiredTech = [new NuclearPhysics()]

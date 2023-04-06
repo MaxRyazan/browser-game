@@ -1,39 +1,44 @@
 import {PlanetarySystem} from "./PlanetarySystem";
 import {Building} from "./Building";
+import {Player} from "./Player";
 
 export class Planet {
-    constructor(
-        public id: Number,
-        public name: String,
-        public planetarySystem: PlanetarySystem,
-        public orbit: Number,
-        public atmosphere: Boolean,
-        public building_points: Number,
-        public picture: String,
-        public isEnergyEnough: Boolean,
-        public allStorageUnitsMass: Number,
-        public buildingsEffectiveCoefficient: Number,
-        public storage: {
-            maxCapacity: Number,
-            modules: {},
-            materials: {},
-            resources: {}
-        },
-        public buildings: Building[],
-        public peoples: Number
-    ) {
+    id: Number
+    name: String
+    planetarySystem: PlanetarySystem
+    orbit: Number
+    atmosphere: Boolean
+    building_points: Number
+    picture: String
+    isEnergyEnough: Boolean
+    allStorageUnitsMass: Number
+    buildingsEffectiveCoefficient: Number
+    storage: {
+        maxCapacity: Number,
+        modules: {},
+        materials: {},
+        resources: {}
+    }
+    buildings: Building[]
+    peoples: Number
+    constructor(id: Number, name: String, atmosphere: Boolean) {
         this.id = id
         this.name = name
-        this.planetarySystem = planetarySystem
-        this.orbit = orbit
+        this.planetarySystem = new PlanetarySystem(2, `A${Math.random()}`, {x: Math.random(), y: Math.random()}, Math.random(), [])
+        this.orbit = 2
         this.atmosphere = atmosphere
-        this.building_points = building_points
-        this.picture = picture
-        this.storage = storage
-        this.buildings = buildings
-        this.peoples = peoples
-        this.isEnergyEnough = isEnergyEnough
-        this.allStorageUnitsMass = allStorageUnitsMass
-        this.buildingsEffectiveCoefficient = buildingsEffectiveCoefficient
+        this.building_points = 310
+        this.picture = ''
+        this.isEnergyEnough = false
+        this.allStorageUnitsMass = 0
+        this.buildingsEffectiveCoefficient = 1
+        this.storage = {
+            maxCapacity: 2000,
+            modules: [],
+            materials: [],
+            resources: []
+        }
+        this.buildings = []
+        this.peoples = 0
     }
 }

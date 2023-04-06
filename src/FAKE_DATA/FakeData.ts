@@ -27,9 +27,11 @@ export class FakeData {
     biology = new Biology()
     higherMathematics = new HigherMathematics()
 
-    public planet_MERCURY = new Planet(1, 'Меркурий', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 1, false, 190, '', false, 0,1, {maxCapacity: 2000, modules: [], materials: [], resources: []}, [], 0);
-    public planet_VENUS = new Planet(2, 'Венера', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 2, false, 280, '', false, 0,1,{maxCapacity: 2000, modules: [], materials: [], resources: []}, [], 0);
-    public planet_EARTH = new Planet(3, 'Земля', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 3, true, 310, '', false, 0, 1, {maxCapacity: 2000, modules: [], materials: [new ConstructionMaterials(300), new Electronics(125), new Polymers(121), new Steel(125), new Quadria(100), new Vettur(100), new ChemicalFuel(100)], resources: [new Altah(3), new Delitium(81)]},  [], 0);
+    public planet_MERCURY = new Planet(1, 'Меркурий', false);
+    public planet_VENUS = new Planet(2, 'Венера', false);
+    // public planet_VENUS = new Planet(2, 'Венера', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 2, false, 280, '', false, 0,1,{maxCapacity: 2000, modules: [], materials: [], resources: []}, [], 0);
+    // public planet_EARTH = new Planet(3, 'Земля', {id: 1, name: 'Солнечная система', coordinates: {x: 10, y: 25}, orbits: 3, planets: []}, 3, true, 310, '', false, 0, 1, {maxCapacity: 2000, modules: [], materials: [new ConstructionMaterials(300), new Electronics(125), new Polymers(121), new Steel(125), new Quadria(100), new Vettur(100), new ChemicalFuel(100)], resources: [new Altah(3), new Delitium(81)]},  [], 0);
+    public planet_EARTH = new Planet(3, 'Земля', true);
     public solarSystem = new PlanetarySystem(
         1,
         'Солнечная система',
@@ -39,27 +41,7 @@ export class FakeData {
     );
 
 
-    public player = new Player(
-        1, 'gecaHTHuk', 'email@email.ru', 'password',
-        {
-            race: Humans,
-            playerMoney: {CR: 10000, IG: 500000},
-            playerScience: 100,
-            playerKnowledge: {
-                learned: [this.mathematics, this.biology],
-                inLearnNow: {
-                    tech: this.higherMathematics,
-                    starting_at: Date.now(),
-                    ending_at: Date.now() + 3600000
-                }
-            },
-            playerPlanets: {
-                homeWorld: this.planet_EARTH,
-                inhabitedPlanets: [this.planet_VENUS]
-            },
-            playerShips: [],
-        },
-    )
+    public player = new Player(1, 'gecaHTHuk', 'password', 'email@email.ru', 'Earth', new Humans())
 
     lot1 = new Lot(1,{id: this.player.id, login: this.player.login}, 200, 12, new ChemicalReactor(new Humans()))
     lot2 = new Lot(2, {id: this.player.id, login: this.player.login}, 180, 120, new AltahReactor(new Necrons()))

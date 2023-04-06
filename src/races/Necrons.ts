@@ -1,6 +1,6 @@
-import {Race} from "../interfaces/Race";
+import {Race} from "./Race";
 
-export class Necrons implements Race {
+export class Necrons  extends Race  {
     public id: Number
     public name: String
     public params: {
@@ -13,6 +13,7 @@ export class Necrons implements Race {
     public atmosphere: Boolean
 
     constructor() {
+        super();
         this.id = 3
         this.name = 'Некроны'
         this.params = {

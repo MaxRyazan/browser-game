@@ -1,4 +1,4 @@
-export interface Technology {
+export interface TechnologyInterface {
     id: Number
     name: String
     cost: Number

@@ -1,10 +1,10 @@
-import {Race} from "./Race";
+import {RaceInterface} from "./RaceInterface";
 
 export interface Module{
      id?: Number
      picture?: String
      requiredTech?: {}
-     belongsToRace?: Race
+     belongsToRace?: RaceInterface
      name?: String
      amount?: Number
     costInBuildPoints?: Number

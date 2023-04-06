@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import TheMainView from './components/TheMainView.vue'
-import TheTradeView from "./components/trade/TheTradeView.vue";
+import TheLoginView from "./components/account/TheLoginView.vue";
+import TheRegistrationView from "./components/account/TheRegistrationView.vue";
 
 export const router = createRouter({
     history: createWebHistory(),
@@ -11,11 +12,21 @@ export const router = createRouter({
             component: TheMainView
         },
         {
-            path: '/trade',
-            name: 'trade',
-            // component: () => import('./components/trade/TheTradeView.vue')
-            component: TheTradeView
-        }
+            path: '/login',
+            name: 'login',
+            component: TheLoginView
+        },
+        {
+            path: '/registration',
+            name: 'registration',
+            component: TheRegistrationView
+        },
+        // {
+        //     path: '/trade',
+        //     name: 'trade',
+        //     component: () => import('./components/trade/TheTradeView.vue')
+        //     // component: TheTradeView
+        // }
     ]
 })
 

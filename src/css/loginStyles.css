@@ -1,0 +1,49 @@
+.login_wrapper {
+  max-width: 1920px;
+  height: 50vh;
+  min-height: 480px;
+  background-color: rgb(169, 93, 5);
+  position: relative;
+  padding: 25vh 0;
+  margin: 0 auto;
+}
+
+.login_window {
+  border: 1px solid red;
+  max-width: 984px;
+  min-width: 280px;
+  max-height: 728px;
+  min-height: 440px;
+  margin: auto;
+}
+
+.login_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.login_input {
+  width: 50%;
+  min-width: 250px;
+  padding: 2px 5px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+  outline: none;
+  border: none;
+  background-color: inherit;
+  border-bottom: 2px solid white;
+  border-top: 2px solid white;
+  border-radius: 20%;
+  color: white;
+  letter-spacing: 2px;
+}
+.login_input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/*# sourceMappingURL=loginStyles.css.map */

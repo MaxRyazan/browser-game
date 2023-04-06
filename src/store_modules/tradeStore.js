@@ -7,7 +7,7 @@ const fakeData = new FakeData();
 
 export default createStore({
     state: {
-        player: fakeData.player,
+        player: {},
 
         currentPlanet: fakeData.player.playerData.playerPlanets.homeWorld,
         buildingsEffectiveCoefficient: 1,

@@ -1,4 +1,4 @@
-export interface Race{
+export interface RaceInterface {
     id: Number,
     name: String,
     atmosphere: Boolean,

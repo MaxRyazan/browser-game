@@ -9,7 +9,7 @@ export class WaveStation extends Building{
     constructor(amount: Number = 1, costInTime: Number = 1000) {
         super();
         this.id = 15
-        this.name = 'Волновая платформа'
+        this.name = 'Волновая станция'
         this.costInCR = 110
         this.costInIG = 0
         this.onGround = true
