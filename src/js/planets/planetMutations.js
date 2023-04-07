@@ -167,13 +167,14 @@ export default {
 
 
     checkAccumulationStationsOfCurrentPlanet(){
+        console.log(tradeStore.state.currentPlanet)
         const accumulationStations = tradeStore.state.currentPlanet.buildings.filter(b => b.id ===  variables.accumulationStationsId)[0]
         const isResourceExist =  tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.crudeOreId)[0]
         if(accumulationStations && helpers.isStorageNotFull()){
         const accumulationStationsCount = accumulationStations.amount
-            const sub = (Date.now() - accumulationStations.timeOfLastProduce) / 1000    //  количество прошедших секунд  TODO сделать  количество прошедших минут
-            if(sub > variables.timeOfResourceProduce){ // раз в 2 секунды TODO сделать раз в минуту
-                const count = Math.floor(sub / variables.timeOfResourceProduce)  // подсчет сколько раз прошло по 2 секунды (чтобы посчитать amount) TODO  / 1
+            const sub = (Date.now() - accumulationStations.timeOfLastProduce) / variables.fiveMinutes  //раз в 5 минут производство реса
+            if(sub > variables.timeOfResourceProduce){ // если прошло больше одного раз по пять минут
+                const count = Math.floor(sub / variables.timeOfResourceProduce)  // подсчет сколько раз должен был произвестись рес за прошедшее время
                 const crudeOre = new CrudeOre(5 * count * accumulationStationsCount)
                 if(isResourceExist){
                     planetStore.commit('applyResource',{resource: crudeOre, amount: crudeOre.amount, to: tradeStore.state.currentPlanet.storage.resources})
@@ -183,6 +184,7 @@ export default {
                 accumulationStations.timeOfLastProduce = Date.now()
             }
         }
+        planetStore.commit('savePlayerToLocalStorage')
     },
 
     checkWaveStationsOfCurrentPlanet(){
@@ -190,9 +192,9 @@ export default {
         const isResourceExist =  tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.crudeMineralOreId)[0]
         if(waveStations && helpers.isStorageNotFull()){
             const waveStationsCount = waveStations.amount
-            const sub = (Date.now() - waveStations.timeOfLastProduce) / 1000    //  количество прошедших секунд  TODO сделать  количество прошедших минут
-            if(sub > variables.timeOfResourceProduce){ // раз в 2 секунды TODO сделать раз в минуту
-                const count = Math.floor(sub / variables.timeOfResourceProduce)  // подсчет сколько раз прошло по 2 секунды (чтобы посчитать amount) TODO  / 1
+            const sub = (Date.now() - waveStations.timeOfLastProduce) / variables.fiveMinutes
+            if(sub > variables.timeOfResourceProduce){
+                const count = Math.floor(sub / variables.timeOfResourceProduce)
                 const crudeMineralOre = new CrudeMineralOre(5 * count * waveStationsCount)
                 if(isResourceExist){
                     planetStore.commit('applyResource',{resource: crudeMineralOre, amount: crudeMineralOre.amount, to: tradeStore.state.currentPlanet.storage.resources})
@@ -205,7 +207,6 @@ export default {
     },
 
     recycleCrudeOreToOre(){
-        // TODO подумать как реализовать офлайн переработку
       const oreCleaners = tradeStore.state.currentPlanet.buildings.filter(b => b.id === variables.oreCleanersId)[0]
         if(!oreCleaners){
            return false

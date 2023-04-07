@@ -2,7 +2,8 @@
 
 const variables =  {
 // время в секундах с момента последнего производства здания
-    timeOfResourceProduce: 2, // секунды
+    timeOfResourceProduce: 1, // разница времени в производстве
+    fiveMinutes: 300000, // 5 минут в м-сек
     oneDayInMilliseconds: 86400000,
 
 // ресурсы
