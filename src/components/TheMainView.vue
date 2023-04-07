@@ -31,6 +31,7 @@ import {Mutations} from '../js/trade/mutations.js'
 const mutations = new Mutations()
 onMounted(() => {
     mutations.removeIdenticalElements()
+    planetStore.commit('addTestMaterials')
 })
 </script>
 <style lang="scss">

@@ -9,7 +9,7 @@
         </div>
         <div class="building_controls">
             <button class="building_card_btn" @click="planetStore.commit('createBuilding', name)">Построить</button>
-            <button class="building_card_btn">Сломать</button>
+            <button class="building_card_btn" @click="planetStore.commit('removeBuilding', building)">Сломать</button>
         </div>
         <div class="molnia"
              @click="planetStore.commit('manageBuilding', building)"
@@ -71,7 +71,7 @@ defineProps({
         required: true
     },
     building: {
-        type: Building,
+        type: Object,
         required: false
     },
     buildingInfo: {

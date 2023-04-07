@@ -2,27 +2,26 @@
   max-width: 1920px;
   height: calc(100vh - 50vh);
   min-height: 480px;
-  background-color: rgb(169, 93, 5);
   position: relative;
   padding: 25vh 0;
   margin: 0 auto;
-  //&::after{
-  //  content: '';
-  //  max-width: 1640px;
-  //  margin: auto;
-  //  background-image: url('../assets/images/login_bg.jpg');
-  //  position: absolute;
-  //  left: 0;
-  //  right: 0;
-  //  top: 0;
-  //  bottom: 0;
-  //  background-size: auto;
-  //  background-repeat: no-repeat;
-  //  background-position: center;
-  //}
+  &::after{
+    content: '';
+    max-width: 1920px;
+    margin: auto;
+    background-image: url('../assets/images/login_bg.jpg');
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -2;
+  }
 }
 .login_window{
-  border: 1px solid red;
   max-width: calc(1024px - 40px);
   min-width: calc(320px - 40px);
   max-height: calc(768px - 40px);
@@ -47,12 +46,12 @@
   outline: none;
   border: none;
   background-color: inherit;
-  border-bottom: 2px solid white;
-  border-top: 2px solid white;
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
   border-radius: 20%;
   color: white;
   letter-spacing: 2px;
   &::placeholder{
-    color: rgba(255, 255, 255, .5)
+    color: rgba(0, 0, 0, .5)
   }
 }

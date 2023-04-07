@@ -5,9 +5,7 @@ import {ConstructionMaterials} from "../../materials/ConstructionMaterials";
 import {ChemicalFuel} from "../../materials/ChemicalFuel";
 
 export class ChemicalPlant extends Building{
-    fuelLoadTime: Number
-    isFuelLoaded: Boolean
-    constructor(amount: Number = 1, costInTime: Number = 1000, fuelLoadTime?: Number) {
+    constructor(amount: Number = 1, costInTime: Number = 1000) {
         super();
         this.id = 11
         this.name = 'Химическая электростанция'
@@ -27,7 +25,14 @@ export class ChemicalPlant extends Building{
         this.addStoreToPlanet = 0
         this.buildingType = 2
         this.isFuelLoaded = false
-        this.fuelLoadTime = fuelLoadTime
+        this.fuelLoadTime = 0
         this.fuelNeedToFunctionalityPerDay = {fuelType: new ChemicalFuel(), required: 48.8}
     }
+    // checkFuel(){
+    //     console.log('3333')
+    //     if(this.isFuelLoaded){
+    //         return this.addEnergyToPlanet
+    //     }
+    //     return 0
+    // }
 }

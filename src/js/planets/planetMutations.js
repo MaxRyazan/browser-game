@@ -29,6 +29,13 @@ import {Altah} from "../../Resources/mineral/Altah.ts";
 import {Delitium} from "../../Resources/mineral/Delitium.ts";
 import {Quantium} from "../../Resources/mineral/Quantium.ts";
 import {Tellurium} from "../../Resources/mineral/Tellurium.ts";
+import {ConstructionMaterials} from "../../materials/ConstructionMaterials.ts";
+import {Electronics} from "../../materials/Electronics.ts";
+import {ChemicalFuel} from "../../materials/ChemicalFuel.ts";
+import {Polymers} from "../../materials/Polymers.ts";
+import {Quadria} from "../../materials/Quadria.ts";
+import {Steel} from "../../materials/Steel.ts";
+import {Vettur} from "../../materials/Vettur.ts";
 
 
 export default {
@@ -306,7 +313,7 @@ export default {
                             amount: buildingToLoad.fuelNeedToFunctionalityPerDay.required * buildingToLoad.amount,
                             from: materialsOnStore
                             })
-                            planetStore.commit('loadFuelToStation', buildingToLoad.id)
+                            planetStore.commit('loadFuelToStation', buildingToLoad)
                     } else {
                         planetStore.commit('sendError', 'Топливо уже загружено!')
                     }
@@ -320,23 +327,26 @@ export default {
 
 
 
-    loadFuelToStation(_, id){
-        const buildings = tradeStore.state.currentPlanet.buildings
-        for(let i = 0; i < buildings.length; i++){
-            if(buildings[i].id === id){
-                buildings[i].isFuelLoaded = true
-                buildings[i].addEnergyToPlanet = buildings[i].checkFuel()
-                buildings[i].fuelLoadTime = Date.now()
-            }
-        }
+    loadFuelToStation(_, building){
+        building.isFuelLoaded = true
+        building.fuelLoadTime = Date.now()
+        planetStore.commit('savePlayerToLocalStorage')
     },
 
     // проверяем сутки с момента загрузки
-    checkThatFuelLoadTimePassed(_, building){
-         if(Date.now() > building.fuelLoadTime + variables.oneDayInMilliseconds){
-             building.isFuelLoaded = false
-             building.checkFuel()
+    checkThatFuelLoadTimePassed(_, payload){
+         if(Date.now() > payload.fuelLoadTime + variables.oneDayInMilliseconds){
+             payload.isFuelLoaded = false
          }
+    },
+
+    removeBuilding(_, building){
+        const existBuildingIndex = tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings.indexOf(building)
+        if(building.amount > 1){
+            building.amount -= 1
+        } else {
+            tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings.splice(existBuildingIndex, 1)
+        }
     },
 
 
@@ -562,8 +572,8 @@ export default {
         } else {
             planetStore.commit('sendError', 'На планете кончилось место для застройки!')
         }
+        planetStore.commit('savePlayerToLocalStorage')
     },
-
 
     checkThatFuelIsEnoughAfterBuildNewStation(_, building){
         const stations = tradeStore.state.currentPlanet.buildings.filter(b => b.id === building.id)[0]
@@ -606,6 +616,32 @@ export default {
                 storeMaterials[i].amount = storeMaterials[i].amount - material.amount
             }
         }
+    },
+
+    savePlayerToLocalStorage(){
+        const playerName = tradeStore.state.player.login
+        localStorage.setItem(playerName, JSON.stringify(tradeStore.state.player))
+    },
+
+    addTestMaterials(){
+        const construct = new ConstructionMaterials(20)
+        const electronics = new Electronics(20)
+        const chemicalFuel = new ChemicalFuel(100)
+        const polymers = new Polymers(20)
+        const quadria = new Quadria(20)
+        const steel = new Steel(20)
+        const vettur = new Vettur(20)
+
+
+        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials = []
+
+        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(construct)
+        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(electronics)
+        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(chemicalFuel)
+        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(polymers)
+        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(quadria)
+        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(steel)
+        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(vettur)
     },
 
     checkThatPeopleEnough(_){

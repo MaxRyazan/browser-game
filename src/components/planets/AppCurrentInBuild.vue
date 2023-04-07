@@ -29,13 +29,15 @@ function timer(param) {
         param.timeWhereDone = 0
         for(let i = 0; i < planetStore.state.buildingsInProgressNow.length; i++) {
             if(planetStore.state.buildingsInProgressNow[i].timeWhereDone === param.timeWhereDone){
-                const existsBuilding = tradeStore.state.currentPlanet.buildings.filter(b => b.id === planetStore.state.buildingsInProgressNow[i].building.id)[0]
+                // const existsBuilding = tradeStore.state.currentPlanet.buildings.filter(b => b.id === planetStore.state.buildingsInProgressNow[i].building.id)[0]
+                const existsBuilding = tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings.filter(b => b.id === planetStore.state.buildingsInProgressNow[i].building.id)[0]
                 if(existsBuilding){
                     existsBuilding.amount += 1
                 } else {
-                    tradeStore.state.currentPlanet.buildings.push(planetStore.state.buildingsInProgressNow[i].building)
+                    tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings.push(planetStore.state.buildingsInProgressNow[i].building)
                 }
                 planetStore.state.buildingsInProgressNow.splice(i, 1)
+                planetStore.commit('savePlayerToLocalStorage')
             }
         }
         planetStore.commit('checkThatColonyExists')

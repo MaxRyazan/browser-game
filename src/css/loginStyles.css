@@ -2,14 +2,27 @@
   max-width: 1920px;
   height: 50vh;
   min-height: 480px;
-  background-color: rgb(169, 93, 5);
   position: relative;
   padding: 25vh 0;
   margin: 0 auto;
 }
+.login_wrapper::after {
+  content: "";
+  max-width: 1920px;
+  margin: auto;
+  background-image: url("../assets/images/login_bg.jpg");
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -2;
+}
 
 .login_window {
-  border: 1px solid red;
   max-width: 984px;
   min-width: 280px;
   max-height: 728px;
@@ -36,14 +49,14 @@
   outline: none;
   border: none;
   background-color: inherit;
-  border-bottom: 2px solid white;
-  border-top: 2px solid white;
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
   border-radius: 20%;
   color: white;
   letter-spacing: 2px;
 }
 .login_input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 /*# sourceMappingURL=loginStyles.css.map */

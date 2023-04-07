@@ -29,8 +29,8 @@ onMounted(() => {
     planetStore.commit('checkAccumulationStationsOfCurrentPlanet')
     planetStore.commit('checkWaveStationsOfCurrentPlanet')
     // planetStore.commit('checkThatPeopleEnough')
-    for(let i = 0; i < tradeStore.state.currentPlanet.buildings.length; i ++){
-        planetStore.commit('checkThatFuelLoadTimePassed', tradeStore.state.currentPlanet.buildings[i])
+    for(let i = 0; i < tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings.length; i ++){
+        planetStore.commit('checkThatFuelLoadTimePassed', tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings[i])
     }
 })
 

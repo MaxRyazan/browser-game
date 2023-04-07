@@ -28,7 +28,8 @@ import AppError from '../mini/AppError.vue'
 import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
 import {FakeData} from "../../FAKE_DATA/FakeData.ts";
-import {router} from "../../router.js";
+import router from "../../router.js";
+import {onBeforeRouteLeave} from "vue-router";
 
 const login = ref('')
 const password = ref('')
@@ -36,18 +37,19 @@ function logIn() {
     // const thisPlayerLogin = login.value
     // const thisPlayerPassword = password.value
     const player1 = JSON.parse(localStorage.getItem('player'))
-    const player2 = JSON.parse(localStorage.getItem('player2'))
+    const player2 = JSON.parse(localStorage.getItem('Player'))
 
     if(password.value === player1.password && login.value === player1.login){
-        console.log('111111111111')
+
         tradeStore.state.player = player1
         tradeStore.state.currentPlanet = player1.playerData.playerPlanets.homeWorld
+        router.push('/')
     }
     if(password.value === player2.password && login.value === player2.login){
-        console.log('2222222222')
+
         tradeStore.state.player = player2
         tradeStore.state.currentPlanet = player2.playerData.playerPlanets.homeWorld
-        console.log()
+        router.push('/')
     }
 
     // if(localStorage.getItem('player')){
@@ -74,6 +76,7 @@ watch(error, (value) => {
         }, 1500)
     }
 })
+
 </script>
 <style lang="scss">
 .fade-enter-from,

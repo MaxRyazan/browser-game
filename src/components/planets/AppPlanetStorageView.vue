@@ -89,7 +89,6 @@ const interval = setInterval(() => {
     planetStore.commit('checkWaveStationsOfCurrentPlanet')
     planetStore.commit('recycleCrudeOreToOre')
     planetStore.commit('recycleCrudeMineralOreToMinerals')
-    console.log('1111')
 }, 6000)
 
 onMounted(() => {

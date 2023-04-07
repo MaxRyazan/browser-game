@@ -28,12 +28,6 @@ export class Building implements BuildingInterface{
     buildingType: Number
     isFuelLoaded?: Boolean
     buildingEffectiveCoefficient: number;
-
-    checkFuel(){
-        if(this.isFuelLoaded){
-            return this.addEnergyToPlanet
-        }
-        return 0
-    }
+    fuelLoadTime: Number
 
 }

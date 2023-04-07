@@ -10,7 +10,7 @@ export class Colony extends Building{
         this.id = 1
         this.name = 'Колония'
         this.costInCR = 0
-        this.costInIG = 10000
+        this.costInIG = 4500
         this.onGround = true
         this.costInTime = costInTime
         this.buildComponentsSpeed = 0
