@@ -167,7 +167,6 @@ export default {
 
 
     checkAccumulationStationsOfCurrentPlanet(){
-        console.log(tradeStore.state.currentPlanet)
         const accumulationStations = tradeStore.state.currentPlanet.buildings.filter(b => b.id ===  variables.accumulationStationsId)[0]
         const isResourceExist =  tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.crudeOreId)[0]
         if(accumulationStations && helpers.isStorageNotFull()){
@@ -212,7 +211,7 @@ export default {
            return false
         }
         else {
-            const sub = (Date.now() - oreCleaners.timeOfLastProduce) / 1000    //  количество прошедших секунд  TODO сделать  количество прошедших минут
+            const sub = (Date.now() - oreCleaners.timeOfLastProduce) / variables.fiveMinutes    //  количество прошедших секунд  TODO сделать  количество прошедших минут
 
             if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(variables.oreCleanersId, variables.crudeOreId)){ // раз в 2 секунды TODO сделать раз в минуту
                 const count = Math.floor(sub / variables.timeOfResourceProduce)  // подсчет сколько раз прошло по 2 секунды (чтобы посчитать amount) TODO  / 1
@@ -248,13 +247,13 @@ export default {
 
 
     recycleCrudeMineralOreToMinerals(){
-        // TODO подумать как реализовать офлайн переработку
+        console.log('recycleCrudeMineralOreToMinerals')
         const mineralSynthesizer = tradeStore.state.currentPlanet.buildings.filter(b => b.id === variables.mineralSynthesizerId)[0]
         if(!mineralSynthesizer){
             return false
         }
         else {
-            const sub = (Date.now() - mineralSynthesizer.timeOfLastProduce) / 1000    //  количество прошедших секунд  TODO сделать  количество прошедших минут
+            const sub = (Date.now() - mineralSynthesizer.timeOfLastProduce) / variables.fiveMinutes    //  количество прошедших секунд  TODO сделать  количество прошедших минут
 
             if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(variables.mineralSynthesizerId, variables.crudeMineralOreId)){ // раз в 2 секунды TODO сделать раз в минуту
                 const count = Math.floor(sub / variables.timeOfResourceProduce)  // подсчет сколько раз прошло по 2 секунды (чтобы посчитать amount) TODO  / 1
@@ -271,6 +270,7 @@ export default {
                 //TODO  НЕ ЗАБЫТЬ КОММЕНТЫ !
                 if(isAltahMineralOnStorage){ // && isStorageNotFull()
                     planetStore.commit('applyResource',{resource: altahMineral, amount: altahMineral.amount, to: tradeStore.state.currentPlanet.storage.resources})
+                    console.log('isAltahMineralOnStorage')
                 } else {
                     tradeStore.state.currentPlanet.storage.resources.push(altahMineral)
                 }
@@ -625,13 +625,13 @@ export default {
     },
 
     addTestMaterials(){
-        const construct = new ConstructionMaterials(20)
-        const electronics = new Electronics(20)
+        const construct = new ConstructionMaterials(140)
+        const electronics = new Electronics(60)
         const chemicalFuel = new ChemicalFuel(100)
-        const polymers = new Polymers(20)
-        const quadria = new Quadria(20)
-        const steel = new Steel(20)
-        const vettur = new Vettur(20)
+        const polymers = new Polymers(60)
+        const quadria = new Quadria(60)
+        const steel = new Steel(60)
+        const vettur = new Vettur(60)
 
 
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials = []

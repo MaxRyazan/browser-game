@@ -6,7 +6,7 @@ export class CrudeOre implements ResourceInterface{
     id: Number;
     name: String;
     constructor(amount: Number = 1) {
-        this.baseMass = 12
+        this.baseMass = 2
         this. id = 8
         this.name = 'Неочищенная руда'
         this.amount = amount
