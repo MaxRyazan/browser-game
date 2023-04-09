@@ -21,7 +21,7 @@ export class Colony extends Building{
         this.peopleNeedToFunctionality = 7
         this.addEnergyToPlanet = 10
         this.energyNeedToFunctionality = 4
-        this.addStoreToPlanet = 0
+        this.addStoreToPlanet = 50000
         this.buildingType = 1
         this.isFuelLoaded = true
         this.buildingEffectiveCoefficient = 1

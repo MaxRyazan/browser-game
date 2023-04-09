@@ -7,8 +7,8 @@
         </div>
 
         <div class="planet_storage_modules" v-if="showModules">
+            <AppTableTitle :race="true"/>
             <div class="planet_storage_modules_line" v-for="(module, index) in tradeStore.state.currentPlanet.storage.modules" :key="index">
-                <div class="modules_line module_id">{{module.id}}</div>
                 <div class="modules_line">{{module.name}}</div>
                 <div class="modules_line module_amount">{{module.amount}}</div>
                 <div class="modules_line">{{module.belongsToRace.name}}</div>
@@ -22,6 +22,7 @@
         </div>
 
         <div class="planet_storage_modules" v-if="showMaterials">
+            <AppTableTitle />
             <div class="planet_storage_materials_line" v-for="(material, index) in tradeStore.state.currentPlanet.storage.materials" :key="index">
                 <div class="modules_materials">{{material.name}}</div>
                 <div class="modules_materials">{{(material.amount).toFixed(2)}}</div>
@@ -35,6 +36,7 @@
         </div>
 
         <div class="planet_storage_modules" v-if="showResources">
+            <AppTableTitle />
             <div class="planet_storage_materials_line" v-for="(resource, index) in tradeStore.state.currentPlanet.storage.resources" :key="index">
                 <div class="modules_line">{{resource.name}}</div>
                 <div class="modules_line">{{(resource.amount).toFixed(2)}}</div>
@@ -56,6 +58,7 @@ import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
 import AppMiniButton from "../mini/AppMiniButton.vue";
 import {onMounted, onUnmounted, ref} from "vue";
+import AppTableTitle from "./planetMini/AppTableTitle.vue";
 
 const showModules = ref(false)
 const showMaterials = ref(false)

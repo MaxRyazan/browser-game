@@ -49,10 +49,10 @@ export default {
         const storage = tradeStore.state.currentPlanet.storage.resources
         const oreCleaners = tradeStore.state.currentPlanet.buildings.filter(b => b.id === stationsId)[0]
         const crudeOre = storage.filter( r => r.id === crudeOreId)[0]
-        if(!crudeOre){
+        if(!crudeOre || crudeOre.amount <= 0){
             return false
         }
-        crudeOre.amount = crudeOre.amount - 5 * oreCleaners.amount
+        crudeOre.amount = crudeOre.amount - variables.productionPower * oreCleaners.amount
         return true
     }
 }

@@ -5,6 +5,7 @@ const variables =  {
     timeOfResourceProduce: 1, // разница времени в производстве
     fiveMinutes: 300000, // 5 минут в м-сек
     oneDayInMilliseconds: 86400000,
+    productionPower: 5,   // количество руд, произведенных за единицу времени
 
 // ресурсы
     metalOreId: 1,

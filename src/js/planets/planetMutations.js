@@ -174,7 +174,7 @@ export default {
             const sub = (Date.now() - accumulationStations.timeOfLastProduce) / variables.fiveMinutes  //раз в 5 минут производство реса
             if(sub > variables.timeOfResourceProduce){ // если прошло больше одного раз по пять минут
                 const count = Math.floor(sub / variables.timeOfResourceProduce)  // подсчет сколько раз должен был произвестись рес за прошедшее время
-                const crudeOre = new CrudeOre(5 * count * accumulationStationsCount)
+                const crudeOre = new CrudeOre(variables.productionPower * count * accumulationStationsCount)
                 if(isResourceExist){
                     planetStore.commit('applyResource',{resource: crudeOre, amount: crudeOre.amount, to: tradeStore.state.currentPlanet.storage.resources})
                 } else {
@@ -182,6 +182,9 @@ export default {
                 }
                 accumulationStations.timeOfLastProduce = Date.now()
             }
+        }
+        if(!helpers.isStorageNotFull()){
+            accumulationStations.timeOfLastProduce = Date.now()
         }
         planetStore.commit('savePlayerToLocalStorage')
     },
@@ -194,7 +197,7 @@ export default {
             const sub = (Date.now() - waveStations.timeOfLastProduce) / variables.fiveMinutes
             if(sub > variables.timeOfResourceProduce){
                 const count = Math.floor(sub / variables.timeOfResourceProduce)
-                const crudeMineralOre = new CrudeMineralOre(5 * count * waveStationsCount)
+                const crudeMineralOre = new CrudeMineralOre(variables.productionPower * count * waveStationsCount)
                 if(isResourceExist){
                     planetStore.commit('applyResource',{resource: crudeMineralOre, amount: crudeMineralOre.amount, to: tradeStore.state.currentPlanet.storage.resources})
                 } else {
@@ -203,6 +206,10 @@ export default {
                 waveStations.timeOfLastProduce = Date.now()
             }
         }
+        if(!helpers.isStorageNotFull()){
+            waveStations.timeOfLastProduce = Date.now()
+        }
+        planetStore.commit('savePlayerToLocalStorage')
     },
 
     recycleCrudeOreToOre(){
@@ -211,31 +218,31 @@ export default {
            return false
         }
         else {
-            const sub = (Date.now() - oreCleaners.timeOfLastProduce) / variables.fiveMinutes    //  количество прошедших секунд  TODO сделать  количество прошедших минут
+            const sub = (Date.now() - oreCleaners.timeOfLastProduce) / variables.fiveMinutes
 
-            if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(variables.oreCleanersId, variables.crudeOreId)){ // раз в 2 секунды TODO сделать раз в минуту
-                const count = Math.floor(sub / variables.timeOfResourceProduce)  // подсчет сколько раз прошло по 2 секунды (чтобы посчитать amount) TODO  / 1
-                const metalOre = new MetalOre((5/3 * oreCleaners.amount).toFixed(2) * count)
-                const mineralOre = new MineralOre((5/3 * oreCleaners.amount).toFixed(2) * count)
-                const organicOre = new OrganicOre((5/3 * oreCleaners.amount).toFixed(2) * count)
+            if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(variables.oreCleanersId, variables.crudeOreId)){
+                const count = Math.floor(sub / variables.timeOfResourceProduce)
+                const metalOre = new MetalOre((variables.productionPower/3 * oreCleaners.amount).toFixed(2) * count)
+                const mineralOre = new MineralOre((variables.productionPower/3 * oreCleaners.amount).toFixed(2) * count)
+                const organicOre = new OrganicOre((variables.productionPower/3 * oreCleaners.amount).toFixed(2) * count)
 
                 const isMetalOreExistOnStorage =  tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.metalOreId)[0]
                 const isMineralOreExistOnStorage =  tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.mineralOreId)[0]
                 const isOrganicOreExistOnStorage =  tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.organicOreId)[0]
-                //TODO  НЕ ЗАБЫТЬ КОММЕНТЫ !
-                if(isMetalOreExistOnStorage){ // && isStorageNotFull()
+
+                if(isMetalOreExistOnStorage && helpers.isStorageNotFull()){
                     planetStore.commit('applyResource',{resource: metalOre, amount: metalOre.amount, to: tradeStore.state.currentPlanet.storage.resources})
                 } else {
                     tradeStore.state.currentPlanet.storage.resources.push(metalOre)
                 }
 
-                if(isMineralOreExistOnStorage){ // && isStorageNotFull()
+                if(isMineralOreExistOnStorage && helpers.isStorageNotFull()){
                     planetStore.commit('applyResource',{resource: mineralOre, amount: mineralOre.amount, to: tradeStore.state.currentPlanet.storage.resources})
                 } else {
                     tradeStore.state.currentPlanet.storage.resources.push(mineralOre)
                 }
 
-                if(isOrganicOreExistOnStorage){ // && isStorageNotFull()
+                if(isOrganicOreExistOnStorage && helpers.isStorageNotFull()){
                     planetStore.commit('applyResource',{resource: organicOre, amount: organicOre.amount, to: tradeStore.state.currentPlanet.storage.resources})
                 } else {
                     tradeStore.state.currentPlanet.storage.resources.push(organicOre)
@@ -247,47 +254,37 @@ export default {
 
 
     recycleCrudeMineralOreToMinerals(){
-        console.log('recycleCrudeMineralOreToMinerals')
         const mineralSynthesizer = tradeStore.state.currentPlanet.buildings.filter(b => b.id === variables.mineralSynthesizerId)[0]
         if(!mineralSynthesizer){
             return false
         }
         else {
-            const sub = (Date.now() - mineralSynthesizer.timeOfLastProduce) / variables.fiveMinutes    //  количество прошедших секунд  TODO сделать  количество прошедших минут
+            const sub = (Date.now() - mineralSynthesizer.timeOfLastProduce) / variables.fiveMinutes
 
-            if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(variables.mineralSynthesizerId, variables.crudeMineralOreId)){ // раз в 2 секунды TODO сделать раз в минуту
-                const count = Math.floor(sub / variables.timeOfResourceProduce)  // подсчет сколько раз прошло по 2 секунды (чтобы посчитать amount) TODO  / 1
-                const altahMineral = new Altah((5/4 * mineralSynthesizer.amount).toFixed(2) * count)
-                const delitiumMineral = new Delitium((5/4 * mineralSynthesizer.amount).toFixed(2) * count)
-                const quantiumMineral = new Quantium((5/4 * mineralSynthesizer.amount).toFixed(2) * count)
-                const telluriumMineral = new Tellurium((5/4 * mineralSynthesizer.amount).toFixed(2) * count)
+            if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(variables.mineralSynthesizerId, variables.crudeMineralOreId)){
+                const count = Math.floor(sub / variables.timeOfResourceProduce)
+                const delitiumMineral = new Delitium((5/3 * mineralSynthesizer.amount).toFixed(2) * count)
+                const quantiumMineral = new Quantium((5/3 * mineralSynthesizer.amount).toFixed(2) * count)
+                const telluriumMineral = new Tellurium((5/3 * mineralSynthesizer.amount).toFixed(2) * count)
 
-                const isAltahMineralOnStorage = tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.altahMineralId)[0]
+
                 const delitiumMineralOnStorage = tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.delitiumMineralId)[0]
                 const quantiumMineralOnStorage = tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.quantiumMineralId)[0]
                 const telluriumMineralOnStorage = tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.telluriumMineralId)[0]
 
-                //TODO  НЕ ЗАБЫТЬ КОММЕНТЫ !
-                if(isAltahMineralOnStorage){ // && isStorageNotFull()
-                    planetStore.commit('applyResource',{resource: altahMineral, amount: altahMineral.amount, to: tradeStore.state.currentPlanet.storage.resources})
-                    console.log('isAltahMineralOnStorage')
-                } else {
-                    tradeStore.state.currentPlanet.storage.resources.push(altahMineral)
-                }
-
-                if(delitiumMineralOnStorage){ // && isStorageNotFull()
+                if(delitiumMineralOnStorage && helpers.isStorageNotFull()){
                     planetStore.commit('applyResource',{resource: delitiumMineral, amount: delitiumMineral.amount, to: tradeStore.state.currentPlanet.storage.resources})
                 } else {
                     tradeStore.state.currentPlanet.storage.resources.push(delitiumMineral)
                 }
 
-                if(quantiumMineralOnStorage){ // && isStorageNotFull()
+                if(quantiumMineralOnStorage && helpers.isStorageNotFull()){
                     planetStore.commit('applyResource',{resource: quantiumMineral, amount: quantiumMineral.amount, to: tradeStore.state.currentPlanet.storage.resources})
                 } else {
                     tradeStore.state.currentPlanet.storage.resources.push(quantiumMineral)
                 }
 
-                if(telluriumMineralOnStorage){ // && isStorageNotFull()
+                if(telluriumMineralOnStorage && helpers.isStorageNotFull()){
                     planetStore.commit('applyResource',{resource: telluriumMineral, amount: telluriumMineral.amount, to: tradeStore.state.currentPlanet.storage.resources})
                 } else {
                     tradeStore.state.currentPlanet.storage.resources.push(telluriumMineral)
@@ -318,6 +315,8 @@ export default {
                     } else {
                         planetStore.commit('sendError', 'Топливо уже загружено!')
                     }
+                } else {
+                    planetStore.commit('sendError', 'На складе нехватает топлива!!!')
                 }
             }
         }
@@ -343,10 +342,18 @@ export default {
 
     removeBuilding(_, building){
         const existBuildingIndex = tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings.indexOf(building)
-        if(building.amount > 1){
-            building.amount -= 1
+        if(building.id === 1){
+            if(tradeStore.state.currentPlanet.buildings.length){
+                planetStore.commit('sendError', 'Колонию нельзя разрушить, пока есть другие здания на планете!')
+            } else {
+                building.amount -= 1
+            }
         } else {
-            tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings.splice(existBuildingIndex, 1)
+            if(building.amount > 1){
+                building.amount -= 1
+            } else {
+                tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings.splice(existBuildingIndex, 1)
+            }
         }
     },
 
@@ -635,6 +642,7 @@ export default {
 
 
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials = []
+        tradeStore.state.player.playerData.playerMoney.IG = 50000
 
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(construct)
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(electronics)
