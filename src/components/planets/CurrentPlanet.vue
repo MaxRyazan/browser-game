@@ -28,6 +28,8 @@ onMounted(() => {
     planetStore.commit('calculateWeightOfAllOnStorage')
     planetStore.commit('checkAccumulationStationsOfCurrentPlanet')
     planetStore.commit('checkWaveStationsOfCurrentPlanet')
+    planetStore.commit('recycleCrudeOreToOre')
+    planetStore.commit('recycleCrudeMineralOreToMinerals')
     // planetStore.commit('checkThatPeopleEnough')
     for(let i = 0; i < tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings.length; i ++){
         planetStore.commit('checkThatFuelLoadTimePassed', tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings[i])

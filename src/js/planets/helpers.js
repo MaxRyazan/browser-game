@@ -45,14 +45,15 @@ export default {
         return true
     },
 
-    checkCrudeOreAndSubtract(stationsId, crudeOreId) {
+    checkCrudeOreAndSubtract(stationsId, crudeOreId, count) {
+        //TODO  56 строка дописал *count - ПРОВЕРИТЬ РАБОТУ ! ! !
         const storage = tradeStore.state.currentPlanet.storage.resources
         const oreCleaners = tradeStore.state.currentPlanet.buildings.filter(b => b.id === stationsId)[0]
         const crudeOre = storage.filter( r => r.id === crudeOreId)[0]
         if(!crudeOre || crudeOre.amount <= 0){
             return false
         }
-        crudeOre.amount = crudeOre.amount - variables.productionPower * oreCleaners.amount
+        crudeOre.amount = crudeOre.amount - variables.productionPower * oreCleaners.amount * count
         return true
     }
 }

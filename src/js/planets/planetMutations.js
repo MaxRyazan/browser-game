@@ -25,7 +25,6 @@ import {MineralOre} from "../../Resources/ore/MineralOre.ts";
 import {OrganicOre} from "../../Resources/ore/OrganicOre.ts";
 import variables from "../../variables.js";
 import {CrudeMineralOre} from "../../Resources/CrudeMineralOre.ts";
-import {Altah} from "../../Resources/mineral/Altah.ts";
 import {Delitium} from "../../Resources/mineral/Delitium.ts";
 import {Quantium} from "../../Resources/mineral/Quantium.ts";
 import {Tellurium} from "../../Resources/mineral/Tellurium.ts";
@@ -219,9 +218,8 @@ export default {
         }
         else {
             const sub = (Date.now() - oreCleaners.timeOfLastProduce) / variables.fiveMinutes
-
-            if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(variables.oreCleanersId, variables.crudeOreId)){
-                const count = Math.floor(sub / variables.timeOfResourceProduce)
+            const count = Math.floor(sub / variables.timeOfResourceProduce)
+            if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(variables.oreCleanersId, variables.crudeOreId, count)){
                 const metalOre = new MetalOre((variables.productionPower/3 * oreCleaners.amount).toFixed(2) * count)
                 const mineralOre = new MineralOre((variables.productionPower/3 * oreCleaners.amount).toFixed(2) * count)
                 const organicOre = new OrganicOre((variables.productionPower/3 * oreCleaners.amount).toFixed(2) * count)
@@ -261,8 +259,8 @@ export default {
         else {
             const sub = (Date.now() - mineralSynthesizer.timeOfLastProduce) / variables.fiveMinutes
 
-            if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(variables.mineralSynthesizerId, variables.crudeMineralOreId)){
-                const count = Math.floor(sub / variables.timeOfResourceProduce)
+            const count = Math.floor(sub / variables.timeOfResourceProduce)
+            if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(variables.mineralSynthesizerId, variables.crudeMineralOreId, count)){
                 const delitiumMineral = new Delitium((5/3 * mineralSynthesizer.amount).toFixed(2) * count)
                 const quantiumMineral = new Quantium((5/3 * mineralSynthesizer.amount).toFixed(2) * count)
                 const telluriumMineral = new Tellurium((5/3 * mineralSynthesizer.amount).toFixed(2) * count)

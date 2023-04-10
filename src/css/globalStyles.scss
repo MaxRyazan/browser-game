@@ -71,12 +71,12 @@ span{
   width: calc(100% - 200px);
   max-width: 1600px;
   min-width: 730px;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 189px);
   display: flex;
   padding: 0;
   margin-bottom: 100px;
   @media (max-width: 1210px){
-    height: calc(100vh + 132px);
+    height: calc(100vh + 42px);
   }
   &::after{
     border-radius: 12px;
