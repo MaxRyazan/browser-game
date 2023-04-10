@@ -23,14 +23,16 @@
 
         <div class="planet_storage_modules" v-if="showMaterials">
             <AppTableTitle />
-            <div class="planet_storage_materials_line" v-for="(material, index) in tradeStore.state.currentPlanet.storage.materials" :key="index">
-                <div class="modules_materials">{{material.name}}</div>
-                <div class="modules_materials">{{(material.amount).toFixed(2)}}</div>
-                <div class="modules_materials">{{material.mass}}</div>
-                <div class="modules_materials">{{(material.mass * material.amount).toFixed(2)}}</div>
-                <div class="modules_line_buttons">
-                    <AppMiniButton name="З" :mini="true" />
-                    <AppMiniButton name="У" :mini="true" @click="planetStore.commit('removeMaterial',material)" />
+            <div v-for="(material, index) in tradeStore.state.currentPlanet.storage.materials" :key="index">
+                <div  class="planet_storage_materials_line" v-if="material.amount > 0">
+                    <div class="modules_materials">{{material.name}}</div>
+                    <div class="modules_materials">{{(material.amount).toFixed(2)}}</div>
+                    <div class="modules_materials">{{material.mass}}</div>
+                    <div class="modules_materials">{{(material.mass * material.amount).toFixed(2)}}</div>
+                    <div class="modules_line_buttons">
+                        <AppMiniButton name="З" :mini="true" />
+                        <AppMiniButton name="У" :mini="true" @click="planetStore.commit('removeMaterial',material)" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -94,6 +96,7 @@ const interval = setInterval(() => {
     planetStore.commit('checkWaveStationsOfCurrentPlanet')
     planetStore.commit('recycleCrudeOreToOre')
     planetStore.commit('recycleCrudeMineralOreToMinerals')
+    planetStore.commit('checkReinforcedConcretePlants')
 }, 30000)
 
 onMounted(() => {

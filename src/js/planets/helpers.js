@@ -46,7 +46,6 @@ export default {
     },
 
     checkCrudeOreAndSubtract(stationsId, crudeOreId, count) {
-        //TODO  56 строка дописал *count - ПРОВЕРИТЬ РАБОТУ ! ! !
         const storage = tradeStore.state.currentPlanet.storage.resources
         const oreCleaners = tradeStore.state.currentPlanet.buildings.filter(b => b.id === stationsId)[0]
         const crudeOre = storage.filter( r => r.id === crudeOreId)[0]
@@ -54,6 +53,32 @@ export default {
             return false
         }
         crudeOre.amount = crudeOre.amount - variables.productionPower * oreCleaners.amount * count
+        return true
+    },
+
+    isResourceEnough(resourceId, resourceAmount, enoughWhere, count){
+        const resourceOnStorage = enoughWhere.filter(r => r.id === resourceId)[0]
+        if(!resourceOnStorage || resourceOnStorage.amount < resourceAmount * count){
+            return false
+        }
+        return true
+    },
+
+    checkResourcesForProductAndSubtract(arrayOfRequiredResourcesForProduce, count) {
+        const required = arrayOfRequiredResourcesForProduce
+        for(let i = 0; i < required.length; i ++){
+            if(!this.isResourceEnough(required[i].resourcesId, required[i].amount, tradeStore.state.currentPlanet.storage.resources, count)) {
+               return false;
+            }
+        }
+        const storage = tradeStore.state.currentPlanet.storage.resources
+        for(let i = 0; i < storage.length; i ++){
+           for(let j = 0; j < required.length; j++){
+               if(required[j].resourcesId === storage[i].id){
+                   storage[i].amount -= required[j].amount
+               }
+           }
+        }
         return true
     }
 }

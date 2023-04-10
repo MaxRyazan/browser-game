@@ -9,10 +9,10 @@ export class ConstructionMaterials implements Material {
     public resourcesForProduction: {}
     amount: Number;
     constructor(amount: Number = 1) {
-        this. id = 9
+        this.id = 9
         this.mass = 4
         this.name = 'Строительные материалы'
-        this.resourcesForProduction = [new MineralOre(), new MineralOre(), new MetalOre(), new MetalOre()]
+        this.resourcesForProduction = [new MineralOre(2), new MetalOre(3)]
         this.amount = amount
     }
 

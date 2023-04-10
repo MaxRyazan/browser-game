@@ -11,7 +11,6 @@ import {MedicalCenter} from "../../buildings/infrastructure/MedicalCenter.ts";
 import {Bank} from "../../buildings/infrastructure/Bank.ts";
 import {SpacePort} from "../../buildings/infrastructure/SpacePort.ts";
 import {SolarPlant} from "../../buildings/energy/SolarPlant.ts";
-import {ChemicalPlant} from "../../buildings/energy/ChemicalPlant.ts";
 import {NuclearPlant} from "../../buildings/energy/NuclearPlant.ts";
 import {AltahSplitter} from "../../buildings/energy/AltahSplitter.ts";
 import {AccumulationStation} from "../../buildings/resources/AccumulationStation.ts";
@@ -296,6 +295,34 @@ export default {
             }
         }
     },
+
+    checkReinforcedConcretePlants(){
+        const reinforcedConcretePlants = tradeStore.state.currentPlanet.buildings.filter(b => b.id === variables.reinforcedConcretePlantId)[0]
+        if(!reinforcedConcretePlants){
+            return false
+        }
+        else {
+            const sub = (Date.now() - reinforcedConcretePlants.timeOfLastProduce) / variables.fiveMinutes
+            const count = Math.floor(sub / variables.timeOfResourceProduce)
+            if(sub > variables.timeOfResourceProduce && helpers.checkResourcesForProductAndSubtract([{resourcesId: variables.metalOreId, amount: 3}, {resourcesId: variables.mineralOreId, amount: 2}], count)){
+                const constructionMaterials = new ConstructionMaterials((5 * reinforcedConcretePlants.amount).toFixed(2) * count)
+                const constructionMaterialsOnStorage = tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.constructionMaterialsId)[0]
+
+                if(constructionMaterialsOnStorage && helpers.isStorageNotFull()){
+                    planetStore.commit('applyResource',{resource: constructionMaterials, amount: constructionMaterials.amount, to: tradeStore.state.currentPlanet.storage.materials})
+                } else {
+                    tradeStore.state.currentPlanet.storage.resources.push(constructionMaterials)
+                }
+                reinforcedConcretePlants.timeOfLastProduce = Date.now()
+            }
+        }
+    },
+
+
+
+
+
+
 
 
     manageBuilding(_, building){

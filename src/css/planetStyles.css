@@ -335,6 +335,13 @@
   font-weight: bold;
   font-family: FUTURE, sans-serif;
   cursor: default;
+  margin: 5px 0;
+}
+@media (max-width: 1024px) {
+  .modules_materials {
+    font-size: 75%;
+    height: 20px;
+  }
 }
 
 .modules_line {
@@ -344,6 +351,13 @@
   font-weight: bold;
   font-family: FUTURE, sans-serif;
   cursor: default;
+  margin: 5px 0;
+}
+@media (max-width: 1024px) {
+  .modules_line {
+    font-size: 75%;
+    height: 20px;
+  }
 }
 .modules_line.module_id {
   width: 15%;
