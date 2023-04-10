@@ -35,6 +35,11 @@ import {Polymers} from "../../materials/Polymers.ts";
 import {Quadria} from "../../materials/Quadria.ts";
 import {Steel} from "../../materials/Steel.ts";
 import {Vettur} from "../../materials/Vettur.ts";
+import {ReinforcedConcretePlant} from "../../buildings/materials/ReinforcedConcretePlant.ts";
+import {OreMineralPlant} from "../../buildings/materials/Ore-mineralPlant.ts";
+import {PolymersPlant} from "../../buildings/materials/PolymersPlant.ts";
+import {ChemicalComplex} from "../../buildings/materials/ChemicalComplex.ts";
+import {EnrichmentComplex} from "../../buildings/materials/EnrichmentComplex.ts";
 
 
 export default {
@@ -509,7 +514,7 @@ export default {
                 }
                     break;
                 case 'Химическая электростанция' : {
-                    const chemicalPlant = new ChemicalPlant()
+                    const chemicalPlant = new ChemicalComplex()
                     planetStore.commit('checkThatFuelIsEnoughAfterBuildNewStation', chemicalPlant)
                     if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
                         helpers.checkEnergyAndAddBuildingToInProgressNow(chemicalPlant)
@@ -569,6 +574,51 @@ export default {
                     const mineralSynthesizer = new MineralSynthesizer()
                     if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
                         helpers.checkEnergyAndAddBuildingToInProgressNow(mineralSynthesizer)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
+                }
+                    break;
+                case 'Железобетонный завод' : {
+                    const reinforcedConcretePlant = new ReinforcedConcretePlant()
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(reinforcedConcretePlant)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
+                }
+                    break;
+                case 'Рудо-минеральный завод' : {
+                    const oreMineralPlant = new OreMineralPlant()
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(oreMineralPlant)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
+                }
+                    break;
+                case 'Полимерный завод' : {
+                    const polymersPlant = new PolymersPlant()
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(polymersPlant)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
+                }
+                    break;
+                case 'Химический комплекс' : {
+                    const chemicalPlant = new ChemicalComplex()
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(chemicalPlant)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
+                }
+                    break;
+                case 'Обогатительный комплекс' : {
+                    const enrichmentComplex = new EnrichmentComplex()
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(enrichmentComplex)
                     } else {
                         planetStore.commit('sendError', 'Нехватает строительных центров!')
                     }
