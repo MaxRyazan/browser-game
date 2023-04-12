@@ -221,12 +221,29 @@ export default {
            return false
         }
         else {
+            let maxProduce = 0
             const sub = (Date.now() - oreCleaners.timeOfLastProduce) / variables.fiveMinutes
             const count = Math.floor(sub / variables.timeOfResourceProduce)
-            if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(variables.oreCleanersId, variables.crudeOreId, count)){
-                const metalOre = new MetalOre((variables.productionPower/3 * oreCleaners.amount).toFixed(2) * count)
-                const mineralOre = new MineralOre((variables.productionPower/3 * oreCleaners.amount).toFixed(2) * count)
-                const organicOre = new OrganicOre((variables.productionPower/3 * oreCleaners.amount).toFixed(2) * count)
+            if(sub > variables.timeOfResourceProduce && helpers.checkThatCrudeOreEnough(variables.oreCleanersId, variables.crudeOreId, count)){
+
+                const mayProducePerPastTime = oreCleaners.canProduce.amount * oreCleaners.amount * count
+                const storage = tradeStore.state.currentPlanet.storage.resources
+                const crudeOre = storage.filter( r => r.id === variables.crudeOreId)[0]
+
+                if(crudeOre.amount < mayProducePerPastTime){
+                    maxProduce = crudeOre.amount
+                    crudeOre.amount = 0
+                } else {
+                    maxProduce = mayProducePerPastTime
+                    crudeOre.amount = crudeOre.amount - variables.productionPower * oreCleaners.amount * count
+                }
+
+                const produce = Number((maxProduce / 3).toFixed(2))
+
+                const metalOre = new MetalOre(produce)
+                const mineralOre = new MineralOre(produce)
+                const organicOre = new OrganicOre(produce)
+
 
                 const isMetalOreExistOnStorage =  tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.metalOreId)[0]
                 const isMineralOreExistOnStorage =  tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.mineralOreId)[0]
@@ -261,13 +278,28 @@ export default {
             return false
         }
         else {
+            let maxProduce = 0
             const sub = (Date.now() - mineralSynthesizer.timeOfLastProduce) / variables.fiveMinutes
-
             const count = Math.floor(sub / variables.timeOfResourceProduce)
-            if(sub > variables.timeOfResourceProduce && helpers.checkCrudeOreAndSubtract(variables.mineralSynthesizerId, variables.crudeMineralOreId, count)){
-                const delitiumMineral = new Delitium((5/3 * mineralSynthesizer.amount).toFixed(2) * count)
-                const quantiumMineral = new Quantium((5/3 * mineralSynthesizer.amount).toFixed(2) * count)
-                const telluriumMineral = new Tellurium((5/3 * mineralSynthesizer.amount).toFixed(2) * count)
+            if(sub > variables.timeOfResourceProduce && helpers.checkThatCrudeOreEnough(variables.mineralSynthesizerId, variables.crudeMineralOreId, count)){
+
+                const mayProducePerPastTime = mineralSynthesizer.canProduce.amount * mineralSynthesizer.amount * count
+                const storage = tradeStore.state.currentPlanet.storage.resources
+                const crudeMineralOreId = storage.filter( r => r.id === variables.crudeMineralOreId)[0]
+
+                if(crudeMineralOreId.amount < mayProducePerPastTime){
+                    maxProduce = crudeMineralOreId.amount
+                    crudeMineralOreId.amount = 0
+                } else {
+                    maxProduce = mayProducePerPastTime
+                    crudeMineralOreId.amount = crudeMineralOreId.amount - variables.productionPower * mineralSynthesizer.amount * count
+                }
+
+                const produce = Number((maxProduce / 3).toFixed(2))
+
+                const delitiumMineral = new Delitium(produce)
+                const quantiumMineral = new Quantium(produce)
+                const telluriumMineral = new Tellurium(produce)
 
 
                 const delitiumMineralOnStorage = tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.delitiumMineralId)[0]
@@ -718,6 +750,7 @@ export default {
 
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials = []
         tradeStore.state.player.playerData.playerMoney.IG = 50000
+        tradeStore.state.player.playerData.playerMoney.CR = 50000
 
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(construct)
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(electronics)

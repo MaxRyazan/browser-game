@@ -28,7 +28,7 @@ export class MineralSynthesizer extends Building{
         this.energyNeedToFunctionality = 20
         this.addStoreToPlanet = 0
         this.buildingType = 3
-        this.canProduce= {type: [Delitium, Quantium, Tellurium], amount: 5}
+        this.canProduce= {type: [new Delitium(), new Quantium(), new Tellurium()], amount: 5}
         this.resourcesNeedToFunctionality= {type: [new CrudeMineralOre()], amount: 5}
         this.isResourceLoaded = false
         this.timeOfLastProduce = Date.now()

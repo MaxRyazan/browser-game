@@ -40,7 +40,7 @@
         <div class="planet_storage_modules" v-if="showResources">
             <AppTableTitle />
             <div v-for="(resource, index) in tradeStore.state.currentPlanet.storage.resources" :key="index">
-                <div  class="planet_storage_materials_line" v-if="resource.amount > 0">
+                <div  class="planet_storage_materials_line">  <!-- v-if="resource.amount > 0" -->
                     <div class="modules_line">{{resource.name}}</div>
                     <div class="modules_line">{{(resource.amount).toFixed(2)}}</div>
                     <div class="modules_line">{{resource.baseMass}}</div>

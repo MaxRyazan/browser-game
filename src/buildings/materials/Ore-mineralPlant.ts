@@ -27,7 +27,7 @@ export class OreMineralPlant extends Building{
         this.energyNeedToFunctionality = 15
         this.addStoreToPlanet = 0
         this.buildingType = 4
-        this.canProduce= {type: [Steel, Vettur], amount: 5}
+        this.canProduce= {type: [new Steel(), new Vettur()], amount: 5}
         this.timeOfLastProduce = Date.now()
     }
 }

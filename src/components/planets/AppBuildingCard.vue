@@ -20,6 +20,7 @@
         <div class="help_container">
            <AppIcon :path="iconsPaths.help" :small="true" :colored="true" @click="toggleHelp"/>
         </div>
+        <AppProductionStationsInfo :building="building"/>
     </div>
     <transition name="fade">
         <AppError v-if="error"/>
@@ -55,12 +56,12 @@
 
 <script setup>
 import planetStore from "../../store_modules/planetStore.js";
-import {Building} from "../../entities/Building.ts";
 import AppError from '../mini/AppError.vue'
 import {computed, ref, watch} from "vue";
 import AppIcon from "../navigation/AppIcon.vue";
 import iconsPaths from "../../iconsPaths.js";
 import AppInfo from "../mini/AppInfo.vue";
+import AppProductionStationsInfo from '../../components/planets/planetMini/AppProductionStationsInfo.vue'
 defineProps({
     picture: {
         type: String,

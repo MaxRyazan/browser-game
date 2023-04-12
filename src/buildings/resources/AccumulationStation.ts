@@ -26,7 +26,7 @@ export class AccumulationStation extends Building{
         this.energyNeedToFunctionality = 14
         this.addStoreToPlanet = 0
         this.buildingType = 3
-        this.canProduce= {type: [CrudeOre], amount: 5}
+        this.canProduce= {type: [new CrudeOre()], amount: 5}
         this.timeOfLastProduce = Date.now()
     }
 }

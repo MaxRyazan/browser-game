@@ -24,7 +24,7 @@ export class WaveStation extends Building{
         this.energyNeedToFunctionality = 12
         this.addStoreToPlanet = 0
         this.buildingType = 3
-        this.canProduce= {type: [CrudeMineralOre], amount: 5}
+        this.canProduce= {type: [new CrudeMineralOre()], amount: 5}
         this.timeOfLastProduce = Date.now()
     }
 }

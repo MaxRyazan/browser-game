@@ -27,7 +27,7 @@ export class OreCleaner extends Building{
         this.energyNeedToFunctionality = 10
         this.addStoreToPlanet = 0
         this.buildingType = 3
-        this.canProduce= {type: [MetalOre, MineralOre, OrganicOre], amount: 5}
+        this.canProduce= {type: [new MetalOre(), new MineralOre(), new OrganicOre()], amount: 5}
         this.resourcesNeedToFunctionality= {type: [new CrudeOre()] , amount: 5}
         this.timeOfLastProduce = Date.now()
     }

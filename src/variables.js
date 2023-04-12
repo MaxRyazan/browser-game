@@ -4,7 +4,8 @@ const variables =  {
 // время в секундах с момента последнего производства здания
     timeOfResourceProduce: 1, // разница времени в производстве
     fiveSeconds: 5000, // 5 сек в м-сек
-    fiveMinutes: 300000, // 5 минут в м-сек
+    fiveMinutes: 60000, // 5 минут в м-сек
+    // fiveMinutes: 300000, // 5 минут в м-сек
     oneDayInMilliseconds: 86400000,
     productionPower: 5,   // количество руд, произведенных за единицу времени
 

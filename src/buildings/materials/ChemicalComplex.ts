@@ -27,7 +27,7 @@ export class ChemicalComplex extends Building{
         this.energyNeedToFunctionality = 15
         this.addStoreToPlanet = 0
         this.buildingType = 4
-        this.canProduce= {type: [ChemicalFuel, NanoFuel], amount: 5}
+        this.canProduce= {type: [new ChemicalFuel(), new NanoFuel()], amount: 5}
         this.timeOfLastProduce = Date.now()
     }
 }

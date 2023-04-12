@@ -29,7 +29,7 @@ export class EnrichmentComplex extends Building{
         this.energyNeedToFunctionality = 15
         this.addStoreToPlanet = 0
         this.buildingType = 4
-        this.canProduce= {type: [NuclearFuel, Quadria], amount: 5}
+        this.canProduce= {type: [new NuclearFuel(), new Quadria()], amount: 5}
         this.timeOfLastProduce = Date.now()
     }
 }
