@@ -58,27 +58,27 @@ export default {
 
     isResourceEnough(resourceId, resourceAmount, enoughWhere, count){
         const resourceOnStorage = enoughWhere.filter(r => r.id === resourceId)[0]
-        if(!resourceOnStorage || resourceOnStorage.amount < resourceAmount * count){
+        if(!resourceOnStorage || resourceOnStorage.amount <= 0 || resourceOnStorage.amount < resourceAmount * count){
             return false
         }
         return true
     },
 
-    checkResourcesForProductAndSubtract(arrayOfRequiredResourcesForProduce, count) {
-        const required = arrayOfRequiredResourcesForProduce
-        for(let i = 0; i < required.length; i ++){
-            if(!this.isResourceEnough(required[i].resourcesId, required[i].amount, tradeStore.state.currentPlanet.storage.resources, count)) {
+    checkThatResourcesForReinforcedConcretePlantsEnough(arrayOfRequiredResources, plantsAmount, count) {
+        console.log(plantsAmount)
+        for(let i = 0; i < arrayOfRequiredResources.length; i ++){
+            if(!this.isResourceEnough(arrayOfRequiredResources[i].resourcesId, arrayOfRequiredResources[i].amount * plantsAmount, tradeStore.state.currentPlanet.storage.resources, count)) {
                return false;
             }
         }
-        const storage = tradeStore.state.currentPlanet.storage.resources
-        for(let i = 0; i < storage.length; i ++){
-           for(let j = 0; j < required.length; j++){
-               if(required[j].resourcesId === storage[i].id){
-                   storage[i].amount -= required[j].amount
-               }
-           }
-        }
         return true
     }
+        // const storage = tradeStore.state.currentPlanet.storage.resources
+        // for(let i = 0; i < storage.length; i ++){
+        //    for(let j = 0; j < required.length; j++){
+        //        if(required[j].resourcesId === storage[i].id){
+        //            storage[i].amount -= required[j].amount * plantsAmount
+        //        }
+        //    }
+        // }
 }

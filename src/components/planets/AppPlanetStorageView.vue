@@ -97,7 +97,7 @@ const interval = setInterval(() => {
     planetStore.commit('recycleCrudeOreToOre')
     planetStore.commit('recycleCrudeMineralOreToMinerals')
     planetStore.commit('checkReinforcedConcretePlants')
-}, 30000)
+}, 31000)
 
 onMounted(() => {
     const buttons = document.querySelectorAll('.storage')

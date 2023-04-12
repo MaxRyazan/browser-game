@@ -336,14 +336,23 @@ export default {
         else {
             const sub = (Date.now() - reinforcedConcretePlants.timeOfLastProduce) / variables.fiveMinutes
             const count = Math.floor(sub / variables.timeOfResourceProduce)
-            if(sub > variables.timeOfResourceProduce && helpers.checkResourcesForProductAndSubtract([{resourcesId: variables.metalOreId, amount: 3}, {resourcesId: variables.mineralOreId, amount: 2}], count)){
-                const constructionMaterials = new ConstructionMaterials((5 * reinforcedConcretePlants.amount).toFixed(2) * count)
-                const constructionMaterialsOnStorage = tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.constructionMaterialsId)[0]
+            if(sub > variables.timeOfResourceProduce && helpers.checkThatResourcesForReinforcedConcretePlantsEnough([{resourcesId: variables.metalOreId, amount: 3}, {resourcesId: variables.mineralOreId, amount: 2}], reinforcedConcretePlants.amount, count)){
+                const constructionMaterials = new ConstructionMaterials((variables.productionPower * reinforcedConcretePlants.amount).toFixed(2) * count)
+                const constructionMaterialsOnStorage = tradeStore.state.currentPlanet.storage.materials.filter(r => r.id === variables.constructionMaterialsId)[0]
 
-                if(constructionMaterialsOnStorage && helpers.isStorageNotFull()){
-                    planetStore.commit('applyResource',{resource: constructionMaterials, amount: constructionMaterials.amount, to: tradeStore.state.currentPlanet.storage.materials})
-                } else {
-                    tradeStore.state.currentPlanet.storage.resources.push(constructionMaterials)
+                if(helpers.isStorageNotFull()){
+                    for(let i = 0; i < constructionMaterials.resourcesForProduction.length; i ++){
+
+                        planetStore.commit('subtractResource',
+                            {resource: constructionMaterials.resourcesForProduction[i],
+                            amount: constructionMaterials.resourcesForProduction[i].amount * reinforcedConcretePlants.amount * count,
+                            from: tradeStore.state.currentPlanet.storage.resources})
+                    }
+                    if(constructionMaterialsOnStorage){
+                        planetStore.commit('applyResource',{resource: constructionMaterials, amount: constructionMaterials.amount, to: tradeStore.state.currentPlanet.storage.materials})
+                    } else {
+                        tradeStore.state.currentPlanet.storage.materials.push(constructionMaterials)
+                    }
                 }
                 reinforcedConcretePlants.timeOfLastProduce = Date.now()
             }
@@ -739,20 +748,25 @@ export default {
     },
 
     addTestMaterials(){
-        const construct = new ConstructionMaterials(140)
+        // const construct = new ConstructionMaterials(140)
         const electronics = new Electronics(60)
         const chemicalFuel = new ChemicalFuel(100)
         const polymers = new Polymers(60)
         const quadria = new Quadria(60)
         const steel = new Steel(60)
         const vettur = new Vettur(60)
+        const metalOre = new MetalOre(100)
+        const mineralOre = new MineralOre(100)
 
 
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials = []
+        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.resources = []
         tradeStore.state.player.playerData.playerMoney.IG = 50000
         tradeStore.state.player.playerData.playerMoney.CR = 50000
 
-        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(construct)
+        // tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(construct)
+        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.resources.push(metalOre)
+        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.resources.push(mineralOre)
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(electronics)
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(chemicalFuel)
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(polymers)
