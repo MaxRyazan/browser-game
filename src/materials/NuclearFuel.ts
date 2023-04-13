@@ -11,7 +11,7 @@ export class NuclearFuel implements Material {
     public resourcesForProduction: {}
     amount: Number;
     constructor(amount: Number = 1) {
-        this. id = 6
+        this.id = 6
         this.mass = 4
         this.name = 'Ядерное топлливо'
         this.resourcesForProduction = [new Delitium(), new MineralOre(), new MetalOre()]

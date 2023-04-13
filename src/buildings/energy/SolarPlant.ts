@@ -4,7 +4,7 @@ import {Steel} from "../../materials/Steel";
 
 export class SolarPlant extends Building{
     fuelLoadTime: Number
-    constructor(amount: Number = 1, costInTime: Number = 20000) {
+    constructor(amount: Number = 1, costInTime: Number = 1000) {
         super();
         this.id = 10
         this.name = 'Солнечная станция'

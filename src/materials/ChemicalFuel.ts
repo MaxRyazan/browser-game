@@ -8,7 +8,7 @@ export class ChemicalFuel implements Material {
     public resourcesForProduction: {}
     amount: Number;
     constructor(amount: Number = 1) {
-        this. id = 5
+        this.id = 5
         this.mass = 2
         this.amount = 1
         this.name = 'Химическое топливо'

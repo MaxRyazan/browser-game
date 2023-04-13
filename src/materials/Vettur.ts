@@ -12,7 +12,7 @@ export class Vettur implements Material {
     public resourcesForProduction: {}
     amount: Number;
     constructor(amount: Number = 1) {
-        this. id = 2
+        this.id = 2
         this.mass = 8
         this.name = 'Веттур'
         this.resourcesForProduction = [new MetalOre(), new MineralOre(), new Quantium(), new Delitium()]

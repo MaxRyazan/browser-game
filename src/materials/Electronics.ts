@@ -10,7 +10,7 @@ export class Electronics implements Material {
     public name: String
     public resourcesForProduction: {}
     constructor(amount: Number = 1) {
-        this. id = 8
+        this.id = 8
         this.mass = 2
         this.name = 'Электроника'
         this.resourcesForProduction = [new MineralOre(), new MetalOre(), new Quantium()]

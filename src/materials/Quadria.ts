@@ -12,10 +12,10 @@ export class Quadria implements Material {
     public resourcesForProduction: {}
     amount: Number;
     constructor(amount: Number = 1) {
-        this. id = 3
+        this.id = 3
         this.mass = 20
         this.name = 'Квадрия'
-        this.resourcesForProduction = [new MineralOre(), new MineralOre(), new OrganicOre(), new Delitium(), new Delitium(), new Quantium()]
+        this.resourcesForProduction = [new MineralOre(2), new OrganicOre(), new Delitium(2), new Quantium()]
         this.amount = amount
     }
 

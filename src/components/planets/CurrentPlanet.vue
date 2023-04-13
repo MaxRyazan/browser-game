@@ -31,6 +31,7 @@ onMounted(() => {
     planetStore.commit('recycleCrudeOreToOre')
     planetStore.commit('recycleCrudeMineralOreToMinerals')
     planetStore.commit('checkReinforcedConcretePlants')
+    planetStore.commit('checkOreMineralPlants')
     // planetStore.commit('checkThatPeopleEnough')
     for(let i = 0; i < tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings.length; i ++){
         planetStore.commit('checkThatFuelLoadTimePassed', tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings[i])

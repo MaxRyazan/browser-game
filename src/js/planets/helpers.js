@@ -23,6 +23,24 @@ export default {
         return tradeStore.state.currentPlanet.allStorageUnitsMass <  tradeStore.state.currentPlanet.storage.maxCapacity
     },
 
+    subtractResourcesAndApplyMaterials(material, plant, count, to){
+        const materialsOnStorage = tradeStore.state.currentPlanet.storage.materials.filter(r => r.id === material.id)[0]
+        for(let i = 0; i < material.resourcesForProduction.length; i ++){
+
+            planetStore.commit('subtractResource',
+                {resource: material.resourcesForProduction[i],
+                    amount: material.resourcesForProduction[i].amount * plant.amount * count,
+                    from: tradeStore.state.currentPlanet.storage.resources})
+        }
+        if(materialsOnStorage){
+            planetStore.commit('applyResource',{resource: material, amount: material.amount, to: to})
+        } else {
+            tradeStore.state.currentPlanet.storage.materials.push(material)
+        }
+    },
+
+    // tradeStore.state.currentPlanet.storage.materials
+
     checkEnergyAndAddBuildingToInProgressNow(building){
         planetStore.commit('checkThatEnergyOnPlanetIsEnough', building)
         if(!tradeStore.state.currentPlanet.isEnergyEnough){
@@ -65,20 +83,27 @@ export default {
     },
 
     checkThatResourcesForReinforcedConcretePlantsEnough(arrayOfRequiredResources, plantsAmount, count) {
-        console.log(plantsAmount)
         for(let i = 0; i < arrayOfRequiredResources.length; i ++){
             if(!this.isResourceEnough(arrayOfRequiredResources[i].resourcesId, arrayOfRequiredResources[i].amount * plantsAmount, tradeStore.state.currentPlanet.storage.resources, count)) {
                return false;
             }
         }
         return true
-    }
-        // const storage = tradeStore.state.currentPlanet.storage.resources
-        // for(let i = 0; i < storage.length; i ++){
-        //    for(let j = 0; j < required.length; j++){
-        //        if(required[j].resourcesId === storage[i].id){
-        //            storage[i].amount -= required[j].amount * plantsAmount
-        //        }
-        //    }
-        // }
+    },
+
+    checkThatResourceNeedSomewhereElse(count, resource){
+        const existingBuildingsTypeFour = tradeStore.state.currentPlanet.buildings.filter(b => b.buildingType===4)
+        for(let i = 0; i < existingBuildingsTypeFour.length; i++) {
+            for(let j = 0; j < existingBuildingsTypeFour[i].canProduce.type.length; j++) {
+               for(let k = 0; k < existingBuildingsTypeFour[i].canProduce.type[j].resourcesForProduction.length; k++){
+                    if(resource.id === existingBuildingsTypeFour[i].canProduce.type[j].resourcesForProduction[k].id){
+                        count += (existingBuildingsTypeFour[i].canProduce.type[j].resourcesForProduction[k].amount) * existingBuildingsTypeFour[i].amount
+                    }
+               }
+            }
+        }
+        return count
+    },
+
+
 }
