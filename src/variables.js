@@ -7,7 +7,7 @@ const variables =  {
     fiveMinutes: 60000, // 1 мин (тестовые скорости производства) в м-сек
     // fiveMinutes: 300000, // 5 минут в м-сек
     oneDayInMilliseconds: 86400000,
-    productionPower: 5,   // количество руд, произведенных за единицу времени
+    productionPower: 5,   // количество руды/материала, произведенных за единицу времени
 
 // ресурсы
     metalOreId: 1,

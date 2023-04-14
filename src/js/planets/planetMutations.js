@@ -39,6 +39,7 @@ import {OreMineralPlant} from "../../buildings/materials/Ore-mineralPlant.ts";
 import {PolymersPlant} from "../../buildings/materials/PolymersPlant.ts";
 import {ChemicalComplex} from "../../buildings/materials/ChemicalComplex.ts";
 import {EnrichmentComplex} from "../../buildings/materials/EnrichmentComplex.ts";
+import getters from "../../getters.js";
 
 
 export default {
@@ -339,153 +340,105 @@ export default {
             return false
         }
         else {
-
             if (helpers.isStorageNotFull()) {
+                // дата последнего производства мата
+                const dateOfLastProduce = reinforcedConcretePlants.timeOfLastProduce
 
-                const constructionMaterials = new ConstructionMaterials()
-                const metalOre = tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.metalOreId)[0]
-                const mineralOre = tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.mineralOreId)[0]
+                // разница в милисек между сейчас и датой последнего производства
+                const sub = Date.now() - dateOfLastProduce
 
-                const count = helpers.checkThatResourceNeedSomewhereElse(0, metalOre)
-                const count2 = helpers.checkThatResourceNeedSomewhereElse(0, mineralOre)
+                // если разница более пяти и менее 10 минут (онлайн)
+                if (sub >= variables.fiveMinutes && sub < variables.fiveMinutes * 1.5) {
+                    if (helpers.isResourceEnough(variables.metalOreId, 3, tradeStore.state.currentPlanet.storage.resources) &&
+                        helpers.isResourceEnough(variables.mineralOreId, 2, tradeStore.state.currentPlanet.storage.resources)) {
+                        const constructionMaterials = new ConstructionMaterials()
+                        constructionMaterials.amount = variables.productionPower
 
-                const metalOrePercent = Number((reinforcedConcretePlants.amount * 3 * 100 / count / 100).toFixed(3))
-                const mineralOrePercent = Number((reinforcedConcretePlants.amount * 2 * 100 / count2 / 100).toFixed(3))
-                console.log('metalOrePercent', metalOrePercent * 100, '%')
-                console.log('mineralOrePercent', mineralOrePercent * 100, '%')
+                        helpers.applyMaterialsAndSubtractResources(constructionMaterials, tradeStore.state.currentPlanet.storage.materials, tradeStore.state.currentPlanet.storage.resources)
+                        reinforcedConcretePlants.timeOfLastProduce = Date.now()
+                    }
+                } else {
+                    // логика офлайна
+                    const dateOfLastProduce = reinforcedConcretePlants.timeOfLastProduce
+                    const sub = Date.now() - dateOfLastProduce
+                    // количество руды которую жрёт это здание относильно других в процентах
+                    const percentMetalOre = reinforcedConcretePlants.amount * 3 / helpers.checkThatResourceNeedSomewhereElse(0, getters.getMetalOre(), [])
+                    const percentMineralOre = reinforcedConcretePlants.amount * 2 / helpers.checkThatResourceNeedSomewhereElse(0, getters.getMineralOre(), [])
 
-                const amount = metalOre.amount > mineralOre.amount ? mineralOre.amount * metalOrePercent : metalOre.amount * mineralOrePercent
-                const materialsAmount = Number((amount / 3).toFixed(2))
+                    const maxMetalOreForThis = tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.metalOreId)[0].amount * percentMetalOre
+                    const maxMineralOreForThis = tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.mineralOreId)[0].amount * percentMineralOre
+                    let materialCount = maxMetalOreForThis * 3 > maxMineralOreForThis * 2 ? maxMetalOreForThis / 3 : maxMineralOreForThis / 2
 
+                    const mayProducePerPastTime = variables.productionPower * (sub / variables.fiveMinutes)
 
-                planetStore.commit('applyResource', {
-                    resource: constructionMaterials,
-                    amount: materialsAmount,
-                    to: tradeStore.state.currentPlanet.storage.materials
-                })
-                planetStore.commit('subtractResource', {
-                    resource: metalOre,
-                    amount: materialsAmount * 3,
-                    from: tradeStore.state.currentPlanet.storage.resources
-                })
-                planetStore.commit('subtractResource', {
-                    resource: mineralOre,
-                    amount: materialsAmount * 2,
-                    from: tradeStore.state.currentPlanet.storage.resources
-                })
+                    if (mayProducePerPastTime < materialCount) {
+                        materialCount = mayProducePerPastTime
+                    }
 
+                    const constructionMaterials = new ConstructionMaterials()
+                    constructionMaterials.amount = materialCount
+
+                    helpers.applyMaterialsAndSubtractResources(constructionMaterials, tradeStore.state.currentPlanet.storage.materials, tradeStore.state.currentPlanet.storage.resources)
+                    reinforcedConcretePlants.timeOfLastProduce = Date.now()
+                    }
+                } else {
                 reinforcedConcretePlants.timeOfLastProduce = Date.now()
             }
         }
     },
 
-    checkOreMineralPlants(){
+    checkOreMineralPlants() {
         const oreMineralPlants = tradeStore.state.currentPlanet.buildings.filter(b => b.id === variables.oreMineralPlantId)[0]
-        if(!oreMineralPlants){
+        if (!oreMineralPlants) {
             return false
-        }
-        else {
+        } else {
+            if (helpers.isStorageNotFull()) {
+                const dateOfLastProduce = oreMineralPlants.timeOfLastProduce
+                const sub = Date.now() - dateOfLastProduce
+                if (sub >= variables.fiveMinutes) {
+                    const steel = new Steel()
+                    const subCount = helpers.calcFiveMinutesTimePeriodsCount(sub)
+                    console.log('subCount', subCount)
+                    const resourcePercentForThisBuildings = helpers.calcMaxResourcesPercentForBuilding(oreMineralPlants)
+                    console.log('resourcePercentForThisBuildings', resourcePercentForThisBuildings)
+                    let materialCount = helpers.calcMaxProduceOfBuildingPerTime(subCount, oreMineralPlants)
 
-            if(helpers.isStorageNotFull()){
+                    console.log('materialCount ', materialCount)
+                    console.log('oreAmount', getters.getMetalOre().amount)
+                    if (materialCount * 3 > getters.getMetalOre().amount * resourcePercentForThisBuildings) {
+                        materialCount = getters.getMetalOre().amount * resourcePercentForThisBuildings / 3
+                    }
+                    if (materialCount > getters.getTelluriumMineral().amount * resourcePercentForThisBuildings) {
+                        materialCount = getters.getTelluriumMineral().amount * resourcePercentForThisBuildings
+                    }
+                    steel.amount = materialCount
 
-                const steel = new Steel()
-                const metalOre = tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.metalOreId)[0]
-                const tellurium = tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.telluriumId)[0]
+                    console.log(steel)
 
-                const count = helpers.checkThatResourceNeedSomewhereElse(0, metalOre)
-                const count2 = helpers.checkThatResourceNeedSomewhereElse(0, tellurium)
-
-                const metalOrePercent = Number((oreMineralPlants.amount * 3 * 100 / count / 100).toFixed(3))
-                const telluriumPercent = Number((oreMineralPlants.amount * 100 / count2 / 100).toFixed(3))
-                console.log('metalOrePercent', metalOrePercent * 100, '%')
-                console.log('telluriumPercent', telluriumPercent * 100, '%')
-
-                const amount = metalOre.amount > tellurium.amount ? tellurium.amount * metalOrePercent : metalOre.amount * telluriumPercent
-                const materialsAmount = Number((amount / 3).toFixed(2)) / 2
-
-
-                planetStore.commit('applyResource', {
-                    resource: steel,
-                    amount: materialsAmount,
-                    to: tradeStore.state.currentPlanet.storage.materials
-                })
-                planetStore.commit('subtractResource', {
-                    resource: metalOre,
-                    amount: materialsAmount * 3,
-                    from: tradeStore.state.currentPlanet.storage.resources
-                })
-                planetStore.commit('subtractResource', {
-                    resource: tellurium,
-                    amount: materialsAmount,
-                    from: tradeStore.state.currentPlanet.storage.resources
-                })
-                console.log('-----------------------------------------')
-                console.log(tradeStore.state.currentPlanet.storage.resources)
-                console.log(tradeStore.state.currentPlanet.storage.materials)
-                console.log('-----------------------------------------')
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // const sub = (Date.now() - oreMineralPlants.timeOfLastProduce) / variables.fiveMinutes
-            // const count = Math.floor(sub / variables.timeOfResourceProduce)
-            // if(sub > variables.timeOfResourceProduce && helpers.checkThatResourcesForReinforcedConcretePlantsEnough(
-            //     [
-            //         {resourcesId: variables.metalOreId, amount: 4},
-            //         {resourcesId: variables.telluriumId, amount: 1},
-            //         {resourcesId: variables.mineralOreId, amount: 1},
-            //         {resourcesId: variables.quantiumId, amount: 1},
-            //         {resourcesId: variables.delitiumId, amount: 1}
-            //     ], oreMineralPlants.amount, count)){
-            //
-            //     const steel = new Steel((variables.productionPower * oreMineralPlants.amount).toFixed(2) * count)
-            //     const vettur = new Vettur((variables.productionPower * oreMineralPlants.amount).toFixed(2) * count)
-                // const steelOnStorage = tradeStore.state.currentPlanet.storage.materials.filter(r => r.id === variables.steelId)[0]
-                // const vetturOnStorage = tradeStore.state.currentPlanet.storage.materials.filter(r => r.id === variables.vetturId)[0]
-
-                // if(helpers.isStorageNotFull()){
-                //     helpers.subtractResourcesAndApplyMaterials(steel, oreMineralPlants, count, tradeStore.state.currentPlanet.storage.materials)
-                //     helpers.subtractResourcesAndApplyMaterials(vettur, oreMineralPlants, count, tradeStore.state.currentPlanet.storage.materials)
-                    // for(let i = 0; i < steel.resourcesForProduction.length; i ++){
-                    //     planetStore.commit('subtractResource',
-                    //         {resource: steel.resourcesForProduction[i],
-                    //             amount: steel.resourcesForProduction[i].amount * oreMineralPlants.amount * count,
-                    //             from: tradeStore.state.currentPlanet.storage.resources})
-                    // }
-                    // for(let i = 0; i < vettur.resourcesForProduction.length; i ++){
-                    //     planetStore.commit('subtractResource',
-                    //         {resource: vettur.resourcesForProduction[i],
-                    //             amount: vettur.resourcesForProduction[i].amount * oreMineralPlants.amount * count,
-                    //             from: tradeStore.state.currentPlanet.storage.resources})
-                    // }
-                    //
-                    // if(steelOnStorage){
-                    //     planetStore.commit('applyResource',{resource: steel, amount: steel.amount / oreMineralPlants.canProduce.type.length, to: tradeStore.state.currentPlanet.storage.materials})
-                    // } else {
-                    //     tradeStore.state.currentPlanet.storage.materials.push(steel)
-                    // }
-                    // if(vetturOnStorage){
-                    //     planetStore.commit('applyResource',{resource: vettur, amount: vettur.amount / oreMineralPlants.canProduce.type.length, to: tradeStore.state.currentPlanet.storage.materials})
-                    // } else {
-                    //     tradeStore.state.currentPlanet.storage.materials.push(vettur)
-                    // }
-
-
-                // }
+                    if (helpers.isMaterialExistOnStorage(steel)) {
+                        planetStore.commit('applyResource', {
+                            resource: steel,
+                            amount: steel.amount,
+                            to: tradeStore.state.currentPlanet.storage.materials
+                        })
+                    } else {
+                        tradeStore.state.currentPlanet.storage.materials.push(steel)
+                    }
+                    planetStore.commit('subtractResource', {
+                        resource: getters.getMetalOre(),
+                        amount: steel.amount * 3,
+                        from: tradeStore.state.currentPlanet.storage.resources
+                    })
+                    planetStore.commit('subtractResource', {
+                        resource: getters.getTelluriumMineral(),
+                        amount: steel.amount,
+                        from: tradeStore.state.currentPlanet.storage.resources
+                    })
+                    oreMineralPlants.timeOfLastProduce = Date.now()
+                }
+            } else {
                 oreMineralPlants.timeOfLastProduce = Date.now()
-            // }
+            }
         }
     },
 
@@ -556,6 +509,7 @@ export default {
                 tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings.splice(existBuildingIndex, 1)
             }
         }
+        planetStore.commit('savePlayerToLocalStorage')
     },
 
 
@@ -886,10 +840,10 @@ export default {
         const quadria = new Quadria(60)
         const steel = new Steel(60)
         const vettur = new Vettur(60)
-        const metalOre = new MetalOre(50)
-        const mineralOre = new MineralOre(50)
-        const organicOre = new OrganicOre(50)
-        const delitium = new Delitium(50)
+        const metalOre = new MetalOre(150)
+        const mineralOre = new MineralOre(80)
+        const organicOre = new OrganicOre(500)
+        const delitium = new Delitium(500)
         const quantium = new Quantium(50)
         const tellurium = new Tellurium(50)
 
@@ -912,6 +866,7 @@ export default {
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(quadria)
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(steel)
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(vettur)
+        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials = []
     },
 
     checkThatPeopleEnough(_){
