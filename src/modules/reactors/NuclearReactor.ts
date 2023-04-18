@@ -1,44 +1,11 @@
 import {RaceInterface} from "../../interfaces/RaceInterface";
 import {NuclearPhysics} from "../../Technologies/NuclearPhysics";
-import {ModuleInterface} from "../../interfaces/ModuleInterface";
 import {Module} from "../../entities/Module";
+import {Steel} from "../../materials/Steel";
+import {Electronics} from "../../materials/Electronics";
+import {Polymers} from "../../materials/Polymers";
 
 export class NuclearReactor extends Module{
-    public id: Number
-    public picture: String
-    public requiredTech: {}
-    public belongsToRace: RaceInterface
-    public name: String
-    public amount: Number
-    public costInBuildPoints: Number
-    public baseParams: {
-        baseMass: Number
-        baseSignature: Number
-        requiredEnergy: Number
-        requiredCargo: Number
-        requiredWorkers: Number
-    }
-    public baseCostInMaterials: {
-        metal: Number
-        electronic: Number
-        polymers: Number
-        requiredCRForBuild: Number
-        requiredIGForBuild: Number
-    }
-    public bonusParamsToShip: {
-        energy: Number
-        cargo: Number
-        speedInSubspace: Number
-        speedInNormalSpace: Number
-    }
-    public bonusActionsToShips: {
-        mining: Boolean
-        scanning: Boolean
-        construction: Boolean
-        lifeSupporting: Boolean
-        autoPilot: Boolean
-    }
-
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
         super();
         this.id = 2
@@ -46,20 +13,20 @@ export class NuclearReactor extends Module{
         this.requiredTech = [new NuclearPhysics()]
         this.name = 'Ядерный реактор'
         this.costInBuildPoints = 130
+        this.costInCR = 120
+        this.costInIG = 0
         this.baseParams = {
-            baseMass: 13,
-            baseSignature: 11,
+            moduleMass: 13,
+            moduleSignature: 11,
             requiredEnergy: 0,
             requiredCargo: 16,
             requiredWorkers: 1
         }
-        this.baseCostInMaterials = {
-            metal: 2,
-            electronic: 4,
-            polymers: 1,
-            requiredCRForBuild: 5,
-            requiredIGForBuild: 0
-        }
+        this.baseCostInMaterials = [
+            new Steel(2),
+            new Electronics(4),
+            new Polymers(1),
+        ]
         this.bonusParamsToShip = {
             energy: 150,
             cargo: 0,

@@ -1,13 +1,34 @@
 import {ModuleInterface} from "../interfaces/ModuleInterface";
 import {RaceInterface} from "../interfaces/RaceInterface";
+import {Material} from "../interfaces/Material";
 
 export abstract class Module implements ModuleInterface{
     amount: Number;
-    baseCostInMaterials: { metal: Number; electronic: Number; polymers: Number; requiredCRForBuild: Number; requiredIGForBuild: Number };
-    baseParams: { baseMass: Number; baseSignature: Number; requiredEnergy: Number; requiredCargo: Number; requiredWorkers: Number };
+    costInCR: Number;
+    costInIG?: Number
+    baseCostInMaterials: Material[];
+    requiredFuel: { type: Material, amount: Number }
+    baseParams: {
+        moduleMass: Number;
+        moduleSignature: Number;
+        requiredEnergy: Number;
+        requiredCargo: Number;
+        requiredWorkers: Number
+    };
     belongsToRace?: RaceInterface;
-    bonusActionsToShips: { mining: Boolean; scanning: Boolean; construction: Boolean; lifeSupporting: Boolean; autoPilot: Boolean };
-    bonusParamsToShip: { energy: Number; cargo: Number; speedInSubspace: Number; speedInNormalSpace: Number };
+    bonusActionsToShips: {
+        mining: Boolean;
+        scanning: Boolean;
+        construction: Boolean;
+        lifeSupporting: Boolean;
+        autoPilot: Boolean
+    };
+    bonusParamsToShip: {
+        energy: Number;
+        cargo: Number;
+        speedInSubspace: Number;
+        speedInNormalSpace: Number
+    };
     costInBuildPoints: Number;
     id: Number;
     name: String;

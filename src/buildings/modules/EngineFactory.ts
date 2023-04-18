@@ -26,7 +26,15 @@ export class EngineFactory extends Building{
         this.energyNeedToFunctionality = 20
         this.addStoreToPlanet = 100
         this.buildingType = 6
-        this.canProduce= {type: [new SolarSale(), new RocketEngine(), new NuclearEngine(), new NanoEngine()], amount: 4}
+        this.canProduce= {
+            type:
+                [
+                    new SolarSale(null, 1),
+                    new RocketEngine(null, 1),
+                    new NuclearEngine(null, 1),
+                    new NanoEngine(null, 1)
+                ],
+            amount: 4}
         this.timeOfLastProduce = Date.now()
     }
 }

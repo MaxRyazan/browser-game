@@ -1,4 +1,5 @@
 import {RaceInterface} from "./RaceInterface";
+import {Material} from "./Material";
 
 export interface ModuleInterface {
      id: Number
@@ -7,21 +8,19 @@ export interface ModuleInterface {
      belongsToRace?: RaceInterface
      name: String
      amount: Number
+     costInCR: Number
+     costInIG?: Number
      costInBuildPoints: Number
+     requiredFuel: { type: Material, amount: Number }
      baseParams: {
-        baseMass: Number
-        baseSignature: Number
-        requiredEnergy: Number
-        requiredCargo: Number
-        requiredWorkers: Number
+         moduleMass: Number
+         moduleSignature: Number
+         requiredEnergy: Number
+         requiredCargo: Number
+         requiredWorkers: Number
     }
-     baseCostInMaterials: {
-        metal: Number
-        electronic: Number
-        polymers: Number
-        requiredCRForBuild: Number
-        requiredIGForBuild: Number
-    }
+     baseCostInMaterials: Material[];
+
      bonusParamsToShip: {
         energy: Number
         cargo: Number
