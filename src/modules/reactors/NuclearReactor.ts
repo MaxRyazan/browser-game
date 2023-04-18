@@ -1,14 +1,15 @@
-import {RaceInterface} from "../interfaces/RaceInterface";
-import {NuclearPhysics} from "../Technologies/NuclearPhysics";
-import {Module} from "../interfaces/Module";
+import {RaceInterface} from "../../interfaces/RaceInterface";
+import {NuclearPhysics} from "../../Technologies/NuclearPhysics";
+import {ModuleInterface} from "../../interfaces/ModuleInterface";
+import {Module} from "../../entities/Module";
 
-export class NuclearReactor implements Module{
+export class NuclearReactor extends Module{
     public id: Number
     public picture: String
     public requiredTech: {}
     public belongsToRace: RaceInterface
     public name: String
-    public amount?: Number
+    public amount: Number
     public costInBuildPoints: Number
     public baseParams: {
         baseMass: Number
@@ -39,6 +40,7 @@ export class NuclearReactor implements Module{
     }
 
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
+        super();
         this.id = 2
         this.picture = './src/assets/images/nuclear_reactor.jpg'
         this.requiredTech = [new NuclearPhysics()]

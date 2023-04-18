@@ -1,9 +1,9 @@
-import {Module} from "./Module";
+import {ModuleInterface} from "./ModuleInterface";
 
-export interface TradeLot extends Module{
+export interface TradeLot extends ModuleInterface{
     lotId: Number
     lotFrom: {id: Number, login: String},
-    subject: Module
+    subject: ModuleInterface
     minAmount: Number,
     amount: Number,
     pricePerUnit: Number,

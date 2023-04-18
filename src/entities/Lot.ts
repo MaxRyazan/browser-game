@@ -1,5 +1,5 @@
 import {TradeLot} from "../interfaces/TradeLot";
-import {Module} from "../interfaces/Module";
+import {ModuleInterface} from "../interfaces/ModuleInterface";
 
 export class Lot implements TradeLot {
     lotId: Number;
@@ -8,9 +8,9 @@ export class Lot implements TradeLot {
     amount: number;
     pricePerUnit: number;
     pricePerLot: Number;
-    subject: Module;
+    subject: ModuleInterface;
 
-    constructor(minAmount: number, lotFrom:  { id: Number; login: String }, amount: number, pricePerUnit: number, subject: Module) {
+    constructor(minAmount: number, lotFrom:  { id: Number; login: String }, amount: number, pricePerUnit: number, subject: ModuleInterface) {
         this.lotId = 1
         this.lotFrom = lotFrom
         this.minAmount = minAmount

@@ -1,7 +1,6 @@
 import tradeStore from "../../store_modules/tradeStore.js";
 import planetStore from "../../store_modules/planetStore.js";
 import variables from "../../variables.js";
-import getters from "../../getters.js";
 
 
 export default {
@@ -23,6 +22,54 @@ export default {
     isStorageNotFull(){
         return tradeStore.state.currentPlanet.allStorageUnitsMass <  tradeStore.state.currentPlanet.storage.maxCapacity
     },
+
+    isResourceExistsOnStorage(resource, resourceAmount){
+        return tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === resource.id && r.amount >= resourceAmount).length !== 0
+    },
+
+
+    isMaterialExistOnStorage(material) {
+        return tradeStore.state.currentPlanet.storage.materials.filter(m => m.id === material.id).length !== 0
+    },
+
+
+    produceMaterial(material, plants){
+        const resourceStorage = tradeStore.state.currentPlanet.storage.resources
+        const materialStorage = tradeStore.state.currentPlanet.storage.materials
+        material.amount = variables.productionPower * plants.amount / plants.canProduce.type.length
+
+        for(let i = 0 ; i < material.resourcesForProduction.length; i++){
+           if(!this.isResourceExistsOnStorage(material.resourcesForProduction[i], material.resourcesForProduction[i].amount * plants.amount)){
+               return
+           }
+        }
+        if(this.isMaterialExistOnStorage(material)){
+            let temp = materialStorage.filter(m => m.id === material.id)[0]
+            temp.amount += material.amount
+        } else {
+            materialStorage.push(material)
+        }
+        for(let j = 0; j < material.resourcesForProduction.length; j ++){
+            planetStore.commit('subtractResource', {
+                resource: material.resourcesForProduction[j],
+                amount:  material.resourcesForProduction[j].amount * plants.amount,
+                from: resourceStorage
+            })
+        }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     subtractResourcesAndApplyMaterials(material, plant, count, to){
         const materialsOnStorage = tradeStore.state.currentPlanet.storage.materials.filter(r => r.id === material.id)[0]
@@ -83,37 +130,30 @@ export default {
         return true
     },
 
-    // checkThatResourcesForReinforcedConcretePlantsEnough(arrayOfRequiredResources, plantsAmount, count) {
-    //     for(let i = 0; i < arrayOfRequiredResources.length; i ++){
-    //         if(!this.isResourceEnough(arrayOfRequiredResources[i].resourcesId, arrayOfRequiredResources[i].amount * plantsAmount, tradeStore.state.currentPlanet.storage.resources, count)) {
-    //            return false;
-    //         }
-    //     }
-    //     return true
-    // },
 
-    checkThatResourceNeedSomewhereElse(count, resource, excludeId){
-        const existingBuildingsTypeFour = tradeStore.state.currentPlanet.buildings.filter(b => b.buildingType===4)
-        for(let i = 0; i < existingBuildingsTypeFour.length; i++) {
-            for(let u = 0; u < excludeId.length; u++){
-                if(existingBuildingsTypeFour[i].id !== excludeId){
-                    for(let j = 0; j < existingBuildingsTypeFour[i].canProduce.type.length; j++) {
-                       for(let k = 0; k < existingBuildingsTypeFour[i].canProduce.type[j].resourcesForProduction.length; k++){
-                            if(resource.id === existingBuildingsTypeFour[i].canProduce.type[j].resourcesForProduction[k].id){
-                                count += (existingBuildingsTypeFour[i].canProduce.type[j].resourcesForProduction[k].amount) * existingBuildingsTypeFour[i].amount
-                            }
-                       }
+    checkThatResourceNeedSomewhereElse(count, resource, excludeId) {
+        let existingBuildingsTypeFour = [];
+        if(!excludeId.length){
+            existingBuildingsTypeFour = tradeStore.state.currentPlanet.buildings.filter(b => b.buildingType === 4)
+        }
+        if(excludeId.length ){
+            for(let n = 0; n < excludeId.length; n++){
+                existingBuildingsTypeFour = tradeStore.state.currentPlanet.buildings.filter(b =>b.buildingType === 4 && b.id !== excludeId[n])
+            }
+        }
+        for (let i = 0; i < existingBuildingsTypeFour.length; i++) {
+            for (let j = 0; j < existingBuildingsTypeFour[i].canProduce.type.length; j++) {
+                for (let k = 0; k < existingBuildingsTypeFour[i].canProduce.type[j].resourcesForProduction.length; k++) {
+                    if (resource.id === existingBuildingsTypeFour[i].canProduce.type[j].resourcesForProduction[k].id) {
+                        count += (existingBuildingsTypeFour[i].canProduce.type[j].resourcesForProduction[k].amount) * existingBuildingsTypeFour[i].amount
                     }
                 }
             }
         }
-        return count
+        return count === 0 ? 1 : count
     },
 
 
-    isMaterialExistOnStorage(material) {
-        return tradeStore.state.currentPlanet.storage.materials.filter(m => m.id === material.id).length !== 0
-    },
 
     calcAllMaterialsProductBuildings(){
         let buildingsCount = 0

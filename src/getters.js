@@ -10,6 +10,6 @@ export default {
         return tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.mineralOreId)[0]
     },
     getTelluriumMineral(){
-        return tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.telluriumId)[0]
+        return tradeStore.state.currentPlanet.storage.resources.filter(r => r.id === variables.telluriumMineralId)[0]
     }
 }

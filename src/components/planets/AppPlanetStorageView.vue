@@ -63,6 +63,7 @@ import planetStore from "../../store_modules/planetStore.js";
 import AppMiniButton from "../mini/AppMiniButton.vue";
 import {onMounted, onUnmounted, ref} from "vue";
 import AppTableTitle from "./planetMini/AppTableTitle.vue";
+import variables from "../../variables.js";
 
 const showModules = ref(false)
 const showMaterials = ref(false)
@@ -102,7 +103,7 @@ const interval = setInterval(() => {
     planetStore.commit('recycleCrudeMineralOreToMinerals')
     planetStore.commit('checkReinforcedConcretePlants')
     planetStore.commit('checkOreMineralPlants')
-}, 31000)
+}, variables.oneMinute + 1000)
 
 onMounted(() => {
     const buttons = document.querySelectorAll('.storage')

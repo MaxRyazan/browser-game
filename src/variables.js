@@ -4,8 +4,10 @@ const variables =  {
 // время в секундах с момента последнего производства здания
     timeOfResourceProduce: 1, // разница времени в производстве
     fiveSeconds: 5000, // 5 сек в м-сек
+    oneMinute: 60000, // 1 мин (тестовые скорости производства) в м-сек
     fiveMinutes: 60000, // 1 мин (тестовые скорости производства) в м-сек
     // fiveMinutes: 300000, // 5 минут в м-сек
+    oneHour: 3600000,
     oneDayInMilliseconds: 86400000,
     productionPower: 5,   // количество руды/материала, произведенных за единицу времени
 
@@ -28,9 +30,6 @@ const variables =  {
     constructionMaterialsId: 9,
     steelId: 4,
     vetturId: 2,
-    telluriumId: 6,
-    quantiumId: 5,
-    delitiumId: 4,
 
 // здания
     colonyId: 1,
@@ -41,6 +40,12 @@ const variables =  {
     mineralSynthesizerId: 17,
     reinforcedConcretePlantId: 18,
     oreMineralPlantId: 19,
+    polymersPlantId: 20,
+    chemicalComplexId: 21,
+    enrichmentComplexId: 22,
+
+// Типы зданий
+    buildingTypeMaterials: 4,
 }
 export default variables
 

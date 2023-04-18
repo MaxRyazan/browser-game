@@ -1,34 +1,34 @@
 import {RaceInterface} from "./RaceInterface";
 
-export interface Module{
-     id?: Number
-     picture?: String
-     requiredTech?: {}
+export interface ModuleInterface {
+     id: Number
+     picture: String
+     requiredTech: {}
      belongsToRace?: RaceInterface
-     name?: String
-     amount?: Number
-    costInBuildPoints?: Number
-     baseParams?: {
+     name: String
+     amount: Number
+     costInBuildPoints: Number
+     baseParams: {
         baseMass: Number
         baseSignature: Number
         requiredEnergy: Number
         requiredCargo: Number
         requiredWorkers: Number
     }
-     baseCostInMaterials?: {
+     baseCostInMaterials: {
         metal: Number
         electronic: Number
         polymers: Number
         requiredCRForBuild: Number
         requiredIGForBuild: Number
     }
-     bonusParamsToShip?: {
+     bonusParamsToShip: {
         energy: Number
         cargo: Number
         speedInSubspace: Number
         speedInNormalSpace: Number
     }
-     bonusActionsToShips?: {
+     bonusActionsToShips: {
         mining: Boolean
         scanning: Boolean
         construction: Boolean

@@ -94,6 +94,6 @@ const currentPlanet = computed(() => {
 })
 
 const allWeight = computed(() => {
-    return Number(tradeStore.state.currentPlanet.allStorageUnitsMass.toFixed())
+    return Number(tradeStore.state.currentPlanet.allStorageUnitsMass)
 })
 </script>
