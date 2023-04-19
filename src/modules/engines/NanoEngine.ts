@@ -12,7 +12,7 @@ export class NanoEngine extends Module{
         this.id = 7
         this.picture = './src/assets/images/altah_reactor.jpg'
         this.requiredTech = [new AlienTechnology()]
-        this.name = 'Альтах реактор'
+        this.name = 'Нано двигатель'
         this.costInBuildPoints = 200
         this.costInCR = 120
         this.costInIG = 0

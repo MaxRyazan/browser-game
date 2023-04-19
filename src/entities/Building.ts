@@ -1,8 +1,8 @@
 import {BuildingInterface} from "../interfaces/BuildingInterface";
 import {ResourceInterface} from "../interfaces/ResourceInterface";
 import {Material} from "../interfaces/Material";
-import {Detail} from "../interfaces/Detail";
 import {Resource} from "./Resource";
+import {Module} from "./Module";
 
 export class Building implements BuildingInterface{
     amount: Number;
@@ -10,7 +10,7 @@ export class Building implements BuildingInterface{
     buildOtherBuildingsSpeed: Number;
     picture: String;
     canProduce: {
-        type: Resource[] | Material[] | Detail[]; amount: Number };
+        type: Resource[] | Material[] | Module[]; amount: Number };
     resourcesNeedToFunctionality: {
         type: Resource[]; amount: Number};
     costInCR: Number;

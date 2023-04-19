@@ -30,4 +30,5 @@ import tradeStore from "../../store_modules/tradeStore.js";
 function checkBuilding(param){
     return tradeStore.state.currentPlanet.buildings.filter(b => b.name === param)[0]
 }
+
 </script>

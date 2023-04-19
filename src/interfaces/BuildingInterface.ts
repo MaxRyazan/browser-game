@@ -1,7 +1,7 @@
 import {Material} from "./Material";
 import {ResourceInterface} from "./ResourceInterface";
-import {Detail} from "./Detail";
 import {Resource} from "../entities/Resource";
+import {Module} from "../entities/Module";
 
 export interface BuildingInterface {
     id: Number
@@ -15,7 +15,7 @@ export interface BuildingInterface {
     buildOtherBuildingsSpeed?: Number
     requiredMaterials: Material[]
     canProduce?:{
-        type: ResourceInterface[] | Material[] | Detail[]
+        type: ResourceInterface[] | Material[] | Module[]
         amount: Number
     }
     resourcesNeedToFunctionality?: {

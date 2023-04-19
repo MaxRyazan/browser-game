@@ -12,7 +12,7 @@ export class NuclearEngine extends Module{
         this.id = 6
         this.picture = './src/assets/images/altah_reactor.jpg'
         this.requiredTech = [new AlienTechnology()]
-        this.name = 'Альтах реактор'
+        this.name = 'Ядерный двигатель'
         this.costInBuildPoints = 200
         this.costInCR = 120
         this.costInIG = 0

@@ -1,21 +1,22 @@
 import {RaceInterface} from "../../interfaces/RaceInterface";
-import {AlienTechnology} from "../../Technologies/AlienTechnology";
 import {Steel} from "../../materials/Steel";
 import {Electronics} from "../../materials/Electronics";
 import {Polymers} from "../../materials/Polymers";
 import {Module} from "../../entities/Module";
 import {Vettur} from "../../materials/Vettur";
+import {ChemicalFuel} from "../../materials/ChemicalFuel";
 
 export class RocketEngine extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
         super();
         this.id = 5
         this.picture = './src/assets/images/altah_reactor.jpg'
-        this.requiredTech = [new AlienTechnology()]
-        this.name = 'Альтах реактор'
+        this.requiredTech = []
+        this.name = 'Ракетный двигатель'
         this.costInBuildPoints = 200
         this.costInCR = 120
         this.costInIG = 0
+        this.requiredFuel = { type: new ChemicalFuel(), amount: 0 }
         this.baseParams = {
             moduleMass: 10,
             moduleSignature: 10,

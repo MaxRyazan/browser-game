@@ -26,7 +26,7 @@ export class EngineFactory extends Building{
         this.energyNeedToFunctionality = 20
         this.addStoreToPlanet = 100
         this.buildingType = 6
-        this.canProduce= {
+        this.canProduce = {
             type:
                 [
                     new SolarSale(null, 1),
