@@ -4,6 +4,7 @@ import {Module} from "../../entities/Module";
 import {Steel} from "../../materials/Steel";
 import {Electronics} from "../../materials/Electronics";
 import {Polymers} from "../../materials/Polymers";
+import {Vettur} from "../../materials/Vettur";
 
 export class AltahReactor extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
@@ -26,6 +27,7 @@ export class AltahReactor extends Module{
             new Steel(12),
             new Electronics(10),
             new Polymers(12),
+            new Vettur(15),
         ]
         this.bonusParamsToShip = {
             energy: 350,

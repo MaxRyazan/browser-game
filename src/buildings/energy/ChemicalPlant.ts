@@ -28,11 +28,5 @@ export class ChemicalPlant extends Building{
         this.fuelLoadTime = 0
         this.fuelNeedToFunctionalityPerDay = {fuelType: new ChemicalFuel(), required: 48.8}
     }
-    // checkFuel(){
-    //     console.log('3333')
-    //     if(this.isFuelLoaded){
-    //         return this.addEnergyToPlanet
-    //     }
-    //     return 0
-    // }
+
 }

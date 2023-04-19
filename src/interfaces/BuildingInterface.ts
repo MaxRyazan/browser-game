@@ -6,6 +6,7 @@ import {Resource} from "../entities/Resource";
 export interface BuildingInterface {
     id: Number
     name: String
+    picture: String
     onGround: Boolean
     costInCR: Number
     costInIG?: Number

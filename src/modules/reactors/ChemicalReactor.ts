@@ -24,8 +24,8 @@ export class ChemicalReactor extends  Module{
             requiredWorkers: 1
         }
         this.baseCostInMaterials = [
-            new Steel(1),
-            new Electronics(2),
+            new Steel(3),
+            new Electronics(3),
             new Polymers(2),
         ]
         this.bonusParamsToShip = {

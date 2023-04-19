@@ -16,7 +16,7 @@ export class EngineFactory extends Building{
         this.costInIG = 0
         this.onGround = true
         this.costInTime = costInTime
-        this.buildComponentsSpeed = 0
+        this.buildComponentsSpeed = 5
         this.buildOtherBuildingsSpeed = 0
         this.requiredMaterials = [new ConstructionMaterials(20), new Electronics(5)]
         this.amount = amount

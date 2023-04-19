@@ -4,6 +4,7 @@ import {Steel} from "../../materials/Steel";
 import {Electronics} from "../../materials/Electronics";
 import {Polymers} from "../../materials/Polymers";
 import {Module} from "../../entities/Module";
+import {Vettur} from "../../materials/Vettur";
 
 export class RocketEngine extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
@@ -26,12 +27,13 @@ export class RocketEngine extends Module{
             new Steel(12),
             new Electronics(10),
             new Polymers(12),
+            new Vettur(7),
         ]
         this.bonusParamsToShip = {
-            energy: 350,
+            energy: 0,
             cargo: 0,
             speedInSubspace: 0,
-            speedInNormalSpace: 0
+            speedInNormalSpace: 40
         }
         this.bonusActionsToShips = {
             mining: false,

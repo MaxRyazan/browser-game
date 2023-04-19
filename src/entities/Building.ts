@@ -8,6 +8,7 @@ export class Building implements BuildingInterface{
     amount: Number;
     buildComponentsSpeed: Number;
     buildOtherBuildingsSpeed: Number;
+    picture: String;
     canProduce: {
         type: Resource[] | Material[] | Detail[]; amount: Number };
     resourcesNeedToFunctionality: {

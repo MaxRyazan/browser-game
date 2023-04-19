@@ -4,10 +4,21 @@
   font-weight:normal;
   font-style:normal;
 }
+@font-face {
+  font-family:"Hyatheus";
+  src:url("fonts/Hyatheus.woff") format("woff");
+  font-weight:normal;
+  font-style:normal;
+}
+$sp_green:  #00E000 !global;
+$sp_yellow:  #daa548 !global;
+
 *{
   margin: 0;
   padding: 0;
   font-size: 12px;
+  font-family: Hyatheus, serif !important;
+  letter-spacing: 1.5px !important;
 }
 h1, h2 {
   font-size: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)));

@@ -29,10 +29,10 @@ export class SolarSale extends Module{
             new Polymers(10),
         ]
         this.bonusParamsToShip = {
-            energy: 20,
+            energy: 0,
             cargo: 0,
             speedInSubspace: 0,
-            speedInNormalSpace: 0
+            speedInNormalSpace: 10
         }
         this.bonusActionsToShips = {
             mining: false,

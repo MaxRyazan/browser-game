@@ -4,6 +4,7 @@ import {Module} from "../../entities/Module";
 import {Steel} from "../../materials/Steel";
 import {Electronics} from "../../materials/Electronics";
 import {Polymers} from "../../materials/Polymers";
+import {Quadria} from "../../materials/Quadria";
 
 export class NuclearReactor extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
@@ -23,9 +24,10 @@ export class NuclearReactor extends Module{
             requiredWorkers: 1
         }
         this.baseCostInMaterials = [
-            new Steel(2),
+            new Steel(5),
             new Electronics(4),
-            new Polymers(1),
+            new Polymers(3),
+            new Quadria(3),
         ]
         this.bonusParamsToShip = {
             energy: 150,

@@ -1,3 +1,13 @@
+$sp_green:  #00E000 !global;
+$sp_yellow:  #daa548 !global;
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 .planet_item{
   box-sizing: border-box;
   z-index: 1;
@@ -196,7 +206,7 @@
 }
 .building_name{
   width: 100%;
-  height: 15%;
+  height: 20%;
   color: #daa548;
   font-family: FUTURE, sans-serif;
   background-color: rgba(15, 65, 140, .5);
@@ -206,7 +216,7 @@
   text-align: center;
 }
 .building_picture{
-  height: 60%;
+  height: 55%;
   width: 100%;
   & img{
     width: 100%;
@@ -444,17 +454,93 @@
 }
 
 
+.building_info_wrapper {
+  background: radial-gradient(ellipse 90% 90%, rgba(0,0,0,0.35), rgba(0,0,0,1.0)) no-repeat, url(../assets/images/value_bg_blue.png) repeat padding-box;
+  position: fixed;
+  top: 170px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+  gap: 20px;
+  color: $sp_green;
+  width: 400px;
+}
+.building_info_description{
+  color: $sp_yellow;
+}
+
+.building_info_picture {
+  width: 150px;
+  & img {
+    width: 100%;
+    min-height: 100%;
+  }
+}
+
+.building_info_amount{
+  & input{
+    width: 40px;
+    margin-left: 5px;
+  }
+}
+
+.building_info_production{
+  display: flex;
+  height: 10%;
+  min-height: 20px;
+  padding: 1px;
+}
+
+.building_info_item{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: default;
+  justify-content: space-between;
+  & input{
+    height: 12px;
+    width: 60px;
+    outline: none;
+    padding: 2px 4px;
+    color: $sp_yellow;
+    background: linear-gradient(to right, rgba(4,34,38,0.5), rgba(5,45,51,0.5) 50% ,rgba(4,34,38,0.5) 100%) no-repeat border-box;
+    border: 1px solid rgba(28,136,153,0.5);
+    text-align: center;
+  }
+}
+
+.building_info_title{
+  display: flex;
+  color: $sp_yellow;
+  justify-content: space-between;
+}
+
+.building_info_button{
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  & button{
+    padding: 2px 4px;
+    border: 1px solid rgba(43,211,237,0.6);
+    color: #73d6e5;
+    text-shadow: 0 0 5px rgba(115,214,229,0.5);
+    box-shadow: inset 0 0 2px 1px rgba(43,211,237,0.25);
+    background: linear-gradient(to top, rgba(43,211,237,0.15), rgba(43,211,237,0.05) 100%) no-repeat border-box, linear-gradient(to top, rgba(9,13,15,0.9), rgba(9,13,15,0.9) 100%) no-repeat border-box;
+    &:hover{
+      background: linear-gradient(to top, rgba(43,211,237,0.15), rgba(43,211,237,0.05) 10%) no-repeat border-box, linear-gradient(to top, rgba(9,13,15,0.9), rgba(9,13,15,0.9) 10%) no-repeat border-box;
+      color: #19b6e5;
+    }
+    &:active{
+      color: $sp_yellow;
+    }
+  }
+}
 
 @keyframes blink {
   0%{opacity: 0}
   50%{opacity: 1}
   100%{opacity: 0}
 }
-
-
-
-
-
 
 
 

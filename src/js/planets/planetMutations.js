@@ -41,6 +41,8 @@ import {ChemicalComplex} from "../../buildings/materials/ChemicalComplex.ts";
 import {EnrichmentComplex} from "../../buildings/materials/EnrichmentComplex.ts";
 import {NanoFuel} from "../../materials/NanoFuel.ts";
 import {NuclearFuel} from "../../materials/NuclearFuel.ts";
+import {EngineFactory} from "../../buildings/modules/EngineFactory.ts";
+import {ChemicalPlant} from "../../buildings/energy/ChemicalPlant.ts";
 
 
 export default {
@@ -613,7 +615,7 @@ export default {
                 }
                     break;
                 case 'Химическая электростанция' : {
-                    const chemicalPlant = new ChemicalComplex()
+                    const chemicalPlant = new ChemicalPlant()
                     planetStore.commit('checkThatFuelIsEnoughAfterBuildNewStation', chemicalPlant)
                     if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
                         helpers.checkEnergyAndAddBuildingToInProgressNow(chemicalPlant)
@@ -723,6 +725,15 @@ export default {
                     }
                 }
                     break;
+                case 'Цех сборки двигателей' : {
+                    const engineFactory = new EngineFactory()
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(engineFactory)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
+                }
+                    break;
             }
         } else {
             planetStore.commit('sendError', 'На планете кончилось место для застройки!')
@@ -813,7 +824,7 @@ export default {
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(quadria)
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(steel)
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(vettur)
-        tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials = []
+        // tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials = []
     },
 
     checkThatPeopleEnough(_){

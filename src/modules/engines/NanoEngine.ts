@@ -4,6 +4,7 @@ import {Steel} from "../../materials/Steel";
 import {Electronics} from "../../materials/Electronics";
 import {Polymers} from "../../materials/Polymers";
 import {Module} from "../../entities/Module";
+import {Quadria} from "../../materials/Quadria";
 
 export class NanoEngine extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
@@ -26,12 +27,13 @@ export class NanoEngine extends Module{
             new Steel(12),
             new Electronics(10),
             new Polymers(12),
+            new Quadria(20),
         ]
         this.bonusParamsToShip = {
-            energy: 350,
+            energy: 0,
             cargo: 0,
             speedInSubspace: 0,
-            speedInNormalSpace: 0
+            speedInNormalSpace: 100
         }
         this.bonusActionsToShips = {
             mining: false,
