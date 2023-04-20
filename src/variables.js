@@ -31,6 +31,9 @@ const variables =  {
     steelId: 4,
     vetturId: 2,
 
+// модули
+    solarSailModuleId: 4,
+
 // здания
     colonyId: 1,
     buildingStationId: 5,

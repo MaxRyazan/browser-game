@@ -19,6 +19,16 @@ export default {
         return weight
     },
 
+    calculateWeightOfModules(param){
+        let weight = 0;
+        if(param.length){
+            for(let i = 0; i < param.length; i ++){
+                weight += param[i].baseParams.moduleMass * param[i].amount
+            }
+        }
+        return weight
+    },
+
     isStorageNotFull(){
         return tradeStore.state.currentPlanet.allStorageUnitsMass <  tradeStore.state.currentPlanet.storage.maxCapacity
     },
@@ -196,5 +206,37 @@ export default {
             })
         }
     },
+
+
+    isMaterialsForModulesEnough(module){
+        for(let i = 0; i < module.baseCostInMaterials.length; i++){
+            const check = tradeStore.state.currentPlanet.storage.materials.filter(m => m.id === module.baseCostInMaterials[i].id)[0]
+            if(!check || check.amount < module.baseCostInMaterials[i].amount * module.amount){
+                return false
+            }
+        }
+        return true
+    },
+
+    subtractMaterials(material, amount){
+        const from = tradeStore.state.currentPlanet.storage.materials
+        for(let i = 0; i < from.length; i++){
+            if(from[i].id === material.id){
+                from[i].amount = from[i].amount - material.amount * amount
+            }
+        }
+        planetStore.commit('calculateWeightOfAllOnStorage')
+    },
+
+    addModuleToStorage(module){
+        const modulesStorage = tradeStore.state.currentPlanet.storage.modules
+        const existingModule = modulesStorage.filter(m => m.id === module.id && m.belongsToRace.id === module.belongsToRace.id)[0]
+            if(!existingModule){
+                modulesStorage.push(module)
+            } else {
+                existingModule.amount += module.amount
+            }
+            planetStore.commit('savePlayerToLocalStorage')
+        }
 
 }

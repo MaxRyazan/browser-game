@@ -43,6 +43,7 @@ import {NanoFuel} from "../../materials/NanoFuel.ts";
 import {NuclearFuel} from "../../materials/NuclearFuel.ts";
 import {EngineFactory} from "../../buildings/modules/EngineFactory.ts";
 import {ChemicalPlant} from "../../buildings/energy/ChemicalPlant.ts";
+import {SolarSale} from "../../modules/engines/SolarSale.ts";
 
 
 export default {
@@ -157,7 +158,7 @@ export default {
     },
 
     calculateWeightOfAllOnStorage(_){
-        const modules = helpers.calculateWeightOfThisArray(tradeStore.state.currentPlanet.storage.modules)
+        const modules = helpers.calculateWeightOfModules(tradeStore.state.currentPlanet.storage.modules)
         const resources = helpers.calculateWeightOfThisArray(tradeStore.state.currentPlanet.storage.resources)
         const materials = helpers.calculateWeightOfThisArray(tradeStore.state.currentPlanet.storage.materials)
         tradeStore.state.currentPlanet.allStorageUnitsMass = modules + resources + materials
@@ -845,5 +846,20 @@ export default {
             }
         }
     },
+
+
+    createModule(_, {moduleId, amount}){
+        switch (moduleId){
+            case variables.solarSailModuleId : {
+                const solarSale = new SolarSale(tradeStore.state.player.playerData.race, amount)
+                if(helpers.isMaterialsForModulesEnough(solarSale)){
+                    for(let i = 0; i < solarSale.baseCostInMaterials.length; i++){
+                        helpers.subtractMaterials(solarSale.baseCostInMaterials[i], amount)
+                    }
+                    helpers.addModuleToStorage(solarSale);
+                }
+            }
+        }
+    }
 
 }

@@ -97,7 +97,6 @@ const toggleHelp = () => {
 }
 
 const toggleInfo = () => {
-    console.log(info.value)
     info.value = !info.value
 }
 
