@@ -12,8 +12,8 @@
                 <div class="modules_line">{{module.name}}</div>
                 <div class="modules_line module_amount">{{module.amount}}</div>
                 <div class="modules_line">{{module.belongsToRace.name}}</div>
-                <div class="modules_line module_base_mass">{{module.baseParams.baseMass}}</div>
-                <div class="modules_line module_full_mass">{{module.baseParams.baseMass * module.amount}}</div>
+                <div class="modules_line module_base_mass">{{module.baseParams.moduleMass}}</div>
+                <div class="modules_line module_full_mass">{{module.baseParams.moduleMass * module.amount}}</div>
                 <div class="modules_line_buttons">
                     <AppMiniButton name="З" :mini="true" />
                     <AppMiniButton name="У" :mini="true" @click="planetStore.commit('removeModule',module)" />

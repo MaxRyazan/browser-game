@@ -5,7 +5,8 @@ const path = {
     buy: `src/assets/images/buy_icon.png`,
     close: `src/assets/images/close_btn_icon.png`,
     molnia: `src/assets/images/molnia.png`,
-    help: `src/assets/images/help.png`
+    help: `src/assets/images/help.png`,
+    factorySettingsIcon: `src/assets/images/factory_settings_icon.png`
 }
 
 export default path

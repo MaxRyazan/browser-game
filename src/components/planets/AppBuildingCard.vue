@@ -8,8 +8,16 @@
             {{ building === undefined ? '' : building.amount }}
         </div>
         <div class="building_controls">
-            <button class="building_card_btn" @click="planetStore.commit('createBuilding', name)">Построить</button>
-            <button class="building_card_btn" @click="planetStore.commit('removeBuilding', building)">Сломать</button>
+            <AppMiniButton
+                    name="Построить"
+                    :sp_button_relative="true"
+                    @click="planetStore.commit('createBuilding', name)"
+            />
+            <AppMiniButton
+                    name="Сломать"
+                    :sp_button_relative="true"
+                    @click="planetStore.commit('removeBuilding', building)"
+            />
         </div>
         <div class="molnia"
              @click="planetStore.commit('manageBuilding', building)"
@@ -19,7 +27,7 @@
         </div>
         <div class="help_container">
            <AppIcon :path="iconsPaths.help" :small="true" :colored="true" @click="toggleHelp"/>
-           <AppIcon :path="iconsPaths.help" :small="true" :colored="true" @click="toggleInfo"/>
+           <AppIcon :path="iconsPaths.factorySettingsIcon"  :colored="true" @click="toggleInfo" v-if="building && building.buildingType===6"/>
         </div>
         <AppProductionStationsInfo :building="building" />
         <transition name="fade">
@@ -27,6 +35,7 @@
                     :building="building"
                     :picture="picture"
                     v-if="info"
+                    @toggleInfo="toggleInfo"
             />
         </transition>
     </div>
@@ -71,6 +80,7 @@ import iconsPaths from "../../iconsPaths.js";
 import AppInfo from "../mini/AppInfo.vue";
 import AppProductionStationsInfo from '../../components/planets/planetMini/AppProductionStationsInfo.vue'
 import AppBuildingInfo from "./planetMini/AppBuildingInfo.vue";
+import AppMiniButton from "../mini/AppMiniButton.vue";
 defineProps({
     picture: {
         type: String,
@@ -80,10 +90,7 @@ defineProps({
         type: String,
         required: true
     },
-    building: {
-        type: Object,
-        required: false
-    },
+    building: {},
     buildingInfo: {
         type: String,
         required: false

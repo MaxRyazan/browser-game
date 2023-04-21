@@ -1,18 +1,16 @@
 <template>
-    <div>{{b.name}}</div>
-    <input type="number" ref="amount">
-    <button type="submit" @click="produce(b.id)">Запустить</button>
+    <div>{{ product.name }}</div>
+    <input type="number" ref="amount" @keydown.enter="produce(product.id)">
+    <AppMiniButton class="w70" :sp_button="true" name="Запустить" @click="produce(product.id)" />
 </template>
 
 <script setup>
 import {ref} from "vue";
 import planetStore from "../../../store_modules/planetStore.js";
+import AppMiniButton from "../../mini/AppMiniButton.vue";
 
 defineProps({
-    b:{
-        type: Object,
-        required: true
-    }
+    product: {}
 })
 const amount = ref(0)
 function produce(moduleId){
@@ -26,5 +24,7 @@ function produce(moduleId){
 </script>
 
 <style scoped>
-
+.w70{
+    width: 70px;
+}
 </style>

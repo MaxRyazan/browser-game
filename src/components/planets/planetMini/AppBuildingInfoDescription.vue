@@ -1,4 +1,3 @@
-
 <template>
     <div class="building_info_description">
         <div class="building_info_picture">
@@ -21,12 +20,10 @@
         </div>
     </div>
 </template>
-<script setup>
 
+<script setup>
 defineProps({
-    building: {
-        type: Object
-    },
+    building: {},
     picture:{
         type: String
     }
