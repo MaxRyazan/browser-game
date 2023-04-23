@@ -208,10 +208,10 @@ export default {
     },
 
 
-    isMaterialsForModulesEnough(module){
+    isMaterialsForModulesEnough(module, amount){
         for(let i = 0; i < module.baseCostInMaterials.length; i++){
             const check = tradeStore.state.currentPlanet.storage.materials.filter(m => m.id === module.baseCostInMaterials[i].id)[0]
-            if(!check || check.amount < module.baseCostInMaterials[i].amount * module.amount){
+            if(!check || check.amount < module.baseCostInMaterials[i].amount * amount){
                 return false
             }
         }
@@ -234,9 +234,9 @@ export default {
             if(!existingModule){
                 modulesStorage.push(module)
             } else {
-                existingModule.amount += module.amount
+                existingModule.amount += 1
             }
             planetStore.commit('savePlayerToLocalStorage')
-        }
+        },
 
 }

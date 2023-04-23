@@ -347,8 +347,6 @@ export default {
             helpers.produceMaterial(new ConstructionMaterials(), reinforcedConcretePlants)
         }
     },
-//TODO запилить цикл производства ресов, sub - количество повторов цикла ( в куррентпланет.вью )
-
 
     checkOreMineralPlants() {
         const oreMineralPlants = tradeStore.state.currentPlanet.buildings.filter(b => b.id === variables.oreMineralPlantId)[0]
@@ -826,6 +824,7 @@ export default {
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(steel)
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(vettur)
         // tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials = []
+        tradeStore.state.currentPlanet.modulesInCreationNow = []
     },
 
     checkThatPeopleEnough(_){
@@ -851,12 +850,13 @@ export default {
     createModule(_, {moduleId, amount}){
         switch (moduleId){
             case variables.solarSailModuleId : {
-                const solarSale = new SolarSale(tradeStore.state.player.playerData.race, amount)
-                if(helpers.isMaterialsForModulesEnough(solarSale)){
+                const solarSale = new SolarSale(tradeStore.state.player.playerData.race)
+                if(helpers.isMaterialsForModulesEnough(solarSale, amount)){
                     for(let i = 0; i < solarSale.baseCostInMaterials.length; i++){
                         helpers.subtractMaterials(solarSale.baseCostInMaterials[i], amount)
                     }
-                    helpers.addModuleToStorage(solarSale);
+                    tradeStore.state.currentPlanet.modulesInCreationNow.push({module: solarSale, amount: amount})
+                    planetStore.commit('savePlayerToLocalStorage')
                 }
             }
         }

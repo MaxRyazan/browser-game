@@ -477,7 +477,7 @@ input::-webkit-inner-spin-button {
   display: flex;
   gap: 20px;
   color: #00E000;
-  width: 500px;
+  width: 600px;
   z-index: 999999;
 }
 

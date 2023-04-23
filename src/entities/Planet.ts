@@ -1,6 +1,6 @@
 import {PlanetarySystem} from "./PlanetarySystem";
 import {Building} from "./Building";
-import {Player} from "./Player";
+import {Module} from "./Module";
 
 export class Planet {
     id: Number
@@ -21,6 +21,8 @@ export class Planet {
     }
     buildings: Building[]
     peoples: Number
+    buildingsInProgressNow: []
+    modulesInCreationNow: []
     constructor(id: Number, name: String, atmosphere: Boolean) {
         this.id = id
         this.name = name
@@ -40,5 +42,7 @@ export class Planet {
         }
         this.buildings = []
         this.peoples = 0
+        this.buildingsInProgressNow = []
+        this.modulesInCreationNow = []
     }
 }

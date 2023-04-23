@@ -12,6 +12,7 @@ export interface ModuleInterface {
      costInIG?: Number
      costInBuildPoints: Number
      requiredFuel: { type: Material, amount: Number }
+     willBeCreatedAt: Number
      baseParams: {
          moduleMass: Number
          moduleSignature: Number

@@ -24,6 +24,7 @@ export default createStore({
 
         isColonyCreated: false,
         buildingsInProgressNow: [],
+        // modulesInCreationNow: [],
     },
     mutations: planetMutations,
     actions: planetActions,

@@ -8,6 +8,7 @@ export abstract class Module implements ModuleInterface{
     costInIG?: Number
     baseCostInMaterials: Material[];
     requiredFuel: { type: Material, amount: Number }
+    willBeCreatedAt: Number
     baseParams: {
         moduleMass: Number;
         moduleSignature: Number;

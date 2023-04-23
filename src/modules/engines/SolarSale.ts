@@ -16,6 +16,7 @@ export class SolarSale extends Module{
         this.costInCR = 250
         this.costInIG = 0
         this.requiredFuel = { type: null, amount: 0 }
+        this.willBeCreatedAt = Date.now() + 10000
         this.baseParams = {
             moduleMass: 2,
             moduleSignature: 1000,
