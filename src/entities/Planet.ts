@@ -22,7 +22,7 @@ export class Planet {
     buildings: Building[]
     peoples: Number
     buildingsInProgressNow: []
-    modulesInCreationNow: []
+    modulesInCreationNow: [{}]
     constructor(id: Number, name: String, atmosphere: Boolean) {
         this.id = id
         this.name = name
@@ -43,6 +43,6 @@ export class Planet {
         this.buildings = []
         this.peoples = 0
         this.buildingsInProgressNow = []
-        this.modulesInCreationNow = []
+        this.modulesInCreationNow = [{}]
     }
 }

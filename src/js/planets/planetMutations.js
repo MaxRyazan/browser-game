@@ -44,6 +44,9 @@ import {NuclearFuel} from "../../materials/NuclearFuel.ts";
 import {EngineFactory} from "../../buildings/modules/EngineFactory.ts";
 import {ChemicalPlant} from "../../buildings/energy/ChemicalPlant.ts";
 import {SolarSale} from "../../modules/engines/SolarSale.ts";
+import {RocketEngine} from "../../modules/engines/RocketEngine.ts";
+import {NuclearEngine} from "../../modules/engines/NuclearEngine.ts";
+import {NanoEngine} from "../../modules/engines/NanoEngine.ts";
 
 
 export default {
@@ -113,6 +116,7 @@ export default {
         }
         storage.splice(index, 1)
         planetStore.commit('calculateWeightOfAllOnStorage')
+        planetStore.commit('savePlayerToLocalStorage')
     },
 
     removeMaterial(_, material){
@@ -125,6 +129,7 @@ export default {
         }
         storage.splice(index, 1)
         planetStore.commit('calculateWeightOfAllOnStorage')
+        planetStore.commit('savePlayerToLocalStorage')
     },
 
     removeResource(_, resource){
@@ -137,6 +142,7 @@ export default {
         }
         storage.splice(index, 1)
         planetStore.commit('calculateWeightOfAllOnStorage')
+        planetStore.commit('savePlayerToLocalStorage')
     },
 
     subtractResource(_, {resource, amount, from}){
@@ -146,6 +152,7 @@ export default {
             }
         }
         planetStore.commit('calculateWeightOfAllOnStorage')
+        planetStore.commit('savePlayerToLocalStorage')
     },
 
     applyResource(_, {resource, amount, to}){
@@ -155,6 +162,7 @@ export default {
             }
         }
         planetStore.commit('calculateWeightOfAllOnStorage')
+        planetStore.commit('savePlayerToLocalStorage')
     },
 
     calculateWeightOfAllOnStorage(_){
@@ -824,7 +832,7 @@ export default {
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(steel)
         tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials.push(vettur)
         // tradeStore.state.player.playerData.playerPlanets.homeWorld.storage.materials = []
-        tradeStore.state.currentPlanet.modulesInCreationNow = []
+        // tradeStore.state.currentPlanet.modulesInCreationNow = []
     },
 
     checkThatPeopleEnough(_){
@@ -855,10 +863,44 @@ export default {
                     for(let i = 0; i < solarSale.baseCostInMaterials.length; i++){
                         helpers.subtractMaterials(solarSale.baseCostInMaterials[i], amount)
                     }
-                    tradeStore.state.currentPlanet.modulesInCreationNow.push({module: solarSale, amount: amount})
+                    helpers.addModuleToQueue(solarSale, amount)
                     planetStore.commit('savePlayerToLocalStorage')
                 }
             }
+            break;
+            case variables.rocketEngineId : {
+                const rocketEngine = new RocketEngine(tradeStore.state.player.playerData.race)
+                if(helpers.isMaterialsForModulesEnough(rocketEngine, amount)){
+                    for(let i = 0; i < rocketEngine.baseCostInMaterials.length; i++){
+                        helpers.subtractMaterials(rocketEngine.baseCostInMaterials[i], amount)
+                    }
+                    helpers.addModuleToQueue(rocketEngine, amount)
+                    planetStore.commit('savePlayerToLocalStorage')
+                }
+            }
+            break;
+            case variables.nuclearEngineId : {
+                const nuclearEngine = new NuclearEngine(tradeStore.state.player.playerData.race)
+                if(helpers.isMaterialsForModulesEnough(nuclearEngine, amount)){
+                    for(let i = 0; i < nuclearEngine.baseCostInMaterials.length; i++){
+                        helpers.subtractMaterials(nuclearEngine.baseCostInMaterials[i], amount)
+                    }
+                    helpers.addModuleToQueue(nuclearEngine, amount)
+                    planetStore.commit('savePlayerToLocalStorage')
+                }
+            }
+            break;
+            case variables.nanoEngineId : {
+                const nanoEngine = new NanoEngine(tradeStore.state.player.playerData.race)
+                if(helpers.isMaterialsForModulesEnough(nanoEngine, amount)){
+                    for(let i = 0; i < nanoEngine.baseCostInMaterials.length; i++){
+                        helpers.subtractMaterials(nanoEngine.baseCostInMaterials[i], amount)
+                    }
+                    helpers.addModuleToQueue(nanoEngine, amount)
+                    planetStore.commit('savePlayerToLocalStorage')
+                }
+            }
+            break;
         }
     }
 

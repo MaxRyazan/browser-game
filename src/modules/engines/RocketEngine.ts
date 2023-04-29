@@ -5,6 +5,7 @@ import {Polymers} from "../../materials/Polymers";
 import {Module} from "../../entities/Module";
 import {Vettur} from "../../materials/Vettur";
 import {ChemicalFuel} from "../../materials/ChemicalFuel";
+import variables from '../../variables.js'
 
 export class RocketEngine extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
@@ -17,6 +18,7 @@ export class RocketEngine extends Module{
         this.costInCR = 120
         this.costInIG = 0
         this.requiredFuel = { type: new ChemicalFuel(), amount: 0 }
+        this.willBeCreatedAt = Date.now() + variables.fiveMinutes
         this.baseParams = {
             moduleMass: 10,
             moduleSignature: 10,

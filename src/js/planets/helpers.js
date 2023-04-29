@@ -228,15 +228,35 @@ export default {
         planetStore.commit('calculateWeightOfAllOnStorage')
     },
 
-    addModuleToStorage(module){
+    addModuleToStorage(module, amount){
+        console.log(module)
+        console.log(amount)
         const modulesStorage = tradeStore.state.currentPlanet.storage.modules
         const existingModule = modulesStorage.filter(m => m.id === module.id && m.belongsToRace.id === module.belongsToRace.id)[0]
+        console.log(existingModule)
             if(!existingModule){
+                module.amount = amount
+                console.log(module)
                 modulesStorage.push(module)
             } else {
-                existingModule.amount += 1
+                console.log(existingModule)
+                existingModule.amount += amount
+                console.log(existingModule)
             }
             planetStore.commit('savePlayerToLocalStorage')
         },
 
+
+    addModuleToQueue(module, amount) {
+        console.log(module)
+        console.log(amount)
+        const inProgress = tradeStore.state.currentPlanet.modulesInCreationNow
+        const exist = inProgress.filter(m => m.id === module.id)[0]
+        if (exist) {
+            exist.amount += amount
+        } else {
+            inProgress.push({module: module, amount: amount})
+        }
+
+    }
 }

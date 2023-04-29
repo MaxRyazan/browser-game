@@ -19,6 +19,7 @@ const props = defineProps({
 const amount = ref(0)
 
 function produce(moduleId){
+    console.log(moduleId)
     if(amount.value.value){
         planetStore.commit('createModule', {
             moduleId: moduleId,
@@ -30,7 +31,7 @@ function produce(moduleId){
 
 const count = computed(() => {
     let moduleAmount = 0
-    if(tradeStore.state.currentPlanet.modulesInCreationNow){
+    if(tradeStore.state.currentPlanet.modulesInCreationNow.length){
         for(let i = 0; i < tradeStore.state.currentPlanet.modulesInCreationNow.length; i ++){
             if(tradeStore.state.currentPlanet.modulesInCreationNow[i].module.id === props.product.id){
                 moduleAmount += tradeStore.state.currentPlanet.modulesInCreationNow[i].amount

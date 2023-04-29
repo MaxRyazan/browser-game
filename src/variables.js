@@ -5,8 +5,8 @@ const variables =  {
     timeOfResourceProduce: 1, // разница времени в производстве
     fiveSeconds: 5000, // 5 сек в м-сек
     oneMinute: 60000, // 1 мин (тестовые скорости производства) в м-сек
-    fiveMinutes: 60000, // 1 мин (тестовые скорости производства) в м-сек
-    // fiveMinutes: 300000, // 5 минут в м-сек
+    // fiveMinutes: 60000, // 1 мин (тестовые скорости производства) в м-сек
+    fiveMinutes: 300000, // 5 минут в м-сек
     oneHour: 3600000,
     oneDayInMilliseconds: 86400000,
     productionPower: 5,   // количество руды/материала, произведенных за единицу времени
@@ -33,6 +33,9 @@ const variables =  {
 
 // модули
     solarSailModuleId: 4,
+    rocketEngineId: 5,
+    nuclearEngineId: 6,
+    nanoEngineId: 7,
 
 // здания
     colonyId: 1,
@@ -46,6 +49,7 @@ const variables =  {
     polymersPlantId: 20,
     chemicalComplexId: 21,
     enrichmentComplexId: 22,
+    engineFactoryId: 27,
 
 // Типы зданий
     buildingTypeMaterials: 4,
