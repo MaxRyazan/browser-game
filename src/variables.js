@@ -53,6 +53,7 @@ const variables =  {
 
 // Типы зданий
     buildingTypeMaterials: 4,
+    buildingTypeModules: 6,
 }
 export default variables
 

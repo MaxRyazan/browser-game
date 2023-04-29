@@ -402,6 +402,20 @@ export default {
 
 
 
+    checkModulesQueue(){
+        const inProgress = tradeStore.state.currentPlanet.modulesInCreationNow
+        console.log(inProgress)
+        if(helpers.isStorageNotFull()){
+            for(let i = 0; i < inProgress.length; i++){
+                helpers.addModuleToStorage(inProgress[i].module)
+                inProgress[i].amount -= 1
+                if(inProgress[i].amount === 0) {
+                    inProgress.splice(i, 1)
+                }
+            }
+        }
+    },
+
 
 
 

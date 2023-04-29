@@ -322,7 +322,6 @@ input::-webkit-inner-spin-button {
 
 .planet_storage_modules_line {
   width: calc(100% - 42px);
-  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;

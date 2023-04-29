@@ -36,17 +36,34 @@ onMounted(() => {
         planetStore.commit('checkThatFuelLoadTimePassed', tradeStore.state.player.playerData.playerPlanets.homeWorld.buildings[i])
     }
     const plants = tradeStore.state.currentPlanet.buildings.filter(b => b.buildingType === variables.buildingTypeMaterials)
+    const factories = tradeStore.state.currentPlanet.buildings.filter(b => b.buildingType === variables.buildingTypeModules)
     if(plants.length){
         const randomPlant = plants[0]
         const sub = (Date.now() - randomPlant.timeOfLastProduce) / variables.fiveMinutes
-        for(let i = 0; i < sub; i++){
-            planetStore.commit('checkReinforcedConcretePlants')
-            planetStore.commit('checkOreMineralPlants')
-            planetStore.commit('checkPolymerPlants')
-            planetStore.commit('checkChemicalComplex')
-            planetStore.commit('checkEnrichmentComplex')
+        console.log('materialSub',sub)
+        if(sub > 1){
+            for(let i = 0; i < sub; i++){
+                planetStore.commit('checkReinforcedConcretePlants')
+                planetStore.commit('checkOreMineralPlants')
+                planetStore.commit('checkPolymerPlants')
+                planetStore.commit('checkChemicalComplex')
+                planetStore.commit('checkEnrichmentComplex')
+            }
+            plants.forEach(p => p.timeOfLastProduce = Date.now())
         }
-        plants.forEach(p => p.timeOfLastProduce = Date.now())
+        planetStore.commit('savePlayerToLocalStorage')
+    }
+    if(factories.length){
+        const randomPlant = factories[0]
+        console.log(randomPlant)
+        const sub = (Date.now() - randomPlant.timeOfLastProduce) / variables.fiveMinutes
+        console.log('modulesSub',sub)
+        if(sub > 1){
+            for(let i = 0; i < sub; i++){
+                planetStore.commit('checkModulesQueue')
+                factories.forEach(p => p.timeOfLastProduce = Date.now())
+            }
+        }
         planetStore.commit('savePlayerToLocalStorage')
     }
 })
@@ -57,7 +74,7 @@ const interval = setInterval(() => {
     for(let i = 0; i < modulesInProgress.length; i++){
         if(modulesInProgress[i].module.willBeCreatedAt <= Date.now() && modulesInProgress[i].amount > 0){
             modulesInProgress[i].amount -= 1
-            modulesInProgress[i].module.willBeCreatedAt = Date.now() + 10000
+            modulesInProgress[i].module.willBeCreatedAt = Date.now() + variables.fiveMinutes
             helpers.addModuleToStorage(modulesInProgress[i].module)
         }
         if(modulesInProgress[i].amount <= 0){

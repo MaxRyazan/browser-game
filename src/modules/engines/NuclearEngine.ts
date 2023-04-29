@@ -5,6 +5,8 @@ import {Electronics} from "../../materials/Electronics";
 import {Polymers} from "../../materials/Polymers";
 import {Module} from "../../entities/Module";
 import {Quadria} from "../../materials/Quadria";
+import {ChemicalFuel} from "../../materials/ChemicalFuel";
+import variables from '../../variables.js'
 
 export class NuclearEngine extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
@@ -16,6 +18,8 @@ export class NuclearEngine extends Module{
         this.costInBuildPoints = 200
         this.costInCR = 120
         this.costInIG = 0
+        this.requiredFuel = { type: new ChemicalFuel(), amount: 0 }
+        this.willBeCreatedAt = Date.now() + variables.fiveMinutes
         this.baseParams = {
             moduleMass: 10,
             moduleSignature: 10,
