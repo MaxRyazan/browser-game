@@ -6,9 +6,12 @@
             <div class="building_info_title">
                 <p>Наименование</p>
                 <p>Количество</p>
+                <p>Управление</p>
+                <p>Всего</p>
+                <p>Таймер</p>
             </div>
             <div class="">
-                <div class="building_info_item" v-for="product in building.canProduce.type" :key="product.id" >
+                <div class="building_info_item" v-for="product in building.canProduce.type" :key="product.id">
                     <AppInfoList :product="product" />
                 </div>
             </div>

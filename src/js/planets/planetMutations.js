@@ -403,10 +403,13 @@ export default {
 
 
     checkModulesQueue(){
+        console.log('checkModulesQueue')
         const inProgress = tradeStore.state.currentPlanet.modulesInCreationNow
-        console.log(inProgress)
         if(helpers.isStorageNotFull()){
+            console.log('inProgress.length', inProgress.length)
+            console.log('inProgress', inProgress)
             for(let i = 0; i < inProgress.length; i++){
+                console.log('addModuleToStorage',inProgress[i].module)
                 helpers.addModuleToStorage(inProgress[i].module)
                 inProgress[i].amount -= 1
                 if(inProgress[i].amount === 0) {
@@ -813,11 +816,11 @@ export default {
 
     addTestMaterials(){
         const construct = new ConstructionMaterials(140)
-        const electronics = new Electronics(60)
+        const electronics = new Electronics(600)
         const chemicalFuel = new ChemicalFuel(100)
-        const polymers = new Polymers(60)
+        const polymers = new Polymers(600)
         const quadria = new Quadria(60)
-        const steel = new Steel(60)
+        const steel = new Steel(600)
         const vettur = new Vettur(60)
         const metalOre = new MetalOre(150)
         const mineralOre = new MineralOre(15)

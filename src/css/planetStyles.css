@@ -476,7 +476,7 @@ input::-webkit-inner-spin-button {
   display: flex;
   gap: 20px;
   color: #00E000;
-  width: 600px;
+  width: 700px;
   z-index: 999999;
 }
 
@@ -508,12 +508,12 @@ input::-webkit-inner-spin-button {
   position: relative;
   display: flex;
   align-items: center;
-  width: 300px;
+  width: 340px;
   cursor: default;
 }
 .building_info_item input {
   position: absolute;
-  right: 80px;
+  left: 180px;
   height: 18px;
   width: 60px;
   outline: none;
@@ -526,7 +526,7 @@ input::-webkit-inner-spin-button {
 
 .sp_button {
   position: absolute;
-  right: 0;
+  left: 270px;
   padding: 0 4px;
   border: 1px solid rgba(43, 211, 237, 0.6);
   color: #73d6e5;
@@ -569,12 +569,16 @@ input::-webkit-inner-spin-button {
 }
 
 .building_info_title {
+  width: 500px;
   display: flex;
   color: #daa548;
   justify-content: space-between;
 }
-.building_info_title p:last-child {
-  margin-right: 80px;
+.building_info_title p:nth-child(2) {
+  margin-left: 55px;
+}
+.building_info_title p:nth-child(3) {
+  margin-left: -15px;
 }
 
 @keyframes blink {

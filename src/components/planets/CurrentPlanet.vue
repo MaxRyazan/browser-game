@@ -53,10 +53,10 @@ onMounted(() => {
         }
         planetStore.commit('savePlayerToLocalStorage')
     }
+
     if(factories.length){
         const randomPlant = factories[0]
-        console.log(randomPlant)
-        const sub = (Date.now() - randomPlant.timeOfLastProduce) / variables.fiveMinutes
+        const sub = Math.floor((Date.now() - randomPlant.timeOfLastProduce) / variables.fiveMinutes)
         console.log('modulesSub',sub)
         if(sub > 1){
             for(let i = 0; i < sub; i++){
@@ -81,8 +81,7 @@ const interval = setInterval(() => {
             modulesInProgress.splice(i, 1)
         }
     }
-// }, variables.oneMinute + 1000)
-}, 10100)
+}, variables.tenSeconds)
 
 onUnmounted(() => {
     clearInterval(interval)

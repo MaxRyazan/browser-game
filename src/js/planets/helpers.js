@@ -237,13 +237,14 @@ export default {
             } else {
                 existingModule.amount += 1
             }
+        console.log('add module')
             planetStore.commit('savePlayerToLocalStorage')
         },
 
 
     addModuleToQueue(module, amount) {
         const inProgress = tradeStore.state.currentPlanet.modulesInCreationNow
-        const exist = inProgress.filter(m => m.id === module.id)[0]
+        const exist = inProgress.filter(m => m.module.id === module.id)[0]
         if (exist) {
             exist.amount += amount
         } else {

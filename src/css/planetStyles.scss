@@ -475,7 +475,7 @@ input::-webkit-inner-spin-button {
   display: flex;
   gap: 20px;
   color: $sp_green;
-  width: 600px;
+  width: 700px;
   z-index: 999999;
 }
 .building_info_description{
@@ -508,12 +508,12 @@ input::-webkit-inner-spin-button {
   position: relative;
   display: flex;
   align-items: center;
-  width: 300px;
+  width: 340px;
   cursor: default;
   //justify-content: space-between;
   & input{
     position: absolute;
-    right: 80px;
+    left: 180px;
     height: 18px;
     width: 60px;
     outline: none;
@@ -527,7 +527,7 @@ input::-webkit-inner-spin-button {
 
 .sp_button{
   position: absolute;
-  right: 0;
+  left: 270px;
   padding: 0 4px;
   border: $sp_border;
   color: #73d6e5;
@@ -569,11 +569,15 @@ input::-webkit-inner-spin-button {
 }
 
 .building_info_title{
+  width: 500px;
   display: flex;
   color: $sp_yellow;
   justify-content: space-between;
-  & p:last-child{
-    margin-right: 80px;
+  & p:nth-child(2){
+    margin-left: 55px;
+  }
+  & p:nth-child(3){
+    margin-left: -15px;
   }
 }
 
