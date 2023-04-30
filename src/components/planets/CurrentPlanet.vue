@@ -72,10 +72,21 @@ const modulesInProgress = tradeStore.state.currentPlanet.modulesInCreationNow
 const interval = setInterval(() => {
     console.log('start interval')
     for(let i = 0; i < modulesInProgress.length; i++){
+        let factoryCount;
         if(modulesInProgress[i].module.willBeCreatedAt <= Date.now() && modulesInProgress[i].amount > 0){
-            modulesInProgress[i].amount -= 1
-            modulesInProgress[i].module.willBeCreatedAt = Date.now() + variables.fiveMinutes
-            helpers.addModuleToStorage(modulesInProgress[i].module)
+            if(modulesInProgress[i].module.moduleType === variables.moduleTypeEngine){
+                factoryCount = tradeStore.state.currentPlanet.buildings.filter(b => b.id === variables.engineFactoryId)[0].amount
+            }
+            //TODO ЗДЕСЬ ПЕРЕБРАТЬ ВСЕ ВИДЫ ЗДАНИЙ ПРОИЗВОДЯЩИХ МОДУЛИ
+            if(modulesInProgress[i].amount >= factoryCount){
+                modulesInProgress[i].amount -= factoryCount
+                modulesInProgress[i].module.willBeCreatedAt = Date.now() + variables.fiveMinutes
+                helpers.addModuleToStorage(modulesInProgress[i].module, factoryCount)
+            } else {
+                modulesInProgress[i].module.willBeCreatedAt = Date.now() + variables.fiveMinutes
+                helpers.addModuleToStorage(modulesInProgress[i].module, modulesInProgress[i].amount)
+                modulesInProgress[i].amount = 0
+            }
         }
         if(modulesInProgress[i].amount <= 0){
             modulesInProgress.splice(i, 1)

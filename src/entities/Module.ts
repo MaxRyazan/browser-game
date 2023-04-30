@@ -35,5 +35,5 @@ export abstract class Module implements ModuleInterface{
     name: String;
     picture: String;
     requiredTech: {};
-
+    moduleType: Number
 }

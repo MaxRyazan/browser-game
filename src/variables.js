@@ -36,6 +36,9 @@ const variables =  {
     nuclearEngineId: 6,
     nanoEngineId: 7,
 
+// типы модулей
+    moduleTypeEngine: 1,
+
 // здания
     colonyId: 1,
     buildingStationId: 5,

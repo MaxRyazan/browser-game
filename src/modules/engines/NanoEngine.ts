@@ -48,5 +48,6 @@ export class NanoEngine extends Module{
         }
         this.belongsToRace = belongsToRace;
         this.amount = amount;
+        this.moduleType = 1
     }
 }

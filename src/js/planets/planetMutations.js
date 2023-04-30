@@ -401,17 +401,23 @@ export default {
     },
 
 
-
     checkModulesQueue(){
+        let factoryCount;
         console.log('checkModulesQueue')
         const inProgress = tradeStore.state.currentPlanet.modulesInCreationNow
         if(helpers.isStorageNotFull()){
-            console.log('inProgress.length', inProgress.length)
-            console.log('inProgress', inProgress)
             for(let i = 0; i < inProgress.length; i++){
-                console.log('addModuleToStorage',inProgress[i].module)
-                helpers.addModuleToStorage(inProgress[i].module)
-                inProgress[i].amount -= 1
+                if(inProgress[i].module.moduleType === variables.moduleTypeEngine){
+                    factoryCount = tradeStore.state.currentPlanet.buildings.filter(b => b.id === variables.engineFactoryId)[0].amount
+                }
+                //TODO ЗДЕСЬ ПЕРЕБРАТЬ ВСЕ ВИДЫ ЗДАНИЙ ПРОИЗВОДЯЩИХ МОДУЛИ
+                console.log('factoryCount', factoryCount)
+                if(inProgress[i].amount >= factoryCount){
+                    helpers.addModuleToStorage(inProgress[i].module, factoryCount)
+                } else {
+                    helpers.addModuleToStorage(inProgress[i].module, inProgress[i].amount)
+                }
+                inProgress[i].amount -= factoryCount
                 if(inProgress[i].amount === 0) {
                     inProgress.splice(i, 1)
                 }

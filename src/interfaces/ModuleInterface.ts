@@ -35,4 +35,5 @@ export interface ModuleInterface {
         lifeSupporting: Boolean
         autoPilot: Boolean
     }
+    moduleType: Number
 }

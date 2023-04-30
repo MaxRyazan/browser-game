@@ -47,5 +47,6 @@ export class RocketEngine extends Module{
         }
         this.belongsToRace = belongsToRace;
         this.amount = amount;
+        this.moduleType = 1
     }
 }
