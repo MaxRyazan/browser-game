@@ -1,9 +1,21 @@
 <template>
     <div class="buildings_infrastructure" v-if="planetStore.state.visibilityEnergy">
-        <AppBuildingCard name="Солнечная станция" picture="planet_window_bg" :building="checkBuilding('Солнечная станция')"/>
-        <AppBuildingCard name="Химическая электростанция" picture="planet_window_bg" :building="checkBuilding('Химическая электростанция')"/>
-        <AppBuildingCard name="Ядерная электростанция" picture="planet_window_bg" :building="checkBuilding('Ядерная электростанция')"/>
-        <AppBuildingCard name="Расщепитель Альтах" picture="planet_window_bg" :building="checkBuilding('Расщепитель Альтах')"/>
+        <AppBuildingCard name="Солнечная станция"
+                         picture="solar_station"
+                         :building="checkBuilding('Солнечная станция')"
+        />
+        <AppBuildingCard name="Химическая электростанция"
+                         picture="chemical_station"
+                         :building="checkBuilding('Химическая электростанция')"
+        />
+        <AppBuildingCard name="Ядерная электростанция"
+                         picture="nuclear_station"
+                         :building="checkBuilding('Ядерная электростанция')"
+        />
+        <AppBuildingCard name="Расщепитель Альтах"
+                         picture="altah_station"
+                         :building="checkBuilding('Расщепитель Альтах')"
+        />
     </div>
 </template>
 <script setup>

@@ -888,6 +888,8 @@ export default {
                     }
                     helpers.addModuleToQueue(solarSale, amount)
                     planetStore.commit('savePlayerToLocalStorage')
+                } else {
+                    planetStore.commit('sendError', 'Нехватает материалов!')
                 }
             }
             break;
@@ -899,6 +901,8 @@ export default {
                     }
                     helpers.addModuleToQueue(rocketEngine, amount)
                     planetStore.commit('savePlayerToLocalStorage')
+                } else {
+                    planetStore.commit('sendError', 'Нехватает материалов!')
                 }
             }
             break;
@@ -910,6 +914,8 @@ export default {
                     }
                     helpers.addModuleToQueue(nuclearEngine, amount)
                     planetStore.commit('savePlayerToLocalStorage')
+                } else {
+                    planetStore.commit('sendError', 'Нехватает материалов!')
                 }
             }
             break;
@@ -921,6 +927,8 @@ export default {
                     }
                     helpers.addModuleToQueue(nanoEngine, amount)
                     planetStore.commit('savePlayerToLocalStorage')
+                } else {
+                    planetStore.commit('sendError', 'Нехватает материалов!')
                 }
             }
             break;

@@ -1,5 +1,8 @@
 <template>
     <div>{{ product.name }}</div>
+    <div class="module_image_info">
+        <img :src="`${product.picture}`" alt="" :title="`${product.name}`">
+    </div>
     <input type="number" ref="amount" @keydown.enter="produce(product.id)">
     <AppMiniButton class="w70" :sp_button="true" :name="time ? `Добавить` : `Запустить`" @click="produce(product.id)" />
     <div class="in_progress_time" v-if="count">
@@ -70,6 +73,18 @@ onUnmounted(() => {
     width: 30px;
     &:nth-child(3){
       margin-left: 30px;
+    }
+  }
+}
+.module_image_info{
+  width: 25px;
+  position: absolute;
+  left: 145px;
+  & img{
+    width: 100%;
+    &:hover{
+      transform: scale(1.5);
+      transition: .3s linear;
     }
   }
 }

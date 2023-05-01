@@ -11,7 +11,7 @@ export class RocketEngine extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
         super();
         this.id = 5
-        this.picture = './src/assets/images/altah_reactor.jpg'
+        this.picture = './src/assets/images/engines/rocket_engine.jpg'
         this.requiredTech = []
         this.name = 'Ракетный двигатель'
         this.costInBuildPoints = 200

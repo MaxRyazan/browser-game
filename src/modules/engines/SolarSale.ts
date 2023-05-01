@@ -10,7 +10,7 @@ export class SolarSale extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
         super();
         this.id = 4
-        this.picture = './src/assets/images/altah_reactor.jpg'
+        this.picture = './src/assets/images/engines/solar_sail.jpg'
         this.requiredTech = [new AlienTechnology()]
         this.name = 'Солнечный парус'
         this.costInBuildPoints = 70

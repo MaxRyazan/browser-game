@@ -12,7 +12,7 @@ export class NanoEngine extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
         super();
         this.id = 7
-        this.picture = './src/assets/images/altah_reactor.jpg'
+        this.picture = './src/assets/images/engines/nano_engine.jpg'
         this.requiredTech = [new AlienTechnology()]
         this.name = 'Нано двигатель'
         this.costInBuildPoints = 200
