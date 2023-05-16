@@ -47,6 +47,10 @@ import {SolarSale} from "../../modules/engines/SolarSale.ts";
 import {RocketEngine} from "../../modules/engines/RocketEngine.ts";
 import {NuclearEngine} from "../../modules/engines/NuclearEngine.ts";
 import {NanoEngine} from "../../modules/engines/NanoEngine.ts";
+import {ReactorFactory} from "../../buildings/modules/ReactorFactory.ts";
+import {ChemicalReactor} from "../../modules/reactors/ChemicalReactor.ts";
+import {NuclearReactor} from "../../modules/reactors/NuclearReactor.ts";
+import {AltahReactor} from "../../modules/reactors/AltahReactor.ts";
 
 
 export default {
@@ -410,15 +414,17 @@ export default {
                 if(inProgress[i].module.moduleType === variables.moduleTypeEngine){
                     factoryCount = tradeStore.state.currentPlanet.buildings.filter(b => b.id === variables.engineFactoryId)[0].amount
                 }
+                if(inProgress[i].module.moduleType === variables.moduleTypeReactor){
+                    factoryCount = tradeStore.state.currentPlanet.buildings.filter(b => b.id === variables.reactorFactoryId)[0].amount
+                }
                 //TODO ЗДЕСЬ ПЕРЕБРАТЬ ВСЕ ВИДЫ ЗДАНИЙ ПРОИЗВОДЯЩИХ МОДУЛИ
-                console.log('factoryCount', factoryCount)
                 if(inProgress[i].amount >= factoryCount){
                     helpers.addModuleToStorage(inProgress[i].module, factoryCount)
                 } else {
                     helpers.addModuleToStorage(inProgress[i].module, inProgress[i].amount)
                 }
                 inProgress[i].amount -= factoryCount
-                if(inProgress[i].amount === 0) {
+                if(inProgress[i].amount <= 0) {
                     inProgress.splice(i, 1)
                 }
             }
@@ -764,6 +770,15 @@ export default {
                     }
                 }
                     break;
+                case 'Цех сборки реакторов' : {
+                    const reactorFactory = new ReactorFactory()
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(reactorFactory)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
+                }
+                    break;
             }
         } else {
             planetStore.commit('sendError', 'На планете кончилось место для застройки!')
@@ -879,6 +894,8 @@ export default {
 
 
     createModule(_, {moduleId, amount}){
+        console.log(moduleId)
+        console.log(amount)
         switch (moduleId){
             case variables.solarSailModuleId : {
                 const solarSale = new SolarSale(tradeStore.state.player.playerData.race)
@@ -926,6 +943,45 @@ export default {
                         helpers.subtractMaterials(nanoEngine.baseCostInMaterials[i], amount)
                     }
                     helpers.addModuleToQueue(nanoEngine, amount)
+                    planetStore.commit('savePlayerToLocalStorage')
+                } else {
+                    planetStore.commit('sendError', 'Нехватает материалов!')
+                }
+            }
+            break;
+            case variables.chemicalReactorId : {
+                const chemicalReactor = new ChemicalReactor(tradeStore.state.player.playerData.race)
+                if(helpers.isMaterialsForModulesEnough(chemicalReactor, amount)){
+                    for(let i = 0; i < chemicalReactor.baseCostInMaterials.length; i++){
+                        helpers.subtractMaterials(chemicalReactor.baseCostInMaterials[i], amount)
+                    }
+                    helpers.addModuleToQueue(chemicalReactor, amount)
+                    planetStore.commit('savePlayerToLocalStorage')
+                } else {
+                    planetStore.commit('sendError', 'Нехватает материалов!')
+                }
+            }
+            break;
+            case variables.nuclearReactorId : {
+                const nuclearReactor = new NuclearReactor(tradeStore.state.player.playerData.race)
+                if(helpers.isMaterialsForModulesEnough(nuclearReactor, amount)){
+                    for(let i = 0; i < nuclearReactor.baseCostInMaterials.length; i++){
+                        helpers.subtractMaterials(nuclearReactor.baseCostInMaterials[i], amount)
+                    }
+                    helpers.addModuleToQueue(nuclearReactor, amount)
+                    planetStore.commit('savePlayerToLocalStorage')
+                } else {
+                    planetStore.commit('sendError', 'Нехватает материалов!')
+                }
+            }
+            break;
+            case variables.altahReactorId : {
+                const altahReactor = new AltahReactor(tradeStore.state.player.playerData.race)
+                if(helpers.isMaterialsForModulesEnough(altahReactor, amount)){
+                    for(let i = 0; i < altahReactor.baseCostInMaterials.length; i++){
+                        helpers.subtractMaterials(altahReactor.baseCostInMaterials[i], amount)
+                    }
+                    helpers.addModuleToQueue(altahReactor, amount)
                     planetStore.commit('savePlayerToLocalStorage')
                 } else {
                     planetStore.commit('sendError', 'Нехватает материалов!')

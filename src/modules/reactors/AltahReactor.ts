@@ -5,6 +5,7 @@ import {Steel} from "../../materials/Steel";
 import {Electronics} from "../../materials/Electronics";
 import {Polymers} from "../../materials/Polymers";
 import {Vettur} from "../../materials/Vettur";
+import variables from '../../variables.js'
 
 export class AltahReactor extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
@@ -16,6 +17,7 @@ export class AltahReactor extends Module{
         this.costInBuildPoints = 200
         this.costInCR = 120
         this.costInIG = 0
+        this.willBeCreatedAt = Date.now() + variables.fiveMinutes
         this.baseParams = {
             moduleMass: 10,
             moduleSignature: 10,
@@ -44,5 +46,6 @@ export class AltahReactor extends Module{
         }
         this.belongsToRace = belongsToRace;
         this.amount = amount;
+        this.moduleType = 2
     }
 }

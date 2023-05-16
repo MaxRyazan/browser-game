@@ -9,9 +9,10 @@
         <div class="planet_storage_modules" v-if="showModules">
             <AppTableTitle :race="true"/>
             <div class="planet_storage_modules_line" v-for="(module, index) in tradeStore.state.currentPlanet.storage.modules" :key="index">
+                <img :src="`${module.picture}`" alt="">
                 <div class="modules_line">{{module.name}}</div>
                 <div class="modules_line module_amount">{{module.amount}}</div>
-                <div class="modules_line">{{module.belongsToRace.name}}</div>
+<!--                <div class="modules_line">{{module.belongsToRace.name}}</div>-->
                 <div class="modules_line module_base_mass">{{module.baseParams.moduleMass}}</div>
                 <div class="modules_line module_full_mass">{{module.baseParams.moduleMass * module.amount}}</div>
                 <div class="modules_line_buttons">

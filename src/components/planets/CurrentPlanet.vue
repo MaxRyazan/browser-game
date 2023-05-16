@@ -77,6 +77,9 @@ const interval = setInterval(() => {
             if(modulesInProgress[i].module.moduleType === variables.moduleTypeEngine){
                 factoryCount = tradeStore.state.currentPlanet.buildings.filter(b => b.id === variables.engineFactoryId)[0].amount
             }
+            if(modulesInProgress[i].module.moduleType === variables.moduleTypeReactor){
+                factoryCount = tradeStore.state.currentPlanet.buildings.filter(b => b.id === variables.reactorFactoryId)[0].amount
+            }
             //TODO ЗДЕСЬ ПЕРЕБРАТЬ ВСЕ ВИДЫ ЗДАНИЙ ПРОИЗВОДЯЩИХ МОДУЛИ
             if(modulesInProgress[i].amount >= factoryCount){
                 modulesInProgress[i].amount -= factoryCount

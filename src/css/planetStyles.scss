@@ -291,6 +291,7 @@ input::-webkit-inner-spin-button {
   background-color: rgba(15, 65, 140, .7);
   align-items: center;
   cursor: default;
+
 }
 .modules_line_title_inner{
   padding: 5px 0;
@@ -327,6 +328,15 @@ input::-webkit-inner-spin-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  & img {
+    width: 30px;
+    position: absolute;
+    left: 3px;
+      @media (max-width: 1024px) {
+        width: 20px;
+    }
+  }
 }
 .planet_storage_materials_line {
   width: calc(100% - 42px);
@@ -351,6 +361,7 @@ input::-webkit-inner-spin-button {
 }
 
 .modules_line{
+  padding-left: 35px;
   width: 80%;
   text-align: center;
   color: #daa548;
@@ -361,18 +372,7 @@ input::-webkit-inner-spin-button {
   @media (max-width: 1024px) {
     font-size: 75%;
     height: 20px;
-  }
-  &.module_id{
-    width: 15%;
-  }
-  &.module_amount{
-    width: 15%;
-  }
-  &.module_base_mass{
-    width: 15%;
-  }
-  &.module_full_mass{
-    width: 35%;
+    padding-left: 25px;
   }
 }
 

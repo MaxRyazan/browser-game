@@ -229,11 +229,9 @@ export default {
     },
 
     addModuleToStorage(module, amount){
-        console.log('amount1', amount)
         if(!amount){
             amount = 1
         }
-        console.log('amount', amount)
         const modulesStorage = tradeStore.state.currentPlanet.storage.modules
         const existingModule = modulesStorage.filter(m => m.id === module.id && m.belongsToRace.id === module.belongsToRace.id)[0]
             if(!existingModule){
@@ -254,5 +252,6 @@ export default {
         } else {
             inProgress.push({module: module, amount: amount})
         }
+        console.log('inProgress', inProgress)
     }
 }

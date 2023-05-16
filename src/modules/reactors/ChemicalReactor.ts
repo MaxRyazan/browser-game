@@ -4,7 +4,7 @@ import {Module} from "../../entities/Module";
 import {Steel} from "../../materials/Steel";
 import {Electronics} from "../../materials/Electronics";
 import {Polymers} from "../../materials/Polymers";
-
+import variables from '../../variables.js'
 
 export class ChemicalReactor extends  Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
@@ -14,6 +14,7 @@ export class ChemicalReactor extends  Module{
         this.requiredTech = [new Chemistry()]
         this.name = 'Химический реактор'
         this.costInBuildPoints = 50
+        this.willBeCreatedAt = Date.now() + variables.fiveMinutes
         this.costInCR = 120
         this.costInIG = 0
         this.baseParams = {
@@ -43,5 +44,6 @@ export class ChemicalReactor extends  Module{
         }
         this.belongsToRace = belongsToRace
         this.amount = amount
+        this.moduleType = 2
     }
 }

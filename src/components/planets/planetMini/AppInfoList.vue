@@ -35,6 +35,8 @@ function prettyTimer (){
     if(props.product){
         const thisModule = tradeStore.state.currentPlanet.modulesInCreationNow.filter(m => m.module.id === props.product.id)[0]
         if(thisModule){
+            console.log('reee')
+            console.log('thisModule', thisModule)
             return Math.floor((thisModule.module.willBeCreatedAt - Date.now()) / 1000)
         }
     }
