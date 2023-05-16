@@ -51,6 +51,9 @@ import {ReactorFactory} from "../../buildings/modules/ReactorFactory.ts";
 import {ChemicalReactor} from "../../modules/reactors/ChemicalReactor.ts";
 import {NuclearReactor} from "../../modules/reactors/NuclearReactor.ts";
 import {AltahReactor} from "../../modules/reactors/AltahReactor.ts";
+import {WeaponFactory} from "../../buildings/modules/WeaponFactory.ts";
+import {DefenceFactory} from "../../buildings/modules/DefenceFactory.ts";
+import {MiningFactory} from "../../buildings/modules/MiningFactory.ts";
 
 
 export default {
@@ -774,6 +777,33 @@ export default {
                     const reactorFactory = new ReactorFactory()
                     if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
                         helpers.checkEnergyAndAddBuildingToInProgressNow(reactorFactory)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
+                }
+                    break;
+                case 'Цех сборки орудийных систем' : {
+                    const weaponFactory = new WeaponFactory()
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(weaponFactory)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
+                }
+                    break;
+                case 'Цех сборки защитных компонентов' : {
+                    const defenceFactory = new DefenceFactory()
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(defenceFactory)
+                    } else {
+                        planetStore.commit('sendError', 'Нехватает строительных центров!')
+                    }
+                }
+                    break;
+                case 'Цех сборки добывающих модулей' : {
+                    const miningFactory = new MiningFactory()
+                    if(maxInProgressNow > planetStore.state.buildingsInProgressNow.length){
+                        helpers.checkEnergyAndAddBuildingToInProgressNow(miningFactory)
                     } else {
                         planetStore.commit('sendError', 'Нехватает строительных центров!')
                     }

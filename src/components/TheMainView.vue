@@ -8,7 +8,7 @@
             <TheTradeView v-if="tradeStore.state.showTrade"/>
         </transition>
         <transition name="fade">
-            <CurrentPlanet v-if="planetStore.state.visibilityPlanetMenu"/>
+            <CurrentPlanet v-if="planetStore.state.visibilityPlanetMenu" />
         </transition>
         <ThePlanetarySystem v-if="planetStore.state.visibilityPlanetarySystem" />
     </div>
@@ -33,6 +33,15 @@ onMounted(() => {
     mutations.removeIdenticalElements()
     planetStore.commit('addTestMaterials')
 })
+window.addEventListener('keydown', press)
+function press(e){
+    if(e.key === 'Escape'){
+        planetStore.state.visibilityPlanetMenu = false
+    }
+    if(e.code === 'KeyG'){
+        planetStore.state.visibilityPlanetMenu = true
+    }
+}
 </script>
 <style lang="scss">
 .fade-enter-from,
