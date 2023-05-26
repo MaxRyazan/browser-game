@@ -130,7 +130,6 @@
 }
 
 .trade_container {
-  width: 97.2%;
   min-width: 700px;
   position: relative;
   height: 370px;
@@ -144,7 +143,7 @@
 }
 .trade_container::before {
   content: "";
-  background-image: url("src/assets/images/trade_background.jpg");
+  background-image: url("@/assets/images/trade_background.jpg");
   background-size: cover;
   position: absolute;
   top: 0;

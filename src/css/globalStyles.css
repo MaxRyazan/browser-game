@@ -70,28 +70,17 @@ span {
 .trade_base_wrapper {
   position: relative;
   width: 730px;
-  margin: 50px auto 80px 70px;
   border: 2px solid white;
   border-radius: 12px;
 }
 
 .planet_main_wrapper {
   position: relative;
-  left: 70px;
-  top: 50px;
+  width: 100%;
   border-radius: 12px;
-  width: calc(100% - 200px);
-  max-width: 1600px;
-  min-width: 730px;
-  height: calc(100vh - 189px);
   display: flex;
+  height: 784px;
   padding: 0;
-  margin-bottom: 100px;
-}
-@media (max-width: 1210px) {
-  .planet_main_wrapper {
-    height: calc(100vh + 130px);
-  }
 }
 .planet_main_wrapper::after {
   border-radius: 12px;

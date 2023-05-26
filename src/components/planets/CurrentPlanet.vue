@@ -1,29 +1,31 @@
 <template>
-    <div class="planet_main_wrapper">
-        <div class="planet_item planet_list">
-            <CurrentPlanetDescription/>
+    <Dialog v-model:visible="planetStore.state.visibilityPlanetMenu" header="*" :closable="false" :style="{ height: '808px', width: '1000px', border: '1px solid white', display: 'flex', background: 'black', borderRadius: '12px' }">
+        <div class="planet_main_wrapper">
+            <div class="planet_item planet_list">
+                <CurrentPlanetDescription/>
+            </div>
+            <div class="planet_item">
+                <AppPlanetNavigationButtons />
+                <AppCurrentInBuild v-if="planetStore.state.visibilityBuildingsInProgress" />
+                <AppPlanetStorageView v-if="planetStore.state.visibilityStorage" />
+                <AppBuildingsMenu />
+            </div>
         </div>
-        <div class="planet_item">
-            <AppPlanetNavigationButtons />
-            <AppCurrentInBuild v-if="planetStore.state.visibilityBuildingsInProgress" />
-            <AppPlanetStorageView v-if="planetStore.state.visibilityStorage" />
-            <AppBuildingsMenu />
-        </div>
-    </div>
+    </Dialog>
 </template>
 
 <script setup>
 import {onMounted, onUnmounted, watch} from "vue";
-import planetStore from "../../store_modules/planetStore.js";
+import planetStore from "@/store_modules/planetStore.js";
 import AppBuildingsMenu from "./AppBuildingsMenu.vue";
 import AppPlanetStorageView from "./AppPlanetStorageView.vue";
 import AppPlanetNavigationButtons from "./AppPlanetNavigationButtons.vue";
 import CurrentPlanetDescription from "./CurrentPlanetDescription.vue";
 import AppCurrentInBuild from "./AppCurrentInBuild.vue";
-import tradeStore from "../../store_modules/tradeStore.js";
-import variables from "../../variables.js";
-import helpers from "../../js/planets/helpers.js";
-
+import tradeStore from "@/store_modules/tradeStore.js";
+import variables from "@/variables.js";
+import helpers from "@/js/planets/helpers.js";
+import Dialog from 'primevue/dialog';
 onMounted(() => {
     planetStore.commit('checkThatColonyExists')
     planetStore.commit('calculateMaxCapacityOfStorage')
@@ -70,7 +72,6 @@ onMounted(() => {
 
 const modulesInProgress = tradeStore.state.currentPlanet.modulesInCreationNow
 const interval = setInterval(() => {
-    console.log('start interval')
     for(let i = 0; i < modulesInProgress.length; i++){
         let factoryCount;
         if(modulesInProgress[i].module.willBeCreatedAt <= Date.now() && modulesInProgress[i].amount > 0){

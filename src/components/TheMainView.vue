@@ -4,12 +4,10 @@
         <TheLeftNav />
         <TheBottomNav />
         <TheHelp v-if="helpStore.state.helpMenu"/>
-        <transition name="fade">
-            <TheTradeView v-if="tradeStore.state.showTrade"/>
-        </transition>
-        <transition name="fade">
-            <CurrentPlanet v-if="planetStore.state.visibilityPlanetMenu" />
-        </transition>
+<!--        <transition name="fade">-->
+            <TheTradeView v-model:visible="tradeStore.state.showTrade" />
+<!--        </transition>-->
+        <CurrentPlanet v-model:visible="planetStore.state.visibilityPlanetMenu" />
         <ThePlanetarySystem v-if="planetStore.state.visibilityPlanetarySystem" />
     </div>
 </template>

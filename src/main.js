@@ -1,10 +1,16 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import './css/tradeStyles.css'
 import App from './App.vue'
 import router from "./router.js";
 import globalStore from "./globalStore.js";
+import {initPrimeVUE} from './primevue'
 
-createApp(App)
-    .use(router)
+
+const app = createApp(App)
+
+
+app.use(router)
     .use(globalStore)
-    .mount('#app')
+// .mount('#app')
+initPrimeVUE(app)
+app.mount('#app')
