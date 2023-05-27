@@ -1,6 +1,8 @@
 import {ModuleInterface} from "../interfaces/ModuleInterface";
 import {RaceInterface} from "../interfaces/RaceInterface";
 import {Material} from "../interfaces/Material";
+import {CrudeOre} from "../Resources/CrudeOre";
+import {CrudeMineralOre} from "../Resources/CrudeMineralOre";
 
 export abstract class Module implements ModuleInterface{
     amount: Number;
@@ -22,7 +24,8 @@ export abstract class Module implements ModuleInterface{
         scanning: Boolean;
         construction: Boolean;
         lifeSupporting: Boolean;
-        autoPilot: Boolean
+        autoPilot: Boolean;
+        canAttack?: Boolean;
     };
     bonusParamsToShip: {
         energy: Number;
@@ -36,4 +39,17 @@ export abstract class Module implements ModuleInterface{
     picture: String;
     requiredTech: {};
     moduleType: Number
+    attackParams?:{
+        radius: Number,
+        baseDamage: Number,
+        notEffectiveAgainst: null,
+        bonusEffectiveAgainst: null
+    }
+    defenceParams?:{
+        bonusHp: Number
+    }
+    miningParams: {
+        canMining: { type: [CrudeOre, CrudeMineralOre], amount : Number}
+        miningSpeed: Number
+    }
 }

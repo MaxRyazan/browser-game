@@ -3,7 +3,7 @@
     <div class="module_image_info">
         <img :src="`${product.picture}`" alt="" :title="`${product.name}`">
     </div>
-    <input type="number" ref="amount" @keydown.enter="produce(product.id)">
+    <input autofocus type="number" ref="amount" @keydown.enter="produce(product.id)">
     <AppMiniButton class="w70" :sp_button="true" :name="time ? `Добавить` : `Запустить`" @click="produce(product.id)" />
     <div class="in_progress_time" v-if="count">
         <span>{{count}}шт.</span> х <span>{{variables.productionPower}}мин.</span><span>{{time}}</span>
@@ -35,8 +35,6 @@ function prettyTimer (){
     if(props.product){
         const thisModule = tradeStore.state.currentPlanet.modulesInCreationNow.filter(m => m.module.id === props.product.id)[0]
         if(thisModule){
-            console.log('reee')
-            console.log('thisModule', thisModule)
             return Math.floor((thisModule.module.willBeCreatedAt - Date.now()) / 1000)
         }
     }

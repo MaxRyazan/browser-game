@@ -30,14 +30,13 @@
            <AppIcon :path="iconsPaths.factorySettingsIcon"  :colored="true" @click="toggleInfo" v-if="building && building.buildingType===6"/>
         </div>
         <AppProductionStationsInfo :building="building" />
-        <transition name="fade">
-            <AppBuildingInfo
-                    :building="building"
-                    :picture="picture"
-                    v-if="info"
-                    @toggleInfo="toggleInfo"
-            />
-        </transition>
+        <AppBuildingInfo
+                :building="building"
+                :picture="picture"
+                v-if="info"
+                @toggleInfo="toggleInfo"
+                v-model:visible="info"
+        />
     </div>
     <transition name="fade">
         <AppError v-if="error"/>

@@ -1,6 +1,7 @@
 import {Building} from "../../entities/Building";
 import {ConstructionMaterials} from "../../materials/ConstructionMaterials";
 import {Electronics} from "../../materials/Electronics";
+import {MechanicalDrill} from "../../modules/mining/MechanicalDrill";
 
 export class MiningFactory extends Building{
     timeOfLastProduce: Number
@@ -25,9 +26,7 @@ export class MiningFactory extends Building{
         this.canProduce = {
             type:
                 [
-                    // new ChemicalReactor(null, 1),
-                    // new NuclearReactor(null, 1),
-                    // new AltahReactor(null, 1),
+                    new MechanicalDrill(null, 1),
                 ],
             amount: 3}
         this.timeOfLastProduce = Date.now()

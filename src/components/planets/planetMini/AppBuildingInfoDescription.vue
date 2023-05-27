@@ -29,3 +29,10 @@ defineProps({
     }
 })
 </script>
+<style scoped>
+.building_info_name{
+    max-width: 147px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
