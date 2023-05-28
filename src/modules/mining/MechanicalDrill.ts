@@ -1,5 +1,4 @@
 import {RaceInterface} from "../../interfaces/RaceInterface";
-import {NuclearPhysics} from "../../Technologies/NuclearPhysics";
 import {Module} from "../../entities/Module";
 import {Steel} from "../../materials/Steel";
 import variables from '../../variables.js'
@@ -12,7 +11,7 @@ export class MechanicalDrill extends Module{
         super();
         this.id = 10
         this.picture = './src/assets/images/nuclear_reactor.jpg'
-        this.requiredTech = [new NuclearPhysics()]
+        this.requiredTech = []
         this.name = 'Механический бур'
         this.costInBuildPoints = 130
         this.willBeCreatedAt = Date.now() + variables.fiveMinutes

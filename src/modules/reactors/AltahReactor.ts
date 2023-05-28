@@ -1,5 +1,4 @@
 import {RaceInterface} from "../../interfaces/RaceInterface";
-import {AlienTechnology} from "../../Technologies/AlienTechnology";
 import {Module} from "../../entities/Module";
 import {Steel} from "../../materials/Steel";
 import {Electronics} from "../../materials/Electronics";
@@ -12,7 +11,7 @@ export class AltahReactor extends Module{
         super();
         this.id = 3
         this.picture = './src/assets/images/altah_reactor.jpg'
-        this.requiredTech = [new AlienTechnology()]
+        this.requiredTech = []
         this.name = 'Альтах реактор'
         this.costInBuildPoints = 200
         this.costInCR = 120

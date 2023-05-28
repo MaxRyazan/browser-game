@@ -1,5 +1,4 @@
 import {RaceInterface} from "../../interfaces/RaceInterface";
-import {AlienTechnology} from "../../Technologies/AlienTechnology";
 import {Steel} from "../../materials/Steel";
 import {Electronics} from "../../materials/Electronics";
 import {Polymers} from "../../materials/Polymers";
@@ -13,7 +12,7 @@ export class NanoEngine extends Module{
         super();
         this.id = 7
         this.picture = './src/assets/images/engines/nano_engine.jpg'
-        this.requiredTech = [new AlienTechnology()]
+        this.requiredTech = []
         this.name = 'Нано двигатель'
         this.costInBuildPoints = 200
         this.costInCR = 120

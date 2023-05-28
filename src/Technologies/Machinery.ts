@@ -1,14 +1,13 @@
 import {Technology} from "../entities/Technology";
-import variables from '../variables.js'
 
-export class Mathematics  extends Technology {
+export class Machinery  extends Technology {
     constructor() {
         super();
-        this.id = 1
-        this.name = 'Математика'
-        this.difficultCoefficient = 0.25
+        this.id = 2
+        this.name = 'Машиностроение'
+        this.difficultCoefficient = 0.15
         this.techLevel = 0
-        this.cost = variables.oneHour + variables.oneHour * this.difficultCoefficient * this.techLevel
+        this.cost = 75 + 75 * this.difficultCoefficient * this.techLevel
         this.willBeLearnedAt = Date.now() + this.cost
         this.requiredTechs = []
         this.bonusToModules = []

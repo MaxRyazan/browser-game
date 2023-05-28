@@ -2,30 +2,14 @@ import {PlanetarySystem} from "../entities/PlanetarySystem";
 import {Planet} from "../entities/Planet";
 import {Player} from "../entities/Player";
 import {Humans} from "../races/Humans";
-import {Mathematics} from "../Technologies/Mathematics";
-import {Biology} from "../Technologies/Biology";
-import {HigherMathematics} from "../Technologies/HigherMathematics";
 import {ChemicalReactor} from "../modules/reactors/ChemicalReactor";
 import {AltahReactor} from "../modules/reactors/AltahReactor";
 import {Necrons} from "../races/Necrons";
 import {NuclearReactor} from "../modules/reactors/NuclearReactor";
 import {Cyborgs} from "../races/Cyborgs";
 import {Lot} from "../entities/Lot";
-import {Electronics} from "../materials/Electronics";
-import {Polymers} from "../materials/Polymers";
-import {Steel} from "../materials/Steel";
-import {Delitium} from "../Resources/mineral/Delitium";
-import {ConstructionMaterials} from "../materials/ConstructionMaterials";
-import {Quadria} from "../materials/Quadria";
-import {Vettur} from "../materials/Vettur";
-import {Altah} from "../Resources/mineral/Altah";
-import {ChemicalFuel} from "../materials/ChemicalFuel";
 
 export class FakeData {
-
-    mathematics = new Mathematics()
-    biology = new Biology()
-    higherMathematics = new HigherMathematics()
 
     public planet_MERCURY = new Planet(1, 'Меркурий', false);
     public planet_VENUS = new Planet(2, 'Венера', false);

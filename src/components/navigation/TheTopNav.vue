@@ -1,12 +1,12 @@
 <template>
     <div class="top_nav">
         <div class="top_nav_money">
-            <AppIcon :path="iconsPath.money" @click="mutations.toggleTrade"/>
+            <AppIcon :path="iconsPath.money" @click="mutations.toggleTrade" />
             <AppPrice :currency_type="`money_cr_currency`" :sum="store.state.player.playerData.playerMoney.CR" :currency="`CR`"/>
             <AppPrice :currency_type="`money_cr_currency`" :sum="store.state.player.playerData.playerMoney.IG" :currency="`IG`"/>
         </div>
         <div class="top_nav_science">
-            <AppIcon :path="iconsPath.science"/>
+            <AppIcon :path="iconsPath.science" @click="toggleScience" />
             <div class="top_nav_science_params">
                 <strong class="science_params_search">{{ store.state.player.playerData.playerKnowledge.inLearnNow.tech.name }}</strong>
                 <span class="science_params_search_time">
@@ -30,8 +30,12 @@ import AppIcon from "./AppIcon.vue";
 import AppPrice from "./AppPrice.vue";
 import iconsPath from '/src/iconsPaths.js'
 import store from "../../store_modules/tradeStore.js";
-import {Mutations} from "../../js/trade/mutations.js";
+import {Mutations} from "@/js/trade/mutations.js";
+import planetStore from "@/store_modules/planetStore.js";
 const mutations = new Mutations()
 
-
+const toggleScience = () => {
+    console.log(planetStore.state.visibilityScience)
+    planetStore.state.visibilityScienceMenu = !planetStore.state.visibilityScienceMenu
+}
 </script>

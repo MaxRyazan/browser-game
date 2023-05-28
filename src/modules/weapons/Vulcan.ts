@@ -1,5 +1,4 @@
 import {RaceInterface} from "../../interfaces/RaceInterface";
-import {NuclearPhysics} from "../../Technologies/NuclearPhysics";
 import {Module} from "../../entities/Module";
 import {Steel} from "../../materials/Steel";
 import {Electronics} from "../../materials/Electronics";
@@ -11,7 +10,7 @@ export class Vulcan extends Module{
         super();
         this.id = 8
         this.picture = './src/assets/images/nuclear_reactor.jpg'
-        this.requiredTech = [new NuclearPhysics()]
+        this.requiredTech = []
         this.name = 'Установка Вулкан'
         this.costInBuildPoints = 130
         this.willBeCreatedAt = Date.now() + variables.fiveMinutes

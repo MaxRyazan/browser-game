@@ -1,5 +1,4 @@
 import {RaceInterface} from "../../interfaces/RaceInterface";
-import {Chemistry} from "../../Technologies/Chemistry";
 import {Module} from "../../entities/Module";
 import {Steel} from "../../materials/Steel";
 import {Electronics} from "../../materials/Electronics";
@@ -11,7 +10,7 @@ export class ChemicalReactor extends  Module{
         super();
         this.id = 1
         this.picture = './src/assets/images/chemical_reactor.jpg'
-        this.requiredTech = [new Chemistry()]
+        this.requiredTech = []
         this.name = 'Химический реактор'
         this.costInBuildPoints = 50
         this.willBeCreatedAt = Date.now() + variables.fiveMinutes

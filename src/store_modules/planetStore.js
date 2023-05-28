@@ -10,6 +10,7 @@ export default createStore({
             flag: false,
             value: ''
         },
+        visibilityScienceMenu: false,
         visibilityPlanetMenu: false,
         visibilityPlanetarySystem: false,
         visibilityInfrastructure: true,
@@ -24,7 +25,6 @@ export default createStore({
 
         isColonyCreated: false,
         buildingsInProgressNow: [],
-        // modulesInCreationNow: [],
     },
     mutations: planetMutations,
     actions: planetActions,

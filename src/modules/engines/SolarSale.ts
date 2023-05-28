@@ -1,5 +1,4 @@
 import {RaceInterface} from "../../interfaces/RaceInterface";
-import {AlienTechnology} from "../../Technologies/AlienTechnology";
 import {Steel} from "../../materials/Steel";
 import {Electronics} from "../../materials/Electronics";
 import {Polymers} from "../../materials/Polymers";
@@ -11,7 +10,7 @@ export class SolarSale extends Module{
         super();
         this.id = 4
         this.picture = './src/assets/images/engines/solar_sail.jpg'
-        this.requiredTech = [new AlienTechnology()]
+        this.requiredTech = []
         this.name = 'Солнечный парус'
         this.costInBuildPoints = 70
         this.costInCR = 250

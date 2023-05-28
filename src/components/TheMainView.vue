@@ -4,10 +4,11 @@
         <TheLeftNav />
         <TheBottomNav />
         <TheHelp v-if="helpStore.state.helpMenu"/>
-<!--        <transition name="fade">-->
-            <TheTradeView v-model:visible="tradeStore.state.showTrade" />
-<!--        </transition>-->
+        <TheTradeView v-model:visible="tradeStore.state.showTrade" />
         <CurrentPlanet v-model:visible="planetStore.state.visibilityPlanetMenu" />
+        <TheScience v-model:visible="planetStore.state.visibilityScienceMenu" />
+
+
         <ThePlanetarySystem v-if="planetStore.state.visibilityPlanetarySystem" />
     </div>
 </template>
@@ -24,9 +25,10 @@ import CurrentPlanet from './planets/CurrentPlanet.vue'
 import ThePlanetarySystem from '../components/planets/ThePlanetarySystem.vue'
 import TheHelp from "./help/TheHelp.vue";
 import {onMounted} from "vue";
-
 import {Mutations} from '../js/trade/mutations.js'
+import TheScience from "@/components/science/TheScience.vue";
 const mutations = new Mutations()
+
 onMounted(() => {
     mutations.removeIdenticalElements()
     planetStore.commit('addTestMaterials')
@@ -37,7 +39,7 @@ function press(e){
         planetStore.state.visibilityPlanetMenu = false
     }
     if(e.code === 'KeyG'){
-        planetStore.state.visibilityPlanetMenu = true
+        planetStore.state.visibilityPlanetMenu = !planetStore.state.visibilityPlanetMenu
     }
 }
 </script>
