@@ -25,6 +25,7 @@ export interface ModuleInterface {
     baseCostInMaterials: Material[];
 
     bonusParamsToShip: {
+        crew?: Number
         energy: Number
         cargo: Number
         speedInSubspace: Number

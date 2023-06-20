@@ -22,7 +22,7 @@ export class NuclearEngine extends Module{
         this.baseParams = {
             moduleMass: 10,
             moduleSignature: 10,
-            requiredEnergy: 0,
+            requiredEnergy: 35,
             requiredCargo: 26,
             requiredWorkers: 5
         }

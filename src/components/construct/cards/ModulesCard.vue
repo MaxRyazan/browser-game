@@ -7,8 +7,8 @@
 
 <script setup>
 import {ref} from "vue";
-import planetStore from "@/store_modules/planetStore";
-import tradeStore from "@/store_modules/tradeStore";
+import planetStore from "@/store_modules/planetStore.js";
+import tradeStore from "@/store_modules/tradeStore.js";
 import {MechanicalDrill} from "@/modules/mining/MechanicalDrill";
 
 const props = defineProps(['module'])
@@ -22,7 +22,9 @@ switch (props.module){
 }
 
 function chooseModule(){
-    planetStore.state.shipInConstructNow = module
+    if(planetStore.state.shipInConstructNow.modules.length < planetStore.state.shipInConstructNow.maxModules) {
+        planetStore.state.shipInConstructNow.modules.push(module.value)
+    }
 }
 
 </script>

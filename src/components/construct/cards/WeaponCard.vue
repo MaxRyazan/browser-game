@@ -7,8 +7,8 @@
 
 <script setup>
 import {ref} from "vue";
-import planetStore from "@/store_modules/planetStore";
-import tradeStore from "@/store_modules/tradeStore";
+import planetStore from "@/store_modules/planetStore.js";
+import tradeStore from "@/store_modules/tradeStore.js";
 import {Vulcan} from "@/modules/weapons/Vulcan";
 
 const props = defineProps(['weapon'])
@@ -22,7 +22,9 @@ switch (props.weapon){
 }
 
 function chooseWeapon(){
-    planetStore.state.shipInConstructNow = weapon
+    if(planetStore.state.shipInConstructNow.modules.length < planetStore.state.shipInConstructNow.maxModules) {
+        planetStore.state.shipInConstructNow.modules.push(weapon.value)
+    }
 }
 
 </script>

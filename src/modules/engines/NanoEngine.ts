@@ -22,7 +22,7 @@ export class NanoEngine extends Module{
         this.baseParams = {
             moduleMass: 10,
             moduleSignature: 10,
-            requiredEnergy: 0,
+            requiredEnergy: 25,
             requiredCargo: 26,
             requiredWorkers: 5
         }

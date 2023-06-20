@@ -7,8 +7,8 @@
 
 <script setup>
 import {ref} from "vue";
-import planetStore from "@/store_modules/planetStore";
-import tradeStore from "@/store_modules/tradeStore";
+import planetStore from "@/store_modules/planetStore.js";
+import tradeStore from "@/store_modules/tradeStore.js";
 import {SteelPlate} from "@/modules/defence/SteelPlate";
 
 const props = defineProps(['defence'])
@@ -22,7 +22,9 @@ switch (props.defence){
 }
 
 function chooseWeapon(){
-    planetStore.state.shipInConstructNow = defence
+    if(planetStore.state.shipInConstructNow.modules.length < planetStore.state.shipInConstructNow.maxModules){
+        planetStore.state.shipInConstructNow.modules.push(defence.value)
+    }
 }
 
 </script>

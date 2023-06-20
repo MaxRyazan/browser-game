@@ -7,9 +7,9 @@
 
 <script setup>
 import {ref} from "vue";
-import planetStore from "@/store_modules/planetStore";
+import planetStore from "@/store_modules/planetStore.js";
 import {NanoEngine} from "@/modules/engines/NanoEngine";
-import tradeStore from "@/store_modules/tradeStore";
+import tradeStore from "@/store_modules/tradeStore.js";
 import {NuclearEngine} from "@/modules/engines/NuclearEngine";
 import {RocketEngine} from "@/modules/engines/RocketEngine";
 import {SolarSale} from "@/modules/engines/SolarSale";
@@ -31,7 +31,9 @@ switch (props.engine){
 }
 
 function chooseEngine(){
-    planetStore.state.shipInConstructNow = engine
+    if(planetStore.state.shipInConstructNow.modules.length < planetStore.state.shipInConstructNow.maxModules) {
+        planetStore.state.shipInConstructNow.modules.push(engine.value)
+    }
 }
 
 </script>

@@ -47,9 +47,9 @@
                         </div>
                     </div>
                     <div class="proekt_slots">
-                        <div v-for="(slot, index) in ship.maxModules" :key="slot" :id="`slot${slot}`" class="slot">
-                            <img :src="`${ship.modules[index].picture}`" alt="" v-if="ship.modules.length"
-                                 style="width: 100%;">
+                        <div v-for="slot in ship.modules" :key="slot" :id="`slot${slot}`" class="slot">
+                            <img :src="`${slot.picture}`" alt="" v-if="ship.modules.length"
+                                 style="width: 45px; height: 45px">
                         </div>
                     </div>
                 </div>
@@ -60,12 +60,12 @@
 
 <script setup>
 import planetStore from "@/store_modules/planetStore.js";
-import ShipCard from "@/components/construct/ShipCard.vue";
-import EngineCard from "@/components/construct/EngineCard.vue";
-import {computed, onMounted} from "vue";
-import ModulesCard from "@/components/construct/ModulesCard.vue";
-import WeaponCard from "@/components/construct/WeaponCard.vue";
-import DefenceModulesCard from "@/components/construct/DefenceModulesCard.vue";
+import ShipCard from "@/components/construct/cards/ShipCard.vue";
+import EngineCard from "@/components/construct/cards/EngineCard.vue";
+import {computed} from "vue";
+import ModulesCard from "@/components/construct/cards/ModulesCard.vue";
+import WeaponCard from "@/components/construct/cards/WeaponCard.vue";
+import DefenceModulesCard from "@/components/construct/cards/DefenceModulesCard.vue";
 
 function toggleHide(param) {
     document.querySelectorAll('.hide_menu').forEach(item => item.classList.add('h20'))
@@ -96,23 +96,28 @@ const cargo = computed(() => {
             currCargo = currCargo + m.bonusParamsToShip.cargo
         })
         ship.value.modules.forEach(m => {
-            reqCargo = reqCargo + m.bonusParamsToShip.requiredCargo
+            reqCargo = reqCargo + m.baseParams.requiredCargo
         })
     }
     if(!currCargo){
         currCargo = 0
     }
-    const result = currCargo - reqCargo
-    return result ? result : ''
+    return currCargo - reqCargo
 })
 const crew = computed(() => {
-    let peoples;
+    let reqPeople = 0
+    let currPeoples = 0;
     if (ship.value.modules) {
         ship.value.modules.forEach(m => {
-            peoples = peoples + m.baseParams.requiredWorkers
+            currPeoples = currPeoples + m.baseParams.requiredWorkers
+        })
+        ship.value.modules.forEach(m => {
+            if(m.crew){
+                reqPeople = reqPeople + m.bonusParamsToShip.crew
+            }
         })
     }
-    return peoples ? peoples + ' чел' : 'Беспилотник'
+    return reqPeople - currPeoples
 })
 const vitality = computed(() => {
     let hp = ship.value.baseHP;

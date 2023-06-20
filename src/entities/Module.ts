@@ -28,6 +28,7 @@ export abstract class Module implements ModuleInterface{
         canAttack?: Boolean;
     };
     bonusParamsToShip: {
+        crew?: Number
         energy: Number;
         cargo: Number;
         speedInSubspace: Number;
