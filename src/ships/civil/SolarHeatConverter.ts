@@ -20,7 +20,7 @@ export class SolarHeatConverter extends Ship {
 
         this.baseCargo = 5;
 
-        this.baseModulesSlots = 3;
+        this.maxModules = 3
 
         this.modules = [];
 

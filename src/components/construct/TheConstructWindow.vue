@@ -1,10 +1,35 @@
 <template>
-    <Dialog v-model:visible="planetStore.state.isConstructOpen" header="construct" position="center"
-            :style="{ width: '80vw', background: 'white' }">
+    <Dialog v-model:visible="planetStore.state.isConstructOpen" header="Конструкторское бюро" position="center"
+            :style="{ width: '80vw', color: '#daa548', border: '2px solid rgba(43, 211, 237)'}">
         <div class="const_wrapper">
+
             <div class="const_left">
-                <ShipCard shipName="solarConverter"/>
+                <div class="hide_menu corps">
+                    <span class="hide_menu-title" @click="toggleHide('corps')">Корпуса</span>
+                    <ShipCard shipName="solarConverter"/>
+                </div>
+                <div class="hide_menu engines h20">
+                    <span class="hide_menu-title" @click="toggleHide('engines')">Двигатели</span>
+                    <EngineCard engine="Нано двигатель"/>
+                    <EngineCard engine="Ядерный двигатель"/>
+                    <EngineCard engine="Ракетный двигатель"/>
+                    <EngineCard engine="Солнечный парус"/>
+                </div>
+                <div class="hide_menu modules h20">
+                    <span class="hide_menu-title" @click="toggleHide('modules')">Модули</span>
+                    <ModulesCard module="mechanicalDrill"/>
+                </div>
+                <div class="hide_menu weapon h20">
+                    <span class="hide_menu-title" @click="toggleHide('weapon')">Орудия</span>
+                    <WeaponCard weapon="vulcan"/>
+                </div>
+                <div class="hide_menu defence h20">
+                    <span class="hide_menu-title" @click="toggleHide('defence')">Защитные системы</span>
+                    <DefenceModulesCard defence="steelPlate"/>
+                </div>
             </div>
+
+
             <div class="const_right">
                 <div class="proekt_wrapper" v-if="ship">
                     <div class="proekt_info_line">
@@ -12,18 +37,19 @@
                             <img :src="`${ship.picture}`" alt="" style="width: 100%;">
                         </div>
                         <div class="proekt_params">
-                            <span>Масса: {{mass}} кг</span>
-                            <span>Вместимость: {{cargo}} ед</span>
-                            <span>Экипаж: {{crew}}</span>
-                            <span>Живучесть: {{vitality}} ед</span>
-                            <span>Сигнатура: {{signature}} м<sup>3</sup></span>
-                            <span>Энергия: {{energy}} ед</span>
-                            <span>Цена постройки: {{price}} CR</span>
+                            <span>Масса: {{ mass }} кг</span>
+                            <span :class="{'red': cargo < 0}">Вместимость: {{ cargo }} ед</span>
+                            <span :class="{'red': crew < 0}">Экипаж: {{ crew }}</span>
+                            <span>Живучесть: {{ vitality }} ед</span>
+                            <span>Сигнатура: {{ signature }} м<sup>3</sup></span>
+                            <span :class="{'red': energy < 0}">Энергия: {{ energy }} ед</span>
+                            <span>Цена постройки: {{ price }} CR</span>
                         </div>
                     </div>
                     <div class="proekt_slots">
-                        <div v-for="slot in ship.baseModulesSlots" :key="slot" :id="`slot${slot}`" class="slot" @click="clickSlot(slot)">
-                            <img src="" alt="">
+                        <div v-for="(slot, index) in ship.maxModules" :key="slot" :id="`slot${slot}`" class="slot">
+                            <img :src="`${ship.modules[index].picture}`" alt="" v-if="ship.modules.length"
+                                 style="width: 100%;">
                         </div>
                     </div>
                 </div>
@@ -35,19 +61,19 @@
 <script setup>
 import planetStore from "@/store_modules/planetStore.js";
 import ShipCard from "@/components/construct/ShipCard.vue";
-import {computed} from "vue";
-import {AltahReactor} from "@/modules/reactors/AltahReactor";
-import tradeStore from "@/store_modules/tradeStore";
+import EngineCard from "@/components/construct/EngineCard.vue";
+import {computed, onMounted} from "vue";
+import ModulesCard from "@/components/construct/ModulesCard.vue";
+import WeaponCard from "@/components/construct/WeaponCard.vue";
+import DefenceModulesCard from "@/components/construct/DefenceModulesCard.vue";
 
-
-function clickSlot(slot){
-    const race = tradeStore.state.player.race
-    planetStore.state.shipInConstructNow.modules.push(new AltahReactor(race))
-    console.log(ship.value)
+function toggleHide(param) {
+    document.querySelectorAll('.hide_menu').forEach(item => item.classList.add('h20'))
+    document.querySelector(`.${param}`).classList.toggle('h20')
 }
 
 const ship = computed(() => {
-    if(planetStore.state.shipInConstructNow) return planetStore.state.shipInConstructNow
+    if (planetStore.state.shipInConstructNow) return planetStore.state.shipInConstructNow
     else return null
 })
 const price = computed(() => {
@@ -55,7 +81,7 @@ const price = computed(() => {
 })
 const mass = computed(() => {
     let mass = ship.value.baseMass;
-    if(ship.value.modules){
+    if (ship.value.modules) {
         ship.value.modules.forEach(m => {
             mass = mass + m.baseParams.moduleMass
         })
@@ -63,17 +89,25 @@ const mass = computed(() => {
     return mass
 })
 const cargo = computed(() => {
-    let cargo = ship.value.baseCargo;
-    if(ship.value.modules){
+    let reqCargo = 0;
+    let currCargo = ship.value.baseCargo
+    if (ship.value.modules) {
         ship.value.modules.forEach(m => {
-            cargo = cargo + m.bonusParamsToShip.cargo
+            currCargo = currCargo + m.bonusParamsToShip.cargo
+        })
+        ship.value.modules.forEach(m => {
+            reqCargo = reqCargo + m.bonusParamsToShip.requiredCargo
         })
     }
-    return cargo
+    if(!currCargo){
+        currCargo = 0
+    }
+    const result = currCargo - reqCargo
+    return result ? result : ''
 })
 const crew = computed(() => {
     let peoples;
-    if(ship.value.modules){
+    if (ship.value.modules) {
         ship.value.modules.forEach(m => {
             peoples = peoples + m.baseParams.requiredWorkers
         })
@@ -82,9 +116,9 @@ const crew = computed(() => {
 })
 const vitality = computed(() => {
     let hp = ship.value.baseHP;
-    if(ship.value.modules){
+    if (ship.value.modules) {
         ship.value.modules.forEach(m => {
-            if(m.defenceParams){
+            if (m.defenceParams) {
                 hp = hp + m.defenceParams.bonusHp
             }
         })
@@ -93,9 +127,9 @@ const vitality = computed(() => {
 })
 const signature = computed(() => {
     let sign = ship.value.baseSignature;
-    if(ship.value.modules){
+    if (ship.value.modules) {
         ship.value.modules.forEach(m => {
-            if(m.baseParams){
+            if (m.baseParams) {
                 sign = sign + m.baseParams.moduleSignature
             }
         })
@@ -105,16 +139,16 @@ const signature = computed(() => {
 const energy = computed(() => {
     let reqEnergy = 0;
     let produceEnergy = 0;
-    if(ship.value.modules){
+    if (ship.value.modules) {
         ship.value.modules.forEach(m => {
-            if(m.baseParams){
+            if (m.baseParams) {
                 reqEnergy = reqEnergy + m.baseParams.requiredEnergy
             }
         })
     }
-    if(ship.value.modules){
+    if (ship.value.modules) {
         ship.value.modules.forEach(m => {
-            if(m.bonusParamsToShip){
+            if (m.bonusParamsToShip) {
                 produceEnergy = produceEnergy + m.bonusParamsToShip.energy
             }
         })
@@ -123,51 +157,59 @@ const energy = computed(() => {
 })
 </script>
 <style scoped lang="scss">
-.proekt_slots{
+.proekt_slots {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
-.slot{
+
+.slot {
   width: 50px;
   height: 50px;
   border: 2px solid rgba(43, 211, 237);
   background-color: black;
   cursor: pointer;
-  &:hover{
+
+  &:hover {
     transform: scale(1.03);
   }
 }
-.proekt_params{
+
+.proekt_params {
   display: flex;
   flex-direction: column;
 }
-.proekt_image{
+
+.proekt_image {
   width: 130px;
   height: 130px;
 }
-.proekt_info_line{
+
+.proekt_info_line {
   display: flex;
 }
+
 .const_left, .const_right {
-  border: 1px solid red;
   height: 100%;
   width: 50%;
   padding: 3px;
+  border: 1px solid rgba(43, 211, 237);
 }
-.const_left{
+
+.const_left {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
 .const_wrapper {
   display: flex;
-  border: 1px solid green;
   height: 800px;
   padding: 0;
   margin: 0;
   width: 100%;
   min-height: calc(85vh - 28px);
+
   &::after {
     z-index: -1;
     position: absolute;
@@ -176,9 +218,35 @@ const energy = computed(() => {
     top: 0;
     bottom: 0;
     content: "";
-    background: url("@/assets/images/backgrounds/sc_bg.jpg") no-repeat center;
+    background: radial-gradient(ellipse 90% 90%, rgba(5, 45, 51, 0.5), rgba(5, 45, 51, 0.2)) no-repeat, url(@/assets/images/value_bg_blue.png) repeat padding-box;
     background-size: cover;
     opacity: .5;
   }
+}
+
+.hide_menu {
+  height: 80%;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 30px;
+  display: flex;
+}
+.hide_menu-title{
+  cursor: pointer;
+  padding: 0 10px;
+  color: #daa548;
+  background: radial-gradient(ellipse 90% 90%, rgba(5, 45, 51, 0.5), rgba(5, 45, 51, 0.2)) no-repeat, url(@/assets/images/value_bg_blue.png) repeat padding-box;
+  position: absolute;
+  left: 2px;
+  top:2px;
+  border: 1px solid rgba(43, 211, 237);
+  width: 99%;
+}
+.h20 {
+  height: 30px;
+}
+.red{
+  color: red;
 }
 </style>

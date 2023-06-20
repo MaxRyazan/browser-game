@@ -17,7 +17,7 @@ export interface ShipInterface {
 
     baseInitiative: Number
 
-    baseModulesSlots: Number
+    maxModules: Number;
 
     modules: Module[];
 
