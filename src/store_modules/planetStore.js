@@ -22,9 +22,12 @@ export default createStore({
         visibilityStorage: false,
         visibilityBuildingsInProgress: true,
         buildingsSettingsModal: false,
+        isConstructOpen: false,
 
         isColonyCreated: false,
         buildingsInProgressNow: [],
+
+        shipInConstructNow: {}
     },
     mutations: planetMutations,
     actions: planetActions,

@@ -7,7 +7,7 @@
         <TheTradeView v-model:visible="tradeStore.state.showTrade" />
         <CurrentPlanet v-model:visible="planetStore.state.visibilityPlanetMenu" />
         <TheScience v-model:visible="planetStore.state.visibilityScienceMenu" />
-
+        <TheConstructWindow v-model:visible="planetStore.state.isConstructOpen"/>
 
         <ThePlanetarySystem v-if="planetStore.state.visibilityPlanetarySystem" />
     </div>
@@ -27,6 +27,7 @@ import TheHelp from "./help/TheHelp.vue";
 import {onMounted} from "vue";
 import {Mutations} from '../js/trade/mutations.js'
 import TheScience from "@/components/science/TheScience.vue";
+import TheConstructWindow from "@/components/construct/TheConstructWindow.vue";
 const mutations = new Mutations()
 
 onMounted(() => {

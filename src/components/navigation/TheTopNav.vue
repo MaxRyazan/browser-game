@@ -16,13 +16,15 @@
             </div>
         </div>
         <div class="top_nav_construct">
-            <AppIcon :path="iconsPath.construct"/>
+            <AppIcon :path="iconsPath.construct" @click="openConstructWindow"/>
             <div class="top_nav_construct_params">
                 <strong class="construct_params_ship">Нет проектирования</strong>
                 <span class="construct_params_ship_time">-</span>
             </div>
         </div>
     </div>
+
+
 </template>
 
 <script setup>
@@ -34,8 +36,15 @@ import {Mutations} from "@/js/trade/mutations.js";
 import planetStore from "@/store_modules/planetStore.js";
 const mutations = new Mutations()
 
+function openConstructWindow(){
+    planetStore.state.isConstructOpen = true
+}
+
 const toggleScience = () => {
     console.log(planetStore.state.visibilityScience)
     planetStore.state.visibilityScienceMenu = !planetStore.state.visibilityScienceMenu
 }
 </script>
+<style scoped lang="scss">
+
+</style>

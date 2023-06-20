@@ -1,7 +1,7 @@
 import {TechnologyInterface} from "../interfaces/TechnologyInterface";
 import {Module} from "./Module";
 import {Building} from "./Building";
-import {Ship} from "../ARCHIVE/Ship";
+import {Ship} from "./Ship";
 
 export interface ReqTech{
     technology: Technology,
