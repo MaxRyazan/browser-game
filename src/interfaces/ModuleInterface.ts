@@ -31,6 +31,8 @@ export interface ModuleInterface {
         speedInSubspace: Number
         speedInNormalSpace: Number
         canAttack?: Boolean;
+        speedInSystem?: Number;
+        speedInCombat?: Number
     }
     bonusActionsToShips: {
         mining: Boolean

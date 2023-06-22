@@ -6,13 +6,13 @@ import {Polymers} from "../../materials/Polymers";
 import {Vettur} from "../../materials/Vettur";
 import variables from '../../variables.js'
 
-export class AltahReactor extends Module{
+export class PlasmaReactor extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
         super();
         this.id = 3
-        this.picture = './src/assets/images/altah_reactor.jpg'
+        this.picture = './src/assets/images/reactors/plasmaReactor.png'
         this.requiredTech = []
-        this.name = 'Альтах реактор'
+        this.name = 'Плазменный реактор'
         this.costInBuildPoints = 200
         this.costInCR = 120
         this.costInIG = 0

@@ -21,7 +21,7 @@ export class RocketEngine extends Module{
         this.willBeCreatedAt = Date.now() + variables.fiveMinutes
         this.baseParams = {
             moduleMass: 10,
-            moduleSignature: 10,
+            moduleSignature: 2,
             requiredEnergy: 12,
             requiredCargo: 26,
             requiredWorkers: 5
@@ -36,7 +36,9 @@ export class RocketEngine extends Module{
             energy: 0,
             cargo: 0,
             speedInSubspace: 0,
-            speedInNormalSpace: 40
+            speedInNormalSpace: 3,
+            speedInSystem: 2000,
+            speedInCombat: 2.5,
         }
         this.bonusActionsToShips = {
             mining: false,

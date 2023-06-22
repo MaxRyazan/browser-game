@@ -6,11 +6,11 @@
             <div class="const_left">
                 <div class="hide_menu corps">
                     <span class="hide_menu-title" @click="toggleHide('corps')">Корпуса</span>
-                    <ShipCard shipName="solarConverter"/>
+                    <ShipCard shipName="researchSatellite"/>
                 </div>
                 <div class="hide_menu engines h20">
                     <span class="hide_menu-title" @click="toggleHide('engines')">Двигатели</span>
-                    <EngineCard engine="Нано двигатель"/>
+                    <EngineCard engine="Плазменный двигатель"/>
                     <EngineCard engine="Ядерный двигатель"/>
                     <EngineCard engine="Ракетный двигатель"/>
                     <EngineCard engine="Солнечный парус"/>
@@ -36,13 +36,14 @@
                         <div class="proekt_image">
                             <img :src="`${ship.picture}`" alt="" style="width: 100%;">
                         </div>
-                        <div class="proekt_params">
+                        <div class="proekt_params border-1">
                             <span>Масса: {{ mass }} кг</span>
                             <span :class="{'red': cargo < 0}">Вместимость: {{ cargo }} ед</span>
-                            <span :class="{'red': crew < 0}">Экипаж: {{ crew }}</span>
+                            <span :class="{'red': crew < 0}">Экипаж: {{ crew }} чел</span>
                             <span>Живучесть: {{ vitality }} ед</span>
                             <span>Сигнатура: {{ signature }} м<sup>3</sup></span>
                             <span :class="{'red': energy < 0}">Энергия: {{ energy }} ед</span>
+                            <span>Доступный тоннаж: {{ tonnage }} кг</span>
                             <span>Цена постройки: {{ price }} CR</span>
                         </div>
                     </div>
@@ -51,6 +52,41 @@
                             <img :src="`${slot.picture}`" alt="" v-if="ship.modules.length"
                                  style="width: 45px; height: 45px">
                         </div>
+                    </div>
+                    <div class="proekt_speed border-1 mt-4">
+                        <div>
+                            <span>Полёт в системе</span>
+                            <reusable-input-icon unit_speed="тыс км/ч" text_max="Скорость макс: " text_min=" мин: " :input_value_min="system_speed_min" :input_value_max="system_speed_max"/>
+                        </div>
+                        <div>
+                            <span>Межзвёздный перелёт</span>
+                            <reusable-input-icon unit_speed="св. лет" text_max="Скорость макс: " text_min=" мин: " :input_value_min="interstellar_speed_min" :input_value_max="interstellar_speed_max"/>
+                        </div>
+                        <div>
+                            <span>Полёт в гиперпространстве</span>
+                            <reusable-input-icon unit_speed="парсек" text_max="Скорость макс: " text_min=" мин: " :input_value_min="hyper_speed_min" :input_value_max="hyper_speed_max"/>
+                        </div>
+                        <div>
+                            <span>Скорость в сражении</span>
+                            <reusable-input-icon unit_speed="км/ч" text_max="Скорость макс: " text_min=" мин: " :input_value_min="combat_speed_min" :input_value_max="combat_speed_max"/>
+                        </div>
+                    </div>
+                    <div class="proekt_damage border-1 mt-4">
+                        <span>Мощность атаки</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td style="padding: 0 5px">Дистанция</td>
+                                    <td style="padding: 0 5px">Сигнатура</td>
+                                    <td style="padding: 0 5px">Мощность атаки</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -66,11 +102,126 @@ import {computed} from "vue";
 import ModulesCard from "@/components/construct/cards/ModulesCard.vue";
 import WeaponCard from "@/components/construct/cards/WeaponCard.vue";
 import DefenceModulesCard from "@/components/construct/cards/DefenceModulesCard.vue";
+import ReusableInputIcon from "@/components/construct/ReusableInputIcon.vue";
 
 function toggleHide(param) {
     document.querySelectorAll('.hide_menu').forEach(item => item.classList.add('h20'))
     document.querySelector(`.${param}`).classList.toggle('h20')
 }
+
+const tonnage = computed(() => {
+    let baseTonnage = ship.value.maxTonnage
+    if(ship.value.modules){
+        ship.value.modules.forEach(m => {
+            baseTonnage = baseTonnage - m.baseParams.moduleMass
+        })
+        return baseTonnage
+    }
+})
+
+const system_speed_max = computed(() => {
+    if(ship.value.modules){
+        let baseSpeed = 0
+        ship.value.modules.forEach(m => {
+            if(m.bonusParamsToShip && m.moduleType === 1){
+                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSystem
+            }
+        })
+        return baseSpeed
+    }
+})
+const system_speed_min = computed(() => {
+    if(ship.value.modules){
+        let baseSpeed = 0
+        ship.value.modules.forEach(m => {
+            if(m.bonusParamsToShip && m.moduleType === 1){
+                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSystem
+            }
+        })
+        return baseSpeed
+    } else {
+        return 0
+    }
+})
+const interstellar_speed_max = computed(() => {
+    if(ship.value.modules){
+        let baseSpeed = 0
+        ship.value.modules.forEach(m => {
+            if(m.bonusParamsToShip && m.moduleType === 1){
+                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInNormalSpace
+            }
+        })
+        return baseSpeed
+    } else {
+        return 0
+    }
+})
+const interstellar_speed_min = computed(() => {
+    if(ship.value.modules){
+        let baseSpeed = 0
+        ship.value.modules.forEach(m => {
+            if(m.bonusParamsToShip && m.moduleType === 1){
+                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInNormalSpace
+            }
+        })
+        return baseSpeed
+    } else {
+        return 0
+    }
+})
+const hyper_speed_max = computed(() => {
+    if(ship.value.modules){
+        let baseSpeed = 0
+            ship.value.modules.forEach(m => {
+            if(m.bonusParamsToShip && m.moduleType === 1){
+                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSubspace
+            }
+        })
+        return baseSpeed
+    } else {
+        return 0
+    }
+})
+const hyper_speed_min = computed(() => {
+    if(ship.value.modules){
+        let baseSpeed = 0
+            ship.value.modules.forEach(m => {
+            if(m.bonusParamsToShip && m.moduleType === 1){
+                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSubspace
+            }
+        })
+        return baseSpeed
+    } else {
+        return 0
+    }
+})
+
+const combat_speed_max = computed(() => {
+    if(ship.value.modules){
+        let baseSpeed = 0
+            ship.value.modules.forEach(m => {
+            if(m.bonusParamsToShip && m.moduleType === 1){
+                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInCombat
+            }
+        })
+        return baseSpeed
+    } else {
+        return 0
+    }
+})
+const combat_speed_min = computed(() => {
+    if(ship.value.modules){
+        let baseSpeed = 0
+            ship.value.modules.forEach(m => {
+            if(m.bonusParamsToShip && m.moduleType === 1){
+                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInCombat
+            }
+        })
+        return baseSpeed
+    } else {
+        return 0
+    }
+})
 
 const ship = computed(() => {
     if (planetStore.state.shipInConstructNow) return planetStore.state.shipInConstructNow
@@ -169,9 +320,9 @@ const energy = computed(() => {
 }
 
 .slot {
-  width: 50px;
-  height: 50px;
-  border: 2px solid rgba(43, 211, 237);
+  width: 49px;
+  height: 49px;
+  border: 2px solid rgba(43, 211, 237, .7);
   background-color: black;
   cursor: pointer;
 

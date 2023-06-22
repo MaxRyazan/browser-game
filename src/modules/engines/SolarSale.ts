@@ -33,7 +33,9 @@ export class SolarSale extends Module{
             energy: 0,
             cargo: 0,
             speedInSubspace: 0,
-            speedInNormalSpace: 10
+            speedInNormalSpace: 2,
+            speedInSystem: 300,
+            speedInCombat: 0.1,
         }
         this.bonusActionsToShips = {
             mining: false,

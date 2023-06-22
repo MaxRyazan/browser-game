@@ -9,7 +9,7 @@ export class Vulcan extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
         super();
         this.id = 8
-        this.picture = './src/assets/images/nuclear_reactor.jpg'
+        this.picture = './src/assets/images/weapons/vulcan.png'
         this.requiredTech = []
         this.name = 'Установка Вулкан'
         this.costInBuildPoints = 130

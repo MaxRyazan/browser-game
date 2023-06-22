@@ -17,7 +17,7 @@ export interface ShipInterface {
 
     baseInitiative: Number
 
-    maxModules: Number;
+    maxTonnage: Number;
 
     modules: Module[];
 

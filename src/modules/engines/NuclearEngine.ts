@@ -20,8 +20,8 @@ export class NuclearEngine extends Module{
         this.requiredFuel = { type: new ChemicalFuel(), amount: 0 }
         this.willBeCreatedAt = Date.now() + variables.fiveMinutes
         this.baseParams = {
-            moduleMass: 10,
-            moduleSignature: 10,
+            moduleMass: 15,
+            moduleSignature: 2,
             requiredEnergy: 35,
             requiredCargo: 26,
             requiredWorkers: 5
@@ -36,7 +36,9 @@ export class NuclearEngine extends Module{
             energy: 0,
             cargo: 0,
             speedInSubspace: 0,
-            speedInNormalSpace: 60
+            speedInNormalSpace: 8,
+            speedInSystem: 4000,
+            speedInCombat: 4,
         }
         this.bonusActionsToShips = {
             mining: false,

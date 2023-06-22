@@ -15,7 +15,7 @@ export abstract class Ship implements ShipInterface{
 
     baseHP: Number
 
-    maxModules: Number;
+    maxTonnage: Number;
 
     modules: Module[];
 

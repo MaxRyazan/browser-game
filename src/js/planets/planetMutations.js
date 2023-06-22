@@ -1,59 +1,59 @@
-import tradeStore from "../../store_modules/tradeStore.js";
-import planetStore from "../../store_modules/planetStore.js";
-import {Colony} from '../../buildings/infrastructure/Colony.ts'
-import helpStore from "../../store_modules/helpStore.js";
-import {Store} from "../../buildings/infrastructure/Store.ts";
-import {BuildingCenter} from "../../buildings/infrastructure/BuildingCenter.ts";
-import {ColonialSenate} from "../../buildings/infrastructure/ColonialSenate.ts";
-import {AdministrativeCenter} from "../../buildings/infrastructure/AdministrativeCenter.ts";
-import {Skyscraper} from "../../buildings/infrastructure/Skyscraper.ts";
-import {MedicalCenter} from "../../buildings/infrastructure/MedicalCenter.ts";
-import {Bank} from "../../buildings/infrastructure/Bank.ts";
-import {SpacePort} from "../../buildings/infrastructure/SpacePort.ts";
-import {SolarPlant} from "../../buildings/energy/SolarPlant.ts";
-import {NuclearPlant} from "../../buildings/energy/NuclearPlant.ts";
-import {AltahSplitter} from "../../buildings/energy/AltahSplitter.ts";
-import {AccumulationStation} from "../../buildings/resources/AccumulationStation.ts";
-import {WaveStation} from "../../buildings/resources/WaveStation.ts";
-import {OreCleaner} from "../../buildings/resources/OreCleaner.ts";
-import {MineralSynthesizer} from "../../buildings/resources/MineralSynthesizer.ts";
-import {CrudeOre} from "../../Resources/CrudeOre.ts";
-import helpers from "./helpers.js";
-import {MetalOre} from "../../Resources/ore/MetalOre.ts";
-import {MineralOre} from "../../Resources/ore/MineralOre.ts";
-import {OrganicOre} from "../../Resources/ore/OrganicOre.ts";
-import variables from "../../variables.js";
-import {CrudeMineralOre} from "../../Resources/CrudeMineralOre.ts";
-import {Delitium} from "../../Resources/mineral/Delitium.ts";
-import {Quantium} from "../../Resources/mineral/Quantium.ts";
-import {Tellurium} from "../../Resources/mineral/Tellurium.ts";
-import {ConstructionMaterials} from "../../materials/ConstructionMaterials.ts";
-import {Electronics} from "../../materials/Electronics.ts";
-import {ChemicalFuel} from "../../materials/ChemicalFuel.ts";
-import {Polymers} from "../../materials/Polymers.ts";
-import {Quadria} from "../../materials/Quadria.ts";
-import {Steel} from "../../materials/Steel.ts";
-import {Vettur} from "../../materials/Vettur.ts";
-import {ReinforcedConcretePlant} from "../../buildings/materials/ReinforcedConcretePlant.ts";
-import {OreMineralPlant} from "../../buildings/materials/Ore-mineralPlant.ts";
-import {PolymersPlant} from "../../buildings/materials/PolymersPlant.ts";
-import {ChemicalComplex} from "../../buildings/materials/ChemicalComplex.ts";
-import {EnrichmentComplex} from "../../buildings/materials/EnrichmentComplex.ts";
-import {NanoFuel} from "../../materials/NanoFuel.ts";
-import {NuclearFuel} from "../../materials/NuclearFuel.ts";
-import {EngineFactory} from "../../buildings/modules/EngineFactory.ts";
-import {ChemicalPlant} from "../../buildings/energy/ChemicalPlant.ts";
-import {SolarSale} from "../../modules/engines/SolarSale.ts";
-import {RocketEngine} from "../../modules/engines/RocketEngine.ts";
-import {NuclearEngine} from "../../modules/engines/NuclearEngine.ts";
-import {NanoEngine} from "../../modules/engines/NanoEngine.ts";
-import {ReactorFactory} from "../../buildings/modules/ReactorFactory.ts";
-import {ChemicalReactor} from "../../modules/reactors/ChemicalReactor.ts";
-import {NuclearReactor} from "../../modules/reactors/NuclearReactor.ts";
-import {AltahReactor} from "../../modules/reactors/AltahReactor.ts";
-import {WeaponFactory} from "../../buildings/modules/WeaponFactory.ts";
-import {DefenceFactory} from "../../buildings/modules/DefenceFactory.ts";
-import {MiningFactory} from "../../buildings/modules/MiningFactory.ts";
+import tradeStore from "../../store_modules/tradeStore";
+import planetStore from "../../store_modules/planetStore";
+import {Colony} from '@/buildings/infrastructure/Colony'
+import helpStore from "../../store_modules/helpStore";
+import {Store} from "@/buildings/infrastructure/Store";
+import {BuildingCenter} from "@/buildings/infrastructure/BuildingCenter";
+import {ColonialSenate} from "@/buildings/infrastructure/ColonialSenate";
+import {AdministrativeCenter} from "@/buildings/infrastructure/AdministrativeCenter";
+import {Skyscraper} from "@/buildings/infrastructure/Skyscraper";
+import {MedicalCenter} from "@/buildings/infrastructure/MedicalCenter";
+import {Bank} from "@/buildings/infrastructure/Bank";
+import {SpacePort} from "@/buildings/infrastructure/SpacePort";
+import {SolarPlant} from "@/buildings/energy/SolarPlant";
+import {NuclearPlant} from "@/buildings/energy/NuclearPlant";
+import {AltahSplitter} from "@/buildings/energy/AltahSplitter";
+import {AccumulationStation} from "@/buildings/resources/AccumulationStation";
+import {WaveStation} from "@/buildings/resources/WaveStation";
+import {OreCleaner} from "@/buildings/resources/OreCleaner";
+import {MineralSynthesizer} from "@/buildings/resources/MineralSynthesizer";
+import {CrudeOre} from "@/Resources/CrudeOre";
+import helpers from "./helpers";
+import {MetalOre} from "@/Resources/ore/MetalOre";
+import {MineralOre} from "@/Resources/ore/MineralOre";
+import {OrganicOre} from "@/Resources/ore/OrganicOre";
+import variables from "../../variables";
+import {CrudeMineralOre} from "@/Resources/CrudeMineralOre";
+import {Delitium} from "@/Resources/mineral/Delitium";
+import {Quantium} from "@/Resources/mineral/Quantium";
+import {Tellurium} from "@/Resources/mineral/Tellurium";
+import {ConstructionMaterials} from "@/materials/ConstructionMaterials";
+import {Electronics} from "@/materials/Electronics";
+import {ChemicalFuel} from "@/materials/ChemicalFuel";
+import {Polymers} from "@/materials/Polymers";
+import {Quadria} from "@/materials/Quadria";
+import {Steel} from "@/materials/Steel";
+import {Vettur} from "@/materials/Vettur";
+import {ReinforcedConcretePlant} from "@/buildings/materials/ReinforcedConcretePlant";
+import {OreMineralPlant} from "@/buildings/materials/Ore-mineralPlant";
+import {PolymersPlant} from "@/buildings/materials/PolymersPlant";
+import {ChemicalComplex} from "@/buildings/materials/ChemicalComplex";
+import {EnrichmentComplex} from "@/buildings/materials/EnrichmentComplex";
+import {NanoFuel} from "@/materials/NanoFuel";
+import {NuclearFuel} from "@/materials/NuclearFuel";
+import {EngineFactory} from "@/buildings/modules/EngineFactory";
+import {ChemicalPlant} from "@/buildings/energy/ChemicalPlant";
+import {SolarSale} from "@/modules/engines/SolarSale";
+import {RocketEngine} from "@/modules/engines/RocketEngine";
+import {NuclearEngine} from "@/modules/engines/NuclearEngine";
+import {PlasmaEngine} from "@/modules/engines/PlasmaEngine";
+import {ReactorFactory} from "@/buildings/modules/ReactorFactory";
+import {ChemicalReactor} from "@/modules/reactors/ChemicalReactor";
+import {NuclearReactor} from "@/modules/reactors/NuclearReactor";
+import {PlasmaReactor} from "@/modules/reactors/PlasmaReactor";
+import {WeaponFactory} from "@/buildings/modules/WeaponFactory";
+import {DefenceFactory} from "@/buildings/modules/DefenceFactory";
+import {MiningFactory} from "@/buildings/modules/MiningFactory";
 
 
 export default {
@@ -966,13 +966,13 @@ export default {
                 }
             }
             break;
-            case variables.nanoEngineId : {
-                const nanoEngine = new NanoEngine(tradeStore.state.player.playerData.race)
-                if(helpers.isMaterialsForModulesEnough(nanoEngine, amount)){
-                    for(let i = 0; i < nanoEngine.baseCostInMaterials.length; i++){
-                        helpers.subtractMaterials(nanoEngine.baseCostInMaterials[i], amount)
+            case variables.plasmaEngineId : {
+                const plasmaEngine = new PlasmaEngine(tradeStore.state.player.playerData.race)
+                if(helpers.isMaterialsForModulesEnough(plasmaEngine, amount)){
+                    for(let i = 0; i < plasmaEngine.baseCostInMaterials.length; i++){
+                        helpers.subtractMaterials(plasmaEngine.baseCostInMaterials[i], amount)
                     }
-                    helpers.addModuleToQueue(nanoEngine, amount)
+                    helpers.addModuleToQueue(plasmaEngine, amount)
                     planetStore.commit('savePlayerToLocalStorage')
                 } else {
                     planetStore.commit('sendError', 'Нехватает материалов!')
@@ -1005,13 +1005,13 @@ export default {
                 }
             }
             break;
-            case variables.altahReactorId : {
-                const altahReactor = new AltahReactor(tradeStore.state.player.playerData.race)
-                if(helpers.isMaterialsForModulesEnough(altahReactor, amount)){
-                    for(let i = 0; i < altahReactor.baseCostInMaterials.length; i++){
-                        helpers.subtractMaterials(altahReactor.baseCostInMaterials[i], amount)
+            case variables.plasmaReactorId : {
+                const plasmaReactor = new PlasmaReactor(tradeStore.state.player.playerData.race)
+                if(helpers.isMaterialsForModulesEnough(plasmaReactor, amount)){
+                    for(let i = 0; i < plasmaReactor.baseCostInMaterials.length; i++){
+                        helpers.subtractMaterials(plasmaReactor.baseCostInMaterials[i], amount)
                     }
-                    helpers.addModuleToQueue(altahReactor, amount)
+                    helpers.addModuleToQueue(plasmaReactor, amount)
                     planetStore.commit('savePlayerToLocalStorage')
                 } else {
                     planetStore.commit('sendError', 'Нехватает материалов!')

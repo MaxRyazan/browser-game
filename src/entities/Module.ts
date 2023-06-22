@@ -32,7 +32,9 @@ export abstract class Module implements ModuleInterface{
         energy: Number;
         cargo: Number;
         speedInSubspace: Number;
-        speedInNormalSpace: Number
+        speedInNormalSpace: Number;
+        speedInSystem?: Number;
+        speedInCombat?: Number
     };
     costInBuildPoints: Number;
     id: Number;

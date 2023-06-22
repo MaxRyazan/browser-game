@@ -8,7 +8,7 @@
 <script setup>
 import {ref} from "vue";
 import planetStore from "@/store_modules/planetStore.js";
-import {NanoEngine} from "@/modules/engines/NanoEngine";
+import {PlasmaEngine} from "@/modules/engines/PlasmaEngine";
 import tradeStore from "@/store_modules/tradeStore.js";
 import {NuclearEngine} from "@/modules/engines/NuclearEngine";
 import {RocketEngine} from "@/modules/engines/RocketEngine";
@@ -20,7 +20,7 @@ const engine = ref()
 
 const race = tradeStore.state.player.race
 switch (props.engine){
-    case 'Нано двигатель': engine.value = new NanoEngine(race)
+    case 'Плазменный двигатель': engine.value = new PlasmaEngine(race)
         break
     case 'Ядерный двигатель': engine.value = new NuclearEngine(race)
         break
@@ -31,7 +31,12 @@ switch (props.engine){
 }
 
 function chooseEngine(){
-    if(planetStore.state.shipInConstructNow.modules.length < planetStore.state.shipInConstructNow.maxModules) {
+    let tonnage = planetStore.state.shipInConstructNow.maxTonnage
+    planetStore.state.shipInConstructNow.modules.forEach(m => {
+        tonnage = tonnage - m.baseParams.moduleMass
+    })
+
+    if(tonnage >= engine.value.baseParams.moduleMass) {
         planetStore.state.shipInConstructNow.modules.push(engine.value)
     }
 }

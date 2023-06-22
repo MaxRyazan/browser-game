@@ -7,7 +7,7 @@
 
 <script setup>
 import {ref} from "vue";
-import {SolarHeatConverter} from "@/ships/civil/SolarHeatConverter";
+import {ResearchSatellite} from "@/ships/civil/ResearchSatellite";
 import planetStore from "@/store_modules/planetStore.js";
 
 const props = defineProps(['shipName'])
@@ -15,7 +15,7 @@ const ship = ref()
 
 
 switch (props.shipName){
-    case 'solarConverter': ship.value = new SolarHeatConverter()
+    case 'researchSatellite': ship.value = new ResearchSatellite()
         console.log(ship.value)
         break
 }

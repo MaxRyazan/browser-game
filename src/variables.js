@@ -35,10 +35,10 @@ const variables =  {
     solarSailModuleId: 4,
     rocketEngineId: 5,
     nuclearEngineId: 6,
-    nanoEngineId: 7,
+    plasmaEngineId: 7,
     chemicalReactorId: 1,
     nuclearReactorId: 2,
-    altahReactorId: 3,
+    plasmaReactorId: 3,
 
 // типы модулей
     moduleTypeEngine: 1,

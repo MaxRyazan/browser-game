@@ -4,7 +4,7 @@ import {Electronics} from "../../materials/Electronics";
 import {SolarSale} from "../../modules/engines/SolarSale";
 import {RocketEngine} from "../../modules/engines/RocketEngine";
 import {NuclearEngine} from "../../modules/engines/NuclearEngine";
-import {NanoEngine} from "../../modules/engines/NanoEngine";
+import {PlasmaEngine} from "../../modules/engines/PlasmaEngine";
 
 export class EngineFactory extends Building{
     timeOfLastProduce: Number
@@ -32,7 +32,7 @@ export class EngineFactory extends Building{
                     new SolarSale(null, 1),
                     new RocketEngine(null, 1),
                     new NuclearEngine(null, 1),
-                    new NanoEngine(null, 1)
+                    new PlasmaEngine(null, 1)
                 ],
             amount: 4}
         this.timeOfLastProduce = Date.now()

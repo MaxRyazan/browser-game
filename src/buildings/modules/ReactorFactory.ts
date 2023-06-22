@@ -1,13 +1,9 @@
 import {Building} from "../../entities/Building";
 import {ConstructionMaterials} from "../../materials/ConstructionMaterials";
 import {Electronics} from "../../materials/Electronics";
-import {SolarSale} from "../../modules/engines/SolarSale";
-import {RocketEngine} from "../../modules/engines/RocketEngine";
-import {NuclearEngine} from "../../modules/engines/NuclearEngine";
-import {NanoEngine} from "../../modules/engines/NanoEngine";
 import {ChemicalReactor} from "../../modules/reactors/ChemicalReactor";
 import {NuclearReactor} from "../../modules/reactors/NuclearReactor";
-import {AltahReactor} from "../../modules/reactors/AltahReactor";
+import {PlasmaReactor} from "../../modules/reactors/PlasmaReactor";
 
 export class ReactorFactory extends Building{
     timeOfLastProduce: Number
@@ -34,7 +30,7 @@ export class ReactorFactory extends Building{
                 [
                     new ChemicalReactor(null, 1),
                     new NuclearReactor(null, 1),
-                    new AltahReactor(null, 1),
+                    new PlasmaReactor(null, 1),
                 ],
             amount: 3}
         this.timeOfLastProduce = Date.now()

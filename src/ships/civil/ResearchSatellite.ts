@@ -4,15 +4,15 @@ import {Polymers} from "../../materials/Polymers";
 import {Electronics} from "../../materials/Electronics";
 import {Vettur} from "../../materials/Vettur";
 
-export class SolarHeatConverter extends Ship {
+export class ResearchSatellite extends Ship {
     constructor() {
         super()
 
         this.id = 1;
 
-        this.name = 'Солнечный генератор';
+        this.name = 'Исследовательский спутник';
 
-        this.picture = 'src/assets/images/ships/ses.png';
+        this.picture = 'src/assets/images/ships/ResearchSatellite.png';
 
         this.baseMass = 800;
 
@@ -20,7 +20,7 @@ export class SolarHeatConverter extends Ship {
 
         this.baseCargo = 5;
 
-        this.maxModules = 3
+        this.maxTonnage = 50
 
         this.modules = [];
 

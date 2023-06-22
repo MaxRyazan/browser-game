@@ -7,13 +7,13 @@ import {Quadria} from "../../materials/Quadria";
 import variables from '../../variables.js'
 import {ChemicalFuel} from "../../materials/ChemicalFuel";
 
-export class NanoEngine extends Module{
+export class PlasmaEngine extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
         super();
         this.id = 7
-        this.picture = './src/assets/images/engines/nano_engine.jpg'
+        this.picture = './src/assets/images/engines/plasmaEngine.png'
         this.requiredTech = []
-        this.name = 'Нано двигатель'
+        this.name = 'Плазменный двигатель'
         this.costInBuildPoints = 200
         this.costInCR = 120
         this.costInIG = 0
@@ -21,7 +21,7 @@ export class NanoEngine extends Module{
         this.willBeCreatedAt = Date.now() + variables.fiveMinutes
         this.baseParams = {
             moduleMass: 10,
-            moduleSignature: 10,
+            moduleSignature: 3,
             requiredEnergy: 25,
             requiredCargo: 26,
             requiredWorkers: 5
@@ -35,8 +35,10 @@ export class NanoEngine extends Module{
         this.bonusParamsToShip = {
             energy: 0,
             cargo: 0,
-            speedInSubspace: 0,
-            speedInNormalSpace: 100
+            speedInSubspace: 1,
+            speedInNormalSpace: 12,
+            speedInSystem: 8000,
+            speedInCombat: 1,
         }
         this.bonusActionsToShips = {
             mining: false,

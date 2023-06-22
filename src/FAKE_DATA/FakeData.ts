@@ -3,7 +3,7 @@ import {Planet} from "../entities/Planet";
 import {Player} from "../entities/Player";
 import {Humans} from "../races/Humans";
 import {ChemicalReactor} from "../modules/reactors/ChemicalReactor";
-import {AltahReactor} from "../modules/reactors/AltahReactor";
+import {PlasmaReactor} from "../modules/reactors/PlasmaReactor";
 import {Necrons} from "../races/Necrons";
 import {NuclearReactor} from "../modules/reactors/NuclearReactor";
 import {Cyborgs} from "../races/Cyborgs";
@@ -28,6 +28,6 @@ export class FakeData {
     public player = new Player(1, 'gecaHTHuk', 'password', 'email@email.ru', 'Earth', new Humans())
 
     lot1 = new Lot(1,{id: this.player.id, login: this.player.login}, 200, 12, new ChemicalReactor(new Humans()))
-    lot2 = new Lot(2, {id: this.player.id, login: this.player.login}, 180, 120, new AltahReactor(new Necrons()))
+    lot2 = new Lot(2, {id: this.player.id, login: this.player.login}, 180, 120, new PlasmaReactor(new Necrons()))
     lot3 = new Lot(10, {id: this.player.id, login: this.player.login}, 1000, 400, new NuclearReactor(new Cyborgs()))
 }
