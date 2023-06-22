@@ -1,7 +1,6 @@
 import {createStore} from "vuex";
 import {reactive, ref} from "vue";
 import {FakeData} from "../FAKE_DATA/FakeData.ts";
-import {Planet} from "../entities/Planet.ts";
 
 const fakeData = new FakeData();
 

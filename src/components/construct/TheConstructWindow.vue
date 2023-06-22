@@ -103,6 +103,7 @@ import ModulesCard from "@/components/construct/cards/ModulesCard.vue";
 import WeaponCard from "@/components/construct/cards/WeaponCard.vue";
 import DefenceModulesCard from "@/components/construct/cards/DefenceModulesCard.vue";
 import ReusableInputIcon from "@/components/construct/ReusableInputIcon.vue";
+import shipsStore from "@/store_modules/shipsStore.js";
 
 function toggleHide(param) {
     document.querySelectorAll('.hide_menu').forEach(item => item.classList.add('h20'))
@@ -110,10 +111,10 @@ function toggleHide(param) {
 }
 
 const tonnage = computed(() => {
-    let baseTonnage = ship.value.maxTonnage
+    let baseTonnage = ship.value.maxTonnage * shipsStore.state.bonusToTonnage
     if(ship.value.modules){
         ship.value.modules.forEach(m => {
-            baseTonnage = baseTonnage - m.baseParams.moduleMass
+            baseTonnage = baseTonnage - m.baseParams.moduleMass / shipsStore.state.massEconomy
         })
         return baseTonnage
     }
@@ -127,7 +128,7 @@ const system_speed_max = computed(() => {
                 baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSystem
             }
         })
-        return baseSpeed
+        return baseSpeed * shipsStore.state.bonusToSpeed
     }
 })
 const system_speed_min = computed(() => {
@@ -138,7 +139,7 @@ const system_speed_min = computed(() => {
                 baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSystem
             }
         })
-        return baseSpeed
+        return baseSpeed * shipsStore.state.bonusToSpeed
     } else {
         return 0
     }
@@ -151,7 +152,7 @@ const interstellar_speed_max = computed(() => {
                 baseSpeed = baseSpeed + m.bonusParamsToShip.speedInNormalSpace
             }
         })
-        return baseSpeed
+        return baseSpeed * shipsStore.state.bonusToSpeed
     } else {
         return 0
     }
@@ -164,7 +165,7 @@ const interstellar_speed_min = computed(() => {
                 baseSpeed = baseSpeed + m.bonusParamsToShip.speedInNormalSpace
             }
         })
-        return baseSpeed
+        return baseSpeed * shipsStore.state.bonusToSpeed
     } else {
         return 0
     }
@@ -177,7 +178,7 @@ const hyper_speed_max = computed(() => {
                 baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSubspace
             }
         })
-        return baseSpeed
+        return baseSpeed * shipsStore.state.bonusToSpeed
     } else {
         return 0
     }
@@ -190,7 +191,7 @@ const hyper_speed_min = computed(() => {
                 baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSubspace
             }
         })
-        return baseSpeed
+        return baseSpeed * shipsStore.state.bonusToSpeed
     } else {
         return 0
     }
@@ -204,7 +205,7 @@ const combat_speed_max = computed(() => {
                 baseSpeed = baseSpeed + m.bonusParamsToShip.speedInCombat
             }
         })
-        return baseSpeed
+        return baseSpeed * shipsStore.state.bonusToSpeed
     } else {
         return 0
     }
@@ -217,7 +218,7 @@ const combat_speed_min = computed(() => {
                 baseSpeed = baseSpeed + m.bonusParamsToShip.speedInCombat
             }
         })
-        return baseSpeed
+        return baseSpeed * shipsStore.state.bonusToSpeed
     } else {
         return 0
     }
@@ -234,7 +235,7 @@ const mass = computed(() => {
     let mass = ship.value.baseMass;
     if (ship.value.modules) {
         ship.value.modules.forEach(m => {
-            mass = mass + m.baseParams.moduleMass
+            mass = mass + m.baseParams.moduleMass / shipsStore.state.massEconomy
         })
     }
     return mass
@@ -279,7 +280,7 @@ const vitality = computed(() => {
             }
         })
     }
-    return hp
+    return hp * shipsStore.state.bonusToHp
 })
 const signature = computed(() => {
     let sign = ship.value.baseSignature;
@@ -305,7 +306,7 @@ const energy = computed(() => {
     if (ship.value.modules) {
         ship.value.modules.forEach(m => {
             if (m.bonusParamsToShip) {
-                produceEnergy = produceEnergy + m.bonusParamsToShip.energy
+                produceEnergy = produceEnergy + m.bonusParamsToShip.energy * shipsStore.state.bonusToEnergy
             }
         })
     }

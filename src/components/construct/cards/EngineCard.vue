@@ -13,6 +13,7 @@ import tradeStore from "@/store_modules/tradeStore.js";
 import {NuclearEngine} from "@/modules/engines/NuclearEngine";
 import {RocketEngine} from "@/modules/engines/RocketEngine";
 import {SolarSale} from "@/modules/engines/SolarSale";
+import shipsStore from "@/store_modules/shipsStore.js";
 
 const props = defineProps(['engine'])
 const engine = ref()
@@ -31,12 +32,12 @@ switch (props.engine){
 }
 
 function chooseEngine(){
-    let tonnage = planetStore.state.shipInConstructNow.maxTonnage
+    let tonnage = planetStore.state.shipInConstructNow.maxTonnage * shipsStore.state.bonusToTonnage
     planetStore.state.shipInConstructNow.modules.forEach(m => {
-        tonnage = tonnage - m.baseParams.moduleMass
+        tonnage = tonnage - m.baseParams.moduleMass / shipsStore.state.massEconomy
     })
 
-    if(tonnage >= engine.value.baseParams.moduleMass) {
+    if(tonnage >= engine.value.baseParams.moduleMass / shipsStore.state.massEconomy) {
         planetStore.state.shipInConstructNow.modules.push(engine.value)
     }
 }
