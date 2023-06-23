@@ -1,6 +1,6 @@
 <template>
     <Dialog v-model:visible="planetStore.state.isConstructOpen" header="Конструкторское бюро" position="center"
-            :style="{ width: '80vw', color: '#daa548', border: '2px solid rgba(43, 211, 237)'}">
+            :style="{ width: '1100px', color: '#daa548', border: '2px solid rgba(43, 211, 237)'}">
         <div class="const_wrapper">
 
             <div class="const_left">
@@ -14,6 +14,12 @@
                     <EngineCard engine="Ядерный двигатель"/>
                     <EngineCard engine="Ракетный двигатель"/>
                     <EngineCard engine="Солнечный парус"/>
+                </div>
+                <div class="hide_menu modules h20">
+                    <span class="hide_menu-title" @click="toggleHide('modules')">Реакторы</span>
+                    <ReactorCard reactor="Химический реактор"/>
+                    <ReactorCard reactor="Ядерный реактор"/>
+                    <ReactorCard reactor="Плазменный реактор"/>
                 </div>
                 <div class="hide_menu modules h20">
                     <span class="hide_menu-title" @click="toggleHide('modules')">Модули</span>
@@ -37,20 +43,25 @@
                             <img :src="`${ship.picture}`" alt="" style="width: 180px; height: 180px;">
                         </div>
                         <div class="proekt_params">
-                            <div class="flex flex-column">
-                                <reusable-text-icon tag_name="span">Сигнатура: {{ signature }} м<sup>3</sup></reusable-text-icon>
-                                <reusable-text-icon tag_name="span">Масса: {{ mass }} кг</reusable-text-icon>
-                                <reusable-text-icon tag_name="span">Живучесть: {{ vitality }} ед</reusable-text-icon>
-                                <reusable-text-icon tag_name="span"
-                                                    :class="{'red': cargo < 0}">Вместимость: {{ cargo }} ед</reusable-text-icon>
-                            </div>
-                            <div class="flex flex-column">
-                                <reusable-text-icon tag_name="span"
-                                                    :class="{'red': crew < 0}">Экипаж: {{ crew ? crew + ' чел' : 'Беспилотник' }} </reusable-text-icon>
-                                <reusable-text-icon tag_name="span"
-                                                    :class="{'red': crew < 0}">Энергия: {{ energy }} ед</reusable-text-icon>
-                                <reusable-text-icon tag_name="span">Доступный тоннаж: {{ tonnage }} кг</reusable-text-icon>
-                                <reusable-text-icon tag_name="span">Цена постройки: {{ price }} CR</reusable-text-icon>
+                            <reusable-text-icon style="white-space: nowrap" tag_name="p" padding="0 30%" base_green>Параметры корабля</reusable-text-icon>
+                            <div class="flex justify-content-between">
+                                <div class="flex flex-column">
+                                    <reusable-text-icon tag_name="span">Сигнатура: {{ signature }} м<sup>3</sup></reusable-text-icon>
+                                    <reusable-text-icon tag_name="span">Масса: {{ mass }} кг</reusable-text-icon>
+                                    <reusable-text-icon tag_name="span">Живучесть: {{ vitality }} ед</reusable-text-icon>
+                                    <reusable-text-icon tag_name="span">Цена постройки: {{ price }} CR</reusable-text-icon>
+                                </div>
+                                <div class="flex flex-column">
+                                    <reusable-text-icon tag_name="span"
+                                                        :class="{'red': crew < 0}">Экипаж: {{ crew ? crew + ' чел' : 'Беспилотник' }} </reusable-text-icon>
+                                    <reusable-text-icon tag_name="span"
+                                                        :class="{'red': energy < 0}">Энергия: {{ energy }} ед</reusable-text-icon>
+                                    <reusable-text-icon tag_name="span"
+                                                        :class="{'red': tonnage <= 0, 'base_yellow': tonnage <= ship.maxTonnage / 2 && tonnage > 0}">Доступный тоннаж: {{ tonnage }} кг</reusable-text-icon>
+                                    <reusable-text-icon tag_name="span"
+                                                        :class="{'red': cargo < 0}">Вместимость: {{ cargo }} ед</reusable-text-icon>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -112,6 +123,7 @@
 <script setup>
 import planetStore from "@/store_modules/planetStore.js";
 import ShipCard from "@/components/construct/cards/ShipCard.vue";
+import ReactorCard from "@/components/construct/cards/ReactorCard.vue";
 import EngineCard from "@/components/construct/cards/EngineCard.vue";
 import {computed, onMounted} from "vue";
 import ModulesCard from "@/components/construct/cards/ModulesCard.vue";
@@ -153,7 +165,7 @@ const system_speed_max = computed(() => {
             baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSystem
         }
     })
-    return baseSpeed * shipsStore.state.bonusToSpeed
+    return baseSpeed * shipsStore.state.bonusToSpeed > 0.0001 ? (baseSpeed * shipsStore.state.bonusToSpeed).toFixed(1) : 0.0001
 })
 
 const system_speed_min = computed(() => {
@@ -163,7 +175,7 @@ const system_speed_min = computed(() => {
             baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSystem
         }
     })
-    return baseSpeed * shipsStore.state.bonusToSpeed
+    return baseSpeed * shipsStore.state.bonusToSpeed > 0.0001 ? (baseSpeed * shipsStore.state.bonusToSpeed).toFixed(1) : 0.0001
 })
 const interstellar_speed_max = computed(() => {
     let baseSpeed = 0.00001
@@ -172,7 +184,7 @@ const interstellar_speed_max = computed(() => {
             baseSpeed = baseSpeed + m.bonusParamsToShip.speedInNormalSpace
         }
     })
-    return baseSpeed * shipsStore.state.bonusToSpeed
+    return baseSpeed * shipsStore.state.bonusToSpeed > 0.0001 ? (baseSpeed * shipsStore.state.bonusToSpeed).toFixed(1) : 0.0001
 })
 const interstellar_speed_min = computed(() => {
     let baseSpeed = 0.00001
@@ -181,7 +193,7 @@ const interstellar_speed_min = computed(() => {
             baseSpeed = baseSpeed + m.bonusParamsToShip.speedInNormalSpace
         }
     })
-    return baseSpeed * shipsStore.state.bonusToSpeed
+    return baseSpeed * shipsStore.state.bonusToSpeed > 0.0001 ? (baseSpeed * shipsStore.state.bonusToSpeed).toFixed(1) : 0.0001
 })
 const hyper_speed_max = computed(() => {
     let baseSpeed = 0.00001
@@ -190,7 +202,7 @@ const hyper_speed_max = computed(() => {
             baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSubspace
         }
     })
-    return baseSpeed * shipsStore.state.bonusToSpeed
+    return baseSpeed * shipsStore.state.bonusToSpeed > 1 ? (baseSpeed * shipsStore.state.bonusToSpeed).toFixed(1) : 0.0001
 })
 const hyper_speed_min = computed(() => {
     let baseSpeed = 0.00001
@@ -199,7 +211,7 @@ const hyper_speed_min = computed(() => {
             baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSubspace
         }
     })
-    return baseSpeed * shipsStore.state.bonusToSpeed
+    return baseSpeed * shipsStore.state.bonusToSpeed > 1 ? (baseSpeed * shipsStore.state.bonusToSpeed).toFixed(1) : 0.0001
 })
 
 const combat_speed_max = computed(() => {
@@ -209,7 +221,7 @@ const combat_speed_max = computed(() => {
             baseSpeed = baseSpeed + m.bonusParamsToShip.speedInCombat
         }
     })
-    return baseSpeed * shipsStore.state.bonusToSpeed
+    return baseSpeed * shipsStore.state.bonusToSpeed > 0.0001 ? (baseSpeed * shipsStore.state.bonusToSpeed).toFixed(1) : 0.0001
 })
 const combat_speed_min = computed(() => {
     let baseSpeed = 0.00001
@@ -218,7 +230,7 @@ const combat_speed_min = computed(() => {
             baseSpeed = baseSpeed + m.bonusParamsToShip.speedInCombat
         }
     })
-    return baseSpeed * shipsStore.state.bonusToSpeed
+    return baseSpeed * shipsStore.state.bonusToSpeed > 0.0001 ? (baseSpeed * shipsStore.state.bonusToSpeed).toFixed(1) : 0.0001
 })
 
 const ship = computed(() => {
@@ -340,6 +352,7 @@ onMounted(() => {
 
 .proekt_params {
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-evenly;
 }
@@ -419,5 +432,8 @@ onMounted(() => {
 
 .red {
   color: red;
+}
+.base_yellow{
+  color: #daa548;
 }
 </style>

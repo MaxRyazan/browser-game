@@ -24,7 +24,7 @@ export class PlasmaEngine extends Module{
             moduleSignature: 3,
             requiredEnergy: 25,
             requiredCargo: 26,
-            requiredWorkers: 5
+            requiredWorkers: 0
         }
         this.baseCostInMaterials = [
             new Steel(12),
@@ -35,7 +35,7 @@ export class PlasmaEngine extends Module{
         this.bonusParamsToShip = {
             energy: 0,
             cargo: 0,
-            speedInSubspace: 1,
+            speedInSubspace: 0.0001,
             speedInNormalSpace: 12,
             speedInSystem: 8000,
             speedInCombat: 1,

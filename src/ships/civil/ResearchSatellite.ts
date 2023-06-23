@@ -30,7 +30,7 @@ export class ResearchSatellite extends Ship {
 
         this.baseInitiative = 1;
 
-        this.basePriceInCR = 500;
+        this.basePriceInCR = 25000;
 
         this.basePriceInMaterials = [
             new Steel(2),

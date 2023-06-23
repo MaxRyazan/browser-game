@@ -1,7 +1,7 @@
 <template>
     <div class="flex base_class" :class="[`flex-${container_flex_direction}`, `justify-content-${justify_container}`]" :style="{'padding': padding}">
         <i class="absolute" :class="`${icon_name}`"></i>
-        <component :is="tag_name" class="flex" :class="[`flex-${tag_flex_direction}`, base_yellow && 'base_yellow']" :style="{color: props.color}">
+        <component :is="tag_name" class="flex" :class="[`flex-${tag_flex_direction}`, base_yellow && 'base_yellow', base_green && 'base_green']" :style="{color: props.color}">
             <slot />
         </component>
     </div>
@@ -28,15 +28,23 @@ const props = defineProps({
     base_yellow: {
         type: Boolean,
         required: false
-    }
+    },
+    base_green: {
+        type: Boolean,
+        required: false
+    },
 })
 </script>
 <style scoped lang="scss">
 .base_yellow{
     color: #daa548;
 }
+.base_green{
+  color: #00E000
+}
 .base_class{
   padding: 2px 5px;
+  color: rgba(43, 211, 237)
 }
 .red {
   color: red;

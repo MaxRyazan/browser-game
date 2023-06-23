@@ -10,7 +10,7 @@ export class PlasmaReactor extends Module{
     constructor(belongsToRace: RaceInterface, amount: Number = 1) {
         super();
         this.id = 3
-        this.picture = './src/assets/images/reactors/plasmaReactor.png'
+        this.picture = './src/assets/images/reactors/plasmaReactor.jpg'
         this.requiredTech = []
         this.name = 'Плазменный реактор'
         this.costInBuildPoints = 200

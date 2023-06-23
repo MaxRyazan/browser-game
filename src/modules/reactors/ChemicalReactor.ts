@@ -21,7 +21,7 @@ export class ChemicalReactor extends  Module{
             moduleSignature: 8,
             requiredEnergy: 0,
             requiredCargo: 11,
-            requiredWorkers: 1
+            requiredWorkers: 0
         }
         this.baseCostInMaterials = [
             new Steel(3),
@@ -29,7 +29,7 @@ export class ChemicalReactor extends  Module{
             new Polymers(2),
         ]
         this.bonusParamsToShip = {
-            energy: 100,
+            energy: 80,
             cargo: 0,
             speedInSubspace: 0,
             speedInNormalSpace: 0
