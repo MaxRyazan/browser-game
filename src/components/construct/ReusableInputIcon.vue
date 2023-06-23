@@ -22,7 +22,7 @@ defineProps({
         type: String
     },
     input_value_max: {
-        required: true
+        required: true,
     },
     input_value_min: {
         required: true

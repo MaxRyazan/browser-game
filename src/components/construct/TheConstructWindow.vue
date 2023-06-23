@@ -34,57 +34,72 @@
                 <div class="proekt_wrapper" v-if="ship">
                     <div class="proekt_info_line">
                         <div class="proekt_image">
-                            <img :src="`${ship.picture}`" alt="" style="width: 100%;">
+                            <img :src="`${ship.picture}`" alt="" style="width: 180px; height: 180px;">
                         </div>
-                        <div class="proekt_params border-1">
-                            <span>Масса: {{ mass }} кг</span>
-                            <span :class="{'red': cargo < 0}">Вместимость: {{ cargo }} ед</span>
-                            <span :class="{'red': crew < 0}">Экипаж: {{ crew }} чел</span>
-                            <span>Живучесть: {{ vitality }} ед</span>
-                            <span>Сигнатура: {{ signature }} м<sup>3</sup></span>
-                            <span :class="{'red': energy < 0}">Энергия: {{ energy }} ед</span>
-                            <span>Доступный тоннаж: {{ tonnage }} кг</span>
-                            <span>Цена постройки: {{ price }} CR</span>
+                        <div class="proekt_params">
+                            <div class="flex flex-column">
+                                <reusable-text-icon tag_name="span">Сигнатура: {{ signature }} м<sup>3</sup></reusable-text-icon>
+                                <reusable-text-icon tag_name="span">Масса: {{ mass }} кг</reusable-text-icon>
+                                <reusable-text-icon tag_name="span">Живучесть: {{ vitality }} ед</reusable-text-icon>
+                                <reusable-text-icon tag_name="span"
+                                                    :class="{'red': cargo < 0}">Вместимость: {{ cargo }} ед</reusable-text-icon>
+                            </div>
+                            <div class="flex flex-column">
+                                <reusable-text-icon tag_name="span"
+                                                    :class="{'red': crew < 0}">Экипаж: {{ crew ? crew + ' чел' : 'Беспилотник' }} </reusable-text-icon>
+                                <reusable-text-icon tag_name="span"
+                                                    :class="{'red': crew < 0}">Энергия: {{ energy }} ед</reusable-text-icon>
+                                <reusable-text-icon tag_name="span">Доступный тоннаж: {{ tonnage }} кг</reusable-text-icon>
+                                <reusable-text-icon tag_name="span">Цена постройки: {{ price }} CR</reusable-text-icon>
+                            </div>
                         </div>
                     </div>
                     <div class="proekt_slots">
-                        <div v-for="slot in ship.modules" :key="slot" :id="`slot${slot}`" class="slot">
-                            <img :src="`${slot.picture}`" alt="" v-if="ship.modules.length"
+                        <div v-for="moduleInSlot in ship.modules" :key="moduleInSlot" :id="`slot${moduleInSlot}`"
+                             class="slot" @click="removeModule(moduleInSlot)">
+                            <img :src="`${moduleInSlot.picture}`" alt="" v-if="ship.modules.length"
                                  style="width: 45px; height: 45px">
                         </div>
                     </div>
                     <div class="proekt_speed border-1 mt-4">
                         <div>
                             <span>Полёт в системе</span>
-                            <reusable-input-icon unit_speed="тыс км/ч" text_max="Скорость макс: " text_min=" мин: " :input_value_min="system_speed_min" :input_value_max="system_speed_max"/>
+                            <reusable-input-icon unit_speed="тыс км/ч" text_max="Скорость макс: " text_min=" мин: "
+                                                 :input_value_min="system_speed_min"
+                                                 :input_value_max="system_speed_max"/>
                         </div>
                         <div>
                             <span>Межзвёздный перелёт</span>
-                            <reusable-input-icon unit_speed="св. лет" text_max="Скорость макс: " text_min=" мин: " :input_value_min="interstellar_speed_min" :input_value_max="interstellar_speed_max"/>
+                            <reusable-input-icon unit_speed="св. лет" text_max="Скорость макс: " text_min=" мин: "
+                                                 :input_value_min="interstellar_speed_min"
+                                                 :input_value_max="interstellar_speed_max"/>
                         </div>
                         <div>
                             <span>Полёт в гиперпространстве</span>
-                            <reusable-input-icon unit_speed="парсек" text_max="Скорость макс: " text_min=" мин: " :input_value_min="hyper_speed_min" :input_value_max="hyper_speed_max"/>
+                            <reusable-input-icon unit_speed="парсек" text_max="Скорость макс: " text_min=" мин: "
+                                                 :input_value_min="hyper_speed_min" :input_value_max="hyper_speed_max"/>
                         </div>
                         <div>
                             <span>Скорость в сражении</span>
-                            <reusable-input-icon unit_speed="км/ч" text_max="Скорость макс: " text_min=" мин: " :input_value_min="combat_speed_min" :input_value_max="combat_speed_max"/>
+                            <reusable-input-icon unit_speed="поз/ход" text_max="Скорость макс: " text_min=" мин: "
+                                                 :input_value_min="combat_speed_min"
+                                                 :input_value_max="combat_speed_max"/>
                         </div>
                     </div>
                     <div class="proekt_damage border-1 mt-4">
                         <span>Мощность атаки</span>
                         <table>
                             <thead>
-                                <tr>
-                                    <td style="padding: 0 5px">Дистанция</td>
-                                    <td style="padding: 0 5px">Сигнатура</td>
-                                    <td style="padding: 0 5px">Мощность атаки</td>
-                                </tr>
+                            <tr>
+                                <td style="padding: 0 5px">Дистанция</td>
+                                <td style="padding: 0 5px">Сигнатура</td>
+                                <td style="padding: 0 5px">Мощность атаки</td>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -98,12 +113,23 @@
 import planetStore from "@/store_modules/planetStore.js";
 import ShipCard from "@/components/construct/cards/ShipCard.vue";
 import EngineCard from "@/components/construct/cards/EngineCard.vue";
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 import ModulesCard from "@/components/construct/cards/ModulesCard.vue";
 import WeaponCard from "@/components/construct/cards/WeaponCard.vue";
 import DefenceModulesCard from "@/components/construct/cards/DefenceModulesCard.vue";
 import ReusableInputIcon from "@/components/construct/ReusableInputIcon.vue";
 import shipsStore from "@/store_modules/shipsStore.js";
+import {ResearchSatellite} from "@/ships/civil/ResearchSatellite";
+import ReusableTextIcon from "@/components/reusable/Reusable-text-icon.vue";
+
+function removeModule(slotModule){
+    const modules = ship.value.modules.filter(m => m.id === slotModule.id)
+    modules.splice(modules.length - 1, 1)
+    ship.value.modules = ship.value.modules.filter(m => m.id !== slotModule.id)
+    for(let item of modules){
+        ship.value.modules.push(item)
+    }
+}
 
 function toggleHide(param) {
     document.querySelectorAll('.hide_menu').forEach(item => item.classList.add('h20'))
@@ -112,7 +138,7 @@ function toggleHide(param) {
 
 const tonnage = computed(() => {
     let baseTonnage = ship.value.maxTonnage * shipsStore.state.bonusToTonnage
-    if(ship.value.modules){
+    if (ship.value.modules) {
         ship.value.modules.forEach(m => {
             baseTonnage = baseTonnage - m.baseParams.moduleMass / shipsStore.state.massEconomy
         })
@@ -121,107 +147,78 @@ const tonnage = computed(() => {
 })
 
 const system_speed_max = computed(() => {
-    if(ship.value.modules){
-        let baseSpeed = 0
-        ship.value.modules.forEach(m => {
-            if(m.bonusParamsToShip && m.moduleType === 1){
-                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSystem
-            }
-        })
-        return baseSpeed * shipsStore.state.bonusToSpeed
-    }
+    let baseSpeed = 0.00001
+    ship.value.modules.forEach(m => {
+        if (m.bonusParamsToShip && m.moduleType === 1) {
+            baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSystem
+        }
+    })
+    return baseSpeed * shipsStore.state.bonusToSpeed
 })
+
 const system_speed_min = computed(() => {
-    if(ship.value.modules){
-        let baseSpeed = 0
-        ship.value.modules.forEach(m => {
-            if(m.bonusParamsToShip && m.moduleType === 1){
-                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSystem
-            }
-        })
-        return baseSpeed * shipsStore.state.bonusToSpeed
-    } else {
-        return 0
-    }
+    let baseSpeed = 0.00001
+    ship.value.modules.forEach(m => {
+        if (m.bonusParamsToShip && m.moduleType === 1) {
+            baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSystem
+        }
+    })
+    return baseSpeed * shipsStore.state.bonusToSpeed
 })
 const interstellar_speed_max = computed(() => {
-    if(ship.value.modules){
-        let baseSpeed = 0
-        ship.value.modules.forEach(m => {
-            if(m.bonusParamsToShip && m.moduleType === 1){
-                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInNormalSpace
-            }
-        })
-        return baseSpeed * shipsStore.state.bonusToSpeed
-    } else {
-        return 0
-    }
+    let baseSpeed = 0.00001
+    ship.value.modules.forEach(m => {
+        if (m.bonusParamsToShip && m.moduleType === 1) {
+            baseSpeed = baseSpeed + m.bonusParamsToShip.speedInNormalSpace
+        }
+    })
+    return baseSpeed * shipsStore.state.bonusToSpeed
 })
 const interstellar_speed_min = computed(() => {
-    if(ship.value.modules){
-        let baseSpeed = 0
-        ship.value.modules.forEach(m => {
-            if(m.bonusParamsToShip && m.moduleType === 1){
-                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInNormalSpace
-            }
-        })
-        return baseSpeed * shipsStore.state.bonusToSpeed
-    } else {
-        return 0
-    }
+    let baseSpeed = 0.00001
+    ship.value.modules.forEach(m => {
+        if (m.bonusParamsToShip && m.moduleType === 1) {
+            baseSpeed = baseSpeed + m.bonusParamsToShip.speedInNormalSpace
+        }
+    })
+    return baseSpeed * shipsStore.state.bonusToSpeed
 })
 const hyper_speed_max = computed(() => {
-    if(ship.value.modules){
-        let baseSpeed = 0
-            ship.value.modules.forEach(m => {
-            if(m.bonusParamsToShip && m.moduleType === 1){
-                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSubspace
-            }
-        })
-        return baseSpeed * shipsStore.state.bonusToSpeed
-    } else {
-        return 0
-    }
+    let baseSpeed = 0.00001
+    ship.value.modules.forEach(m => {
+        if (m.bonusParamsToShip && m.moduleType === 1) {
+            baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSubspace
+        }
+    })
+    return baseSpeed * shipsStore.state.bonusToSpeed
 })
 const hyper_speed_min = computed(() => {
-    if(ship.value.modules){
-        let baseSpeed = 0
-            ship.value.modules.forEach(m => {
-            if(m.bonusParamsToShip && m.moduleType === 1){
-                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSubspace
-            }
-        })
-        return baseSpeed * shipsStore.state.bonusToSpeed
-    } else {
-        return 0
-    }
+    let baseSpeed = 0.00001
+    ship.value.modules.forEach(m => {
+        if (m.bonusParamsToShip && m.moduleType === 1) {
+            baseSpeed = baseSpeed + m.bonusParamsToShip.speedInSubspace
+        }
+    })
+    return baseSpeed * shipsStore.state.bonusToSpeed
 })
 
 const combat_speed_max = computed(() => {
-    if(ship.value.modules){
-        let baseSpeed = 0
-            ship.value.modules.forEach(m => {
-            if(m.bonusParamsToShip && m.moduleType === 1){
-                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInCombat
-            }
-        })
-        return baseSpeed * shipsStore.state.bonusToSpeed
-    } else {
-        return 0
-    }
+    let baseSpeed = 0.00001
+    ship.value.modules.forEach(m => {
+        if (m.bonusParamsToShip && m.moduleType === 1) {
+            baseSpeed = baseSpeed + m.bonusParamsToShip.speedInCombat
+        }
+    })
+    return baseSpeed * shipsStore.state.bonusToSpeed
 })
 const combat_speed_min = computed(() => {
-    if(ship.value.modules){
-        let baseSpeed = 0
-            ship.value.modules.forEach(m => {
-            if(m.bonusParamsToShip && m.moduleType === 1){
-                baseSpeed = baseSpeed + m.bonusParamsToShip.speedInCombat
-            }
-        })
-        return baseSpeed * shipsStore.state.bonusToSpeed
-    } else {
-        return 0
-    }
+    let baseSpeed = 0.00001
+    ship.value.modules.forEach(m => {
+        if (m.bonusParamsToShip && m.moduleType === 1) {
+            baseSpeed = baseSpeed + m.bonusParamsToShip.speedInCombat
+        }
+    })
+    return baseSpeed * shipsStore.state.bonusToSpeed
 })
 
 const ship = computed(() => {
@@ -251,7 +248,7 @@ const cargo = computed(() => {
             reqCargo = reqCargo + m.baseParams.requiredCargo
         })
     }
-    if(!currCargo){
+    if (!currCargo) {
         currCargo = 0
     }
     return currCargo - reqCargo
@@ -264,7 +261,7 @@ const crew = computed(() => {
             currPeoples = currPeoples + m.baseParams.requiredWorkers
         })
         ship.value.modules.forEach(m => {
-            if(m.crew){
+            if (m.crew) {
                 reqPeople = reqPeople + m.bonusParamsToShip.crew
             }
         })
@@ -312,8 +309,17 @@ const energy = computed(() => {
     }
     return produceEnergy - reqEnergy
 })
+onMounted(() => {
+    ship.value = new ResearchSatellite()
+})
 </script>
 <style scoped lang="scss">
+//span{
+//  height: 30px;
+//  display: inline-flex;
+//  align-items: center;
+//  margin: 8px;
+//}
 .proekt_slots {
   display: flex;
   flex-wrap: wrap;
@@ -334,12 +340,13 @@ const energy = computed(() => {
 
 .proekt_params {
   display: flex;
-  flex-direction: column;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
 .proekt_image {
-  width: 130px;
-  height: 130px;
+  width: 180px;
+  height: 180px;
 }
 
 .proekt_info_line {
@@ -386,24 +393,31 @@ const energy = computed(() => {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding-top: 30px;
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 30px 5px 0 5px;
+  align-items: start;
 }
-.hide_menu-title{
+
+.hide_menu-title {
   cursor: pointer;
   padding: 0 10px;
   color: #daa548;
   background: radial-gradient(ellipse 90% 90%, rgba(5, 45, 51, 0.5), rgba(5, 45, 51, 0.2)) no-repeat, url(@/assets/images/value_bg_blue.png) repeat padding-box;
   position: absolute;
   left: 2px;
-  top:2px;
+  top: 2px;
   border: 1px solid rgba(43, 211, 237);
   width: 99%;
 }
+
 .h20 {
   height: 30px;
 }
-.red{
+
+.red {
   color: red;
 }
 </style>

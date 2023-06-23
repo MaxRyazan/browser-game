@@ -1,6 +1,7 @@
 import planetMutations from "../js/planets/planetMutations.js";
 import {createStore} from "vuex";
 import planetActions from "../js/planets/planetActions.js";
+import {ResearchSatellite} from "@/ships/civil/ResearchSatellite";
 
 
 
@@ -27,7 +28,7 @@ export default createStore({
         isColonyCreated: false,
         buildingsInProgressNow: [],
 
-        shipInConstructNow: {}
+        shipInConstructNow: new ResearchSatellite()
     },
     mutations: planetMutations,
     actions: planetActions,

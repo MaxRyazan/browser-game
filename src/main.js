@@ -1,5 +1,6 @@
 import {createApp} from 'vue'
 import './css/tradeStyles.css'
+import './css/globalStyles.scss'
 import App from './App.vue'
 import router from "./router.js";
 import globalStore from "./globalStore.js";
