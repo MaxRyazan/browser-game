@@ -29,5 +29,5 @@ export interface ShipInterface {
 
     basePriceInMaterials: Material[]
 
-    baseCommands: []
+    baseCommands: String[]
 }

@@ -4,6 +4,7 @@ import {Polymers} from "../../materials/Polymers";
 import {Electronics} from "../../materials/Electronics";
 import {Vettur} from "../../materials/Vettur";
 
+
 export class ResearchSatellite extends Ship {
     constructor() {
         super()
@@ -26,7 +27,9 @@ export class ResearchSatellite extends Ship {
 
         this.baseBonusSlots = 0;
 
-        this.baseCommands = [];
+        this.baseCommands = [
+            'produceBonusNP'
+        ];
 
         this.baseInitiative = 1;
 

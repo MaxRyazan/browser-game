@@ -7,7 +7,7 @@ export abstract class Ship implements ShipInterface{
 
     baseCargo: Number;
 
-    baseCommands: [];
+    baseCommands: String[];
 
     baseInitiative: Number;
 
